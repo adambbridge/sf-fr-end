@@ -1,0 +1,9 @@
+<h1>Solutions</h1>
+
+<mat-selection-list>
+  <h3 mat-subheader>Folders</h3>
+  <mat-list-option *ngFor="let sol of solutions">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <app-solution [solution]="sol"></app-solution>
+  </mat-list-option>
+</mat-selection-list>

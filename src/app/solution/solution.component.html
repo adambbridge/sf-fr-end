@@ -1,0 +1,4 @@
+<h3>{{solution.name}}: {{solution.version}}
+<span>({{solution.appId}})</span>
+</h3>
+<app-saas-space *ngFor="let space of solution.workspaces" [saasSpace]="space"></app-saas-space>

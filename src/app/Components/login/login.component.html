@@ -1,0 +1,9 @@
+<div class="login">
+
+  <div *ngIf="loggedIn">
+      <button (click)="logout()" class="btn btn-primary btn-block btn-large">Log Out</button>
+  </div>
+  <div *ngIf="!loggedIn">
+      <button (click)="login()" class="btn btn-primary btn-block btn-large">Log In</button>
+  </div>
+</div>

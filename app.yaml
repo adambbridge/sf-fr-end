@@ -1,0 +1,23 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+env_variables:
+  API_KEY: AIzaSyBDJgtQjrxOmpouGdVo_xA2CHjShMn_M54
+  
+manual_scaling:
+  instances: 1
+
+handlers:
+- url: /index.html
+  static_files: dist/index.html
+  upload: dist/index.html
+- url: /
+  static_dir: dist
+
+skip_files:
+- e2e/
+- node_modules/
+- src/
+- .git/
+- .gitignore

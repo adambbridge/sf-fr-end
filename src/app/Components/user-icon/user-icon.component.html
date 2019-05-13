@@ -1,0 +1,7 @@
+<div id="dropdown" class="dropdown">
+  <button class="dropbtn"id="userDrop" style="display:block">{{user.email}}</button>
+  <div class="dropdown-content">
+    <a *ngFor="let link of links" routerLink="/{{link.id}}" routerLinkActive="active">{{link.title}}</a>
+    <a (click)="logout()">Logout</a>
+  </div>
+</div>

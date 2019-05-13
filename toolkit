@@ -1,0 +1,1 @@
+{"name":"Toolkit Template 3","clientId":"toolkittemplate3","userId":null,"environments":[{"environmentId":"toolkittemplate3","name":"Toolkit Template 3","ownerId":null,"deployments":[{"appId":"vilcap","options":{"deploymentId":null,"workspaces":["all"],"features":["all"]},"snapshotId":"toolkit3","status":null,"date":"20190501192810","version":"0.0"}]}],"groups":null,"users":null}

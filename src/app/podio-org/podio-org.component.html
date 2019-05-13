@@ -1,0 +1,11 @@
+<h3>Name: {{org.name}}</h3>
+<h3>Id: {{org.org_id}}</h3>
+<button (click)="select()" ></button>
+<mat-selection-list>
+  <h3 mat-subheader>Spaces</h3>
+  <mat-list-option *ngFor="let space of org.spaces">
+    <mat-icon mat-list-icon>folder</mat-icon>
+    <app-podio-space mat-line [space]="space"></app-podio-space>
+  </mat-list-option>
+</mat-selection-list>
+   
