@@ -1,4 +1,13 @@
+<div *ngIf="!showForm">
 <h3>{{solution.name}}: {{solution.version}}
 <span>({{solution.appId}})</span>
 </h3>
 <app-saas-space *ngFor="let space of solution.workspaces" [saasSpace]="space"></app-saas-space>
+</div>
+<div *ngIf="showForm">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <input name="name" ngModel required #solutionName="ngModel">
+        <button>Create</button>
+    </form>
+    <app-podio-orgs [showDetail]="false"></app-podio-orgs>
+</div>

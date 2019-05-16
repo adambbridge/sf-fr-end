@@ -1,3 +1,3 @@
 export class Application {
-    constructor(name: string, app_id: Number) {}
+    constructor(public name: string, public app_id: Number) {}
 }

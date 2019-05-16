@@ -34,6 +34,7 @@ import { SolutionComponent } from './solution/solution.component';
 import { SaasSpaceComponent } from './saas-space/saas-space.component';
 import { SaasApplicationComponent } from './saas-application/saas-application.component';
 import { SaasFieldComponent } from './saas-field/saas-field.component';
+import { PodioApplicationComponent } from './podio-application/podio-application.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { SaasFieldComponent } from './saas-field/saas-field.component';
     SolutionComponent,
     SaasSpaceComponent,
     SaasApplicationComponent,
-    SaasFieldComponent
+    SaasFieldComponent,
+    PodioApplicationComponent
   ],
   imports: [
     FormsModule,

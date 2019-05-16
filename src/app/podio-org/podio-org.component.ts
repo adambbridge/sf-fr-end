@@ -11,6 +11,8 @@ export class PodioOrgComponent implements OnInit {
 
   @Input()
   org: Org;
+  @Input()
+  showDetail: boolean;
 
   constructor() { }
   select() {

@@ -11,6 +11,10 @@ import { Observable } from 'rxjs';
 })
 export class SolutionsComponent implements OnInit { 
   solutions: Solution[];
+  newSolution = new Solution('n/a', 'New Solution', '0.0', null);
+  showNewSolution: boolean;
+  showNewIcon = 'expand_more';
+
   mySolutions: Observable<Solutions>;
 
   constructor(private _authService: AuthService,
@@ -21,6 +25,11 @@ export class SolutionsComponent implements OnInit {
        }});
      }
 
+  toggleNewSolution(show: boolean) {
+    console.log('settings showNewSolution to: ' + show);
+    this.showNewSolution = show;
+    this.showNewIcon = show ? 'expand_less' : 'expand_more';
+  }
   ngOnInit() {
   }
 }

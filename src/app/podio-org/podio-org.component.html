@@ -1,11 +1,8 @@
-<h3>Name: {{org.name}}</h3>
-<h3>Id: {{org.org_id}}</h3>
-<button (click)="select()" ></button>
-<mat-selection-list>
-  <h3 mat-subheader>Spaces</h3>
-  <mat-list-option *ngFor="let space of org.spaces">
-    <mat-icon mat-list-icon>folder</mat-icon>
-    <app-podio-space mat-line [space]="space"></app-podio-space>
-  </mat-list-option>
-</mat-selection-list>
+<mat-card (click)="select()">
+  <mat-card-title>{{org.name}}</mat-card-title> 
+  <mat-card-subtitle *ngIf="showDetail">Spaces</mat-card-subtitle>
+  <mat-card-content  *ngFor="let space of org.spaces">
+    <app-podio-space mat-line [space]="space" *ngIf="showDetail"></app-podio-space>
+  </mat-card-content>
+</mat-card>
    
