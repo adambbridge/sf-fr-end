@@ -1,3 +1,2 @@
-<h2>Name: {{space.name}}</h2>
-<h3>Id: {{space.space_id}}</h3>
-<!-- <app-podio-application *ngFor="let app of space.ap" -->
+<h4>Name: {{space.name}}</h4>
+<app-podio-application *ngFor="let app of applications | async" [application]="app"></app-podio-application>

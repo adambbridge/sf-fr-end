@@ -7,6 +7,7 @@ import { SaasafrasResponse } from '../../model/saasafras/response';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Jwt } from 'src/model/saasafras/jwt';
+import { Client, Clients } from 'src/model/saasafras/client';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,39 +15,30 @@ export class SaasafrasService {
   jwt: string;
 
   constructor(private http: HttpClient, private authService: AuthService) {
-    const token = sessionStorage.getItem('jwt');
-    if (token) {
-      this.jwt = token;
-    }
-    this.authService.token$.subscribe({next: (t: Jwt) => {
-      this.jwt = sessionStorage.getItem('jwt');
-    }});
+    this.authService.tokenHook().subscribe({
+      next: (t: Jwt) => {
+        this.jwt = sessionStorage.getItem('jwt');
+      }
+    });
   }
-
-  private defaultHeaders() {
-    return new HttpHeaders({'x-saasafras-jwt': this.jwt});
-  }
-
-  SetJwt(token: string) {
-    this.jwt = token;
-  }
+  private defaultHeaders() { return new HttpHeaders({ 'x-saasafras-jwt': this.jwt }); }
 
   AddEnvironmentCredentials(code: string, clientId: string, environmentId: string, redirectUri: string): Observable<SaasafrasResponse> {
     console.log('AddEnvironmentCredentials');
     return this.http.post<SaasafrasResponse>(environment.saasafras.api.url + 'client/' + clientId + '/env/' + environmentId + '/token',
-    {code: code, redirectUri: redirectUri},
-    {
-      headers: this.defaultHeaders()
-    });
+      { code: code, redirectUri: redirectUri },
+      {
+        headers: this.defaultHeaders()
+      });
   }
 
   AddSolutionCredentials(code: string, solutionId: string, version: string, redirectUri: string): Observable<SaasafrasResponse> {
     console.log('AddSolutionCredentials');
     return this.http.post<SaasafrasResponse>(environment.saasafras.api.url + 'app/' + solutionId + '/token?version=' + version,
-    {code: code, redirectUri: redirectUri},
-    {
-      headers: this.defaultHeaders()
-    });
+      { code: code, redirectUri: redirectUri },
+      {
+        headers: this.defaultHeaders()
+      });
   }
 
   SaveSolution(spaces, organization) {
@@ -62,23 +54,30 @@ export class SaasafrasService {
     };
     this.http.post<any>('', appRequest);
 
-    }
-
-    GetSolutions() {
-      return this.http.get<Solutions>(environment.saasafras.api.url + 'apps',
+  }
+  GetSolutions() {
+    return this.http.get<Solutions>(environment.saasafras.api.url + 'apps',
       {
         headers: this.defaultHeaders()
       });
-    }
+  }
 
-    GetClients() {
-      return this.http.get<Solutions>(environment.saasafras.api.url + 'clients',
+  GetSolution(solutionId: string, includeWorkspaces: boolean) {
+    const url = environment.saasafras.api.url + 'app/' + solutionId + (includeWorkspaces ? '?includeWorkspaces=true' : '');
+    return this.http.get<Solution>(url,
       {
         headers: this.defaultHeaders()
       });
-    }
+  }
 
-    Patch(solutions, client, env, html, load) {
+  GetClients() {
+    return this.http.get<Clients>(environment.saasafras.api.url + 'clients',
+      {
+        headers: this.defaultHeaders()
+      });
+  }
+
+  Patch(solutions, client, env, html, load) {
     console.log('patching');
 
     let solution;
@@ -92,27 +91,33 @@ export class SaasafrasService {
 
     // Get version of current deployment
     const getDeploymentVersionUrl = environment.saasafras.api.url + 'client/' + client + '/env/' + env + '/app/' + solution;
-    this.http.get(getDeploymentVersionUrl, { headers: {
-      ['Accept']: 'application/json',
-      ['x-api-key']: environment.saasafras.api.key
-    }});
+    this.http.get(getDeploymentVersionUrl, {
+      headers: {
+        ['Accept']: 'application/json',
+        ['x-api-key']: environment.saasafras.api.key
+      }
+    });
 
     // Get Latest Version of solution
     const GetSolutionVersionURL = environment.saasafras.api.url + 'app/' + solution + '/currentversion';
-    this.http.get(GetSolutionVersionURL, { headers: {
-      ['Accept']: 'application/json',
-      ['x-api-key']: environment.saasafras.api.key
-    }});
+    this.http.get(GetSolutionVersionURL, {
+      headers: {
+        ['Accept']: 'application/json',
+        ['x-api-key']: environment.saasafras.api.key
+      }
+    });
 
     console.log('Latest Version: ' + latestVersion);
     console.log('Current Version: ' + currentVersion);
 
     // Get Difference
     const getDiffUrl = environment.saasafras.api.url + 'app/' + solution + '/diff/' + currentVersion + '/' + latestVersion;
-    this.http.get(getDiffUrl,  { headers: {
-      ['Accept']: 'application/json',
-      ['x-api-key']: environment.saasafras.api.key
-    }});
+    this.http.get(getDiffUrl, {
+      headers: {
+        ['Accept']: 'application/json',
+        ['x-api-key']: environment.saasafras.api.key
+      }
+    });
   }
 
   CreateVersion() {
@@ -125,19 +130,23 @@ export class SaasafrasService {
     const command = 'refresh';
     let version;
     // Get Version:
-    this.http.get(environment.saasafras.api.url + 'app/' + solution.id + '/currentversion', { headers: {
-      ['Accept']: 'application/json',
-      ['x-api-key']: environment.saasafras.api.key
-    }});
+    this.http.get(environment.saasafras.api.url + 'app/' + solution.id + '/currentversion', {
+      headers: {
+        ['Accept']: 'application/json',
+        ['x-api-key']: environment.saasafras.api.key
+      }
+    });
 
     console.log('Version: ' + version);
-    body = {command, version};
+    body = { command, version };
 
     // POST to API:
-    this.http.post(environment.saasafras.api.url + 'app/' + solution.id, body, { headers: {
-      ['Content-Type']: 'application/json',
-      ['Accept']: 'application/json',
-      ['x-api-key']: environment.saasafras.api.key
-    }});
+    this.http.post(environment.saasafras.api.url + 'app/' + solution.id, body, {
+      headers: {
+        ['Content-Type']: 'application/json',
+        ['Accept']: 'application/json',
+        ['x-api-key']: environment.saasafras.api.key
+      }
+    });
   }
 }

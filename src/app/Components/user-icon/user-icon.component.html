@@ -1,7 +1,71 @@
-<div id="dropdown" class="dropdown">
-  <button class="dropbtn"id="userDrop" style="display:block">{{user.email}}</button>
-  <div class="dropdown-content">
-    <a *ngFor="let link of links" routerLink="/{{link.id}}" routerLinkActive="active">{{link.title}}</a>
+<!-- <div id="dropdown" class="dropdown"> -->
+  <!-- <button class="dropbtn"id="userDrop" style="display:block"></button> -->
+  <!-- <div class="dropdown-content">
+    <a  routerLink= routerLinkActive="active"></a>
     <a (click)="logout()">Logout</a>
   </div>
-</div>
+</div> -->
+<button mat-button [matMenuTriggerFor]="userMenu">
+    <mat-icon>person</mat-icon>
+  <span>{{user.email}}</span>
+</button><mat-label>|</mat-label>
+<button mat-button [matMenuTriggerFor]="solutionsMenu">
+  <span>solutions</span>
+</button><mat-label>|</mat-label>
+<button mat-button [matMenuTriggerFor]="adminMenu">
+    <span>admin</span>
+</button>
+
+<mat-menu #userMenu="matMenu">
+    <button mat-menu-item>
+        <span>account</span>
+      </button>
+      <button mat-menu-item>
+          <span>settings</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+        <span>logout</span>
+    </button>
+</mat-menu>
+<mat-menu #solutionsMenu="matMenu">
+  <button mat-menu-item [routerLink]="[ '/solutions/new' ]" routerLinkActive="active">
+    <span>create</span>
+  </button>
+  <button mat-menu-item [routerLink]="[ '/solutions/deploy' ]" routerLinkActive="active">
+    <span>deploy</span>
+  </button>
+  <button mat-menu-item [routerLink]="[ '/solutions/patch' ]" routerLinkActive="active">
+    <span>patch</span>
+  </button>
+</mat-menu>
+
+<mat-menu #adminMenu="matMenu">
+    <button mat-menu-item [matMenuTriggerFor]="solutionsAdminMenu">
+        <span>by solution</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="clientsAdminMenu">
+          <span>by client</span>
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="taskMenu">
+            <span>ad hoc</span>
+          </button>
+  </mat-menu>
+
+<mat-menu #solutionsAdminMenu="matMenu">
+  <button mat-menu-item *ngFor="let solution of solutions" (click)="currentSolution=solution">
+    <mat-icon>assignment</mat-icon>
+    <span>{{solution.name}}</span>
+  </button>
+</mat-menu>
+<mat-menu #clientsAdminMenu="matMenu">
+  <button mat-menu-item *ngFor="let client of clients" (click)="currentClient=client">
+    <mat-icon>person</mat-icon>
+    <span>{{client}}</span>
+  </button>
+</mat-menu>
+<mat-menu #taskMenu="matMenu">
+  <button mat-menu-item *ngFor="let task of tasks" (click)="do(task)">
+    <mat-icon>{{task.icon}}</mat-icon>
+    <span>{{task.name}}</span>
+  </button>
+</mat-menu>

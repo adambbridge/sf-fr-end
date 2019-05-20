@@ -56,7 +56,7 @@ export class AuthenticatingComponent implements OnInit {
       this._authService.IsAuth$.subscribe({next: (b: boolean) => {
       // console.log('IsAuth$ = ' + b);
       if (b) {
-        this._router.navigate(['home']);
+        this._router.navigate(['solutions']);
       } else {
         this._router.navigate(['login']);
       }

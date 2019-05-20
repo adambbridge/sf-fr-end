@@ -1,42 +1,56 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChildren, QueryList } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PodioService } from '../services/podio.service';
 import { Org } from 'src/model/podio/organization';
+import { PodioOrgComponent } from '../podio-org/podio-org.component';
+import { Space } from 'src/model/podio/space';
 
 @Component({
   selector: 'app-podio-orgs',
-  template: `
-  <h3>Organizations</h3>
-  <mat-selection-list >
-    <mat-list-option *ngFor="let org of orgs">
-      <mat-icon mat-list-icon>group_work</mat-icon>
-      <app-podio-org [org]="org" [showDetail]="showDetail" (selected)="onSelected($event)">
-  </app-podio-org>
-    </mat-list-option>
-  </mat-selection-list>
-    `,
+  templateUrl: 'podio-orgs.component.html',
   styleUrls: ['./podio-orgs.component.css']
 })
 export class PodioOrgsComponent implements OnInit {
+  @ViewChildren('childOrgs') components: QueryList<PodioOrgComponent>;
   @Input()
   showDetail: boolean;
   orgs$: Observable<Org[]>;
   orgs: Org[];
+  @Output() selectedSpaces = new EventEmitter<Space>();
+  @Output() unselectedSpaces = new EventEmitter<Space>();
 
   constructor(private _podioService: PodioService) {
     // this should be replaced with actual selection functionality
     this.orgs$ = this._podioService.GetUserOrgs();
     this.orgs$.subscribe({next: (os: Org[]) => {
-      console.log('PodioOrgComponent received new org: ' + os[0].name);
-      this.orgs = os;
+      console.log('PodioOrgsComponent received ' + os.length + ' orgs.');
+      this.orgs = os.filter(o => o.spaces != null && o.spaces.length > 0);
       // this.selectedOrg.emit(os[0]);
     }});
     this._podioService.refresh();
   }
 
   // use varies?
-  onSelected(org: Org) {
-    console.log('received selection: ' + org.name);
+  onSelected(org: Org, selecting: boolean) {
+    if (selecting) {
+      console.log('onSelected received org_id: ' + org.org_id);
+      this.components.forEach(comp => {
+          comp.hide = comp.org.org_id !== org.org_id;
+        });
+      } else {
+      console.log('onSelected received null');
+      this.components.forEach(comp => {
+        comp.hide = false;
+      });
+    }
+  }
+
+  onSpaceSelected(space: Space) {
+    this.selectedSpaces.emit(space);
+  }
+
+  onSpaceUnselected(space: Space) {
+    this.unselectedSpaces.emit(space);
   }
 
   ngOnInit() {

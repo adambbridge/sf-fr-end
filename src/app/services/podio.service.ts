@@ -14,12 +14,20 @@ import { Field } from 'src/model/podio/field';
 export class PodioService {
   private token: string;
   private tokenEmitter = new EventEmitter<string>();
+  private TOKEN_NAME = 'x-saasafras-podio-token';
+  private BASE_URL = 'https://api.podio.com/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const _token = sessionStorage.getItem(this.TOKEN_NAME);
+    if (_token) {
+      this.updateToken(_token);
+    }
+  }
   updateToken(token: string) {
     console.log('received token');
     this.token = token;
     this.refresh();
+    sessionStorage.setItem(this.TOKEN_NAME, token);
   }
   refresh() {
     console.log('refreshing podio resources');
@@ -28,7 +36,7 @@ export class PodioService {
 
   GetUserOrgs() {
     const p = pipe(
-      map((token: string) => this.http.get<Org[]>('https://api.podio.com/org/', { // options
+      map((token: string) => this.http.get<Org[]>(this.BASE_URL + 'org/', { // options
       headers: {
         ['Authorization']: 'OAuth2 ' + token
       }})),
@@ -38,7 +46,7 @@ export class PodioService {
 
   GetOrg(orgId: Number) {
     const p = pipe(
-      map((token: string) => this.http.get<Org>('https://api.podio.com/org/' + orgId, { // options
+      map((token: string) => this.http.get<Org>(this.BASE_URL + 'org/' + orgId, { // options
       headers: {
         ['Authorization']: 'OAuth2 ' + token
       }})),
@@ -48,7 +56,7 @@ export class PodioService {
 
   GetWorkspacesInOrg(orgId: Number) {
     const p = pipe(
-      map((token: string) => this.http.get<Space[]>('https://api.podio.com/org/' + orgId + '/space', { // options
+      map((token: string) => this.http.get<Space[]>(this.BASE_URL + 'org/' + orgId + '/space', { // options
       headers: {
         ['Authorization']: 'OAuth2 ' + token
       }})),
@@ -58,7 +66,7 @@ export class PodioService {
 
   GetWorkspace(spaceId: Number) {
     const p = pipe(
-      map((token: string) => this.http.get<Space>('https://api.podio.com/space/' + spaceId, { // options
+      map((token: string) => this.http.get<Space>(this.BASE_URL + 'space/' + spaceId, { // options
       headers: {
         ['Authorization']: 'OAuth2 ' + token
       }})),
@@ -68,7 +76,7 @@ export class PodioService {
 
   GetAppsInWorkspace(spaceId: Number) {
     const p = pipe(
-      map((token: string) => this.http.get<Application[]>('https://api.podio.com/app/space/' + spaceId, { // options
+      map((token: string) => this.http.get<Application[]>(this.BASE_URL + 'app/space/' + spaceId, { // options
       headers: {
         ['Authorization']: 'OAuth2 ' + token
       }})),
@@ -78,7 +86,7 @@ export class PodioService {
 
   GetApp(appId: Number) {
     const p = pipe(
-      map((token: string) => this.http.get<Application>('https://api.podio.com/app/' + appId, { // options
+      map((token: string) => this.http.get<Application>(this.BASE_URL + 'app/' + appId, { // options
       headers: {
         ['Authorization']: 'OAuth2 ' + token
       }})),
@@ -88,7 +96,7 @@ export class PodioService {
 
   GetFieldInApp(appId: Number, fieldId: Number) {
     const p = pipe(
-      map((token: string) => this.http.get<Field>('https://api.podio.com/app/' + appId + '/field/' + fieldId, { // options
+      map((token: string) => this.http.get<Field>(this.BASE_URL + 'app/' + appId + '/field/' + fieldId, { // options
       headers: {
         ['Authorization']: 'OAuth2 ' + token
       }})),

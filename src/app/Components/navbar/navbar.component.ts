@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { merge, of } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -6,16 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor() { }
-
+  loggedIn: boolean;
+  constructor(private _authService: AuthService) {
+    merge(
+      of(this._authService.IsAuth), // current auth state
+        this._authService.IsAuth$ // future auth states
+        ).subscribe({next: b => this.loggedIn = b });
+    }
   ngOnInit() {
+    merge(
+      of(this._authService.IsAuth), // current auth state
+        this._authService.IsAuth$ // future auth states
+        ).subscribe({next: b => this.loggedIn = b });
   }
-  onOpen(event) {
-    console.log(event);
-  }
-  onClose(event) {
-    console.log(event);
-  }
-
 }

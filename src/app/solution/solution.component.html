@@ -1,13 +1,15 @@
-<div *ngIf="!showForm">
-<h3>{{solution.name}}: {{solution.version}}
-<span>({{solution.appId}})</span>
-</h3>
-<app-saas-space *ngFor="let space of solution.workspaces" [saasSpace]="space"></app-saas-space>
-</div>
-<div *ngIf="showForm">
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+<mat-expansion-panel (opened)="showForm = true" (closed)="showForm = false" #panel="matExpansionPanel">
+    <mat-expansion-panel-header>
+        <mat-panel-title>{{solution.name}}: {{solution.version}}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-saas-spaces *ngIf="solution.appId" [solutionId]="solution.appId"></app-saas-spaces>
+    <app-podio-orgs *ngIf="!solution.appId" (selectedSpaces)="addSpace($event)" (unselectedSpaces)="removeSpace($event)" [showDetail]="false"></app-podio-orgs>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate *ngIf="!solution.appId">
         <input name="name" ngModel required #solutionName="ngModel">
-        <button>Create</button>
     </form>
-    <app-podio-orgs [showDetail]="false"></app-podio-orgs>
-</div>
+    <div *ngIf="!solution.appId">
+        <mat-label>spaces for solution</mat-label>
+        <app-podio-space [space]="selectedSpace" *ngFor="let selectedSpace of selectedSpaces | async"></app-podio-space>
+        <button mat-button>create</button>
+    </div>
+</mat-expansion-panel>

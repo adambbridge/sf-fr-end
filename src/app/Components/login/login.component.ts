@@ -1,29 +1,26 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, of, pipe, merge } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @Input()
   loggedIn: boolean;
 
   constructor(private _authService: AuthService) {
-    console.log('init');
-    this.loggedIn = this._authService.IsAuth;
-    this._authService.IsAuth$.subscribe({next: (b: boolean) => {
-      this.loggedIn = b;
-    }});
-   }
+    this.loggedIn = _authService.IsAuth;
+  }
 
 
   ngOnInit() {
-    // this.loggedIn$.subscribe({
-    //   next: (b) => console.log('logged in = ' + b)
-    // });
-  }
+    merge(
+      of(this._authService.IsAuth), // current auth state
+        this._authService.IsAuth$ // future auth states
+        ).subscribe({next: b => this.loggedIn = b });
+    }
 
   login() {
       this._authService.login();

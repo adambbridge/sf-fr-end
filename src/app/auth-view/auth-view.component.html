@@ -1,3 +1,6 @@
-<div class="app-auth-view" [hidden]="!loggedIn">
-      <ng-content></ng-content>
+<div class="app-auth-view" [hidden]="!showAuthed">
+      <ng-content select="[unauthed]"></ng-content>
+</div>
+<div class="app-auth-view" [hidden]="showAuthed">
+      <ng-content select="[authed]"></ng-content>
 </div>

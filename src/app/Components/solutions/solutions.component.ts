@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class SolutionsComponent implements OnInit { 
   solutions: Solution[];
-  newSolution = new Solution('n/a', 'New Solution', '0.0', null);
+  newSolution = new Solution(null, 'New Solution', '0.0', null);
   showNewSolution: boolean;
   showNewIcon = 'expand_more';
 
@@ -22,6 +22,7 @@ export class SolutionsComponent implements OnInit {
        this.mySolutions = this._solutionService.GetSolutions();
        this.mySolutions.subscribe({next: (s: Solutions) => {
          this.solutions = s.solutions;
+        //  this.solutions.unshift(this.newSolution); // optionally add a new solution to the top
        }});
      }
 

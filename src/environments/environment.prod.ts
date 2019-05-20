@@ -3,13 +3,13 @@ export const environment = {
   podio: {
     oauth: {
       baseUrl: 'https://www.podio.com/oauth/authorize',
-      clientId: 'saasafras-dev',
-      redirectUrl: 'http://localhost:4200/auth'
+      clientId: 'saasafras-4kir04',
+      redirectUrl: 'https://saasafras-237116.appspot.com/auth'
     },
     oauth_service: {
       baseUrl: 'https://www.podio.com/oauth/authorize',
-      clientId: 'saasafras-service-dev',
-      redirectUrl: 'http://localhost:4200/service-auth'
+      clientId: 'saasafras-service',
+      redirectUrl: 'https://saasafras-237116.appspot.com/service-auth'
     }
   },
   saasafras: {

@@ -5,13 +5,11 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
 import { APP_ROUTES } from './app.routes';
-import { UserIconComponent } from './Components/user-icon/user-icon.component';
+import { SaasafrasMenuComponent } from './Components/user-icon/user-icon.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { FeedbackComponent } from './Components/feedback/feedback.component';
 import { AccountsComponent } from './Components/accounts/accounts.component';
 import { SettingsComponent } from './Components/settings/settings.component';
-import { SubmitButtonComponent } from './Components/submit-button/submit-button.component';
-import { LogoComponent } from './Components/logo/logo.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { VersionresultsComponent } from './Components/versionresults/versionresults.component';
 import { AuthenticatingComponent } from './Components/authenticating/authenticating.component';
@@ -35,19 +33,21 @@ import { SaasSpaceComponent } from './saas-space/saas-space.component';
 import { SaasApplicationComponent } from './saas-application/saas-application.component';
 import { SaasFieldComponent } from './saas-field/saas-field.component';
 import { PodioApplicationComponent } from './podio-application/podio-application.component';
+import { SaasSpacesComponent } from './saas-spaces/saas-spaces.component';
+import { NewSolutionComponent } from './new-solution/new-solution.component';
+import { EditSolutionComponent } from './edit-solution/edit-solution.component';
+import { DeploySolutionComponent } from './deploy-solution/deploy-solution.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PageNotFoundComponent,
-    UserIconComponent,
+    SaasafrasMenuComponent,
     NavbarComponent,
     FeedbackComponent,
     AccountsComponent,
     SettingsComponent,
-    SubmitButtonComponent,
-    LogoComponent,
     FooterComponent,
     VersionresultsComponent,
     AuthenticatingComponent,
@@ -65,7 +65,11 @@ import { PodioApplicationComponent } from './podio-application/podio-application
     SaasSpaceComponent,
     SaasApplicationComponent,
     SaasFieldComponent,
-    PodioApplicationComponent
+    PodioApplicationComponent,
+    SaasSpacesComponent,
+    NewSolutionComponent,
+    EditSolutionComponent,
+    DeploySolutionComponent
   ],
   imports: [
     FormsModule,

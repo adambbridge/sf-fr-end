@@ -1,13 +1,3 @@
-<h3>Solutions</h3>
-<mat-selection-list >
-  <mat-list-option>
-    <mat-icon mat-list-icon (click)="toggleNewSolution(!showNewSolution)">{{showNewIcon}}</mat-icon>
-    <app-solution [solution]="newSolution" [showForm]="showNewSolution"></app-solution>
-  </mat-list-option>
-  <div *ngIf="!showNewSolution">
-    <mat-list-option *ngFor="let sol of solutions">
-      <mat-icon mat-list-icon>folder</mat-icon>
-      <app-solution [solution]="sol"></app-solution>
-    </mat-list-option>
-  </div>
-</mat-selection-list>
+<mat-accordion>
+  <app-solution [solution]="sol" *ngFor="let sol of solutions"></app-solution>
+</mat-accordion>

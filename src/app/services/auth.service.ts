@@ -1,6 +1,6 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Operator, of, merge } from 'rxjs';
+import { Observable, Operator, of, merge, pipe } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from 'src/environments/environment';
 import { Jwt, JwtResponse } from 'src/model/saasafras/jwt';
@@ -46,6 +46,12 @@ export class AuthService {
     }});
     // console.log('starting authService constructor...');
     // console.log('ending authService constructor.');
+  }
+  tokenHook(): Observable<Jwt> {
+    const token = sessionStorage.getItem('jwt');
+    const jwt = token ? this.setAndDecode(token) : new Jwt();
+
+    return merge(of<Jwt>(jwt), this.token$);
   }
 
   /**
