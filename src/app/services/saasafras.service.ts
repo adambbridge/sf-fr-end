@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { Jwt } from 'src/model/saasafras/jwt';
 import { Client, Clients } from 'src/model/saasafras/client';
+import { EnvironmentCredentialsRequest } from 'src/model/saasafras/environmentCredentialsRequest';
+import { SolutionCreationRequest, SolutionCreationResponse } from 'src/model/saasafras/solutionCreationRequest';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,10 +25,21 @@ export class SaasafrasService {
   }
   private defaultHeaders() { return new HttpHeaders({ 'x-saasafras-jwt': this.jwt }); }
 
-  AddEnvironmentCredentials(code: string, clientId: string, environmentId: string, redirectUri: string): Observable<SaasafrasResponse> {
+  AddEnvironmentCredentials_old(code: string, clientId: string, environmentId: string, redirectUri: string): Observable<SaasafrasResponse> {
     console.log('AddEnvironmentCredentials');
     return this.http.post<SaasafrasResponse>(environment.saasafras.api.url + 'client/' + clientId + '/env/' + environmentId + '/token',
       { code: code, redirectUri: redirectUri },
+      {
+        headers: this.defaultHeaders()
+      });
+  }
+
+  AddEnvironmentCredentials(request: EnvironmentCredentialsRequest): Observable<SaasafrasResponse> {
+    console.log('AddEnvironmentCredentials');
+    return this.http.post<SaasafrasResponse>(
+      environment.saasafras.api.url + 'client/' + request.clientId +
+      '/env/' + request.environmentId + '/token',
+      { code: request.code, redirectUri: request.redirectUri },
       {
         headers: this.defaultHeaders()
       });
@@ -41,20 +54,13 @@ export class SaasafrasService {
       });
   }
 
-  SaveSolution(spaces, organization) {
-    // is only grabbing one selection its seems... need work around
-    let wsText = '';
-    for (const i in spaces) {
-    }
-    let solutionText: string;
-    solutionText = '';
-    const workspaceIds = [];
-    const appRequest = {
-      name, orgId: organization.id, workspaceIds
-    };
-    this.http.post<any>('', appRequest);
+  CreateSolution(request: SolutionCreationRequest) {
+    return this.http.post<SolutionCreationResponse>(environment.saasafras.api.url + 'apps', request,
+    {
+      headers: this.defaultHeaders()
+    });
+}
 
-  }
   GetSolutions() {
     return this.http.get<Solutions>(environment.saasafras.api.url + 'apps',
       {
@@ -76,6 +82,7 @@ export class SaasafrasService {
         headers: this.defaultHeaders()
       });
   }
+  // end new style
 
   Patch(solutions, client, env, html, load) {
     console.log('patching');
