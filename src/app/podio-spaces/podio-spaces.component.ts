@@ -17,6 +17,7 @@ export class PodioSpacesComponent implements OnInit {
 
   ngOnInit() {
     this.spaces = this._podioService.GetWorkspacesInOrg(this.orgId);
+
     }
 }
 
