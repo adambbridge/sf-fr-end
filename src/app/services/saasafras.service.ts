@@ -53,8 +53,9 @@ export class SaasafrasService {
         headers: this.defaultHeaders()
       });
   }
+
   CreateSolution(request: SolutionCreationRequest) {
-    return this.http.post<SolutionCreationResponse>(environment.saasafras.api.url + 'apps', request, 
+    return this.http.post<SolutionCreationResponse>(environment.saasafras.api.url + 'apps', request,
     {
       headers: this.defaultHeaders()
     });
