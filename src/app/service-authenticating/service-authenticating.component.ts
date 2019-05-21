@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { SaasafrasService } from 'src/app/services/saasafras.service';
 import { SaasafrasResponse } from 'src/model/saasafras/response';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { EnvironmentCredentialsRequest } from 'src/model/saasafras/environmentCredentialsRequest';
 
 @Component({
   selector: 'app-service-authenticating',
@@ -44,8 +45,8 @@ export class ServiceAuthenticatingComponent implements OnInit {
         }
         if (state.clientId) {
           console.log('adding for client: ' + state.clientId + '/' + state.environmentId);
-          this.saasafrasResponse$ = this._saasafrasService.AddEnvironmentCredentials(
-            p.code, state.clientId, state.environmentId, this.document.location.href);
+          const request = new EnvironmentCredentialsRequest(p.code, state.clientId, state.environmentId, this.document.location.href);
+          this.saasafrasResponse$ = this._saasafrasService.AddEnvironmentCredentials(request);
         }
       }});
       this.saasafrasResponse$.subscribe({next: (r: SaasafrasResponse) => {
