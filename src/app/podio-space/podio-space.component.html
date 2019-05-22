@@ -1,2 +1,10 @@
-<h4>Name: {{space.name}}</h4>
-<app-podio-application *ngFor="let app of applications | async" [application]="app"></app-podio-application>
+<!-- <mat-chip-list>
+    <mat-chip>{{ space.name }}</mat-chip>
+</mat-chip-list> -->
+
+
+<h1>Name: {{space.name}}</h1>
+<app-podio-application
+    *ngFor="let app of applications | async"
+    [application]="app"
+></app-podio-application>
