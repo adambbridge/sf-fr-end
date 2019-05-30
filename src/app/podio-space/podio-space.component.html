@@ -3,7 +3,7 @@
 </mat-chip-list> -->
 
 
-<h1>Name: {{space.name}}</h1>
+<span>Name: {{space.name}}</span>
 <app-podio-application
     *ngFor="let app of applications | async"
     [application]="app"

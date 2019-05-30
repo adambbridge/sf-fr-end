@@ -13,7 +13,7 @@ import { Space } from 'src/model/podio/space';
 export class PodioOrgsComponent implements OnInit {
   @ViewChildren('childOrgs') components: QueryList<PodioOrgComponent>;
   @Input()
-  showDetail: boolean;
+  showDetail: boolean = true;
   orgs$: Observable<Org[]>;
   orgs: Org[];
   @Output() selectedSpaces = new EventEmitter<Space>();
@@ -47,6 +47,8 @@ export class PodioOrgsComponent implements OnInit {
 
   onSpaceSelected(space: Space) {
     this.selectedSpaces.emit(space);
+          this.showDetail = true;
+
   }
 
   onSpaceUnselected(space: Space) {
@@ -54,6 +56,7 @@ export class PodioOrgsComponent implements OnInit {
   }
 
   ngOnInit() {
+      this.showDetail = true;
   }
 
 }
