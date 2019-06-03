@@ -40,6 +40,6 @@ tr:active {
 }
 .table-container {
     /* create scrolling */
-    max-height: 400px;
-    overflow: auto; 
+    /* max-height: 400px;
+    overflow: auto;  */
 }

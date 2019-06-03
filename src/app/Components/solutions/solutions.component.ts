@@ -18,9 +18,9 @@ export class SolutionsComponent implements OnInit {
 
     // MATERIAL TABLE SETUP
     displayedColumns: string[] = [
-        "action",
         "name",
         "version",
+        "workspaces",
         "creationDate",
         "lastUpdateDate",
         "description"
@@ -106,133 +106,126 @@ export class SolutionsComponent implements OnInit {
 
         const fakeSolutions = [
             {
-                action: "action",
-                name: "sol 1 ",
+                name: "Custom Solution 1 ",
                 version: 1,
                 creationDate: new Date("2015-05-05"),
                 lastUpdateDate: new Date(),
-                description: "my lollipop"
+                description: "my lollipop",
+                workspaces: [
+                    fakeWorkspace,
+                    fakeWorkspace,
+                    fakeWorkspace
+                ]
             },
             {
-                action: "action",
-                name: "sol 2",
+                name: "Custom Solution 2",
                 version: 2,
                 creationDate: new Date("2017-05-05"),
                 lastUpdateDate: new Date(),
-                description: "my ice cream"
+                description: "my ice cream",
+                workspaces: [
+                    fakeWorkspace,
+                    fakeWorkspace,
+                    fakeWorkspace
+                ]
             },
             {
-                action: "action",
-                name: "sol 3",
+                name: "Custom Solution 3",
                 version: 1,
                 creationDate: new Date("2016-05-05"),
                 lastUpdateDate: new Date(),
-                description: "my burger"
+                description: "my burger",
+                workspaces: [
+                    fakeWorkspace,
+                    fakeWorkspace,
+                    fakeWorkspace
+                ]
             },
             {
-                action: "action",
-                name: "sol 4",
+                name: "Custom Solution 4",
                 version: 4,
                 creationDate: new Date("2018-05-05"),
                 lastUpdateDate: new Date(),
-                description: "my pizza"
+                description: "my pizza",
+                workspaces: [
+                    fakeWorkspace,
+                    fakeWorkspace,
+                    fakeWorkspace
+                ]
             },
             {
-                action: "action",
-                name: "sol 4",
+                name: "Custom Solution 4",
                 version: 4,
                 creationDate: new Date("2018-05-05"),
                 lastUpdateDate: new Date(),
-                description: "my roasted pig"
+                description: "my roasted pig",
+                workspaces: [
+                    fakeWorkspace,
+                    fakeWorkspace,
+                    fakeWorkspace
+                ]
             },
             {
-                action: "action",
-                name: "sol 4",
+                name: "Custom Solution 4",
                 version: 4,
                 creationDate: new Date("2018-05-05"),
                 lastUpdateDate: new Date(),
-                description: "my description"
+                description: "my description",
+                workspaces: [
+                    fakeWorkspace,
+                    fakeWorkspace,
+                    fakeWorkspace
+                ]
             },
             {
-                action: "action",
-                name: "sol 4",
+                name: "Custom Solution 4",
                 version: 4,
                 creationDate: new Date("2018-05-05"),
                 lastUpdateDate: new Date(),
-                description: "my description"
+                description: "my description",
+                workspaces: [
+                    fakeWorkspace,
+                    fakeWorkspace,
+                    fakeWorkspace
+                ]
             },
             {
-                action: "action",
-                name: "sol 4",
+                name: "Custom Solution 4",
                 version: 4,
                 creationDate: new Date("2018-05-05"),
                 lastUpdateDate: new Date(),
-                description: "my description"
+                description: "my description",
+                workspaces: [
+                    fakeWorkspace,
+                    fakeWorkspace,
+                    fakeWorkspace
+                ]
             },
             {
-                action: "action",
-                name: "sol 4",
+                name: "Custom Solution 4",
                 version: 4,
                 creationDate: new Date("2018-05-05"),
                 lastUpdateDate: new Date(),
-                description: "my description"
+                description: "my description",
+                workspaces: [
+                    fakeWorkspace,
+                    fakeWorkspace,
+                    fakeWorkspace
+                ]
             },
             {
-                action: "action",
-                name: "sol 4",
+                name: "Custom Solution 4",
                 version: 4,
                 creationDate: new Date("2018-05-05"),
                 lastUpdateDate: new Date(),
-                description: "my description"
-            },
-            {
-                action: "action",
-                name: "sol 4",
-                version: 4,
-                creationDate: new Date("2018-05-05"),
-                lastUpdateDate: new Date(),
-                description: "my description"
-            },
-            {
-                action: "action",
-                name: "sol 4",
-                version: 4,
-                creationDate: new Date("2018-05-05"),
-                lastUpdateDate: new Date(),
-                description: "my description"
-            },
-            {
-                action: "action",
-                name: "sol 4",
-                version: 4,
-                creationDate: new Date("2018-05-05"),
-                lastUpdateDate: new Date(),
-                description: "my description"
-            },
-            {
-                action: "action",
-                name: "sol 4",
-                version: 4,
-                creationDate: new Date("2018-05-05"),
-                lastUpdateDate: new Date(),
-                description: "my description"
-            },
-            {
-                action: "action",
-                name: "sol 4",
-                version: 4,
-                creationDate: new Date("2018-05-05"),
-                lastUpdateDate: new Date(),
-                description: "my description"
-            },
-            {
-                action: "action",
-                name: "sol 4",
-                version: 4,
-                creationDate: new Date("2018-05-05"),
-                lastUpdateDate: new Date(),
-                description: "my description"
+                description: "my description",
+                workspaces: [
+                    fakeWorkspace,
+                    fakeWorkspace,
+                    fakeWorkspace
+                ]
             }
+           
         ];
 
         return fakeSolutions;
