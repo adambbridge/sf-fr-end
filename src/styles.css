@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+/* Bootstrap-4-grid */
+@import "~bootstrap-4-grid/css/grid.css";
 
+/* Angular Material theme */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+/* Other */
 html,
 body {
     height: 100%;
