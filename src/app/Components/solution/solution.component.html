@@ -16,7 +16,12 @@
     <mat-tab label="Workspaces">
         <!-- tab content in ng-templates are lazy loaded -->
         <ng-template matTabContent>
-            <!-- expansion panels for spaces -->
+
+                <!-- TODO replace with reusable spaces template 
+            pass it the solution via @Input
+            also use it to show spaces under an org
+            in podio assets component. -->
+
             <mat-accordion>
                 <mat-expansion-panel
                     *ngFor="let space of solution.workspaces"
@@ -62,7 +67,12 @@
     <mat-tab label="History and Tasks">
         <!-- tab content in ng-templates are lazy loaded -->
         <ng-template matTabContent>
-            filter btns table
+
+            <!-- TODO replace with history component???
+            not reusble table comp yet  -->
+            
+            
+
         </ng-template>
     </mat-tab>
 </mat-tab-group>
