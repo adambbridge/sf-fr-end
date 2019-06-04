@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './Components/login/login.component';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
 import { SolutionsComponent } from './Components/solutions/solutions.component';
+import { SolutionComponent } from "./solution/solution.component";
 import { AuthenticatingComponent } from './Components/authenticating/authenticating.component';
 import { ServiceAuthenticatingComponent } from './service-authenticating/service-authenticating.component';
 import { PodioSpacesComponent } from './podio-spaces/podio-spaces.component';
@@ -14,6 +15,7 @@ export const APP_ROUTES: Routes = [
   { path: 'service-auth', component: ServiceAuthenticatingComponent },
   { path: 'solutions/new', component: NewSolutionComponent },
   { path: 'solutions', component: SolutionsComponent },
+  { path: 'solution', component: SolutionComponent },
   { path: 'spaces', component: PodioSpacesComponent },
   { path: 'orgs', component: PodioOrgsComponent },
   { path: '', redirectTo: 'solutions', pathMatch: 'full' },

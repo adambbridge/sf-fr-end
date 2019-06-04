@@ -48,3 +48,6 @@ tr:active {
     display: inline-block;
     height: 24px;
 }
+.sf-font-weight-light {
+    color: rgba(0, 0, 0, 0.54);
+}

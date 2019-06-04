@@ -1,4 +1,4 @@
-<mat-expansion-panel (opened)="showForm = true" (closed)="showForm = false" #panel="matExpansionPanel">
+<!-- <mat-expansion-panel (opened)="showForm = true" (closed)="showForm = false" #panel="matExpansionPanel">
     <mat-expansion-panel-header>
         <mat-panel-title *ngIf="solution.appId">{{solution.name}}: {{solution.version}}</mat-panel-title>
     </mat-expansion-panel-header>
@@ -6,4 +6,63 @@
     <H4>WORKSPACES IN THIS SOLUTION</H4>
 
     <app-saas-spaces *ngIf="solution.appId" [solutionId]="solution.appId"></app-saas-spaces>
-</mat-expansion-panel>
+</mat-expansion-panel> -->
+
+<h3>{{ solution.name }}</h3>
+
+<!-- SPACES -->
+
+<mat-tab-group>
+    <mat-tab label="Workspaces">
+        <!-- tab content in ng-templates are lazy loaded -->
+        <ng-template matTabContent>
+            <!-- expansion panels for spaces -->
+            <mat-accordion>
+                <mat-expansion-panel
+                    *ngFor="let space of solution.workspaces"
+                    (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false"
+                >
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{ space.name }}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Applications: {{ space.applications.length }}
+                        
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+
+                    <mat-list dense>
+                        <mat-list-item> ID: {{ space.space_id }}</mat-list-item>
+                        <mat-list-item> Owner: {{ space.owner }}</mat-list-item>
+                        <mat-list-item
+                            >Created: {{ space.created_on }}</mat-list-item
+                        >
+                        <mat-list-item>
+                            Description: {{ space.description }}
+                        </mat-list-item>
+                        <mat-list-item>
+                            Applications: <span
+                                *ngFor="let app of space.applications"
+                                class="pr-2"
+                                >{{ app }}</span
+                            >
+                        </mat-list-item>
+                    </mat-list>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+        </ng-template>
+    </mat-tab>
+
+    <!-- HISTORY AND TASKS -->
+
+    <mat-tab label="History and Tasks">
+        <!-- tab content in ng-templates are lazy loaded -->
+        <ng-template matTabContent>
+            filter btns table
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>
