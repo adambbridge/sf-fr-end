@@ -12,12 +12,28 @@
 <div class="d-flex justify-content-center">
     <mat-card class="example-card mt-5">
         <mat-card-header>
-            <mat-card-title>Saasafras</mat-card-title>
-            <mat-card-subtitle>Login with Podio</mat-card-subtitle>
+            <mat-card-title>
+                <img
+                    class="sf-mat-icon mr-2"
+                    alt="saasafras logo"
+                    src="https://uploads-ssl.webflow.com/5ad89e5cbcb30031ff70361a/5ad8c34ebcb30096777073cc_saassafras_logo80.png"
+                />
+                Saasafras
+            </mat-card-title>
         </mat-card-header>
 
         <mat-card-content>
-            <p>
+            <div class="example-button-row mt-2">
+                <button mat-flat-button color="primary" class="w-100">
+                    <img
+                        class="sf-mat-icon mr-2"
+                        alt="podio logo"
+                        src="assets/podio-logo-png-transparent.png"
+                    />
+                    Login with Podio
+                </button>
+            </div>
+            <!-- <p>
                 <mat-form-field appearance="outline">
                     <mat-label>Username</mat-label>
                     <input matInput placeholder="" />
@@ -28,12 +44,11 @@
                     <mat-label>Password</mat-label>
                     <input matInput placeholder="" />
                 </mat-form-field>
-            </p>
+            </p> -->
         </mat-card-content>
 
         <mat-card-actions>
-            <button mat-button>Login</button>
-            <button routerLink="/signup" mat-button>Register</button>
+          
         </mat-card-actions>
     </mat-card>
 </div>

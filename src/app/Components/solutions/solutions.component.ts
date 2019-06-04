@@ -50,7 +50,7 @@ export class SolutionsComponent implements OnInit {
 
     ngOnInit() {
         // TODO SORT NOT WORKING
-        this.dataSource.sort = this.sort;
+        // this.dataSource.sort = this.sort;
     }
 
     applyFilter(filterValue: string) {

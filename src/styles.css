@@ -43,3 +43,8 @@ tr:active {
     /* max-height: 400px;
     overflow: auto;  */
 }
+/* TODO register a podio icon with material or use mat-icon class?*/
+.sf-mat-icon {
+    display: inline-block;
+    height: 24px;
+}
