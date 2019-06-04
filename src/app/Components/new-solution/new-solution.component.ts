@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Solution } from 'src/model/saasafras/solution';
-import { $Space } from '../../model/saasafras/saas.space';
+import { $Space } from "../../../model/saasafras/saas.space";
 import { SolutionComponent } from '../solution/solution.component';
 import { Space } from 'src/model/podio/space';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { SolutionCreationRequest, SolutionCreationResponse } from 'src/model/saasafras/solutionCreationRequest';
-import { SaasafrasService } from '../services/saasafras.service';
+import { SaasafrasService } from "../../services/saasafras.service";
 @Component({
   selector: 'app-new-solution',
   templateUrl: './new-solution.component.html',

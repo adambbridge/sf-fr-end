@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChildren, QueryList } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PodioService } from '../services/podio.service';
+import { PodioService } from "../../services/podio.service";
 import { Org } from 'src/model/podio/organization';
 import { PodioOrgComponent } from '../podio-org/podio-org.component';
 import { Space } from 'src/model/podio/space';

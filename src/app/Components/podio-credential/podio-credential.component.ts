@@ -1,6 +1,6 @@
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from "../../services/auth.service";
 import { CredentialRequest } from 'src/model/saasafras/credential';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 

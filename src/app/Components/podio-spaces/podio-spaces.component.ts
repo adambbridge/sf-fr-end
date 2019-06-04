@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Space, Spaces } from 'src/model/podio/space';
 import { Observable } from 'rxjs';
-import { PodioService } from '../services/podio.service';
+import { PodioService } from '../../services/podio.service';
 
 @Component({
   selector: 'app-podio-spaces',

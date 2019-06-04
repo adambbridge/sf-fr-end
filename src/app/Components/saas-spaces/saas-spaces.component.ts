@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SaasafrasService } from '../services/saasafras.service';
+import { SaasafrasService } from '../../services/saasafras.service';
 import { $Space } from 'src/model/saasafras/saas.space';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

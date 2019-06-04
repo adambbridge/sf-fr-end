@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Inject} from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
-import { TokenService } from '../services/get-token.service';
-import { AuthService } from '../services/auth.service';
+import { TokenService } from '../../services/get-token.service';
+import { AuthService } from '../../services/auth.service';
 // import { Observable } from 'node_modules/rxjs';
 import { OAuthResponse } from 'src/model/podio/auth';
 import { map, delay } from 'rxjs/operators';

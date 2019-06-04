@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Space } from '../../model/podio/space';
-import { PodioService } from '../services/podio.service';
+import { Space } from "../../../model/podio/space";
+import { PodioService } from "../../services/podio.service";
 import { Application } from 'src/model/podio/application';
 import { Observable } from 'rxjs';
 @Component({

@@ -7,6 +7,7 @@ import {
     EventEmitter
 } from "@angular/core";
 import { Solution } from "src/model/saasafras/solution";
+import { SolutionVM } from 'src/app/Components/solution/solution.vm';
 import { NgForm } from "@angular/forms";
 import { v4 as uuid } from "node_modules/uuid";
 import { $Space } from "src/model/saasafras/saas.space";
@@ -21,7 +22,7 @@ import { MatExpansionPanel } from "@angular/material";
 })
 export class SolutionComponent implements OnInit {
     // @Input() solution: Solution;
-    solution;
+    solution: SolutionVM;
     @Input() showForm: boolean;
     @Input() expanded: boolean;
     @ViewChild("panel") panel: MatExpansionPanel;
