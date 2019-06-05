@@ -6,14 +6,19 @@ import {
     Output,
     EventEmitter
 } from "@angular/core";
-import { Solution } from "src/model/saasafras/solution";
-import { SolutionVM } from 'src/app/Components/solution/solution.vm';
 import { NgForm } from "@angular/forms";
 import { v4 as uuid } from "node_modules/uuid";
-import { $Space } from "src/model/saasafras/saas.space";
 import { map } from "rxjs/operators";
-import { Space } from "src/model/podio/space";
+
 import { MatExpansionPanel } from "@angular/material";
+import { MatTableDataSource } from "@angular/material";
+import { MatSortModule } from "@angular/material/sort";
+
+import { FakeDataService } from "./../../services/fake-data.service";
+import { Solution } from "src/model/saasafras/solution";
+import { SolutionVM } from "src/app/Components/solution/solution.vm";
+import { $Space } from "src/model/saasafras/saas.space";
+import { Space } from "src/model/podio/space";
 
 @Component({
     selector: "app-solution",
@@ -22,46 +27,26 @@ import { MatExpansionPanel } from "@angular/material";
 })
 export class SolutionComponent implements OnInit {
     // @Input() solution: Solution;
-    solution: SolutionVM;
+    // TODO initialize this in ngOnInit
+    solution: SolutionVM = this.fakeDataService.fakeSolution;
+
     @Input() showForm: boolean;
     @Input() expanded: boolean;
     @ViewChild("panel") panel: MatExpansionPanel;
 
-    constructor() {}
+    // configure material workspaces table 
+    displayedColumns: string[] = ["date", "task", "environment", "description"];
+    dataSource = new MatTableDataSource(this.solution.history);
+    @ViewChild(MatSortModule) sort: MatSortModule;
+
+    constructor(private fakeDataService: FakeDataService) {}
 
     ngOnInit() {
         // this.panel.expanded = this.expanded;
-        this.solution = this.getFakeSolution();
     }
 
-    getFakeSolution() {
-        const fakeSpace = {
-            org_id: "123",
-            space_id: "123",
-            name: "Fake workspace name",
-            created_on: '05/10/2017',
-            description:
-                "This is a workspace description. Not sure how long these might be. May need to truncate",
-            owner: "Owner. Is the owner an org?",
-            applications: ["Fake application", "Fake application", "Fake application", "Fake application", "Fake application"]
-        };
-        const fakeSolution = {
-            appId: "123456",
-            name: "Fake Solution",
-            version: "2",
-            workspaces: [
-                fakeSpace,
-                fakeSpace,
-                fakeSpace,
-                fakeSpace,
-                fakeSpace,
-                fakeSpace,
-                fakeSpace,
-                fakeSpace
-            ]
-        };
-
-        return fakeSolution;
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
     // getId(name: string) {
