@@ -17,27 +17,27 @@ export class FakeDataService {
         fields: ["foo", "bar"]
     };
 
-    /**
-     * solution view uses
-     * name, space_id, owner, c
-     *  */
-
-    // fakeSpace = {
-    //     org_id: "123",
-    //     space_id: "123",
-    //     name: "Fake workspace name",
-    //     created_on: "05/10/2017",
-    //     description:
-    //         "This is a workspace description. Not sure how long these might be. May need to truncate",
-    //     owner: "Owner. Is the owner an org?",
-    //     applications: [
-    //         "Fake application",
-    //         "Fake application",
-    //         "Fake application",
-    //         "Fake application",
-    //         "Fake application"
-    //     ]
-    // };
+    // export class Org {
+    //     public contract_status: string;
+    //     public domains: string[];
+    //     public grants_count: Number;
+    //     public image: any;
+    //     public logo: Number;
+    //     public name: string;
+    //     public org_id: Number;
+    //     public premium: boolean;
+    //     public rank: Number;
+    //     public rights: string[];
+    //     public role: string;
+    //     public sales_agent_id: Number;
+    //     public spaces: Space[];
+    //     public status: string;
+    //     public tier: string;
+    //     public type: string;
+    //     public url: string;
+    //     public url_label: string;
+    //     public user_limit: Number;
+    // }
 
     fakeWorkspace = {
         workspaceName: "Workspace 1",
@@ -77,6 +77,29 @@ export class FakeDataService {
             ]
         }
     };
+
+    fakeOrganization = {
+        name: "Fake Org",
+        spaces: [
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace
+        ]
+    };
+
+    fakeOrganizations = [
+        this.fakeOrganization,
+        this.fakeOrganization,
+        this.fakeOrganization,
+        this.fakeOrganization,
+        this.fakeOrganization,
+        this.fakeOrganization,
+        this.fakeOrganization
+    ];
 
     fakeHistory = [
         {

@@ -41,6 +41,8 @@ import { DeploySolutionComponent } from './Components/deploy-solution/deploy-sol
 
 /** Other */
 import { APP_ROUTES } from "./app.routes";
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 
 
 @NgModule({
@@ -75,8 +77,7 @@ import { APP_ROUTES } from "./app.routes";
         SaasSpacesComponent,
         NewSolutionComponent,
         EditSolutionComponent,
-        DeploySolutionComponent
-    ],
+        DeploySolutionComponent    ],
     imports: [
         /** Modules */
         FormsModule,
@@ -84,7 +85,13 @@ import { APP_ROUTES } from "./app.routes";
         BrowserAnimationsModule,
         CustomMaterialModule,
         RouterModule.forRoot(APP_ROUTES),
-        HttpClientModule
+        HttpClientModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule
     ],
     providers: [],
     bootstrap: [AppComponent]

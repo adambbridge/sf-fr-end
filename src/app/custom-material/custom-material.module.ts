@@ -23,7 +23,8 @@ import {
     MatMenuModule,
     MatTabsModule,
     MatProgressBarModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSelectModule
 } from "@angular/material";
 
 import { MatSortModule } from "@angular/material/sort";
@@ -58,7 +59,8 @@ import { MatTableModule } from "@angular/material/table";
         MatProgressBarModule,
         MatRadioModule,
         MatTableModule,
-        MatSortModule
+        MatSortModule,
+        MatSelectModule
     ],
     exports: [
         MatBadgeModule,
@@ -85,7 +87,8 @@ import { MatTableModule } from "@angular/material/table";
         MatProgressBarModule,
         MatRadioModule,
         MatTableModule,
-        MatSortModule
+        MatSortModule,
+        MatSelectModule
     ]
 })
 export class CustomMaterialModule {}

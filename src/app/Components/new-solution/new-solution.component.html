@@ -1,42 +1,54 @@
-<h3>Create New Solution</h3>
-
 <!-- <mat-expansion-panel
         (opened)="showForm = true"
         (closed)="showForm = false"
         #panel="matExpansionPanel"
     > -->
-<mat-card>
-    <!-- name your solution  -->
-    <mat-card-header>
-        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-            <mat-form-field class="full-width">
-                <input
-                    [(ngModel)]="solution.name"
-                    matInput
-                    placeholder="Solution name"
-                    name="solutionName"
-                    required
-                />
-            </mat-form-field>
-            <button mat-button type="submit">Submit</button>
-        </form>
-    </mat-card-header>
+<div class="d-flex justify-content-center">
+    <mat-card class='w-75'>
+        <!-- name your solution  -->
+        <mat-card-content>
+            <h3>Create New Solution</h3>
 
-    <mat-card-content>
-        
-        <!-- chosen spaces -->
-        <mat-label>spaces for solution</mat-label>
-        <app-podio-space
-            [space]="selectedSpace"
-            *ngFor="let selectedSpace of selectedSpaces | async"
-        ></app-podio-space>
+            <!-- ng creates js object behind scenes accessible via #form -->
+            <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
 
-        <!-- orgs -->
-        <app-podio-orgs
-            *ngIf="!solution.appId"
-            (selectedSpaces)="addSpace($event)"
-            (unselectedSpaces)="removeSpace($event)"
-            [showDetail]="false"
-        ></app-podio-orgs>
-    </mat-card-content>
-</mat-card>
+                <mat-form-field class="w-100" appearance="outline">
+                    <input type='text' ngModel name="solutionName" matInput placeholder="Name" required />
+                </mat-form-field>
+
+                <!-- TEXTAREA DESCRIPTION -->
+                <mat-form-field class="w-100" appearance="outline">
+                    <textarea ngModel name="solutionDescription" matInput placeholder="Description" required></textarea>
+                </mat-form-field>
+
+                <!-- SELECT WITH ORGS -->
+                <mat-form-field class="w-100" appearance="outline">
+                    <mat-label>Use spaces from what organization?</mat-label>
+                    <mat-select required (selectionChange)='onOrgSelected($event)'>
+                        <mat-option *ngFor="let org of organizations" [value]="org.name">
+                            {{org.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!-- WHEN ORG SELECTED SHOW AND POPULATE SELECT WITH SPACES OF THAT ORG -->
+                <mat-checkbox *ngFor='let space of workspaces' class='d-block mb-3'>{{space.workspaceName}}
+                </mat-checkbox>
+
+                <!-- SUBMIT BUTTON -->
+                <button mat-flat-button color="primary" type="submit">
+                    <!-- TODO DISABLE UNTIL AT LEAST ONE ORG SELECTED -->
+                    Create Solution
+                </button>
+
+            </form>
+
+            <!-- chosen spaces -->
+            <!-- <mat-label>spaces for solution</mat-label>
+            <app-podio-space [space]="selectedSpace" *ngFor="let selectedSpace of selectedSpaces | async">
+            </app-podio-space>  -->
+            <!-- <app-podio-orgs *ngIf="!solution.appId" (selectedSpaces)="addSpace($event)"
+                (unselectedSpaces)="removeSpace($event)" [showDetail]="false"></app-podio-orgs> -->
+        </mat-card-content>
+    </mat-card>
+
+</div>
