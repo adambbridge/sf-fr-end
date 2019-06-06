@@ -13,12 +13,14 @@ import { map } from "rxjs/operators";
 import { MatExpansionPanel } from "@angular/material";
 import { MatTableDataSource } from "@angular/material";
 import { MatSortModule } from "@angular/material/sort";
+import { MatDialog } from '@angular/material';
 
 import { FakeDataService } from "./../../services/fake-data.service";
 import { Solution } from "src/model/saasafras/solution";
 import { SolutionVM } from "src/app/Components/solution/solution.vm";
 import { $Space } from "src/model/saasafras/saas.space";
 import { Space } from "src/model/podio/space";
+import { NewUpdateComponent } from "src/app/Components/new-update/new-update.component";
 
 @Component({
     selector: "app-solution",
@@ -39,7 +41,8 @@ export class SolutionComponent implements OnInit {
     dataSource = new MatTableDataSource(this.solution.history);
     @ViewChild(MatSortModule) sort: MatSortModule;
 
-    constructor(private fakeDataService: FakeDataService) {}
+    constructor(private fakeDataService: FakeDataService,
+        private dialog: MatDialog) {}
 
     ngOnInit() {
         // this.panel.expanded = this.expanded;
@@ -47,6 +50,14 @@ export class SolutionComponent implements OnInit {
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    onUpdateClick() {
+        this.dialog.open(NewUpdateComponent, {
+            data: {
+                solution: this.solution
+            }
+        });
     }
 
     // getId(name: string) {

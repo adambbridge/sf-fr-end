@@ -43,6 +43,7 @@ import { DeploySolutionComponent } from './Components/deploy-solution/deploy-sol
 import { APP_ROUTES } from "./app.routes";
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { NewUpdateComponent } from './Components/new-update/new-update.component';
 
 
 @NgModule({
@@ -77,7 +78,9 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
         SaasSpacesComponent,
         NewSolutionComponent,
         EditSolutionComponent,
-        DeploySolutionComponent    ],
+        DeploySolutionComponent,
+        NewUpdateComponent
+    ],
     imports: [
         /** Modules */
         FormsModule,
@@ -94,6 +97,7 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
         MatListModule
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [NewUpdateComponent]
 })
 export class AppModule {}
