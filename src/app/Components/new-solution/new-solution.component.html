@@ -1,53 +1,47 @@
-<!-- <mat-expansion-panel
-        (opened)="showForm = true"
-        (closed)="showForm = false"
-        #panel="matExpansionPanel"
-    > -->
 <div class="d-flex justify-content-center">
-    <mat-card class='w-75'>
-        <!-- name your solution  -->
+    <mat-card class='w-75 mt-3'>
         <mat-card-content>
             <h3>Create New Solution</h3>
 
-            <!-- ng creates js object behind scenes accessible via #form -->
             <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
 
                 <mat-form-field class="w-100" appearance="outline">
-                    <input type='text' ngModel name="solutionName" matInput placeholder="Name" required />
+                    <!-- Defining a name attribute is a requirement when using [(ngModel)] in combination with a form. and the name is used to register eacch control -->
+                    <input type='text' [(ngModel)]="solution.name" name="name" matInput placeholder="Name" required />
+                    todo remove this {{solution.name}}
                 </mat-form-field>
 
-                <!-- TEXTAREA DESCRIPTION -->
                 <mat-form-field class="w-100" appearance="outline">
-                    <textarea ngModel name="solutionDescription" matInput placeholder="Description" required></textarea>
+                    <textarea [(ngModel)]="solution.description" name="description" matInput placeholder="Description"
+                        required></textarea>
                 </mat-form-field>
 
-                <!-- SELECT WITH ORGS -->
                 <mat-form-field class="w-100" appearance="outline">
                     <mat-label>Use spaces from what organization?</mat-label>
-                    <mat-select required (selectionChange)='onOrgSelected($event)'>
+                    <mat-select name="organization" [(ngModel)]="organization" required
+                        (selectionChange)='onOrgSelection($event)'>
                         <mat-option *ngFor="let org of organizations" [value]="org.name">
                             {{org.name}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <!-- WHEN ORG SELECTED SHOW AND POPULATE SELECT WITH SPACES OF THAT ORG -->
-                <mat-checkbox *ngFor='let space of workspaces' class='d-block mb-3'>{{space.workspaceName}}
-                </mat-checkbox>
 
-                <!-- SUBMIT BUTTON -->
-                <button mat-flat-button color="primary" type="submit">
+                <!-- TODO IMPLEMENT REACTIVE FORMS CHECKBOX GROUP COMPONENT -->
+                <div *ngIf="workspaces">
+                    <div *ngFor='let space of workspaces; let i = index' class='d-block mb-3'>
+                        <mat-checkbox [(ngModel)]='workspaces[i].name' name="{workspaces[i].name}">
+                            {{space.workspaceName}}
+                        </mat-checkbox>
+                    </div>
+                </div>
+
+                <button type="submit" mat-raised-button>
                     <!-- TODO DISABLE UNTIL AT LEAST ONE ORG SELECTED -->
                     Create Solution
                 </button>
 
             </form>
 
-            <!-- chosen spaces -->
-            <!-- <mat-label>spaces for solution</mat-label>
-            <app-podio-space [space]="selectedSpace" *ngFor="let selectedSpace of selectedSpaces | async">
-            </app-podio-space>  -->
-            <!-- <app-podio-orgs *ngIf="!solution.appId" (selectedSpaces)="addSpace($event)"
-                (unselectedSpaces)="removeSpace($event)" [showDetail]="false"></app-podio-orgs> -->
         </mat-card-content>
     </mat-card>
 

@@ -45,6 +45,7 @@ export class FakeDataService {
         apps: [this.fakeApplication],
         description:
             "This is a workspace description. Not sure how long these might be. May need to truncate",
+        checked: false, // solely for purpose of user selection when creating a solution
         podioSpace: {
             // strings
             org_id: "123",
@@ -78,8 +79,32 @@ export class FakeDataService {
         }
     };
 
-    fakeOrganization = {
-        name: "Fake Org",
+    fakeOrganization1 = {
+        name: "Fake Org1",
+        spaces: [
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace
+        ]
+    };
+    fakeOrganization2 = {
+        name: "Fake Org2",
+        spaces: [
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace
+        ]
+    };
+    fakeOrganization3 = {
+        name: "Fake Org3",
         spaces: [
             this.fakeWorkspace,
             this.fakeWorkspace,
@@ -92,13 +117,9 @@ export class FakeDataService {
     };
 
     fakeOrganizations = [
-        this.fakeOrganization,
-        this.fakeOrganization,
-        this.fakeOrganization,
-        this.fakeOrganization,
-        this.fakeOrganization,
-        this.fakeOrganization,
-        this.fakeOrganization
+        this.fakeOrganization1,
+        this.fakeOrganization2,
+        this.fakeOrganization3
     ];
 
     fakeHistory = [
