@@ -27,12 +27,17 @@
                         <mat-list-item>
                             Created: {{ space.podioSpace.created_on }}
                         </mat-list-item>
-                        <mat-list-item>Description: {{ space.description }}</mat-list-item>
                         <mat-list-item>
-                            Applications:
-                            <span *ngFor="let app of space.podioSpace.applications" class="pr-2">
-                                {{ app }}
-                            </span>
+                            <h4 mat-line>Description:</h4>
+                            <p mat-line>{{ space.description }}</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <h4 mat-line>Applications:</h4>
+                            <p mat-line>
+                                <span *ngFor="let app of space.podioSpace.applications" class="pr-2">
+                                    {{ app }}
+                                </span>
+                            </p>
                         </mat-list-item>
                     </mat-list>
                 </mat-expansion-panel>
@@ -55,16 +60,17 @@
 
                 <div class="d-flex justify-content-between align-items-center">
                     <!-- FILTER -->
-                    <mat-form-field >
-                        <input matInput (keyup)="applyFilter($event.target.value)"
-                            placeholder="Search history...">
+                    <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search history...">
                     </mat-form-field>
 
                     <!-- TASKS -->
                     <span class="button-row">
                         <button mat-raised-button class='mr-2' (click)='onUpdateClick()'>New Update</button>
-                        <button mat-raised-button class='mr-2'>New Deployment</button>
-                        <button mat-raised-button class='mr-2'>New Patch</button>
+
+                        <button mat-raised-button class='mr-2' (click)='onDeploymentClick()'>New Deployment</button>
+
+                        <button mat-raised-button class='mr-2' (click)='onPatchClick()'>New Patch</button>
                     </span>
                 </div>
 

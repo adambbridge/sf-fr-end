@@ -44,6 +44,8 @@ import { APP_ROUTES } from "./app.routes";
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { NewUpdateComponent } from './Components/new-update/new-update.component';
+import { NewDeploymentComponent } from './Components/new-deployment/new-deployment.component';
+import { NewPatchComponent } from './Components/new-patch/new-patch.component';
 
 
 @NgModule({
@@ -79,7 +81,9 @@ import { NewUpdateComponent } from './Components/new-update/new-update.component
         NewSolutionComponent,
         EditSolutionComponent,
         DeploySolutionComponent,
-        NewUpdateComponent
+        NewUpdateComponent,
+        NewDeploymentComponent,
+        NewPatchComponent
     ],
     imports: [
         /** Modules */
@@ -98,6 +102,10 @@ import { NewUpdateComponent } from './Components/new-update/new-update.component
     ],
     providers: [],
     bootstrap: [AppComponent],
-    entryComponents: [NewUpdateComponent]
+    entryComponents: [
+        NewUpdateComponent,
+        NewDeploymentComponent,
+        NewPatchComponent
+    ]
 })
 export class AppModule {}

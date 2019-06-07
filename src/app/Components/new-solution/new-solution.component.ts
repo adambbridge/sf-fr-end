@@ -45,15 +45,8 @@ export class NewSolutionComponent implements OnInit {
     // MY CODE
     workspaces; // dont generate until user picks org
     organizations = this.fakeDataService.fakeOrganizations;
-    // TODO ADDED CHECKED: FALSE PROP TO FAKE DATA MODEL TO ALLOW FOR USER SELECTION IN FORM
     solution: SolutionVM = new SolutionVM(null, "", "", []);
     submitted = false;
-    // MODEL
-    // appId: string;
-    // name: string;
-    // version: string;
-    // workspaces: Object[];
-    // history?: Object[];
 
     constructor(
         private _saasafrasService: SaasafrasService,
@@ -63,40 +56,18 @@ export class NewSolutionComponent implements OnInit {
     ngOnInit() {}
 
     onOrgSelection(userSelectedOrg) {
-        console.log(userSelectedOrg.value);
         let chosenOrg = this.organizations.find((org) => {
             return org.name === userSelectedOrg.value;
         });
-        console.log(chosenOrg);
-
-        // add checked: false prop to each space in a vm
-        // expose them via ngModel on checkboxes
-        // user can then modify checked prop
-        // then on submit grab just those checked
-        
         this.workspaces = chosenOrg.spaces;
-        this.workspaces.forEach(space => space.checked = false)
-        
-        // .map(space => {
-        //     space.checked = false;
-        // })
-        
-
-
+        this.workspaces.forEach((space) => (space.checked = false));
     }
 
     onSubmit(form: NgForm) {
-        console.log('form value:', form.value);
-        console.log('form valid:', form.valid);
-        // console.log('our model', this.form)
-        // console.log(JSON.stringify(this.model))
+        console.log("form value:", form.value);
+        console.log("form valid:", form.valid);
         this.submitted = true;
     }
-
-    // TODO: Remove this when we're done
-    // get diagnostic() {
-    //     // return JSON.stringify(this.model);
-    // }
 }
 
 // ALEX'S CODE
