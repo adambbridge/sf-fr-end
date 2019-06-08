@@ -5,6 +5,24 @@ import { Injectable } from "@angular/core";
     providedIn: "root"
 })
 export class FakeDataService {
+    fakeClients = [
+        {
+            name: "fake client 1",
+            id: '1',
+            environments: ["fake env 1", "fake env 2", "fake env 3"]
+        },
+        {
+            name: "fake client 2",
+            id: '2',
+            environments: ["fake env 1", "fake env 2", "fake env 3"]
+        },
+        {
+            name: "fake client 3",
+            id: '3',
+            environments: ["fake env 1", "fake env 2", "fake env 3"]
+        }
+    ];
+
     fakeApplication = {
         appId: 123,
         appName: "foo",

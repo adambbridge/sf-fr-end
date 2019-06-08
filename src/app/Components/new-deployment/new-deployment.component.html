@@ -1,2 +1,25 @@
-<h1 mat-dialog-title>New Deployment</h1>
-<p>Dialog has received solution: "{{passedData.solution.name}}" </p>
+<h1 mat-dialog-title>New Deployment of: "{{passedData.solution.name}}"</h1>
+
+<form [formGroup]="deploymentForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field class="w-100">
+        <mat-label>Select an client</mat-label>
+        <mat-select formControlName="client" (selectionChange)='onClientSelection($event.value)'>
+            <mat-option *ngFor="let client of clients" [value]="client.id">{{client.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100" *ngIf='environments'>
+        <mat-label>Select an environment</mat-label>
+        <mat-select formControlName="environment">
+            <mat-option *ngFor="let env of environments" [value]="env">{{env}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+        <textarea matInput formControlName="description" placeholder="Add a description (optional)"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" [disabled]="!deploymentForm.valid">Create Deployment</button>
+
+</form>

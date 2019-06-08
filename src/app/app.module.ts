@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import { CustomMaterialModule } from "./custom-material/custom-material.module";
 
 /** Components */
@@ -88,6 +89,7 @@ import { NewPatchComponent } from './Components/new-patch/new-patch.component';
     imports: [
         /** Modules */
         FormsModule,
+        ReactiveFormsModule,
         BrowserModule,
         BrowserAnimationsModule,
         CustomMaterialModule,
