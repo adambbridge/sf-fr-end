@@ -28,6 +28,8 @@ export class NewDeploymentComponent implements OnInit {
      * TODO: assign form data to another object so we dont mess with the form data once its been captured in onSubmit per
      *  https://malcoded.com/posts/angular-fundamentals-reactive-forms/
      *
+     * TODO??:
+     * set value of solution as the id property but display the name property
      */
 
     // data for populating select inputs
@@ -42,6 +44,7 @@ export class NewDeploymentComponent implements OnInit {
 
     // form model
     deploymentForm = this.fb.group({
+        solution: ["", Validators.required] ,
         client: ["", Validators.required],
         environment: ["", Validators.required],
         description: [""]
@@ -56,18 +59,19 @@ export class NewDeploymentComponent implements OnInit {
 
     ngOnInit() {
        this.clients = this.fakeDataService.fakeClients;
+       this.deploymentForm.controls.solution.setValue(this.passedData.solution.name);
+        
     }
 
     onClientSelection(selectedClientID): void {
-        console.log(selectedClientID)
-        // let selectedClientID = this.deploymentForm.get('client').value;
+        console.log(selectedClientID);
         let selectedClientObject = this.clients.find(client => client.id === selectedClientID);
         this.environments = selectedClientObject.environments;
         console.log(JSON.stringify(this.environments))
     }
 
     onSubmit() {
-        console.warn(this.deploymentForm.value.client.name );
-        console.warn(this.deploymentForm.valid);
+        console.warn(this.deploymentForm.value );
+        console.warn(this.deploymentForm.valid);        
     }
 }

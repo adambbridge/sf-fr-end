@@ -1,17 +1,33 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { Component, OnInit, Inject } from "@angular/core";
+import { MAT_DIALOG_DATA } from "@angular/material";
+import { FormBuilder } from "@angular/forms";
+import { Validators } from "@angular/forms";
+import { MatInputModule } from "@angular/material/input";
 
 @Component({
-  selector: 'app-new-update',
-  templateUrl: './new-update.component.html',
-  styleUrls: ['./new-update.component.css']
+    selector: "app-new-update",
+    templateUrl: "./new-update.component.html",
+    styleUrls: ["./new-update.component.css"]
 })
 export class NewUpdateComponent implements OnInit {
+    updateForm = this.fb.group({
+        solution: ["", Validators.required],
+        description: [""]
+    });
 
-    // get stored data passed by open method from angular material 
-  constructor(@Inject(MAT_DIALOG_DATA) private passedData: any) { }
+    constructor(
+        @Inject(MAT_DIALOG_DATA) private passedData: any,
+        private fb: FormBuilder
+    ) {}
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.updateForm.controls.solution.setValue(
+            this.passedData.solution.name
+        );
+    }
 
+    onSubmit() {
+        console.warn(this.updateForm.value);
+        console.warn(this.updateForm.valid);
+    }
 }
