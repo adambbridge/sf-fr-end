@@ -18,6 +18,8 @@ import { MatInputModule } from "@angular/material/input";
  */
 export class NewPatchComponent implements OnInit {
     environments;
+    selectedEnvs;
+    selectedEnvsError: boolean = true;
     patchForm: FormGroup; // form model
 
     constructor(
@@ -27,28 +29,44 @@ export class NewPatchComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.environments = this._getEnvs(this._fakeDataService.fakeClients);
-        console.log("envs: ", this.environments);
+        this.environments = this._buildEnvArray(
+            this._fakeDataService.fakeClients
+        );
 
         this.patchForm = this._fb.group({
-            solution: ["", Validators.required],
+            solution: [this._passedData.solution.name, Validators.required],
             environments: this._addEnvControls(),
             description: [""]
         });
-
-        this.patchForm.controls.solution.setValue(
-            this._passedData.solution.name
-        );
     }
 
     onSubmit() {
+        delete this.patchForm.value.environments; // true/false values
+        this.patchForm.value.selectedEnvs = this.selectedEnvs;
         console.warn(this.patchForm.value);
         console.warn(this.patchForm.valid);
+    }
+
+    // if corresponding checkbox is checked add env to selectedEnvs
+    getSelectedEnvs() {
+        this.selectedEnvs = [];
+        this.envControls.controls.forEach((ctrl, index) => {
+            if (ctrl.value === true) {
+                this.selectedEnvs.push(this.environments[index]);
+            }
+        });
+        console.log(this.selectedEnvs);
+        console.log(this.envControls);
+        this.selectedEnvsError = this.selectedEnvs.length > 0 ? false : true;
     }
 
     // create access from html
     get envControls() {
         return <FormArray>this.patchForm.get("environments");
+    }
+
+    get description() {
+        return this.patchForm.get("description");
     }
 
     // make one control for each env in this.environments
@@ -59,8 +77,7 @@ export class NewPatchComponent implements OnInit {
         return this._fb.array(arr);
     }
 
-    private _getEnvs(clients) {
-        // iterate, return
+    private _buildEnvArray(clients) {
         let envs = [];
         clients.forEach((client) => {
             client.environments.forEach((e) => {

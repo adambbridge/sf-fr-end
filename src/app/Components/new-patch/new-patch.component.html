@@ -10,16 +10,18 @@
     <!-- inputs loop our controls
     labels loop our environments
     sync them up using index -->
+    <mat-label>Environments to patch</mat-label>
     <div *ngFor="let control of envControls.controls; let i = index">
-        <input type="checkbox" [formControl]="control" id="checkbox{{i}}">
+        <input type="checkbox" [formControl]="control" id="checkbox{{i}}" (change)="getSelectedEnvs()">
         <label for="checkbox{{i}}">{{environments[i]}}</label>
     </div>
+    <small *ngIf="selectedEnvsError && description.touched">Please select at least one environment</small>
 
     <mat-form-field class="w-100">
         <textarea matInput formControlName="description" placeholder="Add a description (optional)"></textarea>
     </mat-form-field>
 
     <button mat-raised-button class='mr-2'>Cancel</button>
-    <button mat-raised-button type="submit" [disabled]="!patchForm.valid">Create Deployment</button>
+    <button mat-raised-button type="submit" [disabled]="selectedEnvsError">Create Deployment</button>
 
 </form>
