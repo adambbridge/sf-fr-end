@@ -9,17 +9,17 @@ export class FakeDataService {
         {
             name: "fake client 1",
             id: '1',
-            environments: ["fake env 1", "fake env 2", "fake env 3"]
+            environments: ["client1 env 1", "client1 env 2", "client1 env 3"]
         },
         {
             name: "fake client 2",
             id: '2',
-            environments: ["fake env 1", "fake env 2", "fake env 3"]
+            environments: ["client2 env 1", "client2 env 2", "client2 env 3"]
         },
         {
             name: "fake client 3",
             id: '3',
-            environments: ["fake env 1", "fake env 2", "fake env 3"]
+            environments: ["client3 env 1", "client3 env 2", "client3 env 3"]
         }
     ];
 

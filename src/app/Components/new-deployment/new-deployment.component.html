@@ -8,10 +8,13 @@
     </mat-form-field>
 
     <mat-form-field class="w-100">
-        <mat-label>Select an client</mat-label>
+        <mat-label>Select a client</mat-label>
         <mat-select formControlName="client" (selectionChange)='onClientSelection($event.value)'>
             <mat-option *ngFor="let client of clients" [value]="client.id">{{client.name}}</mat-option>
         </mat-select>
+        <div *ngIf="c.invalid && (c.dirty || c.touched)">
+            <mat-error *ngIf="c.errors.required">Please select a client</mat-error>
+        </div>
     </mat-form-field>
 
     <mat-form-field class="w-100" *ngIf='environments'>
@@ -19,6 +22,9 @@
         <mat-select formControlName="environment">
             <mat-option *ngFor="let env of environments" [value]="env">{{env}}</mat-option>
         </mat-select>
+        <div *ngIf="env.invalid && (env.dirty || env.touched)">
+            <mat-error *ngIf="env.errors.required">Please select an environment</mat-error>
+        </div>
     </mat-form-field>
 
     <mat-form-field class="w-100">
