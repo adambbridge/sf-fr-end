@@ -12,7 +12,7 @@
     sync them up using index -->
     <mat-label>Environments to patch</mat-label>
     <div *ngFor="let control of envControls.controls; let i = index">
-        <input type="checkbox" [formControl]="control" id="checkbox{{i}}" (change)="getSelectedEnvs()">
+        <input type="checkbox" [formControl]="control" id="checkbox{{i}}" (change)="syncItemsWithControls()">
         <label for="checkbox{{i}}">{{environments[i]}}</label>
     </div>
     <small *ngIf="selectedEnvsError && description.touched">Please select at least one environment</small>

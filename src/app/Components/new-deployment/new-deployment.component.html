@@ -32,7 +32,7 @@
     </mat-form-field>
 
     <button mat-raised-button class='mr-2'>Cancel</button>
-    <button mat-raised-button type="submit" [disabled]="!deploymentForm.valid">Create Deployment</button>
+    <button mat-raised-button type="submit" [disabled]="selectedWorkspacesError">Create Solution</button>
 
 </form>
 

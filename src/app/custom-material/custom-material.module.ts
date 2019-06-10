@@ -24,11 +24,14 @@ import {
     MatTabsModule,
     MatProgressBarModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSidenavModule
 } from "@angular/material";
 
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
+import { MatToolbarModule } from "@angular/material/toolbar";
+
 
 
 @NgModule({
@@ -60,7 +63,9 @@ import { MatTableModule } from "@angular/material/table";
         MatRadioModule,
         MatTableModule,
         MatSortModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSidenavModule,
+        MatToolbarModule
     ],
     exports: [
         MatBadgeModule,
@@ -88,7 +93,9 @@ import { MatTableModule } from "@angular/material/table";
         MatRadioModule,
         MatTableModule,
         MatSortModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSidenavModule,
+        MatToolbarModule
     ]
 })
 export class CustomMaterialModule {}

@@ -47,8 +47,8 @@ export class NewPatchComponent implements OnInit {
         console.warn(this.patchForm.valid);
     }
 
-    // if corresponding checkbox is checked add env to selectedEnvs
-    getSelectedEnvs() {
+    // sync selected envs with selected checkbox controls
+    syncItemsWithControls() {
         this.selectedEnvs = [];
         this.envControls.controls.forEach((ctrl, index) => {
             if (ctrl.value === true) {

@@ -1,3 +1,5 @@
+import { Org } from "./../../../model/podio/organization";
+// vendors
 import {
     Component,
     OnInit,
@@ -9,8 +11,12 @@ import {
 import { map } from "rxjs/operators";
 import { of } from "rxjs";
 import { NgForm } from "@angular/forms";
+import { FormBuilder } from "@angular/forms";
+import { Validators } from "@angular/forms";
+import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 
+// our stuff
 import {
     SolutionCreationRequest,
     SolutionCreationResponse
@@ -18,9 +24,7 @@ import {
 import { Space } from "src/model/podio/space";
 import { Solution } from "src/model/saasafras/solution";
 import { SolutionVM } from "src/app/Components/solution/solution.vm";
-
 import { $Space } from "../../../model/saasafras/saas.space";
-
 import { SaasafrasService } from "../../services/saasafras.service";
 import { SolutionComponent } from "../solution/solution.component";
 import { FakeDataService } from "src/app/services/fake-data.service";
@@ -30,47 +34,108 @@ import { FakeDataService } from "src/app/services/fake-data.service";
     templateUrl: "./new-solution.component.html",
     styleUrls: ["./new-solution.component.css"]
 })
-export class NewSolutionComponent implements OnInit {
-    // ALEX CODE
-    // @ViewChild("solComp") solutionComponent: SolutionComponent;
-    // @Input() solution = new Solution(null, "", "", this.workspaces);
-    // workspaces = new Array<$Space>();
-    // @Output() spaceIds = new Array<Number>();
-    // @Output() selectedSpaces = new EventEmitter<Space[]>();
-    // private _spaces = new Array<Space>();
-    // spaceIdMapper = map((spaces: Space[]) => {
-    //     this.spaceIds = spaces.map((s) => Number.parseInt(s.space_id, 10));
-    // });
 
-    // MY CODE
+// TODO ALEX'S CODE WAS CUT AND PASTED BELOW THE CLASS AS COMMENTS
+export class NewSolutionComponent implements OnInit {
+    organizations;
     workspaces; // dont generate until user picks org
-    organizations = this.fakeDataService.fakeOrganizations;
-    solution: SolutionVM = new SolutionVM(null, "", "", []);
+    selectedWorkspaces = [];
+    selectedWorkspacesError: boolean = true;
+    newSolutionForm: FormGroup;
     submitted = false;
 
     constructor(
+        private _fb: FormBuilder,
         private _saasafrasService: SaasafrasService,
         private fakeDataService: FakeDataService
     ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.organizations = this.fakeDataService.fakeOrganizations;
 
+        this.newSolutionForm = this._fb.group({
+            name: ["", Validators.required],
+            organization: ["", Validators.required],
+            // empty form array
+            workspaceControls: this._fb.array([]),
+            description: [""]
+        });
+    }
+
+    // WHEN choose org, get spaces from it
+    // and populate workspaces array of form model
     onOrgSelection(userSelectedOrg) {
         let chosenOrg = this.organizations.find((org) => {
             return org.name === userSelectedOrg.value;
         });
-        this.workspaces = chosenOrg.spaces;
-        this.workspaces.forEach((space) => (space.checked = false));
+        let spaces = chosenOrg.spaces;
+        this.clearFormArray(this.workspaceControls);
+        this.selectedWorkspaces = [];
+        this._updateFormErrors();
+        spaces.forEach((space) => {
+            // add 1 unchecked checkbox for each space
+            this.workspaceControls.push(this._fb.control(false));
+        });
+        this.workspaces = spaces;
+        
     }
 
-    onSubmit(form: NgForm) {
-        console.log("form value:", form.value);
-        console.log("form valid:", form.valid);
+    clearFormArray = (formArray: FormArray) => {
+        while (formArray.length !== 0) {
+            formArray.removeAt(0);
+        }
+    };
+
+    get workspaceControls() {
+        return this.newSolutionForm.get("workspaceControls") as FormArray;
+    }
+
+    get description() {
+        return <FormArray>this.newSolutionForm.get("description");
+    }
+
+    // sync selected spaces with selected checkbox controls
+    syncItemsWithControls() {
+        this.selectedWorkspaces = [];
+        this.workspaceControls.controls.forEach((ctrl, index) => {
+            if (ctrl.value === true) {
+                this.selectedWorkspaces.push(this.workspaces[index]);
+            }
+        });
+        // console.log(this.selectedWorkspaces);
+        // console.log(this.workspaceControls);
+        this._updateFormErrors();
+    }
+
+    private _updateFormErrors() {
+        this.selectedWorkspacesError =
+            this.selectedWorkspaces.length > 0 ? false : true;
+    }
+
+    onSubmit() {
         this.submitted = true;
+
+        // delete true/false controls and add selected spaces
+        delete this.newSolutionForm.value.workspaceControls; // true/false values
+        this.newSolutionForm.value.workspaces = this.selectedWorkspaces;
+
+        console.log("form value:", this.newSolutionForm.value);
+        console.log("form value:", this.newSolutionForm.valid);
     }
 }
 
 // ALEX'S CODE
+
+// @ViewChild("solComp") solutionComponent: SolutionComponent;
+// @Input() solution = new Solution(null, "", "", this.workspaces);
+// workspaces = new Array<$Space>();
+// @Output() spaceIds = new Array<Number>();
+// @Output() selectedSpaces = new EventEmitter<Space[]>();
+// private _spaces = new Array<Space>();
+// spaceIdMapper = map((spaces: Space[]) => {
+//     this.spaceIds = spaces.map((s) => Number.parseInt(s.space_id, 10));
+// });
+// solution: SolutionVM = new SolutionVM(null, "", "", []);
 
 // onSubmit(form: NgForm) {
 //     console.log(form);

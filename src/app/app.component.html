@@ -1,11 +1,37 @@
-<app-navbar></app-navbar>
-<!-- <h1>Angular Router</h1>
-<nav>
-  <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-  <a routerLink="/login" routerLinkActive="active">Login</a>
-</nav> -->
-<div class="container">
-    <router-outlet></router-outlet>
-</div>
+<!-- <app-navbar></app-navbar> -->
+<mat-toolbar role="navigation" class="justify-content-between">
+    <div class="d-flex align-items-center">
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <img class="sf-mat-icon mr-2" id="image"
+            src="https://uploads-ssl.webflow.com/5ad89e5cbcb30031ff70361a/5ad8c34ebcb30096777073cc_saassafras_logo80.png" />
+        <a routerLink="/solutions" id="home">Saasafras</a>
+    </div>
 
-<!-- <app-login></app-login> -->
+    <div>
+        <ul class="d-flex flex-row">
+            <li><a routerLink="/solutions" class="pr-2">Podio Assets</a></li>
+            <li><a routerLink="/clients" class="pr-2">Clients</a></li>
+            <li><a routerLink="/solutions" class="pr-2">Solutions</a></li>
+            <li><a routerLink="/login" id="signup" class="pr-2">Login</a></li>
+        </ul>
+    </div>
+
+</mat-toolbar>
+
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav role="navigation" mode="side">
+        <p>sidenav</p>
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <!---------------------- 
+            ALL MAIN CONTENT GOES HERE
+        ------------------------->
+
+        <main class="container">
+            <router-outlet></router-outlet>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>

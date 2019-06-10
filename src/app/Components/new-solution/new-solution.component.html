@@ -3,42 +3,47 @@
         <mat-card-content>
             <h3>Create New Solution</h3>
 
-            <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
+            <form [formGroup]="newSolutionForm" (ngSubmit)="onSubmit()" novalidate>
 
                 <mat-form-field class="w-100" appearance="outline">
                     <!-- Defining a name attribute is a requirement when using [(ngModel)] in combination with a form. and the name is used to register eacch control -->
-                    <input type='text' [(ngModel)]="solution.name" name="name" matInput placeholder="Name" required />
-                    todo remove this {{solution.name}}
+                    <!-- <mat-label>Name</mat-label> -->
+                    <input type='text' formControlName="name" matInput required placeholder="Name" />
                 </mat-form-field>
 
                 <mat-form-field class="w-100" appearance="outline">
-                    <textarea [(ngModel)]="solution.description" name="description" matInput placeholder="Description"
-                        required></textarea>
+                    <textarea formControlName="description" matInput placeholder="Description" required></textarea>
                 </mat-form-field>
 
                 <mat-form-field class="w-100" appearance="outline">
                     <mat-label>Use spaces from what organization?</mat-label>
-                    <mat-select name="organization" [(ngModel)]="organization" required
-                        (selectionChange)='onOrgSelection($event)'>
+                    <mat-select formControlName="organization" required (selectionChange)='onOrgSelection($event)'>
                         <mat-option *ngFor="let org of organizations" [value]="org.name">
                             {{org.name}}
                         </mat-option>
                     </mat-select>
+                    <!-- TODO ADD VALIDATION
+                    <div *ngIf="c.invalid && (c.dirty || c.touched)">
+                        <mat-error *ngIf="c.errors.required">Please select a client</mat-error>
+                    </div> -->
                 </mat-form-field>
 
-                <!-- TODO IMPLEMENT REACTIVE FORMS CHECKBOX GROUP COMPONENT -->
-                <div *ngIf="workspaces">
-                    <div *ngFor='let space of workspaces; let i = index' class='d-block mb-3'>
-                        <mat-checkbox [(ngModel)]='workspaces[i].name' name="{workspaces[i].name}">
-                            {{space.workspaceName}}
-                        </mat-checkbox>
+                <div *ngIf="workspaces" class='mb-3'>
+
+                    <mat-label>Which workspaces?</mat-label>
+                    <div class="mt-3">
+                        <div *ngFor="let control of workspaceControls.controls; let i = index" class="pb-2">
+                            <mat-checkbox type="checkbox" [formControl]="control" id="checkbox{{i}}"
+                                (change)="syncItemsWithControls()">
+                                {{workspaces[i].workspaceName}}</mat-checkbox>
+                        </div>
                     </div>
+
+                    <small *ngIf="selectedWorkspacesError && description.touched">Please select at least one
+                        environment</small>
                 </div>
 
-                <button type="submit" mat-raised-button>
-                    <!-- TODO DISABLE UNTIL AT LEAST ONE ORG SELECTED -->
-                    Create Solution
-                </button>
+                <button type="submit" mat-raised-button [disabled]="!newSolutionForm.valid">Create Solution</button>
 
             </form>
 
@@ -46,3 +51,11 @@
     </mat-card>
 
 </div>
+
+<!-- <div *ngIf="workspaces">
+                    <div *ngFor='let space of workspaces; let i = index' class='d-block mb-3'>
+                        <mat-checkbox [(ngModel)]='workspaces[i].name' name="{workspaces[i].name}">
+                            {{space.workspaceName}}
+                        </mat-checkbox>
+                    </div>
+                </div> -->
