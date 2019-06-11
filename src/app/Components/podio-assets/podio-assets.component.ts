@@ -1,8 +1,6 @@
-import { FakeDataService } from './../../services/fake-data.service';
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { FakeDataService } from "./../../services/fake-data.service";
+import { Component, OnInit, Input, ViewChild, ViewChildren } from "@angular/core";
 import { MatExpansionPanel } from "@angular/material";
-
-
 
 @Component({
     selector: "app-podio-assets",
@@ -11,9 +9,9 @@ import { MatExpansionPanel } from "@angular/material";
 })
 export class PodioAssetsComponent implements OnInit {
     organizations;
-    @ViewChild("spaces") spacesList;
+    @ViewChildren("spaces") spacesLists;
     selectedSpaces = [];
-    panelOpenState = false;
+    // panelOpenState = false;
 
     constructor(private _fakeDataService: FakeDataService) {}
 
@@ -21,11 +19,16 @@ export class PodioAssetsComponent implements OnInit {
         this.organizations = this._fakeDataService.fakeOrganizations;
     }
 
-    onSelectionChange(e) {
+    onSelectionChange(e, panelIndex) {
         // let justSelected = e.option.value;
         // console.log('just selected:', justSelected)
-
-        this.selectedSpaces = this.spacesList.selectedOptions.selected;
+        this.selectedSpaces = this.spacesLists._results[panelIndex].selectedOptions.selected;
         console.log(this.selectedSpaces);
+    }
+
+    onPanelClose(panelIndex) {
+        // can't pick spaces from multiple orgs
+        this.spacesLists._results[panelIndex].deselectAll();
+        this.selectedSpaces = [];
     }
 }

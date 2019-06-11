@@ -12,9 +12,8 @@
     <!-- ORGS AND SPACES -->
     <mat-accordion>
 
-        <!-- PANEL  -->
-        <mat-expansion-panel *ngFor="let org of organizations" (opened)="panelOpenState = true"
-            (closed)="panelOpenState = false" (closed)="panelOpenState = false">
+        <!-- A PANEL FOR EACH ORG -->
+        <mat-expansion-panel *ngFor="let org of organizations; let panelIndex = index" (opened)="panelOpenState = true" (closed)="onPanelClose(panelIndex)">
 
             <!-- PANEL HEADER  -->
             <mat-expansion-panel-header>
@@ -29,7 +28,7 @@
             </mat-list>
 
             <!-- SPACES LIST -->
-            <mat-selection-list #spaces aria-label="workspaces list" (selectionChange)="onSelectionChange($event)">
+            <mat-selection-list #spaces aria-label="workspaces list" (selectionChange)="onSelectionChange($event, panelIndex)">
                 <mat-list-option *ngFor="let space of org.spaces" [value]="space">
                     {{space.workspaceName}}
                 </mat-list-option>
