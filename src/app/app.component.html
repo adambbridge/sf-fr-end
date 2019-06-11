@@ -1,52 +1,16 @@
 <!-- <app-navbar></app-navbar> -->
-<mat-toolbar role="navigation" class="justify-content-between">
-    <div class="d-flex align-items-center">
-        <button mat-icon-button (click)="sidenav.toggle()" class="d-inline d-lg-none">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <img class="sf-mat-icon mr-2" id="image"
-            src="https://uploads-ssl.webflow.com/5ad89e5cbcb30031ff70361a/5ad8c34ebcb30096777073cc_saassafras_logo80.png" />
-        <a routerLink="/solutions" id="home">Saasafras</a>
-    </div>
+<app-header (sidenavToggle)="sidenav.toggle()"></app-header>
 
-    <div>
-        <ul class="d-none d-lg-flex flex-row">
-            <li><a routerLink="/solutions" class="pr-2">Podio Assets</a></li>
-            <li><a routerLink="/clients" class="pr-2">Clients</a></li>
-            <li><a routerLink="/solutions" class="pr-2">Solutions</a></li>
-            <li><a routerLink="/login" id="signup" class="pr-2">Login</a></li>
-        </ul>
-    </div>
-
-</mat-toolbar>
-
-<mat-sidenav-container class="example-container d-block d-lg-none">
-    <mat-sidenav #sidenav role="navigation" mode="side" (click)="sidenav.toggle()">
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav role="navigation" mode="side">
 
         <!-- SIDE NAVIGATION CONTENT -->
-        <mat-nav-list>
-            <a mat-list-item routerLink="/solutions">
-                <mat-icon mat-list-icon>palette</mat-icon> 
-                <span class="pl-2">Podio Assets</span>
-            </a>
-            <a mat-list-item routerLink="/clients">
-                <mat-icon mat-list-icon>contacts</mat-icon>
-                <span class="pl-2">Clients</span>
-            </a>
-            <a mat-list-item routerLink="/solutions">
-                <mat-icon mat-list-icon>view_quilt</mat-icon>
-                <span class="pl-2">Solutions</span>
-            </a>
-            <a mat-list-item routerLink="/login">
-                <mat-icon mat-list-icon>lock</mat-icon>
-                <span class="pl-2">Login</span>
-            </a>
-
-        </mat-nav-list>
+        <app-sidenav-list (closeSidenav)="sidenav.close()"></app-sidenav-list>
 
     </mat-sidenav>
     <mat-sidenav-content>
         <!-- ALL MAIN CONTENT GOES HERE -->
+
         <main class="container">
             <router-outlet></router-outlet>
         </main>

@@ -47,6 +47,8 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 import { NewUpdateComponent } from './Components/new-update/new-update.component';
 import { NewDeploymentComponent } from './Components/new-deployment/new-deployment.component';
 import { NewPatchComponent } from './Components/new-patch/new-patch.component';
+import { HeaderComponent } from './Components/header/header.component';
+import { SidenavListComponent } from './Components/sidenav-list/sidenav-list.component';
 
 
 @NgModule({
@@ -84,7 +86,9 @@ import { NewPatchComponent } from './Components/new-patch/new-patch.component';
         DeploySolutionComponent,
         NewUpdateComponent,
         NewDeploymentComponent,
-        NewPatchComponent
+        NewPatchComponent,
+        HeaderComponent,
+        SidenavListComponent
     ],
     imports: [
         /** Modules */
