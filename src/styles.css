@@ -14,10 +14,11 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-.container {
+/* just use bootstrap grid container class
+    .container {
     width: 80%;
     margin: auto;
-}
+} */
 .mat-drawer-container {
     height: 100vh;
 }
