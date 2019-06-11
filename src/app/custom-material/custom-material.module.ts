@@ -25,7 +25,8 @@ import {
     MatProgressBarModule,
     MatRadioModule,
     MatSelectModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTooltipModule
 } from "@angular/material";
 
 import { MatSortModule } from "@angular/material/sort";
@@ -65,7 +66,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
         MatSortModule,
         MatSelectModule,
         MatSidenavModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatTooltipModule
     ],
     exports: [
         MatBadgeModule,
@@ -95,7 +97,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
         MatSortModule,
         MatSelectModule,
         MatSidenavModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatTooltipModule
     ]
 })
 export class CustomMaterialModule {}

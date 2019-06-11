@@ -24,7 +24,7 @@ export class PodioOrgComponent implements OnInit {
 
   constructor() { }
 
-  select(isDetail: boolean) {
+  Dect(isDetail: boolean) {
     this.showDetail = !isDetail;
   }
 

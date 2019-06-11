@@ -49,6 +49,7 @@ import { NewDeploymentComponent } from './Components/new-deployment/new-deployme
 import { NewPatchComponent } from './Components/new-patch/new-patch.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { SidenavListComponent } from './Components/sidenav-list/sidenav-list.component';
+import { PodioAssetsComponent } from './Components/podio-assets/podio-assets.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { SidenavListComponent } from './Components/sidenav-list/sidenav-list.com
         NewDeploymentComponent,
         NewPatchComponent,
         HeaderComponent,
-        SidenavListComponent
+        SidenavListComponent,
+        PodioAssetsComponent
     ],
     imports: [
         /** Modules */

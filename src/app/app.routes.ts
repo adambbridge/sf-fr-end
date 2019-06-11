@@ -1,3 +1,4 @@
+import { PodioAssetsComponent } from './Components/podio-assets/podio-assets.component';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './Components/login/login.component';
 import { PageNotFoundComponent } from './Components/page-not-found/page-not-found.component';
@@ -11,14 +12,15 @@ import { PodioOrgsComponent } from './Components/podio-orgs/podio-orgs.component
 import { NewSolutionComponent } from './Components/new-solution/new-solution.component';
 
 export const APP_ROUTES: Routes = [
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'auth', component: AuthenticatingComponent },
-  { path: 'service-auth', component: ServiceAuthenticatingComponent },
-  { path: 'solutions/new', component: NewSolutionComponent },
-  { path: 'solutions', component: SolutionsComponent },
-  { path: 'solution', component: SolutionComponent },
-  { path: 'spaces', component: PodioSpacesComponent },
-  { path: 'orgs', component: PodioOrgsComponent },
-  { path: '', redirectTo: 'solutions', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+    { path: 'login', component: LoginComponent, pathMatch: 'full' },
+    { path: 'auth', component: AuthenticatingComponent },
+    { path: 'service-auth', component: ServiceAuthenticatingComponent },
+    { path: 'solutions/new', component: NewSolutionComponent },
+    { path: 'solutions', component: SolutionsComponent },
+    { path: 'solution', component: SolutionComponent },
+    { path: 'spaces', component: PodioSpacesComponent },
+    { path: 'orgs', component: PodioOrgsComponent },
+    { path: 'podio', component: PodioAssetsComponent },
+    { path: '', redirectTo: 'solutions', pathMatch: 'full' },
+    { path: '**', component: PageNotFoundComponent }
 ];

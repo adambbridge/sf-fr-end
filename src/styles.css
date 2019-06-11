@@ -64,6 +64,11 @@ tr:active {
     background: #eee;
 }
 
+.mat-expansion-panel-header.mat-expanded {
+    border-bottom: 1px solid lightgrey;
+    font-weight: bold;
+}
+
 @media only screen and (max-width: 767px) {
     .hidden-sm-down {
         display: none;

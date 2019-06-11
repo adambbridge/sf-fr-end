@@ -1,0 +1,49 @@
+<h3>My Podio Assets</h3>
+
+<div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <!-- FILTER -->
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="configure me..." />
+        </mat-form-field>
+    </div>
+
+    <!-- ORGS AND SPACES -->
+    <mat-accordion>
+
+        <!-- PANEL  -->
+        <mat-expansion-panel *ngFor="let org of organizations" (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false" (closed)="panelOpenState = false">
+
+            <!-- PANEL HEADER  -->
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{org.name}}</mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <!-- MISC INFO  -->
+            <mat-list>
+                <mat-list-item>Descrip of org etc??</mat-list-item>
+            </mat-list>
+
+            <!-- SPACES LIST -->
+            <mat-selection-list #spaces aria-label="workspaces list" (selectionChange)="onSelectionChange($event)">
+                <mat-list-option *ngFor="let space of org.spaces" [value]="space">
+                    {{space.workspaceName}}
+                </mat-list-option>
+            </mat-selection-list>
+
+            <!-- CREATE NEW SOLUTION BTN -->
+            <span class="button-row">
+                <span matTooltip="Select at least one workspace to enable button">
+                    <button [disabled]="selectedSpaces.length < 1" mat-raised-button (click)='onNewSolutionClick()' class="mt-3">Create solution from selected
+                        workspaces</button>
+                </span>
+            </span>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+</div>
