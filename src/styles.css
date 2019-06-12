@@ -68,6 +68,17 @@ tr:active {
     border-bottom: 1px solid lightgrey;
     font-weight: bold;
 }
+.text-h1 {
+    font-size: 32px;
+    margin: 20px 20px 20px 0;
+}
+.text-hint {
+    font-size: .9rem;
+    color: #777; /* same as bootstrap "text-muted" */
+}
+.text-small {
+    font-size: .9rem;
+}
 
 @media only screen and (max-width: 767px) {
     .hidden-sm-down {

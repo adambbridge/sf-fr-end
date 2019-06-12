@@ -17,6 +17,7 @@ import { MatInputModule } from "@angular/material/input";
  *
  */
 export class NewPatchComponent implements OnInit {
+    solution;
     environments;
     selectedEnvs;
     selectedEnvsError: boolean = true;
@@ -29,6 +30,8 @@ export class NewPatchComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+
+        this.solution = this._passedData.solution;
         this.environments = this._buildEnvArray(
             this._fakeDataService.fakeClients
         );

@@ -10,19 +10,22 @@ import { MatInputModule } from "@angular/material/input";
     styleUrls: ["./new-update.component.css"]
 })
 export class NewUpdateComponent implements OnInit {
-    updateForm = this.fb.group({
-        solution: ["", Validators.required],
-        description: [""]
-    });
+    solution;
+    updateForm;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) private passedData: any,
+        @Inject(MAT_DIALOG_DATA) private _passedData: any,
         private fb: FormBuilder
     ) {}
 
     ngOnInit() {
+        this.solution = this._passedData.solution;
+        this.updateForm = this.fb.group({
+            solution: ["", Validators.required],
+            description: [""]
+        });
         this.updateForm.controls.solution.setValue(
-            this.passedData.solution.name
+            this._passedData.solution.name
         );
     }
 

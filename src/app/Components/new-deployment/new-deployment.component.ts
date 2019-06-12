@@ -1,12 +1,11 @@
-import { environment } from './../../../environments/environment.prod';
-import { FakeDataService } from 'src/app/services/fake-data.service';
+import { environment } from "./../../../environments/environment.prod";
+import { FakeDataService } from "src/app/services/fake-data.service";
 import { Component, OnInit, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material";
 import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
-
 
 @Component({
     selector: "app-new-deployment",
@@ -28,6 +27,7 @@ import { MatInputModule } from "@angular/material/input";
  * set value of solution as the id property but display the name property
  */
 export class NewDeploymentComponent implements OnInit {
+    solution;
     clients;
     environments;
 
@@ -39,19 +39,24 @@ export class NewDeploymentComponent implements OnInit {
     });
 
     // provide access for validation purposes
-    get c() { return this.deploymentForm.get('client')};
-    get env() { return this.deploymentForm.get('environment')};
+    get c() {
+        return this.deploymentForm.get("client");
+    }
+    get env() {
+        return this.deploymentForm.get("environment");
+    }
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) private passedData: any,
+        @Inject(MAT_DIALOG_DATA) private _passedData: any,
         private fb: FormBuilder,
         private fakeDataService: FakeDataService
     ) {}
 
     ngOnInit() {
+        this.solution = this._passedData.solution;
         this.clients = this.fakeDataService.fakeClients;
         this.deploymentForm.controls.solution.setValue(
-            this.passedData.solution.name
+            this._passedData.solution.name
         );
     }
 

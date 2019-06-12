@@ -1,8 +1,13 @@
-<h1 mat-dialog-title>New Patch</h1>
+<h1 mat-dialog-title>Patch "{{solution.name}}"</h1>
+
+<p class="text-hint">
+    When you have run Updates on your Saasafras solution you can Update deployments of the solution with all of the changes by creating a Patch.
+    <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
+</p>
 
 <form [formGroup]="patchForm" (ngSubmit)="onSubmit()">
 
-    <mat-form-field class='w-100'>
+    <mat-form-field class='w-100 d-none'>
         <mat-label>Solution</mat-label>
         <input type="text" matInput readonly formControlName="solution">
     </mat-form-field>

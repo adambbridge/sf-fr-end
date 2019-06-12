@@ -1,8 +1,13 @@
-<h1 mat-dialog-title>New Deployment</h1>
+<h1 mat-dialog-title>Deploy "{{solution.name}}"</h1>
+
+<p class="text-hint">
+    When you have created a Saasafras Solution, you can deploy the Solution to one or more of your clients. This will ... add further explanation...
+    <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
+</p>
 
 <form [formGroup]="deploymentForm" (ngSubmit)="onSubmit()">
 
-    <mat-form-field class="w-100">
+    <mat-form-field class="w-100 d-none">
         <mat-label>Solution</mat-label>
         <input type="text" matInput readonly formControlName="solution">
     </mat-form-field>
