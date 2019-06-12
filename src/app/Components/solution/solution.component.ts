@@ -1,4 +1,3 @@
-
 import {
     Component,
     OnInit,
@@ -41,6 +40,9 @@ export class SolutionComponent implements OnInit {
 
     // configure material workspaces table
     displayedColumns: string[] = ["date", "task", "environment", "description"];
+
+    searchColumn: string[] = [""];
+
     dataSource = new MatTableDataSource(this.solution.history);
     @ViewChild(MatSortModule) sort: MatSortModule;
 

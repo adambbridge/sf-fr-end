@@ -73,11 +73,34 @@ tr:active {
     margin: 20px 20px 20px 0;
 }
 .text-hint {
-    font-size: .9rem;
+    font-size: 0.9rem;
     color: #777; /* same as bootstrap "text-muted" */
 }
 .text-small {
-    font-size: .9rem;
+    font-size: 0.9rem;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.example-logo {
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfW4DQSUCXdUBC6dPSZQvD9yosKjgstTgb6BjRLxpPnSHH0F-v");
+    background-size: cover;
+}
+mat-card.card-table-container {
+    padding-right: 0;
+    padding-left: 0;
+}
+/* search inside table container */
+.card-table-container .mat-form-field {
+    /* display: inline-block;
+    position: relative;
+    text-align: left; */
+    margin-bottom: -20px;
+}
+.card-table-container .mat-form-field-wrapper {
+    padding-bottom: 1.25em;
+    padding-left: 25px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -89,13 +112,4 @@ tr:active {
     .hidden-md-up {
         display: none;
     }
-}
-
-html,
-body {
-    height: 100%;
-}
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
