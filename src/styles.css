@@ -128,11 +128,17 @@ mat-tab-body .row {
     background-color: white;
     border: 1px solid lightgrey;
     color: #777;
-    padding: 4px 6px;
+    padding: 4px 4px;
+    min-height: 28px;
+    font-size: 12px;
     border-radius: 4px;
     font-weight: normal;
     margin-right: 5px;
 
+}
+.avatar-placeholder  {
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg");
+  background-size: cover;
 }
 .mat-chip .mat-icon {
     font-size: 15px;

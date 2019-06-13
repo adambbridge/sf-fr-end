@@ -118,9 +118,13 @@
 
         <div class="col-12 col-sm-6 col-md-4" *ngFor="let solution of solutions">
             <mat-card class='mr-1 mb-4 cursor-pointer' routerLink="/solution">
-                <img *ngIf='solution.imgUrl' mat-card-image src={{solution.imgUrl}} alt="Photo of a Shiba Inu">
+                <!-- <img *ngIf='solution.imgUrl' mat-card-image src={{solution.imgUrl}} alt="Photo of a Shiba Inu"> -->
+                <mat-card-header>
+                    <div mat-card-avatar class="avatar-placeholder"></div>
 
-                <mat-card-title>{{solution.name}}</mat-card-title>
+                    <mat-card-title>{{solution.name}}</mat-card-title>
+                </mat-card-header>
+
                 <mat-card-content>
                     <p class='text-hint'>
                         Solution description could be here and truncate after 2 lines or so with ...
@@ -128,20 +132,20 @@
                 </mat-card-content>
                 <mat-card-actions>
 
-                    <p class='text-hint'>
+                    <mat-chip-list class='text-hint'>
                         <mat-chip>
                             <mat-icon>ballot</mat-icon> 10
                         </mat-chip>
 
                         <mat-chip>
-                            <mat-icon>update</mat-icon> 07/04/20
+                            <mat-icon>autorenew</mat-icon> 07/04/20
                         </mat-chip>
 
                         <mat-chip>
                             <mat-icon>launch</mat-icon> 3
                         </mat-chip>
 
-                    </p>
+                    </mat-chip-list>
                 </mat-card-actions>
             </mat-card>
         </div>
