@@ -9,7 +9,7 @@
 
                 <mat-card class='w-50'>
                     <mat-card-content>
-                        <h3>Solution description</h3>
+                        <mat-card-title>Solution description</mat-card-title>
                         <p class="text-hint">
                             This can be a user created description for this solution. It can be edited at any time as
                             the solution evolves.
@@ -76,16 +76,16 @@
         <ng-template matTabContent>
 
             <!-- HELP TEXT -->
-            <p class="text-hint">
+            <!-- <p class="text-hint">
                 Some help text for performing tasks can be here.
                 <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
-            </p>
+            </p> -->
 
             <!-- TASK CARDS -->
-            <div class="row">
+            <div class="row mt-4">
 
                 <div class="col-12 col-sm-6 col-md-4">
-                    <mat-card class='mr-1 cursor-pointer' (click)='onUpdateClick()'>
+                    <mat-card class='mr-1 mb-4 cursor-pointer' (click)='onUpdateClick()'>
                         <mat-card-title>Update Solution</mat-card-title>
                         <mat-card-content>
                             <p class='text-hint'>
@@ -140,11 +140,14 @@
             <div class='mt-4'>
 
                 <mat-card class='card-table-container mat-elevation-z3'>
+
+                    <mat-card-title class="pl-4">Task History</mat-card-title>
+
                     <div class="d-flex justify-content-between align-items-center">
                         <!-- FILTER -->
                         <mat-form-field class="w-50">
-                            <input matInput (keyup)="applyFilter($event.target.value)"
-                                placeholder="Search task history...">
+                            <mat-icon matPrefix>search</mat-icon>
+                            <input matInput (keyup)="applyFilter($event.target.value)">
                         </mat-form-field>
 
                     </div>

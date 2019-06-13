@@ -96,12 +96,24 @@ mat-card.card-table-container {
     /* display: inline-block;
     position: relative;
     text-align: left; */
-    margin-bottom: -20px;
+    margin-bottom: -10px;
 }
 .card-table-container .mat-form-field-wrapper {
     padding-bottom: 1.25em;
     padding-left: 25px;
 }
+.mat-form-field-prefix {
+    top: 6px; /* *in search in table container */
+    color: #777;
+}
+.mat-form-field-infix {
+    padding-left: 11px;
+}
+.mat-card-title {
+    font-size: 18px;
+    font-weight: normal;
+}
+
 
 @media only screen and (max-width: 767px) {
     .hidden-sm-down {
