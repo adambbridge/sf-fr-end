@@ -13,9 +13,11 @@ import { MatSortModule } from "@angular/material/sort";
     styleUrls: ["./solutions.component.css"]
 })
 export class SolutionsComponent implements OnInit {
+    showCards = true; // show/hide v.1 or v.2
+
     // TODO REMOVED Solution type enforcement
     // as Application is recursive
-    solutions = this.fakeDataService.fakeSolutions;
+    solutions;
 
     // MATERIAL TABLE SETUP
     displayedColumns: string[] = [
@@ -26,8 +28,9 @@ export class SolutionsComponent implements OnInit {
         "lastUpdateDate",
         "description"
     ];
-    dataSource = new MatTableDataSource(this.solutions);
     @ViewChild(MatSortModule) sort: MatSortModule;
+dataSource;
+   
 
     newSolution = new Solution(null, "New Solution", "0.0", null);
     showNewSolution: boolean;
@@ -53,10 +56,18 @@ export class SolutionsComponent implements OnInit {
     ngOnInit() {
         // TODO SORT NOT WORKING
         // this.dataSource.sort = this.sort;
+        
+        this.solutions = this.fakeDataService.fakeSolutions;
+         this.dataSource = new MatTableDataSource(this.solutions);
     }
 
     applyFilter(filterValue: string) {
+        // for table 
         this.dataSource.filter = filterValue.trim().toLowerCase();
+
+        // for cards 
+        // search name, descrip, workspace names, client deploys?
+        // TODO ... 
     }
 
     toggleNewSolution(show: boolean) {
@@ -64,6 +75,4 @@ export class SolutionsComponent implements OnInit {
         this.showNewSolution = show;
         this.showNewIcon = show ? "expand_less" : "expand_more";
     }
-
-  
 }

@@ -8,17 +8,17 @@ export class FakeDataService {
     fakeClients = [
         {
             name: "fake client 1",
-            id: '1',
+            id: "1",
             environments: ["client1 env 1", "client1 env 2", "client1 env 3"]
         },
         {
             name: "fake client 2",
-            id: '2',
+            id: "2",
             environments: ["client2 env 1", "client2 env 2", "client2 env 3"]
         },
         {
             name: "fake client 3",
-            id: '3',
+            id: "3",
             environments: ["client3 env 1", "client3 env 2", "client3 env 3"]
         }
     ];
@@ -265,54 +265,8 @@ export class FakeDataService {
         },
         {
             name: "Custom Solution 4",
-            version: 4,
-            creationDate: new Date("2018-05-05"),
-            lastUpdateDate: new Date(),
-            description: "my description",
-            workspaces: [
-                this.fakeWorkspace,
-                this.fakeWorkspace,
-                this.fakeWorkspace
-            ]
-        },
-        {
-            name: "Custom Solution 4",
-            version: 4,
-            creationDate: new Date("2018-05-05"),
-            lastUpdateDate: new Date(),
-            description: "my description",
-            workspaces: [
-                this.fakeWorkspace,
-                this.fakeWorkspace,
-                this.fakeWorkspace
-            ]
-        },
-        {
-            name: "Custom Solution 4",
-            version: 4,
-            creationDate: new Date("2018-05-05"),
-            lastUpdateDate: new Date(),
-            description: "my description",
-            workspaces: [
-                this.fakeWorkspace,
-                this.fakeWorkspace,
-                this.fakeWorkspace
-            ]
-        },
-        {
-            name: "Custom Solution 4",
-            version: 4,
-            creationDate: new Date("2018-05-05"),
-            lastUpdateDate: new Date(),
-            description: "my description",
-            workspaces: [
-                this.fakeWorkspace,
-                this.fakeWorkspace,
-                this.fakeWorkspace
-            ]
-        },
-        {
-            name: "Custom Solution 4",
+            imgUrl:
+                "https://taskreports.com/wp-content/uploads/2016/12/Screen-Shot-2016-12-09-at-4.09.47-PM-e1481328659143.png",
             version: 4,
             creationDate: new Date("2018-05-05"),
             lastUpdateDate: new Date(),

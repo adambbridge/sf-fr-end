@@ -113,7 +113,36 @@ mat-card.card-table-container {
     font-size: 18px;
     font-weight: normal;
 }
+input[type="file"] {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+}
+/* fix overflow scroll bug on solution about tab */
+mat-tab-body .row {
+    max-width: 100%;
+}
 
+/*  TODO CREATE MAT-CHIP-SOLUTION-STAT */ 
+.mat-chip.mat-standard-chip {
+    /* background-color: #eeeeee; */
+    background-color: white;
+    border: 1px solid lightgrey;
+    color: #777;
+    padding: 4px 6px;
+    border-radius: 4px;
+    font-weight: normal;
+    margin-right: 5px;
+
+}
+.mat-chip .mat-icon {
+    font-size: 15px;
+    color: #555;
+    height: 15px;
+    position: relative;
+    padding-left: 2px;
+    bottom: -2px;
+    width: 20px;
+}
 
 @media only screen and (max-width: 767px) {
     .hidden-sm-down {

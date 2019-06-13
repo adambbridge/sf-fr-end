@@ -90,8 +90,7 @@ import { PodioAssetsComponent } from './Components/podio-assets/podio-assets.com
         NewPatchComponent,
         HeaderComponent,
         SidenavListComponent,
-        PodioAssetsComponent
-    ],
+        PodioAssetsComponent    ],
     imports: [
         /** Modules */
         FormsModule,

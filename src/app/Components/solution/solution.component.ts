@@ -30,6 +30,7 @@ import { NewPatchComponent } from "src/app/Components/new-patch/new-patch.compon
     styleUrls: ["./solution.component.css"]
 })
 export class SolutionComponent implements OnInit {
+
     // @Input() solution: Solution;
     // TODO initialize this in ngOnInit
     solution: SolutionVM = this.fakeDataService.fakeSolution;
