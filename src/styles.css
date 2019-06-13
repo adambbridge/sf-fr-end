@@ -121,7 +121,17 @@ input[type="file"] {
 mat-tab-body .row {
     max-width: 100%;
 }
-
+.mat-expansion-panel-header-title {
+    align-items: center;
+}
+.exp-panel-icon {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: contain;
+    padding-right: 11px;
+}
 
 @media only screen and (max-width: 767px) {
     .hidden-sm-down {
