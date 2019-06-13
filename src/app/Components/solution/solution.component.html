@@ -59,7 +59,13 @@
                 <mat-expansion-panel *ngFor="let space of solution.workspaces" (opened)="panelOpenState = true"
                     (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
-                        <mat-panel-title>{{ space.workspaceName }}</mat-panel-title>
+
+                        <mat-panel-title>
+                            <img src="https://cdn.iconscout.com/icon/free/png-256/podio-282956.png" alt=""
+                                class="exp-panel-icon">
+                            <span>{{ space.workspaceName }}</span>
+
+                        </mat-panel-title>
                         <mat-panel-description>
                             Applications: {{ space.podioSpace.applications.length }}
                         </mat-panel-description>
