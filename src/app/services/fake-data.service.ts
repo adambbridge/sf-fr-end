@@ -205,6 +205,8 @@ export class FakeDataService {
     fakeSolutions = [
         {
             name: "Custom Solution 1 ",
+            imageUrl:
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 1,
             creationDate: new Date("2015-05-05"),
             lastUpdateDate: new Date(),
@@ -217,6 +219,8 @@ export class FakeDataService {
         },
         {
             name: "Custom Solution 2",
+            imageUrl:
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 2,
             creationDate: new Date("2017-05-05"),
             lastUpdateDate: new Date(),
@@ -229,6 +233,8 @@ export class FakeDataService {
         },
         {
             name: "Custom Solution 3",
+            imageUrl:
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 1,
             creationDate: new Date("2016-05-05"),
             lastUpdateDate: new Date(),
@@ -265,8 +271,8 @@ export class FakeDataService {
         },
         {
             name: "Custom Solution 4",
-            imgUrl:
-                "https://taskreports.com/wp-content/uploads/2016/12/Screen-Shot-2016-12-09-at-4.09.47-PM-e1481328659143.png",
+            imageUrl:
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 4,
             creationDate: new Date("2018-05-05"),
             lastUpdateDate: new Date(),

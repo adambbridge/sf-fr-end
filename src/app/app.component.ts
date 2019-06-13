@@ -1,14 +1,15 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild } from "@angular/core";
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = 'Saasafras';
-//   @ViewChild('sidenav')
+    title = "Saasafras";
+    //   @ViewChild('sidenav')
 
-  onToggle() {
-    // sidenav.toggle();
-}
+    onToggle() {
+        // sidenav.toggle();
+    }
 }

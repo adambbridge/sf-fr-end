@@ -1,0 +1,29 @@
+<mat-card class='mr-1 mb-4 cursor-pointer' routerLink="/solution">
+
+    <!-- IF IMAGE -->
+    <mat-card-header *ngIf="item.imageUrl">
+        <div mat-card-avatar>
+            <img [src]='item.imageUrl' alt="">
+        </div>
+        <mat-card-title>{{item.name}}</mat-card-title>
+    </mat-card-header>
+
+    <!-- IF NO IMAGE -->
+    <mat-card-title *ngIf="!item.imageUrl">{{item.name}}</mat-card-title>
+
+    <mat-card-content>
+        <p class='text-hint'>
+            item description could be here and truncate after 2 lines or so with ...
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+
+        <mat-chip-list class='text-hint'>
+            <app-mat-chip-custom [icon]="'ballot'" [text]="item.workspaces.length"></app-mat-chip-custom>
+            <!-- TODO text is the date of last update which is not yet a field -->
+            <app-mat-chip-custom [icon]="'autorenew'" [text]="'07/04/20'"></app-mat-chip-custom>
+            <!-- TODO text is number of deployments which is not yet a field -->
+            <app-mat-chip-custom [icon]="'launch'" [text]="'3'"></app-mat-chip-custom>
+        </mat-chip-list>
+    </mat-card-actions>
+</mat-card>

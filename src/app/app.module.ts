@@ -50,6 +50,9 @@ import { NewPatchComponent } from './Components/new-patch/new-patch.component';
 import { HeaderComponent } from './Components/header/header.component';
 import { SidenavListComponent } from './Components/sidenav-list/sidenav-list.component';
 import { PodioAssetsComponent } from './Components/podio-assets/podio-assets.component';
+import { CardCollectionComponent } from './Components/card-collection/card-collection.component';
+import { CardComponent } from './Components/card/card.component';
+import { MatChipCustomComponent } from './Components/mat-chip-custom/mat-chip-custom.component';
 
 
 @NgModule({
@@ -90,7 +93,10 @@ import { PodioAssetsComponent } from './Components/podio-assets/podio-assets.com
         NewPatchComponent,
         HeaderComponent,
         SidenavListComponent,
-        PodioAssetsComponent    ],
+        PodioAssetsComponent,
+        CardCollectionComponent,
+        CardComponent,
+        MatChipCustomComponent    ],
     imports: [
         /** Modules */
         FormsModule,

@@ -1,0 +1,21 @@
+.mat-chip.mat-standard-chip {
+    background-color: white;
+    border: 1px solid lightgrey;
+    color: #777;
+    padding: 4px 4px;
+    min-height: 28px;
+    font-size: 12px;
+    border-radius: 4px;
+    font-weight: normal;
+    margin-right: 5px;
+}
+
+.mat-chip .mat-icon {
+    font-size: 15px;
+    color: #555;
+    height: 15px;
+    position: relative;
+    padding-left: 2px;
+    bottom: -2px;
+    width: 20px;
+}
