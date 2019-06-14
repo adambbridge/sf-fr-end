@@ -210,7 +210,8 @@ export class FakeDataService {
             version: 1,
             creationDate: new Date("2015-05-05"),
             lastUpdateDate: new Date(),
-            description: "my lollipop",
+            description:
+                "my lollipop. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
                 this.fakeWorkspace,
                 this.fakeWorkspace,
@@ -224,7 +225,8 @@ export class FakeDataService {
             version: 2,
             creationDate: new Date("2017-05-05"),
             lastUpdateDate: new Date(),
-            description: "my ice cream",
+            description:
+                "my ice cream. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
                 this.fakeWorkspace,
                 this.fakeWorkspace,
@@ -238,7 +240,8 @@ export class FakeDataService {
             version: 1,
             creationDate: new Date("2016-05-05"),
             lastUpdateDate: new Date(),
-            description: "my burger",
+            description:
+                "my burger. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
                 this.fakeWorkspace,
                 this.fakeWorkspace,
@@ -250,7 +253,8 @@ export class FakeDataService {
             version: 4,
             creationDate: new Date("2018-05-05"),
             lastUpdateDate: new Date(),
-            description: "my pizza",
+            description:
+                "my pizza. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
                 this.fakeWorkspace,
                 this.fakeWorkspace,
@@ -262,7 +266,8 @@ export class FakeDataService {
             version: 4,
             creationDate: new Date("2018-05-05"),
             lastUpdateDate: new Date(),
-            description: "my roasted pig",
+            description:
+                "my roasted pig. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
                 this.fakeWorkspace,
                 this.fakeWorkspace,
@@ -276,7 +281,8 @@ export class FakeDataService {
             version: 4,
             creationDate: new Date("2018-05-05"),
             lastUpdateDate: new Date(),
-            description: "my description",
+            description:
+                "my description. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
                 this.fakeWorkspace,
                 this.fakeWorkspace,

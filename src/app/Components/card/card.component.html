@@ -1,24 +1,30 @@
-<mat-card class='mr-1 mb-4 cursor-pointer' routerLink="/solution">
+<mat-card class='mr-1 mb-4 cursor-pointer' [class.highlight]="item.featured" [routerLink]="item.linkUrl ? [item.linkUrl] : []">
 
     <!-- IF IMAGE -->
-    <mat-card-header *ngIf="item.imageUrl">
+    <mat-card-header *ngIf="item.imageUrl || item.iconName">
         <div mat-card-avatar>
-            <img [src]='item.imageUrl' alt="">
+
+            <!-- show icon or image. if both present will show image -->
+            <mat-icon *ngIf='item.iconName'>{{item.iconName}}</mat-icon>
+            <img *ngIf='item.imageUrl' [src]='item.imageUrl' alt="">
+
         </div>
         <mat-card-title>{{item.name}}</mat-card-title>
     </mat-card-header>
 
     <!-- IF NO IMAGE -->
-    <mat-card-title *ngIf="!item.imageUrl">{{item.name}}</mat-card-title>
+    <mat-card-title *ngIf="!item.imageUrl && !item.iconName">{{item.name}}</mat-card-title>
 
     <mat-card-content>
         <p class='text-hint' >
-            item description could be here and truncate after 2 lines or so with ...
+            <span *ngIf="item.description">{{item.description}}</span>
+            <!-- <span *ngIf="!item.description">item description could be here and truncate after 2 lines or so with ...</span> -->
+           
         </p>
     </mat-card-content>
     <mat-card-actions>
 
-        <mat-chip-list class='text-hint'>
+        <mat-chip-list class='text-hint' *ngIf="chiplist">
             <app-mat-chip-custom [icon]="'ballot'" [text]="item.workspaces.length"
                 matTooltip="Contains {{item.workspaces.length}} workspaces"></app-mat-chip-custom>
             <!-- TODO text is the date of last update which is not yet a field -->

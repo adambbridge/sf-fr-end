@@ -53,6 +53,7 @@ import { PodioAssetsComponent } from './Components/podio-assets/podio-assets.com
 import { CardCollectionComponent } from './Components/card-collection/card-collection.component';
 import { CardComponent } from './Components/card/card.component';
 import { MatChipCustomComponent } from './Components/mat-chip-custom/mat-chip-custom.component';
+import { WelcomeComponent } from './Components/welcome/welcome.component';
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import { MatChipCustomComponent } from './Components/mat-chip-custom/mat-chip-cu
         PodioAssetsComponent,
         CardCollectionComponent,
         CardComponent,
-        MatChipCustomComponent    ],
+        MatChipCustomComponent,
+        WelcomeComponent    ],
     imports: [
         /** Modules */
         FormsModule,

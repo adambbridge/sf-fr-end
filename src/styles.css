@@ -133,6 +133,23 @@ mat-tab-body .row {
     padding-right: 11px;
 }
 
+app-welcome app-card-collection .mat-card {
+    background: #eeeeee;
+    min-height: 200px;
+}
+app-welcome app-card-collection .mat-card:hover {
+    background: #F5F5F5;
+}
+
+/* .highlight {
+    border: 2px solid #ff4081;
+} */
+.active-nav-item {
+    font-weight: bold;
+    color: white;
+}
+
+
 @media only screen and (max-width: 767px) {
     .hidden-sm-down {
         display: none;

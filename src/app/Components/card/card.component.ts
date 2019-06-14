@@ -7,8 +7,12 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class CardComponent implements OnInit {
     @Input("item") item;
+    @Input() chiplist;
     
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        console.log('chiplist in card', this.chiplist)
+        console.log('item in card', this.item)
+    }
 }
