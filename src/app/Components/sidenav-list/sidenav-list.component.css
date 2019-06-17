@@ -1,0 +1,29 @@
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
+    height: 100%;
+}
+.mat-list-item .mat-list-item-content,
+.mat-list-base .mat-list-option .mat-list-item-content {
+    /* align sidenav items with hamburger menu */
+    padding-left: 20px;
+    color: white;
+}
+mat-sidenav {
+    width: 250px;
+    background-color: #333;
+    color: #f2f2f2;
+}
+mat-sidenav li {
+    list-style: none;
+    font-size: initial;
+    font-weight: initial;
+}
+mat-sidenav a {
+    text-decoration: none;
+    color: white;
+}
+mat-sidenav a:hover,
+mat-sidenav a:active {
+    color: lightgray;
+}

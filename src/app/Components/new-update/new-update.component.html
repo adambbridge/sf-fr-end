@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Update "{{solution.name}}"</h1>
+
+<p class="text-hint">
+    When you have made updates to the Podio workspaces which this solution is based on, an Update can capture those changes and update your Saasafras solution.
+    <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
+</p>
+
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field class="w-100 d-none">
+        <mat-label>Solution</mat-label>
+        <input type="text" matInput readonly formControlName="solution">
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+        <textarea matInput formControlName="description" placeholder="Add a description (optional)"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button class='mr-2'>Cancel</button>
+    <button mat-raised-button type="submit" [disabled]="!updateForm.valid">Run Update</button>
+
+</form>
+

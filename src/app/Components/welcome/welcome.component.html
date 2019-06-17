@@ -1,0 +1,42 @@
+<div class="row mt-4">
+    <div class="col col-md-8">
+        <mat-card>
+            <h1 class="text-h1">Welcome!</h1>
+            <h3>Sassafras lets you create, deploy & patch versioned Podio solutions </h3>
+            <app-card-collection [showCards]="true" [items]="onboardingOptions" [chiplist]=false></app-card-collection>
+        </mat-card>
+
+    </div>
+    <div class="col col-md-4">
+        <mat-card>
+            <mat-card-header>
+                <!-- <div mat-card-avatar></div> -->
+                <mat-card-title>
+                    Level up with Sassafras!
+                    <mat-icon>help</mat-icon>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-selection-list #shoes>
+                    <mat-list-option selected='true'>
+                        <span class="text-hint">Login with Podio</span>
+
+                    </mat-list-option>
+                    <mat-list-option>
+                        <span class="text-hint">Load my Podio workspaces</span>
+
+                    </mat-list-option>
+                    <mat-list-option>
+                        <span class="text-hint">Build a solution!</span>
+
+                    </mat-list-option>
+                    <mat-list-option>
+                        <span class="text-hint">Deploy and maintain my Solutions</span>
+
+                    </mat-list-option>
+                </mat-selection-list>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+</div>

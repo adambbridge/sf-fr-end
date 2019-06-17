@@ -1,6 +1,0 @@
-<mat-expansion-panel (opened)="showForm = true" (closed)="showForm = false" #panel="matExpansionPanel">
-    <mat-expansion-panel-header>
-        <mat-panel-title *ngIf="solution.appId">{{solution.name}}: {{solution.version}}</mat-panel-title>
-    </mat-expansion-panel-header>
-    <app-saas-spaces *ngIf="solution.appId" [solutionId]="solution.appId"></app-saas-spaces>
-</mat-expansion-panel>

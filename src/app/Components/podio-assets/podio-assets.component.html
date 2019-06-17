@@ -1,0 +1,56 @@
+<h3 class="text-h1">My Podio</h3>
+
+<div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <!-- FILTER -->
+        <mat-form-field class="w-50">
+            <input autofocus matInput (keyup)="applyFilter($event.target.value)" placeholder="Search my organizations & workspaces"/>
+        </mat-form-field>
+
+        <button mat-raised-button matTooltip="Refresh podio info">
+            <mat-icon>autorenew</mat-icon>
+        </button>
+    </div>
+
+    <!-- ORGS AND SPACES -->
+    <mat-accordion>
+
+        <!-- A PANEL FOR EACH ORG -->
+        <mat-expansion-panel *ngFor="let org of organizations; let panelIndex = index" (opened)="panelOpenState = true" (closed)="onPanelClose(panelIndex)">
+
+            <!-- PANEL HEADER  -->
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/podio-282956.png" alt="" class="exp-panel-icon">
+                    <span>{{org.name}}</span>
+                </mat-panel-title>
+                <mat-panel-description>
+                    
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <!-- MISC INFO  -->
+            <mat-list>
+                <mat-list-item>Descrip of org etc??</mat-list-item>
+            </mat-list>
+
+            <!-- SPACES LIST -->
+            <mat-selection-list #spaces aria-label="workspaces list" (selectionChange)="onSelectionChange($event, panelIndex)">
+                <mat-list-option *ngFor="let space of org.spaces" [value]="space">
+                    {{space.workspaceName}}
+                </mat-list-option>
+            </mat-selection-list>
+
+            <!-- CREATE NEW SOLUTION BTN -->
+            <span class="button-row">
+                <span matTooltip="Select at least one workspace to enable button">
+                    <a routerLink="/solutions/new" [disabled]="selectedSpaces.length < 1" mat-raised-button (click)='onNewSolutionClick()' class="mt-3">Create solution from selected
+                        workspaces</a>
+                </span>
+            </span>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+</div>

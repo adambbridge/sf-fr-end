@@ -1,0 +1,7 @@
+
+<div class="row mt-4" *ngIf='showCards'>
+    <!-- collection sets up shape of the columns so each card only needs to worry about how to display its own content -->
+    <div class="col-12 col-sm-6 col-md-4" *ngFor="let item of items">
+        <app-card [item]='item' [chiplist]='chiplist'></app-card>
+    </div>
+</div>

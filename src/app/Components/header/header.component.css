@@ -1,0 +1,19 @@
+
+
+.mat-toolbar {
+    background-color: #333;
+    color: #f2f2f2;
+}
+mat-toolbar li {
+    list-style: none;
+    font-size: initial;
+    font-weight: initial;
+}
+mat-toolbar a {
+    text-decoration: none;
+    color: white;
+}
+mat-toolbar a:hover,
+mat-toolbar a:active {
+    color: lightgray;
+}

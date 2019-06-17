@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
   loggedIn: boolean;
+  showRegister: boolean = true;
 
   constructor(private _authService: AuthService) {
     this.loggedIn = _authService.IsAuth;

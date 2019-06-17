@@ -1,14 +1,19 @@
-
-<div id="background">
-    <img id="image" src="https://uploads-ssl.webflow.com/5ad89e5cbcb30031ff70361a/5ad8c34ebcb30096777073cc_saassafras_logo80.png">
-    <div *ngIf="loggedIn">
-      <div class="topnav">
-        <a href="/" id="home">Saasafras</a>
-        <app-user-icon></app-user-icon>
-      </div>
+<div id="background" class="mdc-toolbar">
+    <div class="container">
+        <img id="image"
+            src="https://uploads-ssl.webflow.com/5ad89e5cbcb30031ff70361a/5ad8c34ebcb30096777073cc_saassafras_logo80.png" />
+        <div *ngIf="loggedIn">
+            <div class="topnav">
+                <a href="/" id="home">Saasafras</a>
+                <app-user-icon></app-user-icon>
+            </div>
+        </div>
+        <div class="topnav" *ngIf="!loggedIn">
+            <a href="/" id="home">Saasafras</a>
+            <a routerLink="/login" id="signup">Login</a>
+            <a routerLink="/clients">Clients</a>
+            <a routerLink="/solutions">Podio Assets</a>
+            <a routerLink="/solutions">Solutions</a>
+        </div>
     </div>
-    <div class="topnav" *ngIf="!loggedIn">
-        <a href="/" id="home">Saasafras</a>
-        <a href="/signup" id="signup">Sign In or Up</a>
-      </div>
 </div>
