@@ -32,6 +32,8 @@ import {
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+
 
 
 
@@ -67,7 +69,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
         MatSelectModule,
         MatSidenavModule,
         MatToolbarModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatSnackBarModule
     ],
     exports: [
         MatBadgeModule,
@@ -98,7 +101,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
         MatSelectModule,
         MatSidenavModule,
         MatToolbarModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatSnackBarModule
     ]
 })
 export class CustomMaterialModule {}

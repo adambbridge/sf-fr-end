@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { fadeInItems } from '@angular/material';
+import { link } from 'fs';
 
 @Component({
     selector: "app-card-collection",
@@ -10,6 +11,7 @@ export class CardCollectionComponent implements OnInit {
     @Input("items") items;
     @Input("showCards") showCards;
     @Input() chiplist;
+    @Input("link") link;
 
     constructor() {}
 

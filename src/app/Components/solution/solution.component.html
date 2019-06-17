@@ -99,67 +99,8 @@
     <mat-tab label="Tasks">
         <ng-template matTabContent>
 
-            <!-- HELP TEXT -->
-            <!-- <p class="text-hint">
-                Some help text for performing tasks can be here.
-                <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
-            </p> -->
-
             <!-- TASK CARDS -->
-            <div class="row mt-4">
-
-                <div class="col-12 col-sm-6 col-md-4">
-                    <mat-card class='mr-1 mb-4 cursor-pointer' (click)='onUpdateClick()'>
-                        <mat-card-title>Update Solution</mat-card-title>
-                        <mat-card-content>
-                            <p class='text-hint'>
-                                When you have made updates to the Podio workspaces which this solution is based on, an
-                                Update can capture those
-                                changes and update your Saasafras solution.
-                                <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
-                            </p>
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button mat-button>Make an Update...</button>
-                        </mat-card-actions>
-                    </mat-card>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-4">
-                    <mat-card class='mr-1 cursor-pointer' (click)='onDeploymentClick()'>
-                        <mat-card-title>New Deployment</mat-card-title>
-                        <mat-card-content>
-                            <p class='text-hint'>
-                                When you have created a Saasafras Solution, you can deploy the Solution to one or more
-                                of your clients. This will ...
-                                add further explanation...
-                                <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
-                            </p>
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button mat-button>Create New Deployment...</button>
-                        </mat-card-actions>
-                    </mat-card>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-4">
-                    <mat-card class='mr-1 cursor-pointer' (click)='onPatchClick()'>
-                        <mat-card-title>Patch Deployments</mat-card-title>
-                        <mat-card-content>
-                            <p class='text-hint'>
-                                When you have run Updates on your Saasafras solution you can Update deployments of the
-                                solution with all of the changes
-                                by creating a Patch.
-                                <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
-                            </p>
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button mat-button>Create a Patch...</button>
-                        </mat-card-actions>
-                    </mat-card>
-                </div>
-
-            </div>
+            <app-solution-tasks [solution]='solution'></app-solution-tasks>
 
             <div class='mt-4'>
 

@@ -1,14 +1,16 @@
 <div class="row mt-4">
     <div class="col col-md-8">
         <mat-card>
-            <h1 class="text-h1">Welcome!</h1>
+            <h1 class="text-h1" >
+                Welcome!</h1>
             <h3>Sassafras lets you create, deploy & patch versioned Podio solutions </h3>
             <app-card-collection [showCards]="true" [items]="onboardingOptions" [chiplist]=false></app-card-collection>
         </mat-card>
 
     </div>
     <div class="col col-md-4">
-        <mat-card>
+        <mat-card #tooltip="matTooltip" matTooltip="We can show styled tooltips when we want and make them go away when clicked." [matTooltipPosition]="'below'"
+                (mouseenter)="$event.stopImmediatePropagation()" (mouseleave)="$event.stopImmediatePropagation()" (click)="tooltip.toggle()">
             <mat-card-header>
                 <!-- <div mat-card-avatar></div> -->
                 <mat-card-title>

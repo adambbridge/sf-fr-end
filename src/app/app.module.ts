@@ -54,6 +54,7 @@ import { CardCollectionComponent } from './Components/card-collection/card-colle
 import { CardComponent } from './Components/card/card.component';
 import { MatChipCustomComponent } from './Components/mat-chip-custom/mat-chip-custom.component';
 import { WelcomeComponent } from './Components/welcome/welcome.component';
+import { SolutionTasksComponent } from './Components/solution-tasks/solution-tasks.component';
 
 
 @NgModule({
@@ -98,7 +99,8 @@ import { WelcomeComponent } from './Components/welcome/welcome.component';
         CardCollectionComponent,
         CardComponent,
         MatChipCustomComponent,
-        WelcomeComponent    ],
+        WelcomeComponent,
+        SolutionTasksComponent    ],
     imports: [
         /** Modules */
         FormsModule,
