@@ -43,7 +43,11 @@
                         environment</small>
                 </div>
 
-                <button type="submit" mat-raised-button [disabled]="!newSolutionForm.valid">Create Solution</button>
+                <button type="submit" mat-raised-button *ngIf="!submitted" [disabled]="!newSolutionForm.valid">Create Solution</button>
+
+                <div class="mt-4 mb-4" *ngIf="submitted">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
 
             </form>
 

@@ -15,6 +15,8 @@ import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
+import { MatSnackBar } from "@angular/material/snack-bar";
+
 
 // our stuff
 import {
@@ -43,11 +45,13 @@ export class NewSolutionComponent implements OnInit {
     selectedWorkspacesError: boolean = true;
     newSolutionForm: FormGroup;
     submitted = false;
+    fakeActionCompleted = false;
 
     constructor(
         private _fb: FormBuilder,
         private _saasafrasService: SaasafrasService,
-        private fakeDataService: FakeDataService
+        private fakeDataService: FakeDataService,
+        private _snackBar: MatSnackBar
     ) {}
 
     ngOnInit() {
@@ -118,10 +122,16 @@ export class NewSolutionComponent implements OnInit {
         // delete true/false controls and add selected spaces
         delete this.newSolutionForm.value.workspaceControls; // true/false values
         this.newSolutionForm.value.workspaces = this.selectedWorkspaces;
-
+        this._snackBar.open(
+            "Something happened in the component",
+            "test-action",
+            { duration: 4000 }
+        )
         console.log("form value:", this.newSolutionForm.value);
         console.log("form value:", this.newSolutionForm.valid);
     }
+
+    
 }
 
 // ALEX'S CODE
