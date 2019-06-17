@@ -24,15 +24,18 @@ export class NewSolutionComponent implements OnInit {
   private _spaces = new Array<Space>();
   spaceIdMapper = map((spaces: Space[]) => {
     this.spaceIds = spaces.map(s => Number.parseInt(s.space_id, 10));
+
   });
   constructor(private _saasafrasService: SaasafrasService) {
+    this.spaceIdMapper(this.selectedSpaces).subscribe({next: () => {} });
   }
 
   onSubmit(form: NgForm) {
-    const request = new SolutionCreationRequest(form.value.name, this.spaceIds);
-    this._saasafrasService.CreateSolution(request).subscribe({next: (response: SolutionCreationResponse) => {
-      console.log('received response: ' + response.message);
-    }});
+    const request = new SolutionCreationRequest(this.solution.name, this.spaceIds);
+    this._saasafrasService.CreateSolution(request).subscribe({
+      next: (response: SolutionCreationResponse) => {
+        console.log('received response: ' + response.message);
+      }});
 
     console.log('submitted');
 

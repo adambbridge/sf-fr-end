@@ -19,7 +19,32 @@ export class AuthenticatingComponent implements OnInit {
   IsLoggedIn: Observable<boolean>;
   @Input()
   oauthResponse$: Observable<OAuthResponse>;
-  stringConverter = map((s: string) => new OAuthResponse(s));
+  stringConverter = map((oauthResponseFragment: string) => {
+        console.log('parsing ' + JSON.stringify(oauthResponseFragment));
+        const kvs = oauthResponseFragment.split('&');
+        const response = new OAuthResponse();
+        kvs.forEach(pair => {
+          const kv = pair.split('=');
+          switch (kv[0]) {
+            case 'code':
+              response.code = kv[1];
+              break;
+            case 'access_token':
+              response.AccessToken = kv[1];
+              break;
+            case 'state':
+              response.state = kv[1];
+              break;
+            case 'refresh_token':
+              response.RefreshToken = kv[1];
+              break;
+            case 'expires_in':
+              response.Expiration = Number.parseInt(kv[1], 10);
+              break;
+          }
+        });
+    return response;
+  });
 
   constructor(
     private _podioService: PodioService,
@@ -33,7 +58,7 @@ export class AuthenticatingComponent implements OnInit {
       this.oauthResponse$ = this.route.fragment.pipe(this.stringConverter);
 
       this.oauthResponse$.subscribe({next: (o: OAuthResponse) => {
-        this._podioService.updateToken(o.token);
+        this._podioService.updateToken(o.AccessToken);
         this._tokenService.JwtResponse$ = this._tokenService.GetToken(o);
       }});
 
