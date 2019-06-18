@@ -31,4 +31,9 @@ export class PodioAssetsComponent implements OnInit {
         this.spacesLists._results[panelIndex].deselectAll();
         this.selectedSpaces = [];
     }
+
+    applyFilter(x) {
+        console.log(x);
+        // TODO implement the filter
+    }
 }
