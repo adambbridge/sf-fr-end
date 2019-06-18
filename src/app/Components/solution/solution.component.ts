@@ -27,9 +27,18 @@ import { SolutionAboutComponent } from "src/app/Components/solution-about/soluti
     styleUrls: ["./solution.component.css"]
 })
 export class SolutionComponent implements OnInit {  
+    v1 = false;
     solution: SolutionVM = this.fakeDataService.fakeSolution;
 
     constructor(private fakeDataService: FakeDataService) {}
 
     ngOnInit() {}
+
+    toggleVersion() {
+        if(this.v1 === true) {
+            this.v1 = false;
+        } else {
+            this.v1 = true;
+        }
+    }
 }

@@ -1,6 +1,13 @@
-<h3 class="text-h1">{{ solution.name }}</h3>
+<h3 class="text-h1">
+    {{ solution.name }}
+    <span [hidden]="!v1">v1</span>
+    <span [hidden]="v1">v2</span>
+    <span (click)='v1 = !v1' class='text-hint'>
+        toggle version
+    </span>
+</h3>
 
-<mat-tab-group>
+<mat-tab-group *ngIf="v1">
 
     <mat-tab label="About">
         <ng-template matTabContent>
@@ -15,6 +22,24 @@
     </mat-tab>
 
     <mat-tab label="Tasks">
+        <ng-template matTabContent>
+            <app-solution-tasks [solution]='solution'></app-solution-tasks>
+            <app-solution-history [solution]='solution'></app-solution-history>
+        </ng-template>
+    </mat-tab>
+
+</mat-tab-group>
+
+<mat-tab-group  *ngIf="!v1">
+
+    <mat-tab label="About">
+        <ng-template matTabContent>
+            <app-solution-about></app-solution-about>
+            <app-solution-spaces [solution]='solution'></app-solution-spaces>
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Manage">
         <ng-template matTabContent>
             <app-solution-tasks [solution]='solution'></app-solution-tasks>
             <app-solution-history [solution]='solution'></app-solution-history>
