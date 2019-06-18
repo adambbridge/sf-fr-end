@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-between align-items-center">
         <!-- FILTER -->
         <mat-form-field class="w-50">
-            <input autofocus matInput (keyup)="applyFilter($event.target.value)" placeholder="Search my organizations & workspaces"/>
+            <input autofocus matInput (keyup)="applyFilter($event.target.value)" placeholder="Search organizations & workspaces"/>
         </mat-form-field>
 
         <button mat-raised-button matTooltip="Refresh podio info">
@@ -26,6 +26,7 @@
                     <span>{{org.name}}</span>
                 </mat-panel-title>
                 <mat-panel-description>
+                    Owner: {{org.owner}}
                     
                 </mat-panel-description>
             </mat-expansion-panel-header>

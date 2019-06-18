@@ -99,6 +99,7 @@ export class FakeDataService {
 
     fakeOrganization1 = {
         name: "Fake Org1",
+        owner: "Client Company XYZ",
         spaces: [
             this.fakeWorkspace,
             this.fakeWorkspace,
@@ -111,6 +112,7 @@ export class FakeDataService {
     };
     fakeOrganization2 = {
         name: "Fake Org2",
+        owner: "Brick Bridge Consulting",
         spaces: [
             this.fakeWorkspace,
             this.fakeWorkspace,
@@ -123,6 +125,7 @@ export class FakeDataService {
     };
     fakeOrganization3 = {
         name: "Fake Org3",
+        owner: "Client Company ABC",
         spaces: [
             this.fakeWorkspace,
             this.fakeWorkspace,
