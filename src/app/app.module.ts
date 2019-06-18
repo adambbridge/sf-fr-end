@@ -6,7 +6,14 @@ import { RouterModule } from "@angular/router";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
-import { CustomMaterialModule } from "./custom-material/custom-material.module";
+import { LayoutModule } from "@angular/cdk/layout";
+import {
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
+} from "@angular/material";
 
 /** Components */
 import { AppComponent } from './app.component';
@@ -39,26 +46,25 @@ import { SaasSpacesComponent } from './Components/saas-spaces/saas-spaces.compon
 import { NewSolutionComponent } from './Components/new-solution/new-solution.component';
 import { EditSolutionComponent } from './Components/edit-solution/edit-solution.component';
 import { DeploySolutionComponent } from './Components/deploy-solution/deploy-solution.component';
+import { NewUpdateComponent } from "./Components/new-update/new-update.component";
+import { NewDeploymentComponent } from "./Components/new-deployment/new-deployment.component";
+import { NewPatchComponent } from "./Components/new-patch/new-patch.component";
+import { HeaderComponent } from "./Components/header/header.component";
+import { SidenavListComponent } from "./Components/sidenav-list/sidenav-list.component";
+import { PodioAssetsComponent } from "./Components/podio-assets/podio-assets.component";
+import { CardCollectionComponent } from "./Components/card-collection/card-collection.component";
+import { CardComponent } from "./Components/card/card.component";
+import { MatChipCustomComponent } from "./Components/mat-chip-custom/mat-chip-custom.component";
+import { WelcomeComponent } from "./Components/welcome/welcome.component";
+import { SolutionTasksComponent } from "./Components/solution-tasks/solution-tasks.component";
+import { SolutionSpacesComponent } from "./Components/solution-spaces/solution-spaces.component";
+import { SolutionHistoryComponent } from "./Components/solution-history/solution-history.component";
+import { SolutionAboutComponent } from "./Components/solution-about/solution-about.component";
 
 /** Other */
 import { APP_ROUTES } from "./app.routes";
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-import { NewUpdateComponent } from './Components/new-update/new-update.component';
-import { NewDeploymentComponent } from './Components/new-deployment/new-deployment.component';
-import { NewPatchComponent } from './Components/new-patch/new-patch.component';
-import { HeaderComponent } from './Components/header/header.component';
-import { SidenavListComponent } from './Components/sidenav-list/sidenav-list.component';
-import { PodioAssetsComponent } from './Components/podio-assets/podio-assets.component';
-import { CardCollectionComponent } from './Components/card-collection/card-collection.component';
-import { CardComponent } from './Components/card/card.component';
-import { MatChipCustomComponent } from './Components/mat-chip-custom/mat-chip-custom.component';
-import { WelcomeComponent } from './Components/welcome/welcome.component';
-import { SolutionTasksComponent } from './Components/solution-tasks/solution-tasks.component';
-import { SolutionSpacesComponent } from './Components/solution-spaces/solution-spaces.component';
-import { SolutionHistoryComponent } from './Components/solution-history/solution-history.component';
-import { SolutionAboutComponent } from './Components/solution-about/solution-about.component';
-
+import { CustomMaterialModule } from "./custom-material/custom-material.module";
+import { AuthGuard } from "./guards/auth-guard.service";
 
 @NgModule({
     declarations: [
@@ -123,7 +129,7 @@ import { SolutionAboutComponent } from './Components/solution-about/solution-abo
         MatIconModule,
         MatListModule
     ],
-    providers: [],
+    providers: [AuthGuard],
     bootstrap: [AppComponent],
     entryComponents: [
         NewUpdateComponent,
