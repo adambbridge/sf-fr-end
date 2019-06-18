@@ -12,7 +12,5 @@ export class CardComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
-        console.log('chiplist in card', this.chiplist)
-        console.log('item in card', this.item)
     }
 }

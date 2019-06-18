@@ -18,6 +18,7 @@ export interface IClientViewModel {
 }
 export interface IPodioOrganizationViewModel {
     name: string;
+    owner: string;
     orgId?: number;
     spaces: Array<IPodioSpaceViewModel>;
 }

@@ -66,6 +66,7 @@ export class NewSolutionComponent implements OnInit {
                 this.organizations = os.map(o => {
                     return {
                         name: o.name,
+                        owner: 'fake owner',
                         orgId: o.org_id,
                         spaces: []
                     }
@@ -89,6 +90,7 @@ export class NewSolutionComponent implements OnInit {
             chosenOrg = {
                 orgId: chosenOrg.orgId,
                 name: chosenOrg.name,
+                owner: "fake owner",
                 spaces: sa.map(s => {
                     return {
                     workspaceName: s.name,

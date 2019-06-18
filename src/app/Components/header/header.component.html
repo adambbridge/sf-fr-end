@@ -14,7 +14,10 @@
             <li><a routerLink="/podio" class="pr-2 mat-h4 mb-0">Podio Assets</a></li>
             <li><a routerLink="/clients" class="pr-2 mat-h4 mb-0">Clients</a></li>
             <li><a routerLink="/solutions" class="pr-2 mat-h4 mb-0">Solutions</a></li>
-            <li><a routerLink="/login" id="signup" class="pr-2 mat-h4 mb-0">Login</a></li>
+            <li>
+                <a *ngIf='loggedIn' routerLink="/login" (click)="logout()" id="signup" class="pr-2 mat-h4 mb-0">Logout</a>
+                <a *ngIf='!loggedIn' routerLink="/login" id="signup" class="pr-2 mat-h4 mb-0">Login</a>
+            </li>
         </ul>
     </div>
 
