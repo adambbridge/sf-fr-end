@@ -55,6 +55,9 @@ import { CardComponent } from './Components/card/card.component';
 import { MatChipCustomComponent } from './Components/mat-chip-custom/mat-chip-custom.component';
 import { WelcomeComponent } from './Components/welcome/welcome.component';
 import { SolutionTasksComponent } from './Components/solution-tasks/solution-tasks.component';
+import { SolutionSpacesComponent } from './Components/solution-spaces/solution-spaces.component';
+import { SolutionHistoryComponent } from './Components/solution-history/solution-history.component';
+import { SolutionAboutComponent } from './Components/solution-about/solution-about.component';
 
 
 @NgModule({
@@ -100,7 +103,10 @@ import { SolutionTasksComponent } from './Components/solution-tasks/solution-tas
         CardComponent,
         MatChipCustomComponent,
         WelcomeComponent,
-        SolutionTasksComponent    ],
+        SolutionTasksComponent,
+        SolutionSpacesComponent,
+        SolutionHistoryComponent,
+        SolutionAboutComponent    ],
     imports: [
         /** Modules */
         FormsModule,

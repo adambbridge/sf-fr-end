@@ -1,0 +1,41 @@
+<p class="text-hint">
+    Some help text can be here.
+    <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
+</p>
+
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let space of solution.workspaces" (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+
+            <mat-panel-title>
+                <img src="https://cdn.iconscout.com/icon/free/png-256/podio-282956.png" alt="" class="exp-panel-icon">
+                <span>{{ space.workspaceName }}</span>
+
+            </mat-panel-title>
+            <mat-panel-description>
+                Applications: {{ space.podioSpace.applications.length }}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-list dense>
+            <mat-list-item>ID: {{ space.workspaceId }}</mat-list-item>
+            <mat-list-item>Owner: {{ space.podioSpace.owner }}</mat-list-item>
+            <mat-list-item>
+                Created: {{ space.podioSpace.created_on }}
+            </mat-list-item>
+            <mat-list-item>
+                <h4 mat-line>Description:</h4>
+                <p mat-line>{{ space.description }}</p>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 mat-line>Applications:</h4>
+                <p mat-line>
+                    <span *ngFor="let app of space.podioSpace.applications" class="pr-2">
+                        {{ app }}
+                    </span>
+                </p>
+            </mat-list-item>
+        </mat-list>
+    </mat-expansion-panel>
+</mat-accordion>
