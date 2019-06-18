@@ -24,7 +24,7 @@ export class PodioService {
         }
     }
     updateToken(token: string) {
-        console.log("received token");
+        console.log("received token"); 
         this.token = token;
         this.refresh();
         sessionStorage.setItem(this.TOKEN_NAME, token);

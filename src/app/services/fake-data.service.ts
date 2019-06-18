@@ -1,11 +1,46 @@
 import { Injectable } from "@angular/core";
 
+export interface ISolutionViewModel {
+    appId?: string;
+    name: string;
+    imageUrl?: string;
+    version: string|number;
+    creationDate?: Date;
+    lastUpdateDate?: Date;
+    description?: string;
+    workspaces: Array<IPodioSpaceViewModel>;
+    history?: any;
+}
+export interface IClientViewModel {
+    name: string;
+    id: string;
+    environments: Array<string>;
+}
+export interface IPodioOrganizationViewModel {
+    name: string;
+    orgId?: number;
+    spaces: Array<IPodioSpaceViewModel>;
+}
+export interface IPodioSpaceViewModel {
+    workspaceName: string;
+    workspaceId: number;
+    description: string;
+    checked: boolean;
+    podioSpace: any;
+    apps: Array<IPodioApplicationViewModel>;
+}
+export interface IPodioApplicationViewModel {
+    appName: string;
+    appId: number;
+    podioApplication: any;
+    fields: Array<string>;
+}
 // so we can inject this service
 @Injectable({
     providedIn: "root"
 })
 export class FakeDataService {
-    fakeClients = [
+    fakeClients: Array<IClientViewModel> = [
         {
             name: "fake client 1",
             id: "1",
@@ -23,7 +58,7 @@ export class FakeDataService {
         }
     ];
 
-    fakeApplication = {
+    fakeApplication: IPodioApplicationViewModel = {
         appId: 123,
         appName: "foo",
         podioApplication: {
@@ -57,7 +92,7 @@ export class FakeDataService {
     //     public user_limit: Number;
     // }
 
-    fakeWorkspace = {
+    fakeWorkspace: IPodioSpaceViewModel = {
         workspaceName: "Workspace 1",
         workspaceId: 123,
         apps: [this.fakeApplication],
@@ -97,7 +132,7 @@ export class FakeDataService {
         }
     };
 
-    fakeOrganization1 = {
+    fakeOrganization1: IPodioOrganizationViewModel = {
         name: "Fake Org1",
         owner: "Client Company XYZ",
         spaces: [
@@ -110,7 +145,7 @@ export class FakeDataService {
             this.fakeWorkspace
         ]
     };
-    fakeOrganization2 = {
+    fakeOrganization2: IPodioOrganizationViewModel = {
         name: "Fake Org2",
         owner: "Brick Bridge Consulting",
         spaces: [
@@ -123,7 +158,7 @@ export class FakeDataService {
             this.fakeWorkspace
         ]
     };
-    fakeOrganization3 = {
+    fakeOrganization3: IPodioOrganizationViewModel = {
         name: "Fake Org3",
         owner: "Client Company ABC",
         spaces: [
@@ -137,7 +172,7 @@ export class FakeDataService {
         ]
     };
 
-    fakeOrganizations = [
+    fakeOrganizations: Array<IPodioOrganizationViewModel> = [
         this.fakeOrganization1,
         this.fakeOrganization2,
         this.fakeOrganization3
@@ -188,7 +223,7 @@ export class FakeDataService {
         }
     ];
 
-    fakeSolution = {
+    fakeSolution: ISolutionViewModel = {
         appId: "123456",
         name: "Fake Solution",
         version: "2",
@@ -205,7 +240,7 @@ export class FakeDataService {
         history: this.fakeHistory
     };
 
-    fakeSolutions = [
+    fakeSolutions: Array<ISolutionViewModel> = [
         {
             name: "Custom Solution 1 ",
             imageUrl:

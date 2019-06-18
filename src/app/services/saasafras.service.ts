@@ -25,14 +25,14 @@ export class SaasafrasService {
   }
   private defaultHeaders() { return new HttpHeaders({ 'x-saasafras-jwt': this.jwt }); }
 
-  AddEnvironmentCredentials_old(code: string, clientId: string, environmentId: string, redirectUri: string): Observable<SaasafrasResponse> {
-    console.log('AddEnvironmentCredentials');
-    return this.http.post<SaasafrasResponse>(environment.saasafras.api.url + 'client/' + clientId + '/env/' + environmentId + '/token',
-      { code: code, redirectUri: redirectUri },
-      {
-        headers: this.defaultHeaders()
-      });
-  }
+  // AddEnvironmentCredentials_old(code: string, clientId: string, environmentId: string, redirectUri: string): Observable<SaasafrasResponse> {
+  //   console.log('AddEnvironmentCredentials');
+  //   return this.http.post<SaasafrasResponse>(environment.saasafras.api.url + 'client/' + clientId + '/env/' + environmentId + '/token',
+  //     { code: code, redirectUri: redirectUri },
+  //     {
+  //       headers: this.defaultHeaders()
+  //     });
+  // }
 
   AddEnvironmentCredentials(request: EnvironmentCredentialsRequest): Observable<SaasafrasResponse> {
     console.log('AddEnvironmentCredentials');

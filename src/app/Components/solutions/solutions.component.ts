@@ -1,4 +1,4 @@
-import { FakeDataService } from './../../services/fake-data.service';
+import { FakeDataService, ISolutionViewModel } from './../../services/fake-data.service';
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { SaasafrasService } from "../../services/saasafras.service";
@@ -17,7 +17,7 @@ export class SolutionsComponent implements OnInit {
 
     // TODO REMOVED Solution type enforcement
     // as Application is recursive
-    solutions;
+    solutions: Array<ISolutionViewModel>;
 
     // MATERIAL TABLE SETUP
     displayedColumns: string[] = [
