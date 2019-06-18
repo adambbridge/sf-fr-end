@@ -14,9 +14,8 @@ import { MatExpansionPanel } from "@angular/material";
 import { MatTableDataSource } from "@angular/material";
 import { MatSortModule } from "@angular/material/sort";
 
-import { FakeDataService } from "./../../services/fake-data.service";
+import { FakeDataService, ISolutionViewModel } from "./../../services/fake-data.service";
 import { Solution } from "src/model/saasafras/solution";
-import { SolutionVM } from "src/app/Components/solution/solution.vm";
 import { $Space } from "src/model/saasafras/saas.space";
 import { Space } from "src/model/podio/space";
 import { SolutionTasksComponent } from "src/app/Components/solution-tasks/solution-tasks.component";
@@ -29,7 +28,7 @@ import { SolutionTasksComponent } from "src/app/Components/solution-tasks/soluti
 export class SolutionComponent implements OnInit {
     // @Input() solution: Solution;
     // TODO initialize this in ngOnInit
-    solution: SolutionVM = this.fakeDataService.fakeSolution;
+    solution: ISolutionViewModel = this.fakeDataService.fakeSolution;
 
     @Input() showForm: boolean;
     @Input() expanded: boolean;

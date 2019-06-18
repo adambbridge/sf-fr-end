@@ -3,7 +3,7 @@ export class Spaces {
 
 export class Space {
     public org_id: string;
-    public space_id: string;
+    public space_id: number;
     public name: string;
     public rights: string[];
     public role: string;

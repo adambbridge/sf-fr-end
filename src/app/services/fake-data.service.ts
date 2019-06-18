@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
 
 export interface ISolutionViewModel {
+    appId?: string;
     name: string;
     imageUrl?: string;
-    version: number;
-    creationDate: Date;
-    lastUpdateDate: Date;
-    description: string;
+    version: string|number;
+    creationDate?: Date;
+    lastUpdateDate?: Date;
+    description?: string;
     workspaces: Array<IPodioSpaceViewModel>;
+    history?: any;
 }
 export interface IClientViewModel {
     name: string;
@@ -16,6 +18,7 @@ export interface IClientViewModel {
 }
 export interface IPodioOrganizationViewModel {
     name: string;
+    orgId?: number;
     spaces: Array<IPodioSpaceViewModel>;
 }
 export interface IPodioSpaceViewModel {
@@ -28,6 +31,9 @@ export interface IPodioSpaceViewModel {
 }
 export interface IPodioApplicationViewModel {
     appName: string;
+    appId: number;
+    podioApplication: any;
+    fields: Array<string>;
 }
 // so we can inject this service
 @Injectable({
@@ -52,7 +58,7 @@ export class FakeDataService {
         }
     ];
 
-    fakeApplication = {
+    fakeApplication: IPodioApplicationViewModel = {
         appId: 123,
         appName: "foo",
         podioApplication: {
@@ -126,7 +132,7 @@ export class FakeDataService {
         }
     };
 
-    fakeOrganization1 = {
+    fakeOrganization1: IPodioOrganizationViewModel = {
         name: "Fake Org1",
         spaces: [
             this.fakeWorkspace,
@@ -138,7 +144,7 @@ export class FakeDataService {
             this.fakeWorkspace
         ]
     };
-    fakeOrganization2 = {
+    fakeOrganization2: IPodioOrganizationViewModel = {
         name: "Fake Org2",
         spaces: [
             this.fakeWorkspace,
@@ -150,7 +156,7 @@ export class FakeDataService {
             this.fakeWorkspace
         ]
     };
-    fakeOrganization3 = {
+    fakeOrganization3: IPodioOrganizationViewModel = {
         name: "Fake Org3",
         spaces: [
             this.fakeWorkspace,
@@ -163,7 +169,7 @@ export class FakeDataService {
         ]
     };
 
-    fakeOrganizations = [
+    fakeOrganizations: Array<IPodioOrganizationViewModel> = [
         this.fakeOrganization1,
         this.fakeOrganization2,
         this.fakeOrganization3
@@ -214,7 +220,7 @@ export class FakeDataService {
         }
     ];
 
-    fakeSolution = {
+    fakeSolution: ISolutionViewModel = {
         appId: "123456",
         name: "Fake Solution",
         version: "2",

@@ -17,7 +17,7 @@ export class PodioSpaceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.applications = this._podioService.GetAppsInWorkspace(Number.parseInt(this.space.space_id, 10));
+    this.applications = this._podioService.GetAppsInWorkspace(this.space.space_id);
   }
 
 }
