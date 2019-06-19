@@ -1,32 +1,40 @@
-<h1 mat-dialog-title>Patch "{{solution.name}}"</h1>
+<h1 mat-dialog-title>Patch {{solution.name}}</h1>
 
 <p class="text-hint">
-    When you have run Updates on your Saasafras solution you can Update deployments of the solution with all of the changes by creating a Patch.
+    When you have run Updates on your Saasafras solution you can Update deployments of the solution with all of the
+    changes by creating a Patch.
     <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
 </p>
 
-<form [formGroup]="patchForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
 
     <mat-form-field class='w-100 d-none'>
         <mat-label>Solution</mat-label>
         <input type="text" matInput readonly formControlName="solution">
     </mat-form-field>
 
-    <!-- inputs loop our controls
-    labels loop our environments
-    sync them up using index -->
     <mat-label>Environments to patch</mat-label>
-    <div *ngFor="let control of envControls.controls; let i = index">
+
+    <div>
+        <mat-selection-list #envs aria-label="environments list" (selectionChange)="onEnvSelection()">
+            <mat-list-option *ngFor="let env of environments" [value]="env" [checkboxPosition]="before">
+                <span>{{env}}</span>
+            </mat-list-option>
+        </mat-selection-list>
+    </div>
+
+    <!-- <div *ngFor="let control of envControls.controls; let i = index">
         <input type="checkbox" [formControl]="control" id="checkbox{{i}}" (change)="syncItemsWithControls()">
         <label for="checkbox{{i}}">{{environments[i]}}</label>
-    </div>
-    <small *ngIf="selectedEnvsError && description.touched">Please select at least one environment</small>
+    </div> -->
+
+    <small *ngIf="description.touched && !selectedEnvs.length">Please select at least one environment</small>
 
     <mat-form-field class="w-100">
         <textarea matInput formControlName="description" placeholder="Add a description (optional)"></textarea>
     </mat-form-field>
 
     <button mat-raised-button class='mr-2'>Cancel</button>
-    <button mat-raised-button type="submit" [disabled]="selectedEnvsError">Create Deployment</button>
+    <button mat-raised-button type="submit" [disabled]="!selectedEnvs.length">Create Deployment</button>
 
 </form>

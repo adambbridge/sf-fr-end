@@ -1,3 +1,4 @@
+import { UtilsService } from './../../services/utils.service';
 import { Org } from "./../../../model/podio/organization";
 // vendors
 import {
@@ -15,7 +16,6 @@ import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
-import { MatSnackBar } from "@angular/material/snack-bar";
 
 // our stuff
 import {
@@ -52,7 +52,7 @@ export class NewSolutionComponent implements OnInit {
         private _saasafrasService: SaasafrasService,
         private _podioService: PodioService,
         private fakeDataService: FakeDataService,
-        private _snackBar: MatSnackBar
+        private _utilsService: UtilsService
     ) {}
 
     ngOnInit() {
@@ -61,7 +61,7 @@ export class NewSolutionComponent implements OnInit {
         this._createNewSolutionForm();
     }
 
-    public onOrgSelection(userSelectedOrg) {
+    onOrgSelection(userSelectedOrg) {
         let chosenOrg = this.organizations.find(
             (org) => org.name === userSelectedOrg.value
         );
@@ -101,7 +101,7 @@ export class NewSolutionComponent implements OnInit {
         this.newSolutionForm.value.workspaces = this.selectedWorkspaces;
         console.log("form value:", this.newSolutionForm.value);
         console.log("form value:", this.newSolutionForm.valid);
-        this._openSnackBar("Something happened in the component");
+        this._utilsService.openSnackBar('triggered this from onSubmit');
     }
 
     /************************
@@ -154,15 +154,6 @@ export class NewSolutionComponent implements OnInit {
         return <FormArray>this.newSolutionForm.get("description");
     }
 
-    private _openSnackBar(mssg) {
-        this._snackBar.open(
-            "Something happened in the component",
-            "test-action",
-            {
-                duration: 4000
-            }
-        );
-    }
 }
 
 // ALEX'S CODE

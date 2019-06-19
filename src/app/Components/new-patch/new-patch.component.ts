@@ -1,4 +1,5 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import { UtilsService } from "./../../services/utils.service";
+import { Component, OnInit, Inject, ViewChild } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material";
 import { FakeDataService } from "src/app/services/fake-data.service";
 import { FormBuilder } from "@angular/forms";
@@ -18,67 +19,44 @@ import { MatInputModule } from "@angular/material/input";
  */
 export class NewPatchComponent implements OnInit {
     solution;
+    clients;
     environments;
-    selectedEnvs;
+    form: FormGroup;
+    selectedEnvs = [];
     selectedEnvsError: boolean = true;
-    patchForm: FormGroup; // form model
+    @ViewChild("envs") envs;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
         private _fb: FormBuilder,
-        private _fakeDataService: FakeDataService
+        private _fakeDataService: FakeDataService,
+        private _utilsService: UtilsService
     ) {}
 
     ngOnInit() {
-
         this.solution = this._passedData.solution;
-        this.environments = this._buildEnvArray(
-            this._fakeDataService.fakeClients
-        );
+        this.clients = this._fakeDataService.fakeClients;
+        this.environments = this._buildEnvArray(this.clients);
+        this.form = this._createForm();
+    }
 
-        this.patchForm = this._fb.group({
-            solution: [this._passedData.solution.name, Validators.required],
-            environments: this._addEnvControls(),
-            description: [""]
-        });
+    onEnvSelection() {
+        this.selectedEnvs = this.envs.selectedOptions.selected.map(
+            (option) => option.value
+        );
     }
 
     onSubmit() {
-        delete this.patchForm.value.environments; // true/false values
-        this.patchForm.value.selectedEnvs = this.selectedEnvs;
-        console.warn(this.patchForm.value);
-        console.warn(this.patchForm.valid);
+        delete this.form.value.environments; // true/false values
+        this.form.value.selectedEnvs = this.selectedEnvs;
+        console.warn(this.form.value);
+        console.warn(this.form.valid);
+        this._utilsService.openSnackBar('message triggered inside onSubmit', 'some action', 4000);
     }
 
-    // sync selected envs with selected checkbox controls
-    syncItemsWithControls() {
-        this.selectedEnvs = [];
-        this.envControls.controls.forEach((ctrl, index) => {
-            if (ctrl.value === true) {
-                this.selectedEnvs.push(this.environments[index]);
-            }
-        });
-        console.log(this.selectedEnvs);
-        console.log(this.envControls);
-        this.selectedEnvsError = this.selectedEnvs.length > 0 ? false : true;
-    }
-
-    // create access from html
-    get envControls() {
-        return <FormArray>this.patchForm.get("environments");
-    }
-
-    get description() {
-        return this.patchForm.get("description");
-    }
-
-    // make one control for each env in this.environments
-    private _addEnvControls() {
-        const arr = this.environments.map((e) => {
-            return this._fb.control(false);
-        });
-        return this._fb.array(arr);
-    }
+    /************************
+     *  HELPER METHODS
+     ************************/
 
     private _buildEnvArray(clients) {
         let envs = [];
@@ -89,4 +67,22 @@ export class NewPatchComponent implements OnInit {
         });
         return envs;
     }
+
+    private _createForm() {
+        let form = this._fb.group({
+            solution: [this._passedData.solution.name, Validators.required],
+            environments: this._fb.array([]),
+            description: [""]
+        });
+        return form;
+    }
+
+    get envControls() {
+        return <FormArray>this.form.get("environments");
+    }
+
+    get description() {
+        return this.form.get("description");
+    }
+
 }
