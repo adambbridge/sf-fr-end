@@ -11,7 +11,6 @@ export class PodioAssetsComponent implements OnInit {
     organizations;
     @ViewChildren("spaces") spacesLists;
     selectedSpaces = [];
-    // panelOpenState = false;
 
     constructor(private _fakeDataService: FakeDataService) {}
 
@@ -20,14 +19,11 @@ export class PodioAssetsComponent implements OnInit {
     }
 
     onSelectionChange(e, panelIndex) {
-        // let justSelected = e.option.value;
-        // console.log('just selected:', justSelected)
         this.selectedSpaces = this.spacesLists._results[panelIndex].selectedOptions.selected;
         console.log(this.selectedSpaces);
     }
 
     onPanelClose(panelIndex) {
-        // can't pick spaces from multiple orgs
         this.spacesLists._results[panelIndex].deselectAll();
         this.selectedSpaces = [];
     }

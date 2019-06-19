@@ -76,7 +76,7 @@ tr:active {
     font-size: 0.9rem;
     color: #777; /* same as bootstrap "text-muted" */
 }
-.text-small {
+.text-small{
     font-size: 0.9rem;
 }
 .cursor-pointer {

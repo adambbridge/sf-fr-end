@@ -17,35 +17,35 @@ import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
-
 // our stuff
 import {
     SolutionCreationRequest,
     SolutionCreationResponse
 } from "src/model/saasafras/solutionCreationRequest";
-import { Space } from "src/model/podio/space";
+import { Space, Spaces } from "src/model/podio/space";
 import { Solution } from "src/model/saasafras/solution";
 import { $Space } from "../../../model/saasafras/saas.space";
 import { SaasafrasService } from "../../services/saasafras.service";
 import { SolutionComponent } from "../solution/solution.component";
-import { FakeDataService, IPodioOrganizationViewModel, IPodioSpaceViewModel } from "src/app/services/fake-data.service";
-import { PodioService } from 'src/app/services/podio.service';
+import {
+    FakeDataService,
+    IPodioOrganizationViewModel,
+    IPodioSpaceViewModel
+} from "src/app/services/fake-data.service";
+import { PodioService } from "src/app/services/podio.service";
 
 @Component({
     selector: "app-new-solution",
     templateUrl: "./new-solution.component.html",
     styleUrls: ["./new-solution.component.css"]
 })
-
-// TODO ALEX'S CODE WAS CUT AND PASTED BELOW THE CLASS AS COMMENTS
 export class NewSolutionComponent implements OnInit {
     organizations: Array<IPodioOrganizationViewModel>;
-    workspaces: Array<IPodioSpaceViewModel>; // dont generate until user picks org
+    workspaces: Array<IPodioSpaceViewModel>;
     selectedWorkspaces: Array<IPodioSpaceViewModel> = [];
-    selectedWorkspacesError: boolean = true;
     newSolutionForm: FormGroup;
     submitted = false;
-    fakeActionCompleted = false;
+    @ViewChild("spaces") spaces;
 
     constructor(
         private _fb: FormBuilder,
@@ -53,67 +53,94 @@ export class NewSolutionComponent implements OnInit {
         private _podioService: PodioService,
         private fakeDataService: FakeDataService,
         private _snackBar: MatSnackBar
-    ) {
-    
-    }
+    ) {}
 
     ngOnInit() {
-        // this.organizations = this.fakeDataService.fakeOrganizations;
+        this._getOrgs();
+        this._podioService.refresh();
+        this._createNewSolutionForm();
+    }
 
-        this._podioService.GetUserOrgs().subscribe({next:
-            (os: Org[])=>{
-                console.log('getting new orgs');
-                this.organizations = os.map(o => {
+    public onOrgSelection(userSelectedOrg) {
+        let chosenOrg = this.organizations.find(
+            (org) => org.name === userSelectedOrg.value
+        );
+        this._podioService.GetWorkspacesInOrg(chosenOrg.orgId).subscribe({
+            next: (sa) => {
+                chosenOrg = {
+                    orgId: chosenOrg.orgId,
+                    name: chosenOrg.name,
+                    owner: "fake owner",
+                    spaces: sa.map((s) => {
+                        return {
+                            workspaceName: s.name,
+                            workspaceId: s.space_id,
+                            description: s.description,
+                            checked: false,
+                            podioSpace: null,
+                            apps: null
+                        };
+                    })
+                };
+                this._clearFormArray(this.workspaceControls);
+                this.selectedWorkspaces = [];
+                this.workspaces = chosenOrg.spaces;
+            }
+        });
+        this._podioService.refresh();
+    }
+
+    onSpaceSelection() {
+        this.selectedWorkspaces = this._getSelectedSpaces();
+    }
+
+    onSubmit() {
+        this.submitted = true;
+        this.selectedWorkspaces = this._getSelectedSpaces();
+        delete this.newSolutionForm.value.workspaceControls; // true/false values
+        this.newSolutionForm.value.workspaces = this.selectedWorkspaces;
+        console.log("form value:", this.newSolutionForm.value);
+        console.log("form value:", this.newSolutionForm.valid);
+        this._openSnackBar("Something happened in the component");
+    }
+
+    /************************
+     *  HELPER METHODS
+     ************************/
+
+    private _getSelectedSpaces() {
+        let selected = this.spaces.selectedOptions.selected.map(
+            (option) => option.value
+        );
+        return selected;
+    }
+
+    private _getOrgs() {
+        this._podioService.GetUserOrgs().subscribe({
+            next: (os: Org[]) => {
+                console.log("getting new orgs");
+                this.organizations = os.map((o) => {
                     return {
                         name: o.name,
-                        owner: 'fake owner',
+                        owner: "fake owner",
                         orgId: o.org_id,
                         spaces: []
-                    }
+                    };
                 });
-            }});
-        this._podioService.refresh();
-        this.newSolutionForm = this._fb.group({
-            name: ["", Validators.required],
-            organization: ["", Validators.required],
-            // empty form array
-            workspaceControls: this._fb.array([]),
-            description: [""]
+            }
         });
     }
 
-    // WHEN choose org, get spaces from it
-    // and populate workspaces array of form model
-    onOrgSelection(userSelectedOrg) {
-        let chosenOrg = this.organizations.find(org => org.name === userSelectedOrg.value);
-        this._podioService.GetWorkspacesInOrg(chosenOrg.orgId).subscribe({next: sa => {
-            chosenOrg = {
-                orgId: chosenOrg.orgId,
-                name: chosenOrg.name,
-                owner: "fake owner",
-                spaces: sa.map(s => {
-                    return {
-                    workspaceName: s.name,
-                    workspaceId: s.space_id,
-                    description: s.description,
-                    checked: false,
-                    podioSpace: null,
-                    apps: null
-                };
-            })};
-            this.clearFormArray(this.workspaceControls);
-            this.selectedWorkspaces = [];
-            this._updateFormErrors();
-            chosenOrg.spaces.forEach((space) => {
-                // add 1 unchecked checkbox for each space
-                this.workspaceControls.push(this._fb.control(false));
-            });
-            this.workspaces = chosenOrg.spaces;
-            }});
-        this._podioService.refresh();
+    private _createNewSolutionForm() {
+        this.newSolutionForm = this._fb.group({
+            name: ["", Validators.required],
+            description: ["", Validators.required],
+            organization: ["", Validators.required],
+            workspaceControls: this._fb.array([])
+        });
     }
 
-    clearFormArray = (formArray: FormArray) => {
+    private _clearFormArray = (formArray: FormArray) => {
         while (formArray.length !== 0) {
             formArray.removeAt(0);
         }
@@ -127,40 +154,15 @@ export class NewSolutionComponent implements OnInit {
         return <FormArray>this.newSolutionForm.get("description");
     }
 
-    // sync selected spaces with selected checkbox controls
-    syncItemsWithControls() {
-        this.selectedWorkspaces = [];
-        this.workspaceControls.controls.forEach((ctrl, index) => {
-            if (ctrl.value === true) {
-                this.selectedWorkspaces.push(this.workspaces[index]);
-            }
-        });
-        // console.log(this.selectedWorkspaces);
-        // console.log(this.workspaceControls);
-        this._updateFormErrors();
-    }
-
-    private _updateFormErrors() {
-        this.selectedWorkspacesError =
-            this.selectedWorkspaces.length > 0 ? false : true;
-    }
-
-    onSubmit() {
-        this.submitted = true;
-
-        // delete true/false controls and add selected spaces
-        delete this.newSolutionForm.value.workspaceControls; // true/false values
-        this.newSolutionForm.value.workspaces = this.selectedWorkspaces;
+    private _openSnackBar(mssg) {
         this._snackBar.open(
             "Something happened in the component",
             "test-action",
-            { duration: 4000 }
-        )
-        console.log("form value:", this.newSolutionForm.value);
-        console.log("form value:", this.newSolutionForm.valid);
+            {
+                duration: 4000
+            }
+        );
     }
-
-    
 }
 
 // ALEX'S CODE
