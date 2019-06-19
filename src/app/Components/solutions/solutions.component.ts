@@ -1,4 +1,7 @@
-import { FakeDataService, ISolutionViewModel } from './../../services/fake-data.service';
+import {
+    FakeDataService,
+    ISolutionViewModel
+} from "./../../services/fake-data.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { SaasafrasService } from "../../services/saasafras.service";
@@ -29,8 +32,7 @@ export class SolutionsComponent implements OnInit {
         "description"
     ];
     @ViewChild(MatSortModule) sort: MatSortModule;
-dataSource;
-   
+    dataSource;
 
     newSolution = new Solution(null, "New Solution", "0.0", null);
     showNewSolution: boolean;
@@ -56,18 +58,18 @@ dataSource;
     ngOnInit() {
         // TODO SORT NOT WORKING
         // this.dataSource.sort = this.sort;
-        
+
         this.solutions = this.fakeDataService.fakeSolutions;
-         this.dataSource = new MatTableDataSource(this.solutions);
+        this.dataSource = new MatTableDataSource(this.solutions);
     }
 
     applyFilter(filterValue: string) {
-        // for table 
+        // for table
         this.dataSource.filter = filterValue.trim().toLowerCase();
 
-        // for cards 
+        // for cards
         // search name, descrip, workspace names, client deploys?
-        // TODO ... 
+        // TODO ...
     }
 
     toggleNewSolution(show: boolean) {

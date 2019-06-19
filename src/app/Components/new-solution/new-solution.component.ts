@@ -101,12 +101,12 @@ export class NewSolutionComponent implements OnInit {
         this.newSolutionForm.value.workspaces = this.selectedWorkspaces;
         console.log("form value:", this.newSolutionForm.value);
         console.log("form value:", this.newSolutionForm.valid);
-        this._utilsService.openSnackBar('triggered this from onSubmit');
+        this._utilsService.openSnackBar("triggered this from onSubmit");
     }
 
-    /************************
-     *  HELPER METHODS
-     ************************/
+    /*=========================
+            HELPERS
+     =========================*/
 
     private _getSelectedSpaces() {
         let selected = this.spaces.selectedOptions.selected.map(
@@ -153,7 +153,6 @@ export class NewSolutionComponent implements OnInit {
     get description() {
         return <FormArray>this.newSolutionForm.get("description");
     }
-
 }
 
 // ALEX'S CODE

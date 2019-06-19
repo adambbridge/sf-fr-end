@@ -12,9 +12,13 @@ export interface ISolutionViewModel {
     history?: any;
 }
 export interface IClientViewModel {
-    name: string;
+    contact: string;
+    company?: string;
     id: string;
     environments: Array<string>;
+    email?: string;
+    notes?: string;
+
 }
 export interface IPodioOrganizationViewModel {
     name: string;
@@ -43,19 +47,28 @@ export interface IPodioApplicationViewModel {
 export class FakeDataService {
     fakeClients: Array<IClientViewModel> = [
         {
-            name: "fake client 1",
+            company: "XYZ Real Estate",
+            contact: "Pam",
             id: "1",
-            environments: ["client1 env 1", "client1 env 2", "client1 env 3"]
+            email: "pam@gmail.com",
+            notes: "what a nice person",
+            environments: ["their podio org", "their other podio org", "another podio org"]
         },
         {
-            name: "fake client 2",
-            id: "2",
-            environments: ["client2 env 1", "client2 env 2", "client2 env 3"]
+            company: "Random Consulting",
+            contact: "Dan",
+            id: "1",
+            email: "dan@gmail.com",
+            notes: "really wants the product",
+            environments: ["podio org they 'rent' from us"]
         },
         {
-            name: "fake client 3",
-            id: "3",
-            environments: ["client3 env 1", "client3 env 2", "client3 env 3"]
+            company: "ABC Real Estate",
+            contact: "Jan",
+            id: "1",
+            email: "jan@gmail.com",
+            notes: "wants to see a demo",
+            environments: ["their podio org", "podio org they 'rent' from us"]
         }
     ];
 

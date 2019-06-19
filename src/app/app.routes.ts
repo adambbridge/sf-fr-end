@@ -1,3 +1,5 @@
+import { NewClientComponent } from './Components/new-client/new-client.component';
+import { ClientsComponent } from './Components/clients/clients.component';
 import { AuthGuard } from "./guards/auth-guard.service";
 import { WelcomeComponent } from "./Components/welcome/welcome.component";
 import { PodioAssetsComponent } from "./Components/podio-assets/podio-assets.component";
@@ -14,55 +16,65 @@ import { PodioOrgsComponent } from "./Components/podio-orgs/podio-orgs.component
 import { NewSolutionComponent } from "./Components/new-solution/new-solution.component";
 
 export const APP_ROUTES: Routes = [
-    {
-        path: "login",
-        component: LoginComponent,
-        pathMatch: "full"
-    },
-    {
-        path: "",
-        component: WelcomeComponent,
-        pathMatch: "full",
-        canActivate: [AuthGuard]
-    },
-    {
-        path: "auth",
-        component: AuthenticatingComponent
-    },
-    {
-        path: "service-auth",
-        component: ServiceAuthenticatingComponent
-    },
-    {
-        path: "solutions/new",
-        component: NewSolutionComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: "solutions",
-        component: SolutionsComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: "solution",
-        component: SolutionComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: "spaces",
-        component: PodioSpacesComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: "orgs",
-        component: PodioOrgsComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: "podio",
-        component: PodioAssetsComponent,
-        canActivate: [AuthGuard]
-    },
-    // { path: '', redirectTo: 'solutions', pathMatch: 'full' },
-    { path: "**", component: PageNotFoundComponent }
-];
+           {
+               path: "login",
+               component: LoginComponent,
+               pathMatch: "full"
+           },
+           {
+               path: "",
+               component: WelcomeComponent,
+               pathMatch: "full",
+               canActivate: [AuthGuard]
+           },
+           {
+               path: "auth",
+               component: AuthenticatingComponent
+           },
+           {
+               path: "service-auth",
+               component: ServiceAuthenticatingComponent
+           },
+           {
+               path: "solutions/new",
+               component: NewSolutionComponent,
+               canActivate: [AuthGuard]
+           },
+           {
+               path: "solutions",
+               component: SolutionsComponent,
+               canActivate: [AuthGuard]
+           },
+           {
+               path: "solution",
+               component: SolutionComponent,
+               canActivate: [AuthGuard]
+           },
+           {
+               path: "spaces",
+               component: PodioSpacesComponent,
+               canActivate: [AuthGuard]
+           },
+           {
+               path: "orgs",
+               component: PodioOrgsComponent,
+               canActivate: [AuthGuard]
+           },
+           {
+               path: "podio",
+               component: PodioAssetsComponent,
+               canActivate: [AuthGuard]
+           },
+           {
+               path: "clients/new",
+               component: NewClientComponent,
+               canActivate: [AuthGuard]
+           },
+           {
+               path: "clients",
+               component: ClientsComponent,
+               canActivate: [AuthGuard]
+           },
+           // { path: '', redirectTo: 'solutions', pathMatch: 'full' },
+           { path: "**", component: PageNotFoundComponent }
+       ];

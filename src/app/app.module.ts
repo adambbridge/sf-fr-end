@@ -65,6 +65,8 @@ import { SolutionAboutComponent } from "./Components/solution-about/solution-abo
 import { APP_ROUTES } from "./app.routes";
 import { CustomMaterialModule } from "./custom-material/custom-material.module";
 import { AuthGuard } from "./guards/auth-guard.service";
+import { ClientsComponent } from './Components/clients/clients.component';
+import { NewClientComponent } from './Components/new-client/new-client.component';
 
 @NgModule({
     declarations: [
@@ -112,7 +114,9 @@ import { AuthGuard } from "./guards/auth-guard.service";
         SolutionTasksComponent,
         SolutionSpacesComponent,
         SolutionHistoryComponent,
-        SolutionAboutComponent    ],
+        SolutionAboutComponent,
+        ClientsComponent,
+        NewClientComponent    ],
     imports: [
         /** Modules */
         FormsModule,
