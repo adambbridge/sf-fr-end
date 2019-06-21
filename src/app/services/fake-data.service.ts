@@ -4,7 +4,7 @@ export interface ISolutionViewModel {
     appId?: string;
     name: string;
     imageUrl?: string;
-    version: string|number;
+    version: string | number;
     creationDate?: Date;
     lastUpdateDate?: Date;
     description?: string;
@@ -15,10 +15,9 @@ export interface IClientViewModel {
     contact: string;
     company?: string;
     id: string;
-    environments: Array<string>;
+    environments: Array<IPodioOrganizationViewModel>;
     email?: string;
     notes?: string;
-
 }
 export interface IPodioOrganizationViewModel {
     name: string;
@@ -45,33 +44,6 @@ export interface IPodioApplicationViewModel {
     providedIn: "root"
 })
 export class FakeDataService {
-    fakeClients: Array<IClientViewModel> = [
-        {
-            company: "XYZ Real Estate",
-            contact: "Pam",
-            id: "1",
-            email: "pam@gmail.com",
-            notes: "what a nice person",
-            environments: ["their podio org", "their other podio org", "another podio org"]
-        },
-        {
-            company: "Random Consulting",
-            contact: "Dan",
-            id: "1",
-            email: "dan@gmail.com",
-            notes: "really wants the product",
-            environments: ["podio org they 'rent' from us"]
-        },
-        {
-            company: "ABC Real Estate",
-            contact: "Jan",
-            id: "1",
-            email: "jan@gmail.com",
-            notes: "wants to see a demo",
-            environments: ["their podio org", "podio org they 'rent' from us"]
-        }
-    ];
-
     fakeApplication: IPodioApplicationViewModel = {
         appId: 123,
         appName: "foo",
@@ -190,6 +162,36 @@ export class FakeDataService {
         this.fakeOrganization1,
         this.fakeOrganization2,
         this.fakeOrganization3
+    ];
+
+    fakeClients: Array<IClientViewModel> = [
+        {
+            company: "XYZ Real Estate",
+            contact: "Pam Smith",
+            id: "1",
+            email: "pam@gmail.com",
+            notes:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            environments: [this.fakeOrganization1, this.fakeOrganization2]
+        },
+        {
+            company: "Random Consulting",
+            contact: "Dan Jones",
+            id: "2",
+            email: "dan@gmail.com",
+            notes:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            environments: [this.fakeOrganization1, this.fakeOrganization2]
+        },
+        {
+            company: "ABC Real Estate",
+            contact: "Jan Weller",
+            id: "3",
+            email: "jan@gmail.com",
+            notes:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            environments: [this.fakeOrganization1, this.fakeOrganization2]
+        }
     ];
 
     fakeHistory = [

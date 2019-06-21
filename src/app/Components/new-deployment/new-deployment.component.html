@@ -15,7 +15,7 @@
     <mat-form-field class="w-100">
         <mat-label>Select a client</mat-label>
         <mat-select formControlName="client" (selectionChange)='onClientSelection($event.value)'>
-            <mat-option *ngFor="let client of clients" [value]="client.id">{{client.name}}</mat-option>
+            <mat-option *ngFor="let client of clients" [value]="client.id">{{client.contact}}</mat-option>
         </mat-select>
         <div *ngIf="c.invalid && (c.dirty || c.touched)">
             <mat-error >Please select a client</mat-error>

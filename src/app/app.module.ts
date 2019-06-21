@@ -67,6 +67,7 @@ import { CustomMaterialModule } from "./custom-material/custom-material.module";
 import { AuthGuard } from "./guards/auth-guard.service";
 import { ClientsComponent } from './Components/clients/clients.component';
 import { NewClientComponent } from './Components/new-client/new-client.component';
+import { ClientComponent } from './Components/client/client.component';
 
 @NgModule({
     declarations: [
@@ -116,7 +117,8 @@ import { NewClientComponent } from './Components/new-client/new-client.component
         SolutionHistoryComponent,
         SolutionAboutComponent,
         ClientsComponent,
-        NewClientComponent    ],
+        NewClientComponent,
+        ClientComponent    ],
     imports: [
         /** Modules */
         FormsModule,

@@ -1,3 +1,4 @@
+import { ClientComponent } from './Components/client/client.component';
 import { NewClientComponent } from './Components/new-client/new-client.component';
 import { ClientsComponent } from './Components/clients/clients.component';
 import { AuthGuard } from "./guards/auth-guard.service";
@@ -73,6 +74,11 @@ export const APP_ROUTES: Routes = [
            {
                path: "clients",
                component: ClientsComponent,
+               canActivate: [AuthGuard]
+           },
+           {
+               path: "clients/:id",
+               component: ClientComponent,
                canActivate: [AuthGuard]
            },
            // { path: '', redirectTo: 'solutions', pathMatch: 'full' },
