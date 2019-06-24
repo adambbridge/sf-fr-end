@@ -15,7 +15,7 @@ export interface IClientViewModel {
     contact: string;
     company?: string;
     id: string;
-    environments: Array<IPodioOrganizationViewModel>;
+    environments;
     email?: string;
     notes?: string;
 }
@@ -39,6 +39,9 @@ export interface IPodioApplicationViewModel {
     podioApplication: any;
     fields: Array<string>;
 }
+
+
+
 // so we can inject this service
 @Injectable({
     providedIn: "root"
@@ -258,6 +261,7 @@ export class FakeDataService {
 
     fakeSolutions: Array<ISolutionViewModel> = [
         {
+            appId: "123456",
             name: "Custom Solution 1 ",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
@@ -270,9 +274,11 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace,
                 this.fakeWorkspace
-            ]
+            ],
+            history: this.fakeHistory
         },
         {
+            appId: "123456",
             name: "Custom Solution 2",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
@@ -285,9 +291,11 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace,
                 this.fakeWorkspace
-            ]
+            ],
+            history: this.fakeHistory
         },
         {
+            appId: "123456",
             name: "Custom Solution 3",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
@@ -300,9 +308,11 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace,
                 this.fakeWorkspace
-            ]
+            ],
+            history: this.fakeHistory
         },
         {
+            appId: "123456",
             name: "Custom Solution 4",
             version: 4,
             creationDate: new Date("2018-05-05"),
@@ -313,9 +323,11 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace,
                 this.fakeWorkspace
-            ]
+            ],
+            history: this.fakeHistory
         },
         {
+            appId: "123456",
             name: "Custom Solution 4",
             version: 4,
             creationDate: new Date("2018-05-05"),
@@ -326,9 +338,11 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace,
                 this.fakeWorkspace
-            ]
+            ],
+            history: this.fakeHistory
         },
         {
+            appId: "123456",
             name: "Custom Solution 4",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
@@ -341,7 +355,17 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace,
                 this.fakeWorkspace
-            ]
+            ],
+            history: this.fakeHistory
         }
     ];
+
+    // fakeEnvironment = {
+    //     organization: this.fakeOrganization1,
+    //     solution: this.fakeSolution,
+    //     client: this.fakeClients[0]
+    // serviceProviders: [
+    //     {'fake service provider'}
+    // ]
+    // }
 }

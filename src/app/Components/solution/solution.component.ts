@@ -9,6 +9,7 @@ import {
 import { NgForm } from "@angular/forms";
 import { v4 as uuid } from "node_modules/uuid";
 import { map } from "rxjs/operators";
+import { Router, ActivatedRoute, Params } from "@angular/router";
 
 import { FakeDataService, ISolutionViewModel } from "./../../services/fake-data.service";
 import { Solution } from "src/model/saasafras/solution";
@@ -25,20 +26,34 @@ import { SolutionAboutComponent } from "src/app/Components/solution-about/soluti
     templateUrl: "./solution.component.html",
     styleUrls: ["./solution.component.css"]
 })
-
-
 export class SolutionComponent implements OnInit {
     // @Input() solution: Solution;
     // TODO initialize this in ngOnInit
+    appId;
     v1 = false;
-    solution: ISolutionViewModel = this.fakeDataService.fakeSolution;
+    solutions: ISolutionViewModel[];
+    solution: ISolutionViewModel;
 
-    constructor(private fakeDataService: FakeDataService) {}
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        private fakeDataService: FakeDataService
+    ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.appId = this.route.snapshot.paramMap.get("id");
+        
+        this.solutions = this.fakeDataService.fakeSolutions;
+        this.solutions.forEach((sol) => {
+            if (sol.appId === this.appId) {
+                this.solution = sol;
+            }
+        });
+        console.log('solution', this.solution)
+    }
 
     toggleVersion() {
-        if(this.v1 === true) {
+        if (this.v1 === true) {
             this.v1 = false;
         } else {
             this.v1 = true;

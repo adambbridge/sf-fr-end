@@ -77,4 +77,11 @@ export class SolutionsComponent implements OnInit {
         this.showNewSolution = show;
         this.showNewIcon = show ? "expand_less" : "expand_more";
     }
+
+    getCardLink(solution) {
+        let link = "/solutions/" + solution.appId;
+        return link;
+
+    }
+ 
 }

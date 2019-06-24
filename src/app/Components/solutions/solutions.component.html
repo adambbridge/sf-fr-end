@@ -102,7 +102,7 @@
 
                 <!-- ROW DEFINITIONS -->
                 <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="md-elevation-z5"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns" routerLink="/solution"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns" routerLink="/solutions/{{row.appId}}"></tr>
                 <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
             </table>
         </div>
@@ -114,6 +114,10 @@
     
     ==============================-->
 
-    <app-card-collection [showCards]="showCards" [items]="solutions" [chiplist]="true" [link]="'/solution'"></app-card-collection>
+    <div class="row mt-4" *ngIf='showCards'>
+        <div class="col-12 col-sm-6 col-md-4" *ngFor="let item of solutions">
+            <app-card [item]='item' [chiplist]='true' routerLink="/solutions/{{item.appId}}"></app-card>
+        </div>
+    </div>
 
 </div>
