@@ -24,6 +24,7 @@ export interface IPodioOrganizationViewModel {
     owner: string;
     orgId?: number;
     spaces: Array<IPodioSpaceViewModel>;
+    deployedSolutions?: any;
 }
 export interface IPodioSpaceViewModel {
     workspaceName: string;
@@ -132,7 +133,8 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace,
             this.fakeWorkspace
-        ]
+        ],
+        deployedSolutions: []
     };
     fakeOrganization2: IPodioOrganizationViewModel = {
         name: "Fake Org2",
@@ -145,7 +147,8 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace,
             this.fakeWorkspace
-        ]
+        ],
+        deployedSolutions: ['solABC']
     };
     fakeOrganization3: IPodioOrganizationViewModel = {
         name: "Fake Org3",
@@ -158,7 +161,8 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace,
             this.fakeWorkspace
-        ]
+        ],
+        deployedSolutions: ['solXYZ']
     };
 
     fakeOrganizations: Array<IPodioOrganizationViewModel> = [

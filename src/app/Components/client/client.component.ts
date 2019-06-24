@@ -1,3 +1,4 @@
+import { AddEnvironmentComponent } from './../add-environment/add-environment.component';
 import {
     FakeDataService,
     IClientViewModel
@@ -6,6 +7,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { MatTableDataSource } from "@angular/material";
 import { MatSortModule } from "@angular/material/sort";
+import { MatDialog } from "@angular/material";
 
 @Component({
     selector: "app-client",
@@ -25,7 +27,8 @@ export class ClientComponent implements OnInit {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private fakeDataService: FakeDataService
+        private fakeDataService: FakeDataService,
+        private dialog: MatDialog
     ) {}
 
     ngOnInit() {
@@ -44,5 +47,10 @@ export class ClientComponent implements OnInit {
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    onAddEnvClick() {
+        this.dialog.open(AddEnvironmentComponent, {
+        });
     }
 }

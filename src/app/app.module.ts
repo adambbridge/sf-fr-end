@@ -68,6 +68,7 @@ import { AuthGuard } from "./guards/auth-guard.service";
 import { ClientsComponent } from './Components/clients/clients.component';
 import { NewClientComponent } from './Components/new-client/new-client.component';
 import { ClientComponent } from './Components/client/client.component';
+import { AddEnvironmentComponent } from './Components/add-environment/add-environment.component';
 
 @NgModule({
     declarations: [
@@ -118,7 +119,9 @@ import { ClientComponent } from './Components/client/client.component';
         SolutionAboutComponent,
         ClientsComponent,
         NewClientComponent,
-        ClientComponent    ],
+        ClientComponent,
+        AddEnvironmentComponent
+    ],
     imports: [
         /** Modules */
         FormsModule,
@@ -140,7 +143,8 @@ import { ClientComponent } from './Components/client/client.component';
     entryComponents: [
         NewUpdateComponent,
         NewDeploymentComponent,
-        NewPatchComponent
+        NewPatchComponent,
+        AddEnvironmentComponent
     ]
 })
 export class AppModule {}

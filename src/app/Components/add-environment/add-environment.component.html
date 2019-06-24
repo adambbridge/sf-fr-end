@@ -1,0 +1,68 @@
+<h1 mat-dialog-title>Add Environment</h1>
+
+<mat-accordion class="example-headers-align mt-4">
+    <mat-expansion-panel hideToggle [expanded]="false">
+
+        <!-- PANEL HEADER -->
+        <mat-expansion-panel-header (click)="onHeaderClick()">
+            <mat-panel-title>
+                Add from Available Podio Orgs
+            </mat-panel-title>
+            <mat-icon>add_box</mat-icon>
+        </mat-expansion-panel-header>
+
+        <!-- PANEL BODY -->
+        <div *ngIf="showContent">
+            <div class="mb-3 mt-3">
+                <mat-selection-list #envs>
+                    <mat-list-option *ngFor="let env of availableEnvs" [checkboxPosition]="before">
+                        BB Consulting. Owner: BB Consulting Deployed solutions: NA
+
+                    </mat-list-option>
+                </mat-selection-list>
+
+                <button mat-raised-button class='mr-2 mt-3'>Cancel</button>
+                <button mat-raised-button type="submit" [disabled]="false">Add Environment(s)</button>
+            </div>
+        </div>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle [expanded]="false">
+
+        <!-- PANEL HEADER -->
+        <mat-expansion-panel-header (click)="onHeaderClick()">
+            <mat-panel-title>
+                Add A Podio Org Not Yet Known Using Credentials
+            </mat-panel-title>
+            <mat-icon>library_add</mat-icon>
+        </mat-expansion-panel-header>
+
+        <!-- PANEL BODY -->
+        <div *ngIf="showContent">
+            <p class="text-hint">
+                Explanatory text could go here if needed...
+            </p>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mb-3 mt-3">
+
+                <mat-form-field class='w-100'>
+                    <mat-label>Email</mat-label>
+                    <input type="text" matInput formControlName="email">
+                </mat-form-field>
+
+                <mat-form-field class='w-100'>
+                    <mat-label>Password</mat-label>
+                    <input type="text" matInput formControlName="password">
+                </mat-form-field>
+
+                <button mat-raised-button class='mr-2'>Cancel</button>
+                <button mat-raised-button type="submit" [disabled]="false">Add Environment</button>
+
+            </form>
+
+        </div>
+
+    </mat-expansion-panel>
+
+</mat-accordion>

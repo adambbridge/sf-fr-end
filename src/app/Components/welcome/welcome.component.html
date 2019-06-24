@@ -4,7 +4,14 @@
             <h1 class="text-h1" >
                 Welcome!</h1>
             <h3>Sassafras lets you create, deploy & patch versioned Podio solutions </h3>
-            <app-card-collection [showCards]="true" [items]="onboardingOptions" [chiplist]=false></app-card-collection>
+            <!-- <app-card-collection [showCards]="true" [items]="onboardingOptions" [chiplist]=false></app-card-collection> -->
+
+            <div class="row mt-4">
+                <div class="col-12 col-sm-6 col-md-4" *ngFor="let item of onboardingOptions">
+                    <app-card [item]='item' [chiplist]='false' routerLink=""></app-card>
+                </div>
+            </div>
+
         </mat-card>
 
     </div>

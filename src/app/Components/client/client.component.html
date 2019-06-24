@@ -5,7 +5,7 @@
             <!-- NAME  -->
 
             <div class="d-flex justify-content-between align-items-center">
-                <h3>{{client.contact}}</h3>
+                <h3 class="text-h1">{{client.contact}}</h3>
 
                 <!-- ACTIONS MENU  -->
 
@@ -19,21 +19,25 @@
                         <span>Delete client</span>
                     </button>
 
-                    <!-- LAUNCH ORGS DIALOG -->
-                    <button mat-menu-item>
+                   
+                    <button mat-menu-item (click)="onAddEnvClick()">
                         <mat-icon>add_box</mat-icon>
-                        <span>Add Env from Available</span>
+                        <span>Add Environment</span>
                     </button>
 
                     <!-- LAUNCH LOGIN DIALOG -->
-                    <button mat-menu-item>
+                    <!-- <button mat-menu-item matTooltip="launch login dialog asking for podio emaili and pwd">
                         <mat-icon>library_add</mat-icon>
                         <span>Add New Env w/ Podio credentials</span>
-                    </button>
+                    </button> -->
 
                     <!-- <button mat-menu-item [matMenuTriggerFor]="addEnv">Add Environment</button> -->
                 </mat-menu>
-                <button mat-button [matMenuTriggerFor]="clientActionsMenu">Actions</button>
+                <button mat-raised-button [matMenuTriggerFor]="clientActionsMenu">
+                    Actions
+                    <mat-icon>keyboard_arrow_down</mat-icon>
+                
+                </button>
 
                 <!-- <mat-menu #addEnv="matMenu">
                     <button mat-menu-item>Add from available Saasafras environments</button>
@@ -45,7 +49,7 @@
             <!-- INFO  -->
 
             <mat-list>
-                <h3 mat-subheader>Information</h3>
+                <h3>Information</h3>
                 <mat-list-item>
                     <mat-icon mat-list-icon>person_outline</mat-icon>
                     <p mat-line> {{client.contact}} </p>
@@ -73,7 +77,7 @@
 
                 <mat-divider></mat-divider>
 
-                <h3 mat-subheader>Environments</h3>
+                <h3>Environments</h3>
 
                 <!-- ENVIRONMENTS  -->
                 <!-- TODO THIS COULD BE A COMPONENT  -->
