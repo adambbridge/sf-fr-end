@@ -11,6 +11,7 @@ export class PodioAssetsComponent implements OnInit {
     organizations;
     @ViewChildren("spaces") spacesLists;
     selectedSpaces = [];
+    @Input() accordionOnly = false;
 
     constructor(private _fakeDataService: FakeDataService) {}
 

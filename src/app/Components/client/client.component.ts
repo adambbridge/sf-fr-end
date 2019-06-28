@@ -18,9 +18,16 @@ export class ClientComponent implements OnInit {
     id;
     client: IClientViewModel;
     clients: IClientViewModel[];
+    envUI: string = 'twoAccordions';
 
     // MATERIAL TABLE SETUP
-    displayedColumns: string[] = ["org", "owner", "solution", "actions"];
+    displayedColumns: string[] = [
+        "org",
+        "owner",
+        "solution",
+        "isTemplate",
+        "actions"
+    ];
     @ViewChild(MatSortModule) sort: MatSortModule;
     dataSource;
 
@@ -50,7 +57,6 @@ export class ClientComponent implements OnInit {
     }
 
     onAddEnvClick() {
-        this.dialog.open(AddEnvironmentComponent, {
-        });
+        this.dialog.open(AddEnvironmentComponent, {});
     }
 }

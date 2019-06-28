@@ -1,56 +1,99 @@
-<h3 class="text-h1">My Podio</h3>
-
 <div>
-
-    <div class="d-flex justify-content-between align-items-center">
-        <!-- FILTER -->
-        <mat-form-field class="w-50">
-            <input autofocus matInput placeholder="Search my organizations & workspaces"/>
-        </mat-form-field>
-
-        <button mat-raised-button matTooltip="Refresh podio info">
-            <mat-icon>autorenew</mat-icon>
-        </button>
+    <div [hidden]="accordionOnly">
+        <h3 class="text-h1">My Podio</h3>
+        <div class="d-flex justify-content-between align-items-center">
+            <!-- FILTER -->
+            <mat-form-field class="w-50">
+                <input autofocus matInput placeholder="Search my organizations & workspaces" />
+            </mat-form-field>
+            <button mat-raised-button matTooltip="Refresh podio info">
+                <mat-icon>autorenew</mat-icon>
+            </button>
+        </div>
     </div>
 
     <!-- ORGS AND SPACES -->
     <mat-accordion>
 
         <!-- A PANEL FOR EACH ORG -->
-        <mat-expansion-panel *ngFor="let org of organizations; let panelIndex = index" (opened)="panelOpenState = true" (closed)="onPanelClose(panelIndex)">
+        <mat-expansion-panel *ngFor="let org of organizations; let panelIndex = index" (opened)="panelOpenState = true"
+            (closed)="onPanelClose(panelIndex)">
 
             <!-- PANEL HEADER  -->
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    <img src="https://cdn.iconscout.com/icon/free/png-256/podio-282956.png" alt="" class="exp-panel-icon">
-                    <span>{{org.name}}</span>
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/podio-282956.png" alt=""
+                        class="exp-panel-icon">
+                    <span class="overflow-ellipsis w-25">{{org.name}}</span>
+                    <span class="overflow-ellipsis w-25">Org. Owner: {{org.owner}}</span>
+                    <span class="overflow-ellipsis w-25 ml-3 ">Deployed Solution Instance:
+                        {{org.deployedSolutions[0]}}</span>
                 </mat-panel-title>
-                <mat-panel-description>
-                    Owner: {{org.owner}}
+                <!-- <mat-panel-description>
+                    <span>Org. Owner: {{org.owner}}</span>
+                    <span class="ml-3">Deployed Solution Instance: {{org.deployedSolutions[0]}}</span>
                     
-                </mat-panel-description>
+
+                </mat-panel-description> -->
             </mat-expansion-panel-header>
 
-            <!-- MISC INFO  -->
-            <mat-list>
-                <mat-list-item>Descrip of org etc??</mat-list-item>
-            </mat-list>
+            <mat-tab-group>
+                <mat-tab label="About">
+                    <mat-list>
+                        <mat-list-item>
+                            <p mat-line>Workspace Source For: <a href="">Super Solution X</a></p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <p mat-line> Deployed Solution Instance: mPactPro - 228</p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <p mat-line> Description: {{org.description}} </p>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-tab>
+                <mat-tab label="Manage">
+                    <span class="button-row mb-3">
+                        <!-- delete, settings, vpn_key, edit, history, more_vert -->
 
-            <!-- SPACES LIST -->
-            <mat-selection-list #spaces aria-label="workspaces list" (selectionChange)="onSelectionChange($event, panelIndex)">
-                <mat-list-option *ngFor="let space of org.spaces" [value]="space">
-                    {{space.workspaceName}}
-                </mat-list-option>
-            </mat-selection-list>
+                        <a mat-raised-button class="mt-3 mr-2">
+                            <mat-icon>vpn_key</mat-icon>
+                            Manage Credentials
+                        </a>
+                        <a mat-raised-button class="mt-3 mr-2">
+                            <mat-icon>history</mat-icon>
+                            Deployed Instance History
+                        </a>
+                        <a mat-raised-button class="mt-3 mr-2">
+                            <mat-icon>create_new_folder</mat-icon>
+                            Patch Deployed Instance
+                        </a>
+                        <a mat-raised-button class="mt-3 mr-2">
+                            <mat-icon>send</mat-icon>
+                            Deploy Solution to Org
+                        </a>
+                        <a mat-raised-button class="mt-3">
+                            <mat-icon>build</mat-icon>
+                            Other actions...?
+                        </a>
 
-            <!-- CREATE NEW SOLUTION BTN -->
-            <span class="button-row">
-                <span matTooltip="Select at least one workspace to enable button">
-                    <a routerLink="/solutions/new" [disabled]="selectedSpaces.length < 1" mat-raised-button (click)='onNewSolutionClick()' class="mt-3">Create solution from selected
-                        workspaces</a>
-                </span>
-            </span>
-
+                    </span>
+                </mat-tab>
+                <mat-tab label="Workspaces">
+                    <p mat-line> WORKSPACES: </p>
+                    <mat-selection-list #spaces aria-label="workspaces list"
+                        (selectionChange)="onSelectionChange($event, panelIndex)">
+                        <mat-list-option *ngFor="let space of org.spaces" [value]="space"
+                            class="mat-list-option-inline">
+                            {{space.workspaceName}}
+                        </mat-list-option>
+                    </mat-selection-list>
+                    <a routerLink="/solutions/new" [disabled]="selectedSpaces.length < 1" mat-raised-button
+                        (click)='onNewSolutionClick()' class="mt-3 mr-2">
+                        Create solution from selected
+                        workspaces
+                    </a>
+                </mat-tab>
+            </mat-tab-group>
         </mat-expansion-panel>
     </mat-accordion>
 

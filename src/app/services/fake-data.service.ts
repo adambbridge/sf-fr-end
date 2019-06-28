@@ -22,6 +22,7 @@ export interface IClientViewModel {
 export interface IPodioOrganizationViewModel {
     name: string;
     owner: string;
+    isTemplate?: boolean;
     orgId?: number;
     spaces: Array<IPodioSpaceViewModel>;
     deployedSolutions?: any;
@@ -125,6 +126,7 @@ export class FakeDataService {
     fakeOrganization1: IPodioOrganizationViewModel = {
         name: "Fake Org1",
         owner: "Client Company XYZ",
+        isTemplate: true,
         spaces: [
             this.fakeWorkspace,
             this.fakeWorkspace,
@@ -139,6 +141,7 @@ export class FakeDataService {
     fakeOrganization2: IPodioOrganizationViewModel = {
         name: "Fake Org2",
         owner: "Brick Bridge Consulting",
+        isTemplate: false,
         spaces: [
             this.fakeWorkspace,
             this.fakeWorkspace,
@@ -148,7 +151,7 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace
         ],
-        deployedSolutions: ['solABC']
+        deployedSolutions: ["solABC"]
     };
     fakeOrganization3: IPodioOrganizationViewModel = {
         name: "Fake Org3",
@@ -162,7 +165,7 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace
         ],
-        deployedSolutions: ['solXYZ']
+        deployedSolutions: ["solXYZ"]
     };
 
     fakeOrganizations: Array<IPodioOrganizationViewModel> = [

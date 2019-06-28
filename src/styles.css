@@ -79,6 +79,20 @@ tr:active {
 .text-small{
     font-size: 0.9rem;
 }
+.overflow-ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.max-width-250 {
+    max-width: 200px;
+}
+.mat-list-base .mat-list-option.mat-list-option-inline {
+    display: inline-block;
+    width: unset;
+    height: 30px;
+}
+
 .cursor-pointer {
     cursor: pointer;
 }
