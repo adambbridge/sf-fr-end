@@ -82,8 +82,7 @@
                     <p mat-line> WORKSPACES: </p>
                     <mat-selection-list #spaces aria-label="workspaces list"
                         (selectionChange)="onSelectionChange($event, panelIndex)">
-                        <mat-list-option *ngFor="let space of org.spaces" [value]="space"
-                            class="mat-list-option-inline">
+                        <mat-list-option *ngFor="let space of org.spaces" [value]="space">
                             {{space.workspaceName}}
                         </mat-list-option>
                     </mat-selection-list>

@@ -1,3 +1,4 @@
+import { Solution } from './../../../model/saasafras/solution';
 import { environment } from "./../../../environments/environment.prod";
 import { FakeDataService } from "src/app/services/fake-data.service";
 import { Component, OnInit, Inject } from "@angular/core";
@@ -30,13 +31,17 @@ export class NewDeploymentComponent implements OnInit {
     solution;
     clients;
     environments;
+    //TODO these would be solution properties?
+    versions = [1, 2, "KYdev1", "KYdev2", "KYqa1"];
 
     deploymentForm = this.fb.group({
         solution: ["", Validators.required],
+        version: ["", Validators.required],
         client: ["", Validators.required],
         environment: ["", Validators.required],
         description: [""]
     });
+    submitted: boolean = false;
 
     // provide access for validation purposes
     get c() {
@@ -58,6 +63,7 @@ export class NewDeploymentComponent implements OnInit {
         this.deploymentForm.controls.solution.setValue(
             this._passedData.solution.name
         );
+        console.log(this.solution);
     }
 
     onClientSelection(selectedClientID): void {
@@ -69,6 +75,7 @@ export class NewDeploymentComponent implements OnInit {
     }
 
     onSubmit() {
+        this.submitted = true;
         // console.warn(this.deploymentForm.value);
         // console.warn(this.deploymentForm.valid);
     }

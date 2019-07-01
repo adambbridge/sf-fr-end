@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Patch {{solution.name}}</h1>
+<h1 mat-dialog-title>Patch Solution Instances</h1>
 
 <p class="text-hint">
     When you have run Updates on your Saasafras solution you can Update deployments of the solution with all of the
@@ -13,12 +13,21 @@
         <input type="text" matInput readonly formControlName="solution">
     </mat-form-field>
 
-    <mat-label>Environments to patch</mat-label>
+    <mat-form-field class="w-100">
+        <mat-label>Version to use for Patch</mat-label>
+        <mat-select formControlName="version">
+            <mat-option *ngFor="let version of versions" [value]="version">{{version}}</mat-option>
+        </mat-select>
+        <div *ngIf="versionInput.touched && versionInput.invalid">
+            <mat-error>Please select a version</mat-error>
+        </div>
+    </mat-form-field>
 
+    <mat-label>Instances to patch</mat-label>
     <div>
         <mat-selection-list #envs aria-label="environments list" (selectionChange)="onEnvSelection()">
             <mat-list-option *ngFor="let env of environments" [value]="env" [checkboxPosition]="before">
-                <span>{{env}}</span>
+                <span>{{env.name}}</span>
             </mat-list-option>
         </mat-selection-list>
     </div>
@@ -35,6 +44,12 @@
     </mat-form-field>
 
     <button mat-raised-button class='mr-2'>Cancel</button>
-    <button mat-raised-button type="submit" [disabled]="!selectedEnvs.length">Create Deployment</button>
+    <button mat-raised-button type="submit" [disabled]="!form.valid || (selectedEnvs && selectedEnvs.length === 0)">Patch</button>
+
+    <div class="mt-4 mb-4" *ngIf="submitted">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+
+
 
 </form>

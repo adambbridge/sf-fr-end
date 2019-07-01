@@ -252,7 +252,7 @@ export class FakeDataService {
     fakeSolution: ISolutionViewModel = {
         appId: "123456",
         name: "Fake Solution",
-        version: "2",
+        version: 1,
         workspaces: [
             this.fakeWorkspace,
             this.fakeWorkspace,
@@ -269,7 +269,7 @@ export class FakeDataService {
     fakeSolutions: Array<ISolutionViewModel> = [
         {
             appId: "123456",
-            name: "Custom Solution 1 ",
+            name: "Custom Solution A",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 1,
@@ -286,7 +286,7 @@ export class FakeDataService {
         },
         {
             appId: "123456",
-            name: "Custom Solution 2",
+            name: "Custom Solution B",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 2,
@@ -303,7 +303,7 @@ export class FakeDataService {
         },
         {
             appId: "123456",
-            name: "Custom Solution 3",
+            name: "Custom Solution C",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 1,
@@ -320,7 +320,7 @@ export class FakeDataService {
         },
         {
             appId: "123456",
-            name: "Custom Solution 4",
+            name: "Custom Solution D",
             version: 4,
             creationDate: new Date("2018-05-05"),
             lastUpdateDate: new Date(),
@@ -335,7 +335,7 @@ export class FakeDataService {
         },
         {
             appId: "123456",
-            name: "Custom Solution 4",
+            name: "Custom Solution E",
             version: 4,
             creationDate: new Date("2018-05-05"),
             lastUpdateDate: new Date(),
@@ -350,7 +350,7 @@ export class FakeDataService {
         },
         {
             appId: "123456",
-            name: "Custom Solution 4",
+            name: "Custom Solution F",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 4,

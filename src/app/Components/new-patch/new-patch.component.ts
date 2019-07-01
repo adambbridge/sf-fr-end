@@ -22,9 +22,12 @@ export class NewPatchComponent implements OnInit {
     clients;
     environments;
     form: FormGroup;
+    submitted: boolean = false;
     selectedEnvs = [];
     selectedEnvsError: boolean = true;
     @ViewChild("envs") envs;
+    //TODO these would be solution properties?
+    versions = [1, 2, "KYdev1", "KYdev2", "KYqa1"];
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
@@ -51,12 +54,21 @@ export class NewPatchComponent implements OnInit {
         this.form.value.selectedEnvs = this.selectedEnvs;
         console.warn(this.form.value);
         console.warn(this.form.valid);
-        this._utilsService.openSnackBar('message triggered inside onSubmit', 'some action', 4000);
+        this.submitted = true;
+        this._utilsService.openSnackBar(
+            "message triggered inside onSubmit",
+            "some action",
+            4000
+        );
     }
 
     /************************
      *  HELPER METHODS
      ************************/
+
+    get versionInput() {
+        return this.form.get("version");
+    }
 
     private _buildEnvArray(clients) {
         let envs = [];
@@ -71,6 +83,7 @@ export class NewPatchComponent implements OnInit {
     private _createForm() {
         let form = this._fb.group({
             solution: [this._passedData.solution.name, Validators.required],
+            version: ["", Validators.required],
             environments: this._fb.array([]),
             description: [""]
         });
@@ -84,5 +97,4 @@ export class NewPatchComponent implements OnInit {
     get description() {
         return this.form.get("description");
     }
-
 }

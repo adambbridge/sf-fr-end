@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Deploy "{{solution.name}}"</h1>
+<h1 mat-dialog-title>Create New Instance of "{{solution.name}}"</h1>
 
 <p class="text-hint">
     When you have created a Saasafras Solution, you can deploy the Solution to one or more of your clients. This will ... add further explanation...
@@ -13,6 +13,16 @@
     </mat-form-field>
 
     <mat-form-field class="w-100">
+        <mat-label>Select a Solution Version</mat-label>
+        <mat-select formControlName="version">
+            <mat-option *ngFor="let version of versions" [value]="version">{{version}}</mat-option>
+        </mat-select>
+        <div *ngIf="c.invalid && (c.dirty || c.touched)">
+            <mat-error>Please select a version</mat-error>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
         <mat-label>Select a client</mat-label>
         <mat-select formControlName="client" (selectionChange)='onClientSelection($event.value)'>
             <mat-option *ngFor="let client of clients" [value]="client.id">{{client.contact}}</mat-option>
@@ -23,9 +33,9 @@
     </mat-form-field>
 
     <mat-form-field class="w-100" *ngIf='environments'>
-        <mat-label>Select an environment</mat-label>
+        <mat-label>Select an organization</mat-label>
         <mat-select formControlName="environment">
-            <mat-option *ngFor="let env of environments" [value]="env">{{env}}</mat-option>
+            <mat-option *ngFor="let env of environments" [value]="env">{{env.name}}</mat-option>
         </mat-select>
         <div *ngIf="env.invalid && (env.dirty || env.touched)">
             <mat-error >Please select an environment</mat-error>
@@ -37,7 +47,11 @@
     </mat-form-field>
 
     <button mat-raised-button class='mr-2'>Cancel</button>
-    <button mat-raised-button type="submit" [disabled]="false">Create Solution</button>
+    <button mat-raised-button type="submit" [disabled]="false">Deploy</button>
+
+    <div class="mt-4 mb-4" *ngIf="submitted">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
 
 </form>
 
