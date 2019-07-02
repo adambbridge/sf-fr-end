@@ -23,11 +23,12 @@
         </div>
     </mat-form-field>
 
-    <mat-label>Instances to patch</mat-label>
+    <mat-label>Which Instances do you want to Patch?</mat-label>
     <div>
         <mat-selection-list #envs aria-label="environments list" (selectionChange)="onEnvSelection()">
             <mat-list-option *ngFor="let env of environments" [value]="env" [checkboxPosition]="before">
-                <span>{{env.name}}</span>
+                <!-- <span>{{env.name}}</span> -->
+                <span>Deployed Instance X at Org Y of Client Z (currently at v. 999)</span>
             </mat-list-option>
         </mat-selection-list>
     </div>

@@ -127,6 +127,9 @@ mat-card.card-table-container {
     font-size: 18px;
     font-weight: normal;
 }
+app-solution-tasks .mat-card {
+    min-height: 210px;
+}
 input[type="file"] {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 14px;
