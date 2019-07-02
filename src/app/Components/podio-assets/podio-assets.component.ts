@@ -46,6 +46,15 @@ export class PodioAssetsComponent implements OnInit {
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
+    onOrgRowClick(test) {
+        console.log(test)
+        // this.dialog.open(PodioOrgDetailComponent, {
+        //     data: {
+        //         organization: this.solution
+        //     }
+        // });
+    }
+
     /**
      * OLD ACCORDION FUNCTIONS
      */

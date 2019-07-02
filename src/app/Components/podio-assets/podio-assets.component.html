@@ -143,7 +143,7 @@
 
                     <!-- ROWS -->
                     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="md-elevation-z5"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns" routerLink="/podio/{{row.orgId}}"></tr>
                     <!-- <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr> -->
                 </table>
             </div>

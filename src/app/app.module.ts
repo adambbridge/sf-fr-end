@@ -69,6 +69,7 @@ import { ClientsComponent } from './Components/clients/clients.component';
 import { NewClientComponent } from './Components/new-client/new-client.component';
 import { ClientComponent } from './Components/client/client.component';
 import { AddEnvironmentComponent } from './Components/add-environment/add-environment.component';
+import { PodioOrgDetailComponent } from './Components/podio-org-detail/podio-org-detail.component';
 
 @NgModule({
     declarations: [
@@ -120,7 +121,8 @@ import { AddEnvironmentComponent } from './Components/add-environment/add-enviro
         ClientsComponent,
         NewClientComponent,
         ClientComponent,
-        AddEnvironmentComponent
+        AddEnvironmentComponent,
+        PodioOrgDetailComponent
     ],
     imports: [
         /** Modules */

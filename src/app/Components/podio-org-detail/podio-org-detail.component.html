@@ -1,0 +1,110 @@
+<div class="d-flex justify-content-center">
+    <mat-card class='w-100 mt-3'>
+        <mat-card-content>
+
+            <!-- ORG NAME  -->
+            <h3 class="text-h1">Organization Name</h3>
+
+            <!--============================
+                ORG INFO SECTION
+            =========================================== -->
+            <section id="org-info">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- HEADING AND MENU -->
+                    <h3>Org Information</h3>
+                    <span>
+                        <mat-menu #orgActionsMenu="matMenu">
+                            <button mat-menu-item>
+                                <mat-icon>edit</mat-icon>
+                                <span>Manage Org Login Info</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>delete</mat-icon>
+                                <span>Create New Solution Instance in this Org</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>delete</mat-icon>
+                                <span>View Org Workspaces</span>
+                            </button>
+                        </mat-menu>
+                        <button mat-raised-button [matMenuTriggerFor]="orgActionsMenu">
+                            Org Actions
+                            <mat-icon>settings</mat-icon>
+                        </button>
+                    </span>
+                </div>
+
+                <!-- INFO  -->
+                <mat-list>
+                    <!-- <mat-list-item>
+                        <p></p>
+                        <p mat-line> {{org.name}} </p>
+                    </mat-list-item> -->
+                    <mat-list-item>
+                        <p>Owner</p>
+                        <p> client that owns podio org</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <p>Id</p>
+                        <p mat-line> {{org.orgId}} </p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <p>Is Template for a Solution</p>
+                        <p mat-line> {{org.isTemplate}} </p>
+                    </mat-list-item>
+
+                </mat-list>
+            </section>
+
+            <mat-divider></mat-divider>
+
+            <!--============================
+                DEPLOYED SOLUTION INSTANCE INFO
+            =========================================== -->
+
+            <section id="instance-info">
+                <h3>Deployed Solution Instance</h3>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- HEADING AND MENU -->
+                    <p>mPactPro-BBC</p>
+                    <span>
+                        <mat-menu #instanceActionsMenu="matMenu">
+                            <button mat-menu-item>
+                                <mat-icon>edit</mat-icon>
+                                <span>Instance History</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>delete</mat-icon>
+                                <span>Patch Instance</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>delete</mat-icon>
+                                <span>Delete Instance</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>delete</mat-icon>
+                                <span>Revoke Client Access</span>
+                            </button>
+                        </mat-menu>
+                        <button mat-raised-button [matMenuTriggerFor]="instanceActionsMenu">
+                            Instance Actions
+                            <mat-icon>settings</mat-icon>
+                        </button>
+                    </span>
+                </div>
+
+                <!-- INFO  -->
+                <p>Instance of Solution</p>
+                <p><a routerLink="/solutions/1">mPactPro</a></p>
+
+                <p> Description</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore
+                    etdolore magna aliqua.</p>
+
+            </section>
+
+        </mat-card-content>
+    </mat-card>
+
+</div>

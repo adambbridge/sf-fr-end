@@ -125,6 +125,7 @@ export class FakeDataService {
 
     fakeOrganization1: IPodioOrganizationViewModel = {
         name: "Fake Org1",
+        orgId: 1,
         owner: "Client Company XYZ",
         isTemplate: true,
         spaces: [
@@ -140,6 +141,7 @@ export class FakeDataService {
     };
     fakeOrganization2: IPodioOrganizationViewModel = {
         name: "Fake Org2",
+        orgId: 2,
         owner: "Brick Bridge Consulting",
         isTemplate: false,
         spaces: [
@@ -155,6 +157,7 @@ export class FakeDataService {
     };
     fakeOrganization3: IPodioOrganizationViewModel = {
         name: "Fake Org3",
+        orgId: 3,
         owner: "Client Company ABC",
         spaces: [
             this.fakeWorkspace,
