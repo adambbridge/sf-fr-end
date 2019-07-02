@@ -1,8 +1,8 @@
-<div>
-    <div [hidden]="accordionOnly">
+<section>
+
+    <!-- <div>
         <h3 class="text-h1">My Podio</h3>
         <div class="d-flex justify-content-between align-items-center">
-            <!-- FILTER -->
             <mat-form-field class="w-50">
                 <input autofocus matInput placeholder="Search my organizations & workspaces" />
             </mat-form-field>
@@ -10,90 +10,225 @@
                 <mat-icon>autorenew</mat-icon>
             </button>
         </div>
+    </div> -->
+
+    <!-- TABLE  -->
+    <!-- <div *ngIf="envUI === 'oneTable'"> -->
+    <div *ngIf="envUI === 'oneTable'">
+
+        <div class="d-flex justify-content-between align-items-center">
+            <h3>Podio Organizations</h3>
+
+            <!-- ACTION BTN AND MENU  -->
+            <mat-menu #OrgAndInstanceMenu="matMenu">
+                <button mat-menu-item (click)="onAddEnvClick()">
+                    <mat-icon>add_box</mat-icon>
+                    <span>Add Podio Organization</span>
+                </button>
+                <!-- <button mat-menu-item>
+                    <mat-icon>fiber_new</mat-icon>
+                    <span>Create New Solution Instance</span>
+                </button> -->
+            </mat-menu>
+
+            <button mat-raised-button [matMenuTriggerFor]="OrgAndInstanceMenu">
+                <mat-icon>add_box</mat-icon>
+            </button>
+        </div>
+        <div>
+            <div class="d-flex justify-content-between align-items-center">
+
+                <!-- FILTER -->
+                <mat-form-field class="w-50">
+                    <mat-icon matPrefix>search</mat-icon>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search by keyword..." />
+                </mat-form-field>
+
+            </div>
+
+            <!-- TABLE  -->
+            <div class="table-container mat-elevation-z4">
+                <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+                    <ng-container matColumnDef="org">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Podio Org.
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.name }}
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="owner">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Org. Owner
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <a routerLink="/clients/1">
+                                {{ element.owner }}
+                            </a>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="solution">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Deployed Solution Instance
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <span *ngIf="!element.isTemplate">
+                                <a routerLink="/solutions/1">
+                                    mPactPro - BBC
+                                </a>
+                            </span>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="isTemplate">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Is Template
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            <span *ngIf="element.isTemplate">true</span>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+
+                    <!-- <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                            Actions
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+
+                            <mat-menu #envActions="matMenu">
+                                <button mat-menu-item *ngIf="!element.isTemplate">
+                                    <mat-icon>history</mat-icon>
+                                    <span>Instance history</span>
+                                </button>
+                                <button mat-menu-item *ngIf="!element.isTemplate">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>Edit Instance</span>
+                                </button>
+                                <button mat-menu-item *ngIf="!element.isTemplate">
+                                    <mat-icon>settings</mat-icon>
+                                    <span>Patch Instance</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>vpn_key</mat-icon>
+                                    <span>Pause client access</span>
+                                </button>
+                                <button mat-menu-item *ngIf="!element.isTemplate">
+                                    <mat-icon>settings</mat-icon>
+                                    <span>Above in Manage Instance dialog?</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon>settings</mat-icon>
+                                    <span>Manage Organization</span>
+                                </button>
+
+                                <button mat-menu-item>
+                                    <mat-icon>delete</mat-icon>
+                                    <span>Delete Organization</span>
+                                </button>
+                            </mat-menu>
+                            <button mat-button [matMenuTriggerFor]="envActions">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container> -->
+
+                    <!-- ROWS -->
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="md-elevation-z5"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    <!-- <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr> -->
+                </table>
+            </div>
+
+        </div>
     </div>
+</section>
 
-    <!-- ORGS AND SPACES -->
-    <mat-accordion>
+<!-- 
+    OLD
+    ACCORDION 
+    IS NO
+    MORE
 
-        <!-- A PANEL FOR EACH ORG -->
-        <mat-expansion-panel *ngFor="let org of organizations; let panelIndex = index" (opened)="panelOpenState = true"
-            (closed)="onPanelClose(panelIndex)">
+-->
+<!-- <mat-accordion>
 
-            <!-- PANEL HEADER  -->
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <img src="https://cdn.iconscout.com/icon/free/png-256/podio-282956.png" alt=""
-                        class="exp-panel-icon">
-                    <span class="overflow-ellipsis w-25">{{org.name}}</span>
-                    <span class="overflow-ellipsis w-25">Org. Owner: {{org.owner}}</span>
-                    <span class="overflow-ellipsis w-25 ml-3 ">Deployed Solution Instance:
-                        {{org.deployedSolutions[0]}}</span>
-                </mat-panel-title>
-                <!-- <mat-panel-description>
-                    <span>Org. Owner: {{org.owner}}</span>
-                    <span class="ml-3">Deployed Solution Instance: {{org.deployedSolutions[0]}}</span>
-                    
+    <mat-expansion-panel *ngFor="let org of organizations; let panelIndex = index" (opened)="panelOpenState = true"
+        (closed)="onPanelClose(panelIndex)">
 
-                </mat-panel-description> -->
-            </mat-expansion-panel-header>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <img src="https://cdn.iconscout.com/icon/free/png-256/podio-282956.png" alt="" class="exp-panel-icon">
+                <span class="overflow-ellipsis w-25">{{org.name}}</span>
+                <span class="overflow-ellipsis w-25">Org. Owner: {{org.owner}}</span>
+                <span class="overflow-ellipsis w-25 ml-3 ">Deployed Solution Instance:
+                    {{org.deployedSolutions[0]}}</span>
+            </mat-panel-title>
 
-            <mat-tab-group>
-                <mat-tab label="About">
-                    <mat-list>
-                        <mat-list-item>
-                            <p mat-line>Workspace Source For: <a href="">Super Solution X</a></p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <p mat-line> Deployed Solution Instance: mPactPro - 228</p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <p mat-line> Description: {{org.description}} </p>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-tab>
-                <mat-tab label="Manage">
-                    <span class="button-row mb-3">
-                        <!-- delete, settings, vpn_key, edit, history, more_vert -->
+        </mat-expansion-panel-header>
 
-                        <a mat-raised-button class="mt-3 mr-2">
-                            <mat-icon>vpn_key</mat-icon>
-                            Manage Credentials
-                        </a>
-                        <a mat-raised-button class="mt-3 mr-2">
-                            <mat-icon>history</mat-icon>
-                            Deployed Instance History
-                        </a>
-                        <a mat-raised-button class="mt-3 mr-2">
-                            <mat-icon>create_new_folder</mat-icon>
-                            Patch Deployed Instance
-                        </a>
-                        <a mat-raised-button class="mt-3 mr-2">
-                            <mat-icon>send</mat-icon>
-                            Deploy Solution to Org
-                        </a>
-                        <a mat-raised-button class="mt-3">
-                            <mat-icon>build</mat-icon>
-                            Other actions...?
-                        </a>
+        <mat-tab-group>
+            <mat-tab label="About">
+                <mat-list>
+                    <mat-list-item>
+                        <p mat-line>Workspace Source For: <a href="">Super Solution X</a></p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <p mat-line> Deployed Solution Instance: mPactPro - 228</p>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <p mat-line> Description: {{org.description}} </p>
+                    </mat-list-item>
+                </mat-list>
+            </mat-tab>
+            <mat-tab label="Manage">
+                <span class="button-row mb-3">
 
-                    </span>
-                </mat-tab>
-                <mat-tab label="Workspaces">
-                    <p mat-line> WORKSPACES: </p>
-                    <mat-selection-list #spaces aria-label="workspaces list"
-                        (selectionChange)="onSelectionChange($event, panelIndex)">
-                        <mat-list-option *ngFor="let space of org.spaces" [value]="space">
-                            {{space.workspaceName}}
-                        </mat-list-option>
-                    </mat-selection-list>
-                    <a routerLink="/solutions/new" [disabled]="selectedSpaces.length < 1" mat-raised-button
-                        (click)='onNewSolutionClick()' class="mt-3 mr-2">
-                        Create solution from selected
-                        workspaces
+                    <a mat-raised-button class="mt-3 mr-2">
+                        <mat-icon>vpn_key</mat-icon>
+                        Manage Credentials
                     </a>
-                </mat-tab>
-            </mat-tab-group>
-        </mat-expansion-panel>
-    </mat-accordion>
+                    <a mat-raised-button class="mt-3 mr-2">
+                        <mat-icon>history</mat-icon>
+                        Deployed Instance History
+                    </a>
+                    <a mat-raised-button class="mt-3 mr-2">
+                        <mat-icon>create_new_folder</mat-icon>
+                        Patch Deployed Instance
+                    </a>
+                    <a mat-raised-button class="mt-3 mr-2">
+                        <mat-icon>send</mat-icon>
+                        Deploy Solution to Org
+                    </a>
+                    <a mat-raised-button class="mt-3">
+                        <mat-icon>build</mat-icon>
+                        Other actions...?
+                    </a>
 
-</div>
+                </span>
+            </mat-tab>
+            <mat-tab label="Workspaces">
+                <p mat-line> WORKSPACES: </p>
+                <mat-selection-list #spaces aria-label="workspaces list"
+                    (selectionChange)="onSelectionChange($event, panelIndex)">
+                    <mat-list-option *ngFor="let space of org.spaces" [value]="space">
+                        {{space.workspaceName}}
+                    </mat-list-option>
+                </mat-selection-list>
+                <a routerLink="/solutions/new" [disabled]="selectedSpaces.length < 1" mat-raised-button
+                    (click)='onNewSolutionClick()' class="mt-3 mr-2">
+                    Create solution from selected
+                    workspaces
+                </a>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-expansion-panel>
+</mat-accordion> -->

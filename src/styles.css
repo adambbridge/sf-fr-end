@@ -14,6 +14,10 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+section {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 /* just use bootstrap grid container class
     .container {
     width: 80%;

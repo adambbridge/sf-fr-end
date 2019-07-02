@@ -1,3 +1,4 @@
+import { PodioAssetsComponent } from './../podio-assets/podio-assets.component';
 import { AddEnvironmentComponent } from './../add-environment/add-environment.component';
 import {
     FakeDataService,
@@ -18,18 +19,7 @@ export class ClientComponent implements OnInit {
     id;
     client: IClientViewModel;
     clients: IClientViewModel[];
-    envUI: string = 'twoAccordions';
-
-    // MATERIAL TABLE SETUP
-    displayedColumns: string[] = [
-        "org",
-        "owner",
-        "solution",
-        "isTemplate",
-        "actions"
-    ];
-    @ViewChild(MatSortModule) sort: MatSortModule;
-    dataSource;
+    envUI: string = "oneTable";
 
     constructor(
         private router: Router,
@@ -46,15 +36,14 @@ export class ClientComponent implements OnInit {
                 this.client = client;
             }
         });
-        this.dataSource = new MatTableDataSource(this.client.environments);
 
         console.log("client", this.client);
         console.log("clients", this.clients);
     }
 
-    applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
+    // applyFilter(filterValue: string) {
+    //     this.dataSource.filter = filterValue.trim().toLowerCase();
+    // }
 
     onAddEnvClick() {
         this.dialog.open(AddEnvironmentComponent, {});

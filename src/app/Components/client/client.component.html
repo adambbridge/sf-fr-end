@@ -11,10 +11,10 @@
                     <!-- TODO FOR A/B TESTING ONLY. REMOVE... -->
                     <mat-menu #envUIOptions="matMenu">
                         <button mat-menu-item (click)="envUI = 'oneTable'">
-                            <span>one table</span>
+                            <span>orgs in one table</span>
                         </button>
                         <button mat-menu-item (click)="envUI = 'twoAccordions'">
-                            <span>two accordions</span>
+                            <span>orgs, instances in two accordions</span>
                         </button>
                     </mat-menu>
                     <button mat-raised-button [matMenuTriggerFor]="envUIOptions" class="mr-2">
@@ -76,7 +76,7 @@
                     ORGS AND INSTANCES TABLE
                 =========================================== -->
 
-                
+                <app-podio-assets *ngIf="envUI === 'oneTable'" [organizations]='client.environments'></app-podio-assets>
 
                 <!--====================================== 
                     ORGS ACCORDION 
