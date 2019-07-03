@@ -1,4 +1,21 @@
+import { ISolutionViewModel } from './fake-data.service';
 import { Injectable } from "@angular/core";
+
+export interface IPodioApplicationViewModel {
+    appName: string;
+    appId: number;
+    podioApplication: any;
+    fields: Array<string>;
+}
+
+export interface IPodioSpaceViewModel {
+    workspaceName: string;
+    workspaceId: number;
+    description: string;
+    checked: boolean;
+    podioSpace: any;
+    apps: Array<IPodioApplicationViewModel>;
+}
 
 export interface ISolutionViewModel {
     appId?: string;
@@ -11,6 +28,23 @@ export interface ISolutionViewModel {
     workspaces: Array<IPodioSpaceViewModel>;
     history?: any;
 }
+
+export interface ISolutionInstanceViewModel {
+    name: string;
+    id: string;
+    description?: string;
+    solution: ISolutionViewModel;
+}
+
+export interface IPodioOrganizationViewModel {
+    name: string;
+    owner: string;
+    isTemplate?: boolean;
+    orgId?: number;
+    spaces: Array<IPodioSpaceViewModel>;
+    instances?: Array<ISolutionInstanceViewModel>;
+}
+
 export interface IClientViewModel {
     contact: string;
     company?: string;
@@ -19,28 +53,10 @@ export interface IClientViewModel {
     email?: string;
     notes?: string;
 }
-export interface IPodioOrganizationViewModel {
-    name: string;
-    owner: string;
-    isTemplate?: boolean;
-    orgId?: number;
-    spaces: Array<IPodioSpaceViewModel>;
-    deployedSolutions?: any;
-}
-export interface IPodioSpaceViewModel {
-    workspaceName: string;
-    workspaceId: number;
-    description: string;
-    checked: boolean;
-    podioSpace: any;
-    apps: Array<IPodioApplicationViewModel>;
-}
-export interface IPodioApplicationViewModel {
-    appName: string;
-    appId: number;
-    podioApplication: any;
-    fields: Array<string>;
-}
+
+
+
+
 
 
 
@@ -60,28 +76,6 @@ export class FakeDataService {
         },
         fields: ["foo", "bar"]
     };
-
-    // export class Org {
-    //     public contract_status: string;
-    //     public domains: string[];
-    //     public grants_count: Number;
-    //     public image: any;
-    //     public logo: Number;
-    //     public name: string;
-    //     public org_id: Number;
-    //     public premium: boolean;
-    //     public rank: Number;
-    //     public rights: string[];
-    //     public role: string;
-    //     public sales_agent_id: Number;
-    //     public spaces: Space[];
-    //     public status: string;
-    //     public tier: string;
-    //     public type: string;
-    //     public url: string;
-    //     public url_label: string;
-    //     public user_limit: Number;
-    // }
 
     fakeWorkspace: IPodioSpaceViewModel = {
         workspaceName: "Workspace 1",
@@ -122,90 +116,6 @@ export class FakeDataService {
             ]
         }
     };
-
-    fakeOrganization1: IPodioOrganizationViewModel = {
-        name: "Fake Org1",
-        orgId: 1,
-        owner: "Client Company XYZ",
-        isTemplate: true,
-        spaces: [
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace
-        ],
-        deployedSolutions: []
-    };
-    fakeOrganization2: IPodioOrganizationViewModel = {
-        name: "Fake Org2",
-        orgId: 2,
-        owner: "Brick Bridge Consulting",
-        isTemplate: false,
-        spaces: [
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace
-        ],
-        deployedSolutions: ["solABC"]
-    };
-    fakeOrganization3: IPodioOrganizationViewModel = {
-        name: "Fake Org3",
-        orgId: 3,
-        owner: "Client Company ABC",
-        spaces: [
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace
-        ],
-        deployedSolutions: ["solXYZ"]
-    };
-
-    fakeOrganizations: Array<IPodioOrganizationViewModel> = [
-        this.fakeOrganization1,
-        this.fakeOrganization2,
-        this.fakeOrganization3
-    ];
-
-    fakeClients: Array<IClientViewModel> = [
-        {
-            company: "XYZ Real Estate",
-            contact: "Pam Smith",
-            id: "1",
-            email: "pam@gmail.com",
-            notes:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            environments: [this.fakeOrganization1, this.fakeOrganization2]
-        },
-        {
-            company: "Random Consulting",
-            contact: "Dan Jones",
-            id: "2",
-            email: "dan@gmail.com",
-            notes:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            environments: [this.fakeOrganization1, this.fakeOrganization2]
-        },
-        {
-            company: "ABC Real Estate",
-            contact: "Jan Weller",
-            id: "3",
-            email: "jan@gmail.com",
-            notes:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            environments: [this.fakeOrganization1, this.fakeOrganization2]
-        }
-    ];
 
     fakeHistory = [
         {
@@ -370,12 +280,96 @@ export class FakeDataService {
         }
     ];
 
-    // fakeEnvironment = {
-    //     organization: this.fakeOrganization1,
-    //     solution: this.fakeSolution,
-    //     client: this.fakeClients[0]
-    // serviceProviders: [
-    //     {'fake service provider'}
-    // ]
-    // }
+    fakeInstance: ISolutionInstanceViewModel = {
+        name: "mPactPro-XYZ Real Estate",
+        id: "123",
+        description: "This is an optional description of the instance.",
+        solution: this.fakeSolutions[0]
+    };
+
+    fakeOrganization1: IPodioOrganizationViewModel = {
+        name: "Fake Org1",
+        orgId: 1,
+        owner: "Client Company XYZ",
+        isTemplate: true,
+        spaces: [
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace
+        ],
+        instances: [this.fakeInstance]
+    };
+    fakeOrganization2: IPodioOrganizationViewModel = {
+        name: "Fake Org2",
+        orgId: 2,
+        owner: "Brick Bridge Consulting",
+        isTemplate: false,
+        spaces: [
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace
+        ],
+        instances: [this.fakeInstance]
+    };
+    fakeOrganization3: IPodioOrganizationViewModel = {
+        name: "Fake Org3",
+        orgId: 3,
+        owner: "Client Company ABC",
+        spaces: [
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace
+        ],
+        instances: [this.fakeInstance]
+    };
+
+    fakeOrganizations: Array<IPodioOrganizationViewModel> = [
+        this.fakeOrganization1,
+        this.fakeOrganization2,
+        this.fakeOrganization3
+    ];
+
+    fakeClients: Array<IClientViewModel> = [
+        {
+            company: "XYZ Real Estate",
+            contact: "Pam Smith",
+            id: "1",
+            email: "pam@gmail.com",
+            notes:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            environments: [this.fakeOrganization1, this.fakeOrganization2]
+        },
+        {
+            company: "Random Consulting",
+            contact: "Dan Jones",
+            id: "2",
+            email: "dan@gmail.com",
+            notes:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            environments: [this.fakeOrganization1, this.fakeOrganization2]
+        },
+        {
+            company: "ABC Real Estate",
+            contact: "Jan Weller",
+            id: "3",
+            email: "jan@gmail.com",
+            notes:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            environments: [this.fakeOrganization1, this.fakeOrganization2]
+        }
+    ];
+
+  
 }
