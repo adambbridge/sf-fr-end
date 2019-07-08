@@ -78,9 +78,9 @@ tr:active {
 }
 .text-hint {
     font-size: 0.9rem;
-    color: #777; /* same as bootstrap "text-muted" */
+    color: #999; /* same as bootstrap "text-muted" */
 }
-.text-small{
+.text-small {
     font-size: 0.9rem;
 }
 .overflow-ellipsis {
@@ -96,6 +96,26 @@ tr:active {
     width: unset;
     height: 30px;
 }
+
+.mat-selection-list .mat-list-option.mat-list-option-multi-line {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid lightgray;
+    height: unset;
+}
+.comma-separated-list::after {
+    content: ", ";
+}
+.comma-separated-list:last-child::after {
+    content: "";
+}
+.checkbox-hidden .mat-pseudo-checkbox  {
+    display: none;
+}
+.checkbox-hidden, .mat-list-item-disabled {
+    background: unset;
+}
+
 
 .cursor-pointer {
     cursor: pointer;
@@ -159,7 +179,7 @@ app-welcome app-card-collection .mat-card {
     min-height: 200px;
 }
 app-welcome app-card-collection .mat-card:hover {
-    background: #F5F5F5;
+    background: #f5f5f5;
 }
 
 /* .highlight {
@@ -176,9 +196,7 @@ app-welcome app-card-collection .mat-card:hover {
     font-size: 20px;
     padding-right: 20px;
     padding-left: 20px; */
-
 }
-
 
 @media only screen and (max-width: 767px) {
     .hidden-sm-down {

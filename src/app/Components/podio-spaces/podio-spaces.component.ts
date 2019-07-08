@@ -1,23 +1,32 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Space, Spaces } from 'src/model/podio/space';
-import { Observable } from 'rxjs';
+import { FakeDataService, IPodioOrganizationViewModel, IPodioSpaceViewModel } from './../../services/fake-data.service';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { PodioService } from '../../services/podio.service';
 
 @Component({
-  selector: 'app-podio-spaces',
-  templateUrl: './podio-spaces.component.html',
-  styleUrls: ['./podio-spaces.component.css']
+    selector: "app-podio-spaces",
+    templateUrl: "./podio-spaces.component.html",
+    styleUrls: ["./podio-spaces.component.css"]
 })
 export class PodioSpacesComponent implements OnInit {
-  @Input()
-  orgId: Number;
-  spaces: Observable<Space[]>;
+    @Input() org: IPodioOrganizationViewModel;
+    @Input() disableSelection?: boolean = false;
+    allSpaces: Array<IPodioSpaceViewModel> = [];
+    allSpacesSelectionList;
+    private _selectedSpaces;
+    @Output() selectedSpaces = new EventEmitter<IPodioSpaceViewModel>();
+    
+    constructor(private _podioService: PodioService) {}
 
-  constructor(private _podioService: PodioService) {}
+    ngOnInit() {
+        this.allSpaces = this.org.spaces;
+        console.log(this.allSpaces);
+    }
 
-  ngOnInit() {
-    this.spaces = this._podioService.GetWorkspacesInOrg(this.orgId);
-
+    onSpaceSelection() {
+        this._selectedSpaces = this.allSpacesSelectionList.selectedOptions.selected.map(
+            (option) => option.value
+        );
+        this.selectedSpaces.emit(this._selectedSpaces); 
     }
 }
 

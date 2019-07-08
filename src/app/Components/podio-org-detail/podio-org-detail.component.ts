@@ -15,6 +15,7 @@ export class PodioOrgDetailComponent implements OnInit {
     orgs;
     org;
     orgId;
+    
 
     constructor(
         private router: Router,
@@ -37,5 +38,9 @@ export class PodioOrgDetailComponent implements OnInit {
 
         console.log("org", this.org);
         console.log("orgs", this.orgs);
+    }
+
+    onSpaceSelection($event) {
+        console.log("event recd:", $event);
     }
 }

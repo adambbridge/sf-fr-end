@@ -96,7 +96,7 @@ export class NewSolutionComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-        this.selectedWorkspaces = this._getSelectedSpaces();
+        // this.selectedWorkspaces = this._getSelectedSpaces(); dont need this. already have them.
         delete this.newSolutionForm.value.workspaceControls; // true/false values
         this.newSolutionForm.value.workspaces = this.selectedWorkspaces;
         console.log("form value:", this.newSolutionForm.value);

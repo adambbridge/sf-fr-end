@@ -67,10 +67,10 @@ export interface IClientViewModel {
 export class FakeDataService {
     fakeApplication: IPodioApplicationViewModel = {
         appId: 123,
-        appName: "foo",
+        appName: "Time Center",
         podioApplication: {
             appId: 123,
-            appName: "foo",
+            appName: "Time Center",
             podioApplication: "cant recurse here",
             fields: ["foo", "bar"]
         },
@@ -80,7 +80,12 @@ export class FakeDataService {
     fakeWorkspace: IPodioSpaceViewModel = {
         workspaceName: "Workspace 1",
         workspaceId: 123,
-        apps: [this.fakeApplication],
+        apps: [
+            this.fakeApplication,
+            this.fakeApplication,
+            this.fakeApplication,
+            this.fakeApplication
+        ],
         description:
             "This is a workspace description. Not sure how long these might be. May need to truncate",
         checked: false, // solely for purpose of user selection when creating a solution
@@ -370,6 +375,4 @@ export class FakeDataService {
             environments: [this.fakeOrganization1, this.fakeOrganization2]
         }
     ];
-
-  
 }

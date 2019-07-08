@@ -1,4 +1,10 @@
-<p *ngFor="let space of spaces">
-  {{space.name}}
-  {{space.id}}
-</p>
+<mat-selection-list #spaces [disabled]='disableSelection'>
+    <mat-list-option *ngFor="let space of spaces" class='mat-list-option-multi-line'
+        [ngClass]="{'checkbox-hidden': disableSelection}">
+        <div class='mb-1'>{{space.workspaceName}}</div>
+        <div class='text-hint text-small'>
+            <span class="mr-1">Apps:</span>
+            <span *ngFor="let app of space.apps" class='comma-separated-list'>{{app.appName}}</span>
+        </div>
+    </mat-list-option>
+</mat-selection-list>
