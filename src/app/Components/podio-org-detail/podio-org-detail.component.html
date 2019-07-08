@@ -35,8 +35,8 @@ ORG NAME AND ACTIONS
             <mat-divider></mat-divider>
 
             <!--============================
-ORG INFO 
-=========================================== -->
+            ORG INFO 
+            =========================================== -->
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
                     <mat-list>
@@ -63,9 +63,18 @@ ORG INFO
                                 </mat-panel-description> -->
                             </mat-expansion-panel-header>
 
-                            <app-podio-spaces [org]='org' (selectedSpaces)="onSpaceSelection($event)" [disableSelection]='false'></app-podio-spaces>
+                            <!--============================
+                            PODIO SPACES 
+                            ==================================== -->
+                            <ng-template matExpansionPanelContent>
+                                <app-podio-spaces [org]='org' (selectedSpaces)="onSpaceSelection($event)"
+                                    [disableSelection]='false'></app-podio-spaces>
 
-                           
+                                <button mat-raised-button (click)="onCreateSolution()"
+                                    [disabled]="!selectedWorkspaces.length">Create Solution from Selected</button>
+
+                            </ng-template>
+
                         </mat-expansion-panel>
 
                     </mat-list>

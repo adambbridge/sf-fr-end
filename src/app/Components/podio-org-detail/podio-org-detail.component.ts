@@ -15,7 +15,8 @@ export class PodioOrgDetailComponent implements OnInit {
     orgs;
     org;
     orgId;
-    
+    selectedWorkspaces = [];
+
 
     constructor(
         private router: Router,
@@ -40,7 +41,12 @@ export class PodioOrgDetailComponent implements OnInit {
         console.log("orgs", this.orgs);
     }
 
-    onSpaceSelection($event) {
-        console.log("event recd:", $event);
+    onSpaceSelection(selected) {
+        this.selectedWorkspaces = selected;
+    }
+
+    onCreateSolution() {
+        // TODO: launch new solution component
+        // refactor it into a dialog so can pass data to it?
     }
 }
