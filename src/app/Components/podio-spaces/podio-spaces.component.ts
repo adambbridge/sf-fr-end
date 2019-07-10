@@ -30,10 +30,10 @@ export class PodioSpacesComponent implements OnInit {
     constructor(private _podioService: PodioService) {}
 
     ngOnInit() {
-        if (this.org) {
-            this.allSpaces = this.org.spaces;
-        } else if (this.workspaces) {
-            this.allSpaces = this.workspaces;
+        if (this.workspaces) {
+            this.showPreselectedSpaces();
+        } else {
+            this.showSelectableSpaces();
         }
         console.log(this.allSpaces);
     }
@@ -43,5 +43,13 @@ export class PodioSpacesComponent implements OnInit {
             (option) => option.value
         );
         this.selectedSpaces.emit(this._selectedSpaces);
+    }
+
+    showPreselectedSpaces() {
+        this.allSpaces = this.workspaces;
+    }
+
+    showSelectableSpaces() {
+        this.allSpaces = this.org.spaces;
     }
 }

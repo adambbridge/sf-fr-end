@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center">
-    <mat-card class='w-75 mt-3'>
+    <mat-card [ngClass]="{'w-100 mt-1 mat-elevation-z0': showInDialog, 'w-75 mt-3': !showInDialog}">
         <mat-card-content>
             <h3>Create New Solution</h3>
 
@@ -13,7 +13,7 @@
                     <textarea formControlName="description" matInput placeholder="Description" required></textarea>
                 </mat-form-field>
 
-                <mat-form-field *ngIf="!preselectedWorkSpaces" class="w-100" >
+                <mat-form-field *ngIf="!preselectedSpaces" class="w-100" >
                     <mat-label>Use spaces from what organization?</mat-label>
                     <mat-select formControlName="organization" required (selectionChange)='onOrgSelection($event)'>
                         <mat-option *ngFor="let org of organizations" [value]="org.name">
@@ -22,9 +22,8 @@
                     </mat-select>
                 </mat-form-field>
 
-                <div *ngIf="workspaces || preselectedWorkSpaces" class="mb-3">
-                    <mat-label *ngIf="workspaces">Which workspaces would you like to use?</mat-label>
-                    <mat-label *ngIf="preselectedWorkSpaces">Selected Workspaces</mat-label>
+                <div *ngIf="workspaces" class="mb-3">
+                    <mat-label >Workspaces</mat-label>
                     <div>
                         <!-- <mat-selection-list #spaces aria-label="workspaces list" (selectionChange)="onSpaceSelection()">
                             <mat-list-option *ngFor="let space of workspaces" [value]="space"
@@ -32,7 +31,7 @@
                                 <span>{{space.workspaceName}}</span>
                             </mat-list-option>
                         </mat-selection-list> -->
-                        <app-podio-spaces [org]='org' [workspaces]="workspaces" (selectedSpaces)="onSpaceSelection($event)" [disableSelection]='false'></app-podio-spaces>
+                        <app-podio-spaces [org]='org' [workspaces]="workspaces" (selectedSpaces)="onSpaceSelection($event)" [disableSelection]='preselectedSpaces'></app-podio-spaces>
                     </div>
 
                     <small *ngIf="selectedWorkspacesError && description.touched">Please select at least one workspace</small>

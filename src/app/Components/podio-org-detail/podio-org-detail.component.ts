@@ -1,3 +1,4 @@
+import { NewSolutionComponent } from './../new-solution/new-solution.component';
 import { Component, OnInit } from '@angular/core';
 import {
     FakeDataService,
@@ -5,6 +6,8 @@ import {
 
 } from "./../../services/fake-data.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
+import { MatDialog } from "@angular/material";
+
 
 @Component({
     selector: "app-podio-org-detail",
@@ -17,16 +20,16 @@ export class PodioOrgDetailComponent implements OnInit {
     orgId;
     selectedWorkspaces = [];
 
-
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private fakeDataService: FakeDataService
+        private fakeDataService: FakeDataService,
+        private dialog: MatDialog
     ) {}
 
     ngOnInit() {
         this.orgId = this.route.snapshot.paramMap.get("id");
-        
+
         this.orgs = this.fakeDataService.fakeOrganizations;
         // this.orgs.forEach((org) => {
         //     if (org.orgId === this.orgId) {
@@ -43,11 +46,15 @@ export class PodioOrgDetailComponent implements OnInit {
 
     onSpaceSelection(selected) {
         this.selectedWorkspaces = selected;
-        console.log('selected', this.selectedWorkspaces)
+        console.log("selected", this.selectedWorkspaces);
     }
 
-    onCreateSolution() {
-        // TODO: launch new solution component
-        // refactor it into a dialog so can pass data to it?
+    onCreateSolClick() {
+        this.dialog.open(NewSolutionComponent, {
+            data: {
+                org: this.org,
+                workspaces: this.selectedWorkspaces
+            }
+        });
     }
 }

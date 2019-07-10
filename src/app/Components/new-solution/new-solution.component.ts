@@ -1,4 +1,4 @@
-import { UtilsService } from './../../services/utils.service';
+import { UtilsService } from "./../../services/utils.service";
 import { Org } from "./../../../model/podio/organization";
 // vendors
 import {
@@ -7,7 +7,9 @@ import {
     Input,
     ViewChild,
     Output,
-    EventEmitter
+    EventEmitter,
+    Inject,
+    Optional
 } from "@angular/core";
 import { map } from "rxjs/operators";
 import { of } from "rxjs";
@@ -16,6 +18,7 @@ import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
+import { MAT_DIALOG_DATA } from "@angular/material";
 
 // our stuff
 import {
@@ -41,25 +44,34 @@ import { PodioService } from "src/app/services/podio.service";
 })
 export class NewSolutionComponent implements OnInit {
     organizations: Array<IPodioOrganizationViewModel>;
+    org;
     workspaces: Array<IPodioSpaceViewModel>;
     selectedWorkspaces: Array<IPodioSpaceViewModel> = [];
-    @Input() preselectedWorkspaces?;
+    // @Input() preselectedWorkspaces?;
     newSolutionForm: FormGroup;
     submitted = false;
     @ViewChild("spaces") spaces;
+    preselectedSpaces: boolean = false;
+    showInDialog: boolean = false;
 
     constructor(
         private _fb: FormBuilder,
         private _saasafrasService: SaasafrasService,
         private _podioService: PodioService,
         private fakeDataService: FakeDataService,
-        private _utilsService: UtilsService
+        private _utilsService: UtilsService,
+        @Optional() @Inject(MAT_DIALOG_DATA) private _passedData?: any
     ) {}
 
     ngOnInit() {
         this._getOrgs();
         this._podioService.refresh();
         this._createNewSolutionForm();
+        if (this._passedData) {
+            this._dialogSetup(this._passedData);
+        }
+        console.log("passed spaces", this.workspaces);
+        console.log("preselectedspaces", this.preselectedSpaces);
     }
 
     onOrgSelection(userSelectedOrg) {
@@ -120,6 +132,17 @@ export class NewSolutionComponent implements OnInit {
     //     return selected;
     // }
 
+    private _dialogSetup(data) {
+        /**
+         *  ALEX: don't think you need org but passed it in just in case. looks like onOrgSelections just uses it to get spaces. so i hid the field when spaces have been preselected before launching the new sol. form. org is no longer a required field of newSolutionForm
+         */
+        this.org = data.org;
+        this.workspaces = data.workspaces;
+        this.selectedWorkspaces = this.workspaces;
+        this.preselectedSpaces = true;
+        this.showInDialog = true;
+    }
+
     private _getOrgs() {
         this._podioService.GetUserOrgs().subscribe({
             next: (os: Org[]) => {
@@ -140,7 +163,7 @@ export class NewSolutionComponent implements OnInit {
         this.newSolutionForm = this._fb.group({
             name: ["", Validators.required],
             description: ["", Validators.required],
-            organization: ["", Validators.required],
+            organization: [""],
             workspaceControls: this._fb.array([])
         });
     }

@@ -109,13 +109,13 @@ tr:active {
 .comma-separated-list:last-child::after {
     content: "";
 }
-.checkbox-hidden .mat-pseudo-checkbox  {
+.checkbox-hidden .mat-pseudo-checkbox {
     display: none;
 }
-.checkbox-hidden, .mat-list-item-disabled {
+.checkbox-hidden,
+.mat-list-item-disabled {
     background: unset;
 }
-
 
 .cursor-pointer {
     cursor: pointer;
@@ -180,6 +180,11 @@ app-welcome app-card-collection .mat-card {
 }
 app-welcome app-card-collection .mat-card:hover {
     background: #f5f5f5;
+}
+.mat-card-unset-styling {
+    box-shadow: unset;
+    width: 100%;
+    margin-top: unset;
 }
 
 /* .highlight {
