@@ -5,15 +5,15 @@
 
             <form [formGroup]="newSolutionForm" (ngSubmit)="onSubmit()" novalidate>
 
-                <mat-form-field class="w-100" appearance="">
+                <mat-form-field class="w-100" >
                     <input type='text' formControlName="name" matInput required placeholder="Name" />
                 </mat-form-field>
 
-                <mat-form-field class="w-100" appearance="">
+                <mat-form-field class="w-100" >
                     <textarea formControlName="description" matInput placeholder="Description" required></textarea>
                 </mat-form-field>
 
-                <mat-form-field class="w-100" appearance="">
+                <mat-form-field *ngIf="!preselectedWorkSpaces" class="w-100" >
                     <mat-label>Use spaces from what organization?</mat-label>
                     <mat-select formControlName="organization" required (selectionChange)='onOrgSelection($event)'>
                         <mat-option *ngFor="let org of organizations" [value]="org.name">
@@ -22,15 +22,17 @@
                     </mat-select>
                 </mat-form-field>
 
-                <div *ngIf="workspaces" class="mb-3">
-                    <mat-label>Which workspaces?</mat-label>
+                <div *ngIf="workspaces || preselectedWorkSpaces" class="mb-3">
+                    <mat-label *ngIf="workspaces">Which workspaces would you like to use?</mat-label>
+                    <mat-label *ngIf="preselectedWorkSpaces">Selected Workspaces</mat-label>
                     <div>
-                        <mat-selection-list #spaces aria-label="workspaces list" (selectionChange)="onSpaceSelection()">
+                        <!-- <mat-selection-list #spaces aria-label="workspaces list" (selectionChange)="onSpaceSelection()">
                             <mat-list-option *ngFor="let space of workspaces" [value]="space"
                                 [checkboxPosition]="before">
                                 <span>{{space.workspaceName}}</span>
                             </mat-list-option>
-                        </mat-selection-list>
+                        </mat-selection-list> -->
+                        <app-podio-spaces [org]='org' [workspaces]="workspaces" (selectedSpaces)="onSpaceSelection($event)" [disableSelection]='false'></app-podio-spaces>
                     </div>
 
                     <small *ngIf="selectedWorkspacesError && description.touched">Please select at least one workspace</small>

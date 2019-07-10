@@ -43,6 +43,7 @@ export class NewSolutionComponent implements OnInit {
     organizations: Array<IPodioOrganizationViewModel>;
     workspaces: Array<IPodioSpaceViewModel>;
     selectedWorkspaces: Array<IPodioSpaceViewModel> = [];
+    @Input() preselectedWorkspaces?;
     newSolutionForm: FormGroup;
     submitted = false;
     @ViewChild("spaces") spaces;
@@ -90,8 +91,12 @@ export class NewSolutionComponent implements OnInit {
         this._podioService.refresh();
     }
 
-    onSpaceSelection() {
-        this.selectedWorkspaces = this._getSelectedSpaces();
+    // onSpaceSelection() {
+    //     this.selectedWorkspaces = this._getSelectedSpaces();
+    // }
+    onSpaceSelection(selected) {
+        this.selectedWorkspaces = selected;
+        console.log("selected", this.selectedWorkspaces);
     }
 
     onSubmit() {
@@ -108,12 +113,12 @@ export class NewSolutionComponent implements OnInit {
             HELPERS
      =========================*/
 
-    private _getSelectedSpaces() {
-        let selected = this.spaces.selectedOptions.selected.map(
-            (option) => option.value
-        );
-        return selected;
-    }
+    // private _getSelectedSpaces() {
+    //     let selected = this.spaces.selectedOptions.selected.map(
+    //         (option) => option.value
+    //     );
+    //     return selected;
+    // }
 
     private _getOrgs() {
         this._podioService.GetUserOrgs().subscribe({

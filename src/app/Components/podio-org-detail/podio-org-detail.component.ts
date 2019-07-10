@@ -43,6 +43,7 @@ export class PodioOrgDetailComponent implements OnInit {
 
     onSpaceSelection(selected) {
         this.selectedWorkspaces = selected;
+        console.log('selected', this.selectedWorkspaces)
     }
 
     onCreateSolution() {

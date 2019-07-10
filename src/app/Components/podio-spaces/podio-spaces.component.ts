@@ -19,7 +19,8 @@ import { PodioService } from "../../services/podio.service";
     styleUrls: ["./podio-spaces.component.css"]
 })
 export class PodioSpacesComponent implements OnInit {
-    @Input() org: IPodioOrganizationViewModel;
+    @Input() org?: IPodioOrganizationViewModel;
+    @Input() workspaces?;
     @Input() disableSelection?: boolean = false;
     allSpaces: Array<IPodioSpaceViewModel> = [];
     private _selectedSpaces;
@@ -29,7 +30,11 @@ export class PodioSpacesComponent implements OnInit {
     constructor(private _podioService: PodioService) {}
 
     ngOnInit() {
-        this.allSpaces = this.org.spaces;
+        if (this.org) {
+            this.allSpaces = this.org.spaces;
+        } else if (this.workspaces) {
+            this.allSpaces = this.workspaces;
+        }
         console.log(this.allSpaces);
     }
 
