@@ -1,4 +1,5 @@
-<h1 mat-dialog-title>Create New Instance of "{{solution.name}}"</h1>
+<h1 *ngIf="preslectedSolution" mat-dialog-title>Create New Solution Instance of {{solutionTitle}}</h1>
+<h1 *ngIf="preselectedOrg" mat-dialog-title>Create New Solution Instance in Org "{{orgTitle}}"</h1>
 
 <p class="text-hint">
     When you have created a Saasafras Solution, you can deploy the Solution to one or more of your clients. This will
@@ -8,33 +9,18 @@
 
 <form [formGroup]="deploymentForm" (ngSubmit)="onSubmit()">
 
-    <mat-form-field class="w-100 d-none">
-        <mat-label>Solution</mat-label>
-        <input type="text" matInput readonly formControlName="solution">
+    <mat-form-field class="w-100" *ngIf='!preselectedSolution'>
+        <mat-label>What Solution do you want to deploy?</mat-label>
+        <mat-select formControlName="solution">
+            <mat-option *ngFor="let sol of solutions" [value]="sol.name">{{sol.name}}</mat-option>
+        </mat-select>
+        <!-- <div *ngIf="sol.invalid && (sol.dirty || sol.touched)">
+            <mat-error>Please select a solution</mat-error>
+        </div> -->
     </mat-form-field>
 
     <mat-form-field class="w-100">
-        <mat-label>Who is the client?</mat-label>
-        <mat-select formControlName="client" (selectionChange)='onClientSelection($event.value)'>
-            <mat-option *ngFor="let client of clients" [value]="client.id">{{client.contact}}</mat-option>
-        </mat-select>
-        <div *ngIf="c.invalid && (c.dirty || c.touched)">
-            <mat-error>Please select a client</mat-error>
-        </div>
-    </mat-form-field>
-
-    <mat-form-field class="w-100" *ngIf='environments'>
-        <mat-label>Which organization do you want to deploy to?</mat-label>
-        <mat-select formControlName="environment">
-            <mat-option *ngFor="let env of environments" [value]="env">{{env.name}}</mat-option>
-        </mat-select>
-        <div *ngIf="env.invalid && (env.dirty || env.touched)">
-            <mat-error>Please select an environment</mat-error>
-        </div>
-    </mat-form-field>
-
-    <mat-form-field class="w-100">
-        <mat-label>Which Version do you want to deploy?</mat-label>
+        <mat-label>Which version?</mat-label>
         <mat-select formControlName="version">
             <mat-option *ngFor="let version of versions" [value]="version">{{version}}</mat-option>
         </mat-select>
@@ -43,8 +29,33 @@
         </div>
     </mat-form-field>
 
+    <mat-form-field class="w-100" *ngIf="!preselectedOrg">
+        <mat-label>Who is the target client?</mat-label>
+        <mat-select formControlName="client" readonly (selectionChange)='onClientSelection($event.value)'>
+            <mat-option *ngFor="let client of clients" [value]="client.id">{{client.contact}}</mat-option>
+        </mat-select>
+        <div *ngIf="c.invalid && (c.dirty || c.touched)">
+            <mat-error>Please select a client</mat-error>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field class="w-100" *ngIf='environments && !preselectedOrg'>
+        <mat-label>Which organization?</mat-label>
+        <mat-select formControlName="environment">
+            <mat-option *ngFor="let env of environments" [value]="env">{{env.name}}</mat-option>
+        </mat-select>
+        <div *ngIf="env.invalid && (env.dirty || env.touched)">
+            <mat-error>Please select an environment</mat-error>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field class="w-100" *ngIf="deploymentForm.controls.instance">
+        <mat-label>Instance Name (generated automatically based on client)</mat-label>
+        <input type="text" matInput readonly formControlName="instance">
+    </mat-form-field>
+
     <mat-form-field class="w-100">
-        <textarea matInput formControlName="description" placeholder="Add a description (optional)"></textarea>
+        <textarea matInput formControlName="description" placeholder="Instance description (optional)"></textarea>
     </mat-form-field>
 
     <button mat-raised-button class='mr-2'>Cancel</button>

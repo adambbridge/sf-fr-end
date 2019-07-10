@@ -1,3 +1,4 @@
+import { NewDeploymentComponent } from './../new-deployment/new-deployment.component';
 import { NewSolutionComponent } from './../new-solution/new-solution.component';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -54,6 +55,14 @@ export class PodioOrgDetailComponent implements OnInit {
             data: {
                 org: this.org,
                 workspaces: this.selectedWorkspaces
+            }
+        });
+    }
+
+    onAddInstanceClick() {
+        this.dialog.open(NewDeploymentComponent, {
+            data: {
+                org: this.org            
             }
         });
     }

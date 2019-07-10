@@ -48,6 +48,7 @@ export interface IPodioOrganizationViewModel {
 export interface IClientViewModel {
     contact: string;
     company?: string;
+    identifier: string;
     id: string;
     environments;
     email?: string;
@@ -350,6 +351,7 @@ export class FakeDataService {
         {
             company: "XYZ Real Estate",
             contact: "Pam Smith",
+            identifier: "XYZR",
             id: "1",
             email: "pam@gmail.com",
             notes:
@@ -359,6 +361,7 @@ export class FakeDataService {
         {
             company: "Random Consulting",
             contact: "Dan Jones",
+            identifier: "RAND",
             id: "2",
             email: "dan@gmail.com",
             notes:
@@ -368,6 +371,7 @@ export class FakeDataService {
         {
             company: "ABC Real Estate",
             contact: "Jan Weller",
+            identifier: "ABCR",
             id: "3",
             email: "jan@gmail.com",
             notes:

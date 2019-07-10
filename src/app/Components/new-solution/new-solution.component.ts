@@ -1,6 +1,5 @@
 import { UtilsService } from "./../../services/utils.service";
 import { Org } from "./../../../model/podio/organization";
-// vendors
 import {
     Component,
     OnInit,
@@ -19,8 +18,6 @@ import { Validators } from "@angular/forms";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MAT_DIALOG_DATA } from "@angular/material";
-
-// our stuff
 import {
     SolutionCreationRequest,
     SolutionCreationResponse
@@ -47,7 +44,6 @@ export class NewSolutionComponent implements OnInit {
     org;
     workspaces: Array<IPodioSpaceViewModel>;
     selectedWorkspaces: Array<IPodioSpaceViewModel> = [];
-    // @Input() preselectedWorkspaces?;
     newSolutionForm: FormGroup;
     submitted = false;
     @ViewChild("spaces") spaces;
@@ -103,9 +99,6 @@ export class NewSolutionComponent implements OnInit {
         this._podioService.refresh();
     }
 
-    // onSpaceSelection() {
-    //     this.selectedWorkspaces = this._getSelectedSpaces();
-    // }
     onSpaceSelection(selected) {
         this.selectedWorkspaces = selected;
         console.log("selected", this.selectedWorkspaces);
@@ -113,7 +106,6 @@ export class NewSolutionComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-        // this.selectedWorkspaces = this._getSelectedSpaces(); dont need this. already have them.
         delete this.newSolutionForm.value.workspaceControls; // true/false values
         this.newSolutionForm.value.workspaces = this.selectedWorkspaces;
         console.log("form value:", this.newSolutionForm.value);
@@ -124,13 +116,6 @@ export class NewSolutionComponent implements OnInit {
     /*=========================
             HELPERS
      =========================*/
-
-    // private _getSelectedSpaces() {
-    //     let selected = this.spaces.selectedOptions.selected.map(
-    //         (option) => option.value
-    //     );
-    //     return selected;
-    // }
 
     private _dialogSetup(data) {
         /**
