@@ -93,13 +93,17 @@ export class NewDeploymentComponent implements OnInit {
             console.log(this.preselectedOrg);
             this.deploymentForm.controls.environment.setValue(data.org.name);
             this.deploymentForm.controls.instance.setValue(
-                this.getFirstFourChars(data.org.owner)
+                this._generateInstanceNameFromClientName(
+                    data.org.owner
+                )
             );
         }
     }
 
-    getFirstFourChars(string) {
-        return string
+    // TODO THIS WON'T BE USED HERE WHEN WE HAVE DATA WHERE A CLIENT/ONWER HAS AN IDENTIFIER PROPERTY
+    // WE'LL USE SOMETHING LIKE THIS TO GENERATE THE IDENTIFIER WHEN WE CREATE A CLIENT
+    private _generateInstanceNameFromClientName(clientName) {
+        return clientName
             .replace(/\s/g, "")
             .toUpperCase()
             .substring(0, 4);
