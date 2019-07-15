@@ -8,8 +8,12 @@
                 <h3 class="text-h1">{{client.contact}}</h3>
 
                 <span>
-                    <!-- A/B TESTING MENU -->
-                    <mat-menu #envUIOptions="matMenu">
+                    <!-- ========================
+                    A/B TESTING MENU 
+                    removed since single table 
+                    preferred by adam, caleb
+                    ===================================-->
+                    <!-- <mat-menu #envUIOptions="matMenu">
                         <button mat-menu-item (click)="envUI = 'oneTable'">
                             <span>orgs in one table</span>
                         </button>
@@ -19,7 +23,7 @@
                     </mat-menu>
                     <button mat-raised-button [matMenuTriggerFor]="envUIOptions" class="mr-2">
                         <span>env UI options</span>
-                    </button>
+                    </button> -->
 
                     <!--  MENU -->
                     <mat-menu #clientActionsMenu="matMenu">

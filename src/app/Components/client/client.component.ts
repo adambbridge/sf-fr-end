@@ -45,7 +45,5 @@ export class ClientComponent implements OnInit {
     //     this.dataSource.filter = filterValue.trim().toLowerCase();
     // }
 
-    onAddEnvClick() {
-        this.dialog.open(AddEnvironmentComponent, {});
-    }
+   
 }

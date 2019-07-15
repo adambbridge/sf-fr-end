@@ -1,3 +1,4 @@
+import { InstancesComponent } from './Components/instances/instances.component';
 /** Angular */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -70,7 +71,6 @@ import { NewClientComponent } from './Components/new-client/new-client.component
 import { ClientComponent } from './Components/client/client.component';
 import { AddEnvironmentComponent } from './Components/add-environment/add-environment.component';
 import { PodioOrgDetailComponent } from './Components/podio-org-detail/podio-org-detail.component';
-
 @NgModule({
     declarations: [
         /** Components */
@@ -122,7 +122,8 @@ import { PodioOrgDetailComponent } from './Components/podio-org-detail/podio-org
         NewClientComponent,
         ClientComponent,
         AddEnvironmentComponent,
-        PodioOrgDetailComponent
+        PodioOrgDetailComponent,
+        InstancesComponent
     ],
     imports: [
         /** Modules */

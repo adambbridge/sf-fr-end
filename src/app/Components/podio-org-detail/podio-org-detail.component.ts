@@ -1,3 +1,4 @@
+import { InstancesComponent } from './../instances/instances.component';
 import { NewDeploymentComponent } from './../new-deployment/new-deployment.component';
 import { NewSolutionComponent } from './../new-solution/new-solution.component';
 import { Component, OnInit } from '@angular/core';

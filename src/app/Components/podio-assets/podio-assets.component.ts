@@ -1,3 +1,4 @@
+import { AddEnvironmentComponent } from './../add-environment/add-environment.component';
 import { FakeDataService } from "./../../services/fake-data.service";
 import {
     Component,
@@ -47,12 +48,16 @@ export class PodioAssetsComponent implements OnInit {
     }
 
     onOrgRowClick(test) {
-        console.log(test)
+        console.log(test);
         // this.dialog.open(PodioOrgDetailComponent, {
         //     data: {
         //         organization: this.solution
         //     }
         // });
+    }
+
+    onAddEnvClick() {
+        this.dialog.open(AddEnvironmentComponent, {});
     }
 
     /**

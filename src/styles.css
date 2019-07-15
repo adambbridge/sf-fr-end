@@ -50,6 +50,10 @@ tr:active {
     /* max-height: 400px;
     overflow: auto;  */
 }
+/* so ripple can expand beyond checkbox in selection table */
+.mat-column-select {
+  overflow: initial;
+}
 /* TODO register a podio icon with material or use mat-icon class?*/
 .sf-mat-icon {
     display: inline-block;

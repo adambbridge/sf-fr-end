@@ -1,4 +1,4 @@
-import { ISolutionViewModel } from './fake-data.service';
+import { ISolutionViewModel } from "./fake-data.service";
 import { Injectable } from "@angular/core";
 
 export interface IPodioApplicationViewModel {
@@ -34,6 +34,11 @@ export interface ISolutionInstanceViewModel {
     id: string;
     description?: string;
     solution: ISolutionViewModel;
+    solutionVersionNumber: string;
+    solutionVersionName: string;
+    client: any;
+    // patch diff not prop of instance. it is calculated
+    // from instance info and patch version info
 }
 
 export interface IPodioOrganizationViewModel {
@@ -54,12 +59,6 @@ export interface IClientViewModel {
     email?: string;
     notes?: string;
 }
-
-
-
-
-
-
 
 // so we can inject this service
 @Injectable({
@@ -286,12 +285,30 @@ export class FakeDataService {
         }
     ];
 
-    fakeInstance: ISolutionInstanceViewModel = {
-        name: "mPactPro-XYZ Real Estate",
+    fakeInstance1: ISolutionInstanceViewModel = {
+        name: "HCCL",
         id: "123",
         description: "This is an optional description of the instance.",
-        solution: this.fakeSolutions[0]
+        solution: this.fakeSolutions[0],
+        solutionVersionNumber: "1.0",
+        solutionVersionName: "Sierra",
+        client: "Hard Coded Client"
     };
+
+    fakeInstance2: ISolutionInstanceViewModel = {
+        name: "SFC1",
+        id: "234",
+        description: "This is an optional description of the instance.",
+        solution: this.fakeSolutions[0],
+        solutionVersionNumber: "1.1",
+        solutionVersionName: "Nevada",
+        client: "Static Fake Client1"
+    };
+
+    fakeInstances: ISolutionInstanceViewModel[] = [
+        this.fakeInstance1,
+        this.fakeInstance2
+    ];
 
     fakeOrganization1: IPodioOrganizationViewModel = {
         name: "Fake Org1",
@@ -307,7 +324,7 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace
         ],
-        instances: [this.fakeInstance]
+        instances: [this.fakeInstance1]
     };
     fakeOrganization2: IPodioOrganizationViewModel = {
         name: "Fake Org2",
@@ -323,7 +340,7 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace
         ],
-        instances: [this.fakeInstance]
+        instances: [this.fakeInstance2]
     };
     fakeOrganization3: IPodioOrganizationViewModel = {
         name: "Fake Org3",
@@ -338,7 +355,7 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace
         ],
-        instances: [this.fakeInstance]
+        instances: [this.fakeInstance1]
     };
 
     fakeOrganizations: Array<IPodioOrganizationViewModel> = [
@@ -379,4 +396,4 @@ export class FakeDataService {
             environments: [this.fakeOrganization1, this.fakeOrganization2]
         }
     ];
-}
+} // end class fakeDataService
