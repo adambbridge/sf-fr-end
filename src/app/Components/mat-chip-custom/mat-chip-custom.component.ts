@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { mixinColor } from '@angular/material';
 
 @Component({
     selector: "app-mat-chip-custom",
@@ -8,6 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MatChipCustomComponent implements OnInit {
     @Input() icon;
     @Input() text;
+    @Input() color;
 
     constructor() {}
 

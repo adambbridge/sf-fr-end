@@ -81,12 +81,13 @@ ORG NAME AND ACTIONS
 
                 </div>
 
-                <!--============================
-                    DEPLOYED SOLUTION INSTANCE(S)
-                    =========================================== -->
                 <div class="col-xs-12 col-sm-6 mt-2">
 
                     <h3>Deployed Solution Instances</h3>
+
+                    <!--============================
+                    INSTANCE(S)CARDS
+                    =========================================== -->
 
                     <div *ngFor="let instance of org.instances" class='mt-4'>
                         <mat-card>
@@ -139,11 +140,18 @@ ORG NAME AND ACTIONS
                                 </mat-list>
                             </mat-card-content>
 
-                           
                         </mat-card>
 
-                        <app-instances></app-instances>
                     </div>
+
+                    <!--============================
+                    INSTANCE(S) COMPONENT
+                    =========================================== -->
+                    <h3>Deployed Solution Instances</h3>
+                    <mat-card>
+                        <app-instances [instances]="org.instances"></app-instances>
+                    </mat-card>
+
                 </div>
             </div>
 

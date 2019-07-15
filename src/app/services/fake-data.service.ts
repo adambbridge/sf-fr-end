@@ -324,7 +324,7 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace
         ],
-        instances: [this.fakeInstance1]
+        instances: [this.fakeInstance1, this.fakeInstance2]
     };
     fakeOrganization2: IPodioOrganizationViewModel = {
         name: "Fake Org2",
@@ -340,7 +340,7 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace
         ],
-        instances: [this.fakeInstance2]
+        instances: [this.fakeInstance1, this.fakeInstance2]
     };
     fakeOrganization3: IPodioOrganizationViewModel = {
         name: "Fake Org3",
@@ -355,7 +355,7 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace
         ],
-        instances: [this.fakeInstance1]
+        instances: [this.fakeInstance1, this.fakeInstance2]
     };
 
     fakeOrganizations: Array<IPodioOrganizationViewModel> = [

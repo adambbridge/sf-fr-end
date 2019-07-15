@@ -1,8 +1,7 @@
 <h1 mat-dialog-title>Patch Solution Instances</h1>
 
 <p class="text-hint">
-    When you have run Updates on your Saasafras solution you can Update deployments of the solution with all of the
-    changes by creating a Patch.
+    When you have run Updates on your Saasafras solution you can Update deployments of the solution with all of the changes by creating a Patch.
     <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
 </p>
 
@@ -13,35 +12,35 @@
         <input type="text" matInput readonly formControlName="solution">
     </mat-form-field>
 
-    <mat-form-field class="w-100">
+    <!-- <mat-form-field class="w-100">
         <mat-label>Version to use for Patch</mat-label>
-        <mat-select formControlName="version">
+        <mat-select formControlName="version" (selectionChange)="onVersionSelection(e)">
             <mat-option *ngFor="let version of versions" [value]="version">{{version}}</mat-option>
         </mat-select>
         <div *ngIf="versionInput.touched && versionInput.invalid">
             <mat-error>Please select a version</mat-error>
         </div>
-    </mat-form-field>
+    </mat-form-field> -->
 
-    <mat-label>Which Instances do you want to Patch?</mat-label>
-    <div>
+    <mat-label class='mt-2'>Which Instances do you want to Patch?</mat-label>
+    <!-- <div>
         <mat-selection-list #envs aria-label="environments list" (selectionChange)="onEnvSelection()">
             <mat-list-option *ngFor="let env of environments" [value]="env" [checkboxPosition]="before">
-                <!-- <span>{{env.name}}</span> -->
                 <span>Deployed Instance X at Org Y of Client Z (currently at v. 999)</span>
             </mat-list-option>
         </mat-selection-list>
-    </div>
+    </div> -->
+
+    <app-instances [instances]="instances" [patchImpactOnSpaces]='patchImpactOnSpaces' ></app-instances>
 
     <!-- <div *ngFor="let control of envControls.controls; let i = index">
         <input type="checkbox" [formControl]="control" id="checkbox{{i}}" (change)="syncItemsWithControls()">
         <label for="checkbox{{i}}">{{environments[i]}}</label>
-    </div> -->
+    </div> 
+   <small *ngIf="description.touched && !selectedEnvs.length">Please select at least one environment</small> -->
 
-    <small *ngIf="description.touched && !selectedEnvs.length">Please select at least one environment</small>
-
-    <mat-form-field class="w-100">
-        <textarea matInput formControlName="description" placeholder="Add a description (optional)"></textarea>
+    <mat-form-field class="w-100 mt-4">
+        <textarea matInput minRows='3' formControlName="description" placeholder="Add a description (optional)"></textarea>
     </mat-form-field>
 
     <button mat-raised-button class='mr-2'>Cancel</button>

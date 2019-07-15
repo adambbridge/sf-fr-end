@@ -45,11 +45,18 @@ tr:hover {
 tr:active {
     background: #efefef;
 }
-.table-container {
-    /* create scrolling */
-    /* max-height: 400px;
-    overflow: auto;  */
+/* */ 
+.instances-component .mat-cell, 
+.instances-component .mat-header-cell,
+.instances-component .mat-footer-cell {
+    font-size: 16px;
 }
+/* left align table when inside new patch form */
+app-new-patch th.mat-header-cell:first-of-type,
+app-new-patch td.mat-cell:first-of-type{
+    padding-left: unset;
+}
+
 /* so ripple can expand beyond checkbox in selection table */
 .mat-column-select {
   overflow: initial;
@@ -145,7 +152,7 @@ mat-card.card-table-container {
     padding-left: 25px;
 }
 .mat-form-field-prefix {
-    top: 6px; /* *in search in table container */
+    top: 4px; /* * in search input in table container */
     color: #777;
 }
 .mat-form-field-infix {

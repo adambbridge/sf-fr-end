@@ -1,29 +1,42 @@
 import { FakeDataService } from './../../services/fake-data.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
-import { Component, OnInit  } from "@angular/core";
+import { Component, OnInit, Input  } from "@angular/core";
+import { TooltipPosition } from "@angular/material/tooltip";
+
 
 @Component({
     selector: "app-instances",
     templateUrl: "instances.component.html"
 })
-export class InstancesComponent implements OnInit{
-    data;
-    displayedColumns: string[] = [
-        'select',
-        'name',
-        'version',
-        'client',
-        'impact'
-    ];
+export class InstancesComponent implements OnInit {
     dataSource;
     selection = new SelectionModel(true, []);
+    tooltipPosition = 'above';
+    // @Input() hidePatchImpactColumn? = true;
+    @Input() patchImpactOnSpaces; 
+    @Input() instances; 
 
     constructor(private fakeDataService: FakeDataService) {}
 
     ngOnInit() {
-        this.data = this.fakeDataService.fakeInstances;
-        this.dataSource = new MatTableDataSource(this.data);
+        // this.data = this.fakeDataService.fakeInstances;
+        this.dataSource = new MatTableDataSource(this.instances);
+    }
+
+    getDisplayedColumns() {
+         const allColumns: string[] = [
+             "select",
+             "name",
+             "version",
+             "client",
+             "impact"
+         ];
+        if(!this.patchImpactOnSpaces) {
+            return allColumns.filter(col => col != 'impact')
+        } else {
+            return allColumns;
+        }
     }
 
     /** Whether the number of selected elements matches the total number of rows. */
@@ -38,6 +51,10 @@ export class InstancesComponent implements OnInit{
         this.isAllSelected()
             ? this.selection.clear()
             : this.dataSource.data.forEach((row) => this.selection.select(row));
+    }
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
     /** The aria label for the checkbox on the passed row */

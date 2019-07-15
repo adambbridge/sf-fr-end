@@ -21,6 +21,7 @@ export class NewPatchComponent implements OnInit {
     solution;
     clients;
     environments;
+    instances;
     form: FormGroup;
     submitted: boolean = false;
     selectedEnvs = [];
@@ -28,6 +29,7 @@ export class NewPatchComponent implements OnInit {
     @ViewChild("envs") envs;
     //TODO these would be solution properties?
     versions = [1, 2, "KYdev1", "KYdev2", "KYqa1"];
+    patchImpactOnSpaces = null;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
@@ -39,6 +41,7 @@ export class NewPatchComponent implements OnInit {
     ngOnInit() {
         this.solution = this._passedData.solution;
         this.clients = this._fakeDataService.fakeClients;
+        this.instances = this._fakeDataService.fakeInstances;
         this.environments = this._buildEnvArray(this.clients);
         this.form = this._createForm();
     }
@@ -47,6 +50,21 @@ export class NewPatchComponent implements OnInit {
         this.selectedEnvs = this.envs.selectedOptions.selected.map(
             (option) => option.value
         );
+    }
+
+    onVersionSelection(e) {
+        let version = this.form.value.version;
+        /** TODO:
+         * calculate impact on each instance
+         * and set patchImpact property
+         * which will be read by instancesComponent
+         * and used to display patch impact
+         */
+        this.patchImpactOnSpaces = {
+            altered: ["workspace 3", "workspace 4"],
+            added: ["workspace 1", "workspace 2"],
+            unaffected: ["workspace 5", "workspace 6"]
+        };
     }
 
     onSubmit() {
