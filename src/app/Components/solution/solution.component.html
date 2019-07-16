@@ -1,8 +1,17 @@
 <h3 class="text-h1 d-flex justify-content-between">
     <span>{{ solution.name }}</span>
-    <span (click)='v1 = !v1' class='text-hint'>
-        &nbsp; see alternative UI
+
+    <!-- A/B TESTING CODE
+    TO DO: REMOVE LATER -->
+    <span>
+        <span (click)='v1 = !v1' class='text-hint'>
+            &nbsp; see alternative UI
+        </span>
+        <span (click)='showTemplate = !showTemplate' class='text-hint'>
+            &nbsp; show/hide template
+        </span>
     </span>
+
 </h3>
 
 <mat-tab-group *ngIf="v1">
@@ -41,13 +50,46 @@
                 <app-instances [instances]="instances"></app-instances>
             </mat-card>
 
-            <app-solution-spaces [solution]='solution'></app-solution-spaces>
+            <app-solution-spaces *ngIf="showTemplate" [solution]='solution'></app-solution-spaces>
         </ng-template>
     </mat-tab>
 
     <mat-tab label="Manage">
         <ng-template matTabContent>
+
+            <!--====== TASK BTNS ========= -->
             <app-solution-tasks [solution]='solution'></app-solution-tasks>
+            <!-- <app-solution-spaces [solution]='solution'></app-solution-spaces> -->
+
+            <!--====== PODIO SPACES ========= -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Workspaces
+
+                    </mat-panel-title>
+
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+
+                    <!-- SELECT VERSION
+                        TODO: GET DEFAULT OPTION TO SHOW UP SELECTED -->
+                    <mat-form-field class='ml-3 mt-3'>
+                        <mat-label>Solution version</mat-label>
+                        <mat-select [(ngModel)]="selectedVersion">
+                            <mat-option value="fakeVersions[0]">{{fakeVersions[0]}}</mat-option>
+                            <mat-option value="fakeVersions[1]">{{fakeVersions[1]}}</mat-option>
+                            <mat-option value="fakeVersions[2]">{{fakeVersions[2]}}</mat-option>
+                            <mat-option value="fakeVersions[3]">{{fakeVersions[3]}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <app-podio-spaces [workspaces]='solution.workspaces' [disableSelection]='true'>
+                    </app-podio-spaces>
+                </ng-template>
+            </mat-expansion-panel>
+
+            <!--====== TASK HISTORY ========= -->
             <app-solution-history [solution]='solution'></app-solution-history>
         </ng-template>
     </mat-tab>

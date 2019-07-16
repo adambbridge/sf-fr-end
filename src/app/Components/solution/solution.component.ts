@@ -35,9 +35,12 @@ export class SolutionComponent implements OnInit {
     // TODO initialize this in ngOnInit
     appId;
     v1 = false;
+    showTemplate = true;
     solutions: ISolutionViewModel[];
     solution: ISolutionViewModel;
     instances: ISolutionInstanceViewModel[];
+    fakeVersions = ["2.1 Sierra (latest)", "2.0 Sierra", "1.0 Nevada", "0.0 InHouseVersion"];
+    selectedVersion = this.fakeVersions[0];
 
     constructor(
         private router: Router,
