@@ -11,7 +11,11 @@ import { v4 as uuid } from "node_modules/uuid";
 import { map } from "rxjs/operators";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 
-import { FakeDataService, ISolutionViewModel } from "./../../services/fake-data.service";
+import {
+    FakeDataService,
+    ISolutionViewModel,
+    ISolutionInstanceViewModel
+} from "./../../services/fake-data.service";
 import { Solution } from "src/model/saasafras/solution";
 import { $Space } from "src/model/saasafras/saas.space";
 import { Space } from "src/model/podio/space";
@@ -33,6 +37,7 @@ export class SolutionComponent implements OnInit {
     v1 = false;
     solutions: ISolutionViewModel[];
     solution: ISolutionViewModel;
+    instances: ISolutionInstanceViewModel[];
 
     constructor(
         private router: Router,
@@ -42,14 +47,14 @@ export class SolutionComponent implements OnInit {
 
     ngOnInit() {
         this.appId = this.route.snapshot.paramMap.get("id");
-        
         this.solutions = this.fakeDataService.fakeSolutions;
+        this.instances = this.fakeDataService.fakeInstances;
         this.solutions.forEach((sol) => {
             if (sol.appId === this.appId) {
                 this.solution = sol;
             }
         });
-        console.log('solution', this.solution)
+        console.log("solution", this.solution);
     }
 
     toggleVersion() {

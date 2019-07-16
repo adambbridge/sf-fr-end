@@ -307,6 +307,14 @@ export class FakeDataService {
 
     fakeInstances: ISolutionInstanceViewModel[] = [
         this.fakeInstance1,
+        this.fakeInstance2,
+        this.fakeInstance1,
+        this.fakeInstance2,
+        this.fakeInstance1,
+        this.fakeInstance2,
+        this.fakeInstance1,
+        this.fakeInstance2,
+        this.fakeInstance1,
         this.fakeInstance2
     ];
 

@@ -12,7 +12,7 @@
         <input type="text" matInput readonly formControlName="solution">
     </mat-form-field>
 
-    <!-- <mat-form-field class="w-100">
+    <mat-form-field class="w-100">
         <mat-label>Version to use for Patch</mat-label>
         <mat-select formControlName="version" (selectionChange)="onVersionSelection(e)">
             <mat-option *ngFor="let version of versions" [value]="version">{{version}}</mat-option>
@@ -20,7 +20,7 @@
         <div *ngIf="versionInput.touched && versionInput.invalid">
             <mat-error>Please select a version</mat-error>
         </div>
-    </mat-form-field> -->
+    </mat-form-field>
 
     <mat-label class='mt-2'>Which Instances do you want to Patch?</mat-label>
     <!-- <div>

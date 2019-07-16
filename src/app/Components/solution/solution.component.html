@@ -1,9 +1,7 @@
-<h3 class="text-h1">
-    {{ solution.name }}
-    <span [hidden]="!v1">v1</span>
-    <span [hidden]="v1">v2</span>
+<h3 class="text-h1 d-flex justify-content-between">
+    <span>{{ solution.name }}</span>
     <span (click)='v1 = !v1' class='text-hint'>
-        toggle version
+        &nbsp; see alternative UI
     </span>
 </h3>
 
@@ -30,11 +28,19 @@
 
 </mat-tab-group>
 
-<mat-tab-group  *ngIf="!v1">
+<mat-tab-group *ngIf="!v1">
 
-    <mat-tab label="About">
+    <mat-tab label="Summary">
         <ng-template matTabContent>
             <app-solution-about></app-solution-about>
+
+            <mat-card class='card-table-container mat-elevation-z3'>
+                <mat-card-title class="pl-4">
+                    Deployed Instances
+                </mat-card-title>
+                <app-instances [instances]="instances"></app-instances>
+            </mat-card>
+
             <app-solution-spaces [solution]='solution'></app-solution-spaces>
         </ng-template>
     </mat-tab>
