@@ -52,7 +52,7 @@ export class NewPatchComponent implements OnInit {
         );
     }
 
-    onVersionSelection(e) {
+    onVersionSelection() {
         let version = this.form.value.version;
         /** TODO:
          * calculate impact on each instance

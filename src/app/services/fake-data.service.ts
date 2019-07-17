@@ -138,14 +138,24 @@ export class FakeDataService {
 
     fakeSolutionActions: ISolutionActionViewModel[] = [
         {
-            datetime: "03/01/2018 2:22 PM",
+            datetime: "03/01/2018 2:32 PM",
             action: "Patch",
-            instance: "INST",
+            instance: "XYZC",
             versionNumFrom: "0.0",
             versionNumTo: "1.0",
             versionNameFrom: null,
             versionNameTo: "Some Name",
-            notes: "Lorem ipsum and some more notes ..."
+            notes: "Bring Brick Bridge and XYZ up to 1.0"
+        },
+        {
+            datetime: "03/01/2018 2:22 PM",
+            action: "Patch",
+            instance: "BBCO",
+            versionNumFrom: "0.0",
+            versionNumTo: "1.0",
+            versionNameFrom: null,
+            versionNameTo: "Some Name",
+            notes: "Bring Brick Bridge and XYZ up to 1.0"
         },
         {
             datetime: "04/01/2018 2:22 PM",

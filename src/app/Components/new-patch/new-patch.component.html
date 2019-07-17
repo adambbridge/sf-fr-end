@@ -14,7 +14,7 @@
 
     <mat-form-field class="w-100">
         <mat-label>Version to use for Patch</mat-label>
-        <mat-select formControlName="version" (selectionChange)="onVersionSelection(e)">
+        <mat-select formControlName="version" (selectionChange)="onVersionSelection()">
             <mat-option *ngFor="let version of versions" [value]="version">{{version}}</mat-option>
         </mat-select>
         <div *ngIf="versionInput.touched && versionInput.invalid">
