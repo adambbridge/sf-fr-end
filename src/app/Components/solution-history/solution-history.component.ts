@@ -12,7 +12,7 @@ export class SolutionHistoryComponent implements OnInit {
     temp = this.solution;
 
     // configure table
-    displayedColumns: string[] = ["date", "task", "environment", "description"];
+    displayedColumns: string[] = ["datetime", "action", "instance", "version", "notes"];
     searchColumn: string[] = [""];
     dataSource;
     @ViewChild(MatSortModule) sort: MatSortModule;

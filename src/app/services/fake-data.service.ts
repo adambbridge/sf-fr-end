@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment.prod';
 import { ISolutionViewModel } from "./fake-data.service";
 import { Injectable } from "@angular/core";
 
@@ -59,6 +60,19 @@ export interface IClientViewModel {
     email?: string;
     notes?: string;
 }
+
+  export interface ISolutionActionViewModel {
+      datetime: string;
+      action: string;
+      instance: string;
+      versionNumFrom?: any;
+      versionNumTo: string;
+      versionNameFrom?: any;
+      versionNameTo: string;
+      notes?: string;
+  }
+
+
 
 // so we can inject this service
 @Injectable({
@@ -122,48 +136,46 @@ export class FakeDataService {
         }
     };
 
-    fakeHistory = [
+    fakeSolutionActions: ISolutionActionViewModel[] = [
         {
-            date: "01/01/2018",
-            task: "Update",
-            environment: "Bobs business - dev",
-            description: "Lorem ipsum and some more description ..."
+            datetime: "03/01/2018 2:22 PM",
+            action: "Patch",
+            instance: "INST",
+            versionNumFrom: "0.0",
+            versionNumTo: "1.0",
+            versionNameFrom: null,
+            versionNameTo: "Some Name",
+            notes: "Lorem ipsum and some more notes ..."
         },
         {
-            date: "02/01/2018",
-            task: "Deploy",
-            environment: "Bobs business - dev",
-            description: "Lorem ipsum and some more description ..."
+            datetime: "04/01/2018 2:22 PM",
+            action: "Update",
+            instance: null,
+            versionNumFrom: "0.0",
+            versionNumTo: "1.0",
+            versionNameFrom: null,
+            versionNameTo: "Some Name",
+            notes: "Lorem ipsum and some more notes ..."
         },
         {
-            date: "03/01/2018",
-            task: "Patch",
-            environment: "Bobs business - dev",
-            description: "Lorem ipsum and some more description ..."
+            datetime: "02/01/2018 2:22 PM",
+            action: "Deploy",
+            instance: "INST",
+            versionNumFrom: null,
+            versionNumTo: "0.0",
+            versionNameFrom: null,
+            versionNameTo: null,
+            notes: "Lorem ipsum and some more notes ..."
         },
         {
-            date: "04/01/2018",
-            task: "Update",
-            environment: "Bobs business - dev",
-            description: "Lorem ipsum and some more description ..."
-        },
-        {
-            date: "05/01/2018",
-            task: "Deploy",
-            environment: "Bobs business - dev",
-            description: "Lorem ipsum and some more description ..."
-        },
-        {
-            date: "06/01/2018",
-            task: "Patch",
-            environment: "Bobs business - dev",
-            description: "Lorem ipsum and some more description ..."
-        },
-        {
-            date: "07/01/2018",
-            task: "Update",
-            environment: "Bobs business - dev",
-            description: "Lorem ipsum and some more description ..."
+            datetime: "05/01/2018 2:22 PM",
+            action: "Create",
+            instance: null,
+            versionNumFrom: null,
+            versionNumTo: "0.0",
+            versionNameFrom: null,
+            versionNameTo: null,
+            notes: "Lorem ipsum and some more notes ..."
         }
     ];
 
@@ -181,7 +193,7 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace
         ],
-        history: this.fakeHistory
+        history: this.fakeSolutionActions
     };
 
     fakeSolutions: Array<ISolutionViewModel> = [
@@ -191,7 +203,7 @@ export class FakeDataService {
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 1,
-            creationDate: new Date("2015-05-05"),
+            creationDate: new Date("2013-03-01T01:10:00"),
             lastUpdateDate: new Date(),
             description:
                 "my lollipop. item description could be here and truncate after 2 lines or so with ...",
@@ -200,7 +212,7 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
-            history: this.fakeHistory
+            history: this.fakeSolutionActions
         },
         {
             appId: "123456",
@@ -208,7 +220,7 @@ export class FakeDataService {
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 2,
-            creationDate: new Date("2017-05-05"),
+            creationDate: new Date("2013-03-01T01:10:00"),
             lastUpdateDate: new Date(),
             description:
                 "my ice cream. item description could be here and truncate after 2 lines or so with ...",
@@ -217,7 +229,7 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
-            history: this.fakeHistory
+            history: this.fakeSolutionActions
         },
         {
             appId: "123456",
@@ -225,7 +237,7 @@ export class FakeDataService {
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 1,
-            creationDate: new Date("2016-05-05"),
+            creationDate: new Date("2013-03-01T01:10:00"),
             lastUpdateDate: new Date(),
             description:
                 "my burger. item description could be here and truncate after 2 lines or so with ...",
@@ -234,13 +246,13 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
-            history: this.fakeHistory
+            history: this.fakeSolutionActions
         },
         {
             appId: "123456",
             name: "Custom Solution D",
             version: 4,
-            creationDate: new Date("2018-05-05"),
+            creationDate: new Date("2013-03-01T01:10:00"),
             lastUpdateDate: new Date(),
             description:
                 "my pizza. item description could be here and truncate after 2 lines or so with ...",
@@ -249,13 +261,13 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
-            history: this.fakeHistory
+            history: this.fakeSolutionActions
         },
         {
             appId: "123456",
             name: "Custom Solution E",
             version: 4,
-            creationDate: new Date("2018-05-05"),
+            creationDate: new Date("2013-03-01T01:10:00"),
             lastUpdateDate: new Date(),
             description:
                 "my roasted pig. item description could be here and truncate after 2 lines or so with ...",
@@ -264,7 +276,7 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
-            history: this.fakeHistory
+            history: this.fakeSolutionActions
         },
         {
             appId: "123456",
@@ -272,7 +284,7 @@ export class FakeDataService {
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 4,
-            creationDate: new Date("2018-05-05"),
+            creationDate: new Date("2013-03-01T01:10:00"),
             lastUpdateDate: new Date(),
             description:
                 "my description. item description could be here and truncate after 2 lines or so with ...",
@@ -281,7 +293,7 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
-            history: this.fakeHistory
+            history: this.fakeSolutionActions
         }
     ];
 

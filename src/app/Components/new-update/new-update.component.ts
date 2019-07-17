@@ -23,7 +23,7 @@ export class NewUpdateComponent implements OnInit {
         this.updateForm = this.fb.group({
             solution: ["", Validators.required],
             source: [""],
-            description: [""]
+            notes: [""]
         });
         this.updateForm.controls.solution.setValue(
             this._passedData.solution.name

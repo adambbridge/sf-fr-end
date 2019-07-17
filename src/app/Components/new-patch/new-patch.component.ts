@@ -103,7 +103,7 @@ export class NewPatchComponent implements OnInit {
             solution: [this._passedData.solution.name, Validators.required],
             version: ["", Validators.required],
             environments: this._fb.array([]),
-            description: [""]
+            notes: [""]
         });
         return form;
     }
@@ -112,7 +112,7 @@ export class NewPatchComponent implements OnInit {
         return <FormArray>this.form.get("environments");
     }
 
-    get description() {
-        return this.form.get("description");
+    get notes() {
+        return this.form.get("notes");
     }
 }

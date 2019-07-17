@@ -37,10 +37,10 @@
         <input type="checkbox" [formControl]="control" id="checkbox{{i}}" (change)="syncItemsWithControls()">
         <label for="checkbox{{i}}">{{environments[i]}}</label>
     </div> 
-   <small *ngIf="description.touched && !selectedEnvs.length">Please select at least one environment</small> -->
+   <small *ngIf="notes.touched && !selectedEnvs.length">Please select at least one environment</small> -->
 
     <mat-form-field class="w-100 mt-4">
-        <textarea matInput minRows='3' formControlName="description" placeholder="Add a description (optional)"></textarea>
+        <textarea matInput minRows='3' formControlName="notes" placeholder="Notes (optional)"></textarea>
     </mat-form-field>
 
     <button mat-raised-button class='mr-2'>Cancel</button>
