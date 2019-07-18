@@ -5,16 +5,16 @@
     TO DO: REMOVE LATER -->
     <span>
         <span (click)='v1 = !v1' class='text-hint'>
-            &nbsp; see alternative UI
+            &nbsp; toggle single page
         </span>
         <span (click)='showTemplate = !showTemplate' class='text-hint'>
-            &nbsp; show/hide template
+            &nbsp; toggle old spaces widget
         </span>
     </span>
 
 </h3>
 
-<mat-tab-group *ngIf="v1">
+<!-- <mat-tab-group *ngIf="v1">
 
     <mat-tab label="About">
         <ng-template matTabContent>
@@ -35,9 +35,9 @@
         </ng-template>
     </mat-tab>
 
-</mat-tab-group>
+</mat-tab-group> -->
 
-<mat-tab-group *ngIf="!v1">
+<mat-tab-group >
 
     <mat-tab label="Summary">
         <ng-template matTabContent>
@@ -89,8 +89,33 @@
                 </ng-template>
             </mat-expansion-panel>
 
-            <!--====== TASK HISTORY ========= -->
-            <app-solution-history [solution]='solution'></app-solution-history>
+            <!--====== DEPLOYED INSTANCES EXP PANEL ========= -->
+            <mat-expansion-panel *ngIf="!v1" class='mt-3'>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Deployed Instances
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                    <app-instances [instances]="instances"></app-instances>
+                </ng-template>
+            </mat-expansion-panel>
+
+            <!--====== TASK HISTORY IN EXP PANEL ========= -->
+            <mat-expansion-panel *ngIf="!v1"  class='mt-3'>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Actions History
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                    <app-solution-history [solution]='solution'></app-solution-history>
+                </ng-template>
+            </mat-expansion-panel>
+
+            <!--====== TASK HISTORY NOT IN EXP PANEL ========= -->
+            <app-solution-history *ngIf="v1"  [solution]='solution'></app-solution-history>
+
         </ng-template>
     </mat-tab>
 
