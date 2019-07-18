@@ -69,7 +69,9 @@ app-new-patch td.mat-cell:first-of-type{
 .sf-font-weight-light {
     color: rgba(0, 0, 0, 0.54);
 }
-
+.text-warn {
+    color: #f44336;
+}
 .example-container {
     position: absolute;
     top: 0;
@@ -93,6 +95,14 @@ app-new-patch td.mat-cell:first-of-type{
 }
 .text-small {
     font-size: 0.9rem;
+}
+.text-inherit-styles {
+    font-size: inherit;
+    color: inherit;
+    height: inherit;
+    position: relative;
+    margin-bottom: -4px;
+    padding-left: 2px;
 }
 .overflow-ellipsis {
     text-overflow: ellipsis;

@@ -314,7 +314,7 @@ export class FakeDataService {
         solution: this.fakeSolutions[0],
         solutionVersionNumber: "1.0",
         solutionVersionName: "Sierra",
-        client: "Hard Coded Client"
+        client: "XYZ Real Estate"
     };
 
     fakeInstance2: ISolutionInstanceViewModel = {
@@ -323,21 +323,33 @@ export class FakeDataService {
         description: "This is an optional description of the instance.",
         solution: this.fakeSolutions[0],
         solutionVersionNumber: "1.1",
+        solutionVersionName: "Sierra",
+        client: "ABC Construction"
+    };
+    fakeInstance3: ISolutionInstanceViewModel = {
+        name: "SFC1",
+        id: "567",
+        description: "This is an optional description of the instance.",
+        solution: this.fakeSolutions[0],
+        solutionVersionNumber: "0.0",
         solutionVersionName: "Nevada",
-        client: "Static Fake Client1"
+        client: "DEFG Coffee"
+    };
+    fakeInstance4: ISolutionInstanceViewModel = {
+        name: "SFC1",
+        id: "891",
+        description: "This is an optional description of the instance.",
+        solution: this.fakeSolutions[0],
+        solutionVersionNumber: "3.0",
+        solutionVersionName: "California",
+        client: "HIJK Catering"
     };
 
     fakeInstances: ISolutionInstanceViewModel[] = [
         this.fakeInstance1,
         this.fakeInstance2,
-        this.fakeInstance1,
-        this.fakeInstance2,
-        this.fakeInstance1,
-        this.fakeInstance2,
-        this.fakeInstance1,
-        this.fakeInstance2,
-        this.fakeInstance1,
-        this.fakeInstance2
+        this.fakeInstance3,
+        this.fakeInstance4
     ];
 
     fakeOrganization1: IPodioOrganizationViewModel = {

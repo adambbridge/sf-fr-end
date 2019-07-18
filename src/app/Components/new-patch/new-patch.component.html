@@ -1,7 +1,8 @@
 <h1 mat-dialog-title>Patch Solution Instances</h1>
 
 <p class="text-hint">
-    When you have run Updates on your Saasafras solution you can Update deployments of the solution with all of the changes by creating a Patch.
+    When you have run Updates on your Saasafras solution you can Update deployments of the solution with all of the
+    changes by creating a Patch.
     <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
 </p>
 
@@ -22,34 +23,25 @@
         </div>
     </mat-form-field>
 
-    <mat-label class='mt-2'>Which Instances do you want to Patch?</mat-label>
-    <!-- <div>
-        <mat-selection-list #envs aria-label="environments list" (selectionChange)="onEnvSelection()">
-            <mat-list-option *ngFor="let env of environments" [value]="env" [checkboxPosition]="before">
-                <span>Deployed Instance X at Org Y of Client Z (currently at v. 999)</span>
-            </mat-list-option>
-        </mat-selection-list>
-    </div> -->
+    <div>
+        <mat-label class='mt-2'>
+            <span *ngIf="!instancePreselection">Which Instances do you want to Patch?</span>
+            <span *ngIf="instancePreselection">Instances</span>
+        </mat-label>
+        <app-instances [instances]="instances" [instancePreselection]="instancePreselection" [patchImpactOnSpaces]='patchImpactOnSpaces' [showButton]="false" (selectedInstances)="onInstanceSelection($event)"
+            [showSearchBox]="instances.length > 5" ></app-instances>
+    </div>
 
-    <app-instances [instances]="instances" [patchImpactOnSpaces]='patchImpactOnSpaces' ></app-instances>
-
-    <!-- <div *ngFor="let control of envControls.controls; let i = index">
-        <input type="checkbox" [formControl]="control" id="checkbox{{i}}" (change)="syncItemsWithControls()">
-        <label for="checkbox{{i}}">{{environments[i]}}</label>
-    </div> 
-   <small *ngIf="notes.touched && !selectedEnvs.length">Please select at least one environment</small> -->
-
-    <mat-form-field class="w-100 mt-4">
+    <mat-form-field class="w-100">
         <textarea matInput minRows='3' formControlName="notes" placeholder="Notes (optional)"></textarea>
     </mat-form-field>
 
     <button mat-raised-button class='mr-2'>Cancel</button>
-    <button mat-raised-button type="submit" [disabled]="!form.valid || (selectedEnvs && selectedEnvs.length === 0)">Patch</button>
+    <button mat-raised-button type="submit"
+        [disabled]="!form.valid || (selectedInstances && selectedInstances.length === 0)">Patch</button>
 
     <div class="mt-4 mb-4" *ngIf="submitted">
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
-
-
 
 </form>

@@ -1,6 +1,5 @@
-<!-- <mat-card-title class="pl-4">History</mat-card-title> -->
 <div class="instances-component">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center" *ngIf="showSearchBox">
         <!-- FILTER -->
         <mat-form-field class="w-50">
             <mat-icon matPrefix>search</mat-icon>
@@ -18,12 +17,13 @@
                 <th mat-header-cell *matHeaderCellDef>
                     <mat-checkbox (change)="$event ? masterToggle() : null"
                         [checked]="selection.hasValue() && isAllSelected()"
-                        [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="createCheckboxAriaLabel()">
                     </mat-checkbox>
                 </th>
                 <td mat-cell *matCellDef="let row">
-                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                        [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                    <mat-checkbox (click)=" $event.stopPropagation()" (change)="$event ? onCheckboxChange(row) : null"
+                        [checked]="rowIsSelected(row)" [aria-label]="createCheckboxAriaLabel(row)">
                     </mat-checkbox>
                 </td>
             </ng-container>
@@ -50,24 +50,25 @@
             <!-- impact Column -->
             <ng-container matColumnDef="impact">
                 <th mat-header-cell *matHeaderCellDef>
-                    Predicted Impact of Patch
-                    <mat-icon
+                    Predicted Impact on Workspaces
+                    <mat-icon class='text-inherit-styles'
                         matTooltip="Workspaces that will be added to the instance and workspaces that will be edited if you patch with Selected Version of solution. Existing instance workspaces that are not part of the version used for patch are not affected in any way."
                         [matTooltipPosition]="tooltipPosition">help</mat-icon>
                 </th>
                 <td mat-cell *matCellDef="let element">
                     <span>
-                        <span>Altered: {{patchImpactOnSpaces.altered.length}}</span>
+                        <span class='text-warn' matTooltip="{{patchImpactOnSpaces.altered.join(', ')}}">
+                            Altered: {{patchImpactOnSpaces.altered.length}}
+                        </span>
                         , &nbsp;
-                        <span>Added: {{patchImpactOnSpaces.added.length}}</span>
+                        <span matTooltip="{{patchImpactOnSpaces.added.join(', ')}}">
+                            Added: {{patchImpactOnSpaces.added.length}}
+                        </span>
                         , &nbsp;
-                        <span>No Effect: {{patchImpactOnSpaces.unaffected.length}}</span>
+                        <span matTooltip="{{patchImpactOnSpaces.unaffected.join(', ')}}">No Effect:
+                            {{patchImpactOnSpaces.unaffected.length}}
+                        </span>
                     </span>
-
-                    <!-- <mat-chip-list class='text-hint'>
-                            <app-mat-chip-custom [icon]="'edit'" text="5" matTooltip="Space 1, space 2, spaces 3"></app-mat-chip-custom>
-                            <app-mat-chip-custom [icon]="'add_box'" text="5" matTooltip="Space 1, space 2, spaces 3"></app-mat-chip-custom>
-                        </mat-chip-list> -->
 
                 </td>
             </ng-container>
@@ -78,4 +79,9 @@
         </table>
 
     </div>
+
+    <button *ngIf="showButton" mat-raised-button (click)="onPatchSelectedClick()"
+        [disabled]="!selection.selected.length">
+        Patch Selected Instances...
+    </button>
 </div>

@@ -20,13 +20,11 @@ import { MatInputModule } from "@angular/material/input";
 export class NewPatchComponent implements OnInit {
     solution;
     clients;
-    environments;
     instances;
+    selectedInstances;
+    instancePreselection: boolean = false;
     form: FormGroup;
     submitted: boolean = false;
-    selectedEnvs = [];
-    selectedEnvsError: boolean = true;
-    @ViewChild("envs") envs;
     //TODO these would be solution properties?
     versions = [1, 2, "KYdev1", "KYdev2", "KYqa1"];
     patchImpactOnSpaces = null;
@@ -39,17 +37,20 @@ export class NewPatchComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.solution = this._passedData.solution;
+        if (this._passedData.solution) {
+            this.solution = this._passedData.solution;
+        } else {
+            this.solution = this._fakeDataService.fakeSolution;
+        }
+        if (this._passedData.preSelectedInstances) {
+            this.instances = this._passedData.preSelectedInstances;
+            this.selectedInstances = this.instances;
+            this.instancePreselection = true;
+        } else {
+            this.instances = this.solution.instances;
+        }
         this.clients = this._fakeDataService.fakeClients;
-        this.instances = this._fakeDataService.fakeInstances;
-        this.environments = this._buildEnvArray(this.clients);
         this.form = this._createForm();
-    }
-
-    onEnvSelection() {
-        this.selectedEnvs = this.envs.selectedOptions.selected.map(
-            (option) => option.value
-        );
     }
 
     onVersionSelection() {
@@ -67,9 +68,13 @@ export class NewPatchComponent implements OnInit {
         };
     }
 
+    onInstanceSelection(selected) {
+        this.selectedInstances = selected;
+    }
+
     onSubmit() {
         delete this.form.value.environments; // true/false values
-        this.form.value.selectedEnvs = this.selectedEnvs;
+        this.form.value.selectedInstances = this.selectedInstances;
         console.warn(this.form.value);
         console.warn(this.form.valid);
         this.submitted = true;
@@ -88,28 +93,14 @@ export class NewPatchComponent implements OnInit {
         return this.form.get("version");
     }
 
-    private _buildEnvArray(clients) {
-        let envs = [];
-        clients.forEach((client) => {
-            client.environments.forEach((e) => {
-                envs.push(e);
-            });
-        });
-        return envs;
-    }
-
     private _createForm() {
         let form = this._fb.group({
-            solution: [this._passedData.solution.name, Validators.required],
+            solution: [this.solution.name, Validators.required],
             version: ["", Validators.required],
-            environments: this._fb.array([]),
+            instances: this._fb.array([]),
             notes: [""]
         });
         return form;
-    }
-
-    get envControls() {
-        return <FormArray>this.form.get("environments");
     }
 
     get notes() {
