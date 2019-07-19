@@ -45,6 +45,7 @@ export class InstancesComponent implements OnInit {
             "name",
             "version",
             "client",
+            "lastAction",
             "impact"
         ];
         if (!this.patchImpactOnSpaces) {
@@ -60,7 +61,6 @@ export class InstancesComponent implements OnInit {
     }
 
     rowIsSelected(row) {
-        console.log(this.selection.selected)
         return this.selection.isSelected(row);
     }
 
@@ -80,7 +80,6 @@ export class InstancesComponent implements OnInit {
     }
 
     onPatchSelectedClick() {
-        console.log("lets launch patch dialog");
         this.dialog.open(NewPatchComponent, {
             data: {
                 preSelectedInstances: this.selection.selected
@@ -100,7 +99,6 @@ export class InstancesComponent implements OnInit {
     private _emitSelectedInstances() {
         this._selectedInstances = this.selection.selected;
         this.selectedInstances.emit(this._selectedInstances);
-        console.log(this.selection.selected);
     }
 
     private _selectAll() {

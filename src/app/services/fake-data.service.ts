@@ -38,6 +38,7 @@ export interface ISolutionInstanceViewModel {
     solutionVersionNumber: string;
     solutionVersionName: string;
     client: any;
+    lastAction: string;
     // patch diff not prop of instance. it is calculated
     // from instance info and patch version info
 }
@@ -314,7 +315,8 @@ export class FakeDataService {
         solution: this.fakeSolutions[0],
         solutionVersionNumber: "1.0",
         solutionVersionName: "Sierra",
-        client: "XYZ Real Estate"
+        client: "XYZ Real Estate",
+        lastAction: "04/01/19 (Deploy)"
     };
 
     fakeInstance2: ISolutionInstanceViewModel = {
@@ -324,7 +326,8 @@ export class FakeDataService {
         solution: this.fakeSolutions[0],
         solutionVersionNumber: "1.1",
         solutionVersionName: "Sierra",
-        client: "ABC Construction"
+        client: "ABC Construction",
+        lastAction: "04/01/19 (Patch)"
     };
     fakeInstance3: ISolutionInstanceViewModel = {
         name: "SFC1",
@@ -333,7 +336,8 @@ export class FakeDataService {
         solution: this.fakeSolutions[0],
         solutionVersionNumber: "0.0",
         solutionVersionName: "Nevada",
-        client: "DEFG Coffee"
+        client: "DEFG Coffee",
+        lastAction: "04/01/19 (Deploy)"
     };
     fakeInstance4: ISolutionInstanceViewModel = {
         name: "SFC1",
@@ -342,7 +346,8 @@ export class FakeDataService {
         solution: this.fakeSolutions[0],
         solutionVersionNumber: "3.0",
         solutionVersionName: "California",
-        client: "HIJK Catering"
+        client: "HIJK Catering",
+        lastAction: "04/01/19 (Patch)"
     };
 
     fakeInstances: ISolutionInstanceViewModel[] = [

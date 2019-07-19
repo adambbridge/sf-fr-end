@@ -6,17 +6,13 @@ import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
+import { setDefaultService } from "selenium-webdriver/chrome";
 
 @Component({
     selector: "app-new-patch",
     templateUrl: "./new-patch.component.html",
     styleUrls: ["./new-patch.component.css"]
 })
-
-/**
- * TODO ??? need send client and env for each env? or use env unique id?
- *
- */
 export class NewPatchComponent implements OnInit {
     solution;
     clients;
@@ -47,7 +43,11 @@ export class NewPatchComponent implements OnInit {
             this.selectedInstances = this.instances;
             this.instancePreselection = true;
         } else {
-            this.instances = this.solution.instances;
+            if (this.solution.instances) {
+                this.instances = this.solution.instances;
+            } else {
+                this.instances = this._fakeDataService.fakeInstances;
+            }
         }
         this.clients = this._fakeDataService.fakeClients;
         this.form = this._createForm();
@@ -75,8 +75,8 @@ export class NewPatchComponent implements OnInit {
     onSubmit() {
         delete this.form.value.environments; // true/false values
         this.form.value.selectedInstances = this.selectedInstances;
-        console.warn(this.form.value);
-        console.warn(this.form.valid);
+        // console.warn(this.form.value);
+        // console.warn(this.form.valid);
         this.submitted = true;
         this._utilsService.openSnackBar(
             "message triggered inside onSubmit",
