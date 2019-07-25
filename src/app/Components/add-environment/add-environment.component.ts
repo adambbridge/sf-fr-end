@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
-import { FakeDataService } from "src/app/services/fake-data.service";
+import { FakeDataService, IPodioOrganizationViewModel } from "src/app/services/fake-data.service";
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: "app-add-environment",
@@ -14,15 +15,30 @@ export class AddEnvironmentComponent implements OnInit {
     loginForm: FormGroup;
     availableEnvs;
     showContent = false;
+    @ViewChild("envs") envs;
+    selectedOrgs: IPodioOrganizationViewModel[] = [];
 
     constructor(
         private _fakeDataService: FakeDataService,
-        private _fb: FormBuilder
+        private _fb: FormBuilder,
+        public dialogRef: MatDialogRef<AddEnvironmentComponent>
     ) {}
 
     ngOnInit() {
         this.loginForm = this._createForm();
-        this.availableEnvs = ["BB Consulting", "XYZ Real Estate"];
+        this.availableEnvs = this._fakeDataService.fakeOrganizations;
+    }
+
+    onOrgSelection() {
+        this.selectedOrgs = this.envs.selectedOptions.selected.map(
+            (option) => option.value
+        );
+        console.log(this.selectedOrgs);
+    }
+
+    onCancelClick(): void {
+        console.log('clicked cancel')
+        this.dialogRef.close();
     }
 
     onSubmit() {
@@ -37,15 +53,15 @@ export class AddEnvironmentComponent implements OnInit {
         // );
     }
 
+    onHeaderClick() {
+        this.showContent = true;
+    }
+
     private _createForm() {
         let form = this._fb.group({
             email: ["", Validators.required],
             password: ["", Validators.required]
         });
         return form;
-    }
-
-    onHeaderClick() {
-        this.showContent = true;
     }
 }

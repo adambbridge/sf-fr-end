@@ -14,14 +14,19 @@
         <!-- PANEL BODY -->
         <div *ngIf="showContent">
             <div class="mb-3 mt-3">
-                <mat-selection-list #envs>
-                    <mat-list-option *ngFor="let env of availableEnvs" [checkboxPosition]="before">
-                        BB Consulting. Owner: BB Consulting Deployed solutions: NA
+                <mat-selection-list #envs (selectionChange)="onOrgSelection()">
+                    <mat-list-option *ngFor="let env of availableEnvs" [value]="env" [checkboxPosition]="before" class='mat-list-option-multi-line'>
+                        <div class='mb-1'>{{env.name}}</div>
+                        <div class='text-hint text-small'>
+                            <span class="mr-1">Owner: {{env.owner}}.</span>
+                            <span>Deployed Instances: </span>
+                            <span *ngFor="let instance of env.instances" class='comma-separated-list'>{{instance.name}}</span>
+                        </div>
                     </mat-list-option>
                 </mat-selection-list>
 
-                <button mat-raised-button class='mr-2 mt-3'>Cancel</button>
-                <button mat-raised-button type="submit" [disabled]="false">Add Environment(s)</button>
+                <button mat-raised-button class='mr-2 mt-3' (click)="onCancelClick()">Cancel</button>
+                <button mat-raised-button type="submit" [disabled]="selectedOrgs.length === 0" [mat-dialog-close]='this.selectedOrgs'>Add Organization(s)</button>
             </div>
         </div>
 

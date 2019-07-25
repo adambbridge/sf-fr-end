@@ -14,17 +14,38 @@
                 </mat-form-field>
 
                 <mat-form-field class="w-100" appearance="">
-                    <input type='email' formControlName="email" matInput placeholder="email" required/>
+                    <input type='email' formControlName="email" matInput placeholder="email" required />
                 </mat-form-field>
 
                 <mat-form-field class="w-100" appearance="">
                     <textarea formControlName="notes" matInput placeholder="Notes"></textarea>
                 </mat-form-field>
 
-                <button routerlink="/clients" mat-raised-button class="mr-2">Cancel</button>
+                <mat-card class='mat-elevation-z1'>
+                    <span>
+                        Podio Organizations
+                        <button type="button" mat-button (click)="onAddOrgClick()" class='ml-2'>
+                            <mat-icon>add_box</mat-icon>
+                        </button>
+                    </span>
+                    <mat-list >
+                        <mat-list-item *ngFor="let org of orgs">
+                            <div class='mb-1 mr-2'>{{org.name}}</div>
+                            <div class='text-hint text-small'>
+                                <span class="mr-2">Owner: {{org.owner}}.</span>
+                                <span>Deployed Instances: </span>
+                                <span *ngFor="let instance of org.instances"
+                                    class='comma-separated-list'>{{instance.name}}</span>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+                </mat-card>
 
-                <button type="submit" mat-raised-button *ngIf="!submitted"
-                    [disabled]="newClientForm.status === 'INVALID'">Create</button>
+                <div class='mt-4'>
+                    <button routerlink="/clients" mat-raised-button class="mr-2">Cancel</button>
+                    <button type="submit" mat-raised-button *ngIf="!submitted"
+                        [disabled]="newClientForm.status === 'INVALID'">Create</button>
+                </div>
 
             </form>
 

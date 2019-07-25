@@ -53,12 +53,12 @@ export interface IPodioOrganizationViewModel {
 }
 
 export interface IClientViewModel {
+    id: string;
+    identifier: string;
     contact: string;
     company?: string;
-    identifier: string;
-    id: string;
-    environments;
     email?: string;
+    environments;
     notes?: string;
 }
 

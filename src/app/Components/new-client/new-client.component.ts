@@ -1,3 +1,5 @@
+import { MatDialog } from "@angular/material";
+import { AddEnvironmentComponent } from "./../add-environment/add-environment.component";
 import {
     Component,
     OnInit,
@@ -25,25 +27,37 @@ import {
 export class NewClientComponent implements OnInit {
     newClientForm: FormGroup;
     submitted = false;
+    orgs;
 
     constructor(
         private _fb: FormBuilder,
         private fakeDataService: FakeDataService,
         private _utilsService: UtilsService,
-        private router: Router
+        private router: Router,
+        private dialog: MatDialog
     ) {}
 
     ngOnInit() {
         this._createNewClientForm();
     }
 
+    /** open dialog and setup a subscription to it's afterClosed lifecycle event */
+    onAddOrgClick() {
+        const dialogRef = this.dialog.open(AddEnvironmentComponent, {});
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log("d closed, received: ", result);
+            this.orgs = result;
+        });
+    }
+
     onSubmit() {
         this.submitted = true;
+        this.newClientForm.value.envs = this.orgs;
         console.log("form value:", this.newClientForm.value);
         console.log("form value:", this.newClientForm.valid);
-        // if succesfully create new client...
+        // if success
         this._utilsService.openSnackBar("triggered this from onSubmit");
-        this.router.navigate(['/clients']);
+        this.router.navigate(["/clients"]);
     }
 
     /*=========================
@@ -55,7 +69,8 @@ export class NewClientComponent implements OnInit {
             contact: ["", Validators.required],
             company: [""],
             email: ["", Validators.required],
-            notes: [""]
+            notes: [""],
+            envs: [""]
         });
     }
 }
