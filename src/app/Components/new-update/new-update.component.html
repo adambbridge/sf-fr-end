@@ -1,7 +1,8 @@
 <h1 mat-dialog-title>Update "{{solution.name}}"</h1>
 
 <p class="text-hint">
-    When you have made updates to the Podio workspaces which this solution is based on, an Update can capture those changes and update your Saasafras solution.
+    When you have made updates to the Podio workspaces which this solution is based on, an Update can capture those
+    changes and update your Saasafras solution.
     <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
 </p>
 
@@ -13,9 +14,31 @@
     </mat-form-field>
 
     <mat-form-field class="w-100">
-        <mat-label>Source Organization: Fake Podio Org A</mat-label>
-        <input type="text" matInput readonly formControlName="source" >
+        <mat-label>Which version do you want to update?</mat-label>
+        <mat-select formControlName="version" (selectionChange)="onVersionSelection()">
+            <mat-option *ngFor="let version of versions" [value]="version">{{version.versionNumber}}</mat-option>
+        </mat-select>
     </mat-form-field>
+
+    <mat-form-field class="w-100">
+        <input matInput formControlName="name" placeholder="Name the new version (optional)">
+    </mat-form-field>
+
+    <mat-expansion-panel *ngIf="selectedVersionSpaces" >
+        <mat-expansion-panel-header>
+            <mat-panel-title>Edit included workspaces</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+            <div>
+                <mat-label class='mt-2'>
+                    <span>Continue using selected workspaces?</span>
+                </mat-label>
+                <app-podio-spaces [org]="sourceOrg" [workspaces]="allSourceOrgSpaces"
+                    [preselectedSpaces]="selectedVersionSpaces" (selectedSpaces)="onSpaceSelection($event)">
+                </app-podio-spaces>
+            </div>
+        </ng-template>
+    </mat-expansion-panel>
 
     <mat-form-field class="w-100">
         <textarea matInput formControlName="notes" placeholder="Notes (optional)"></textarea>
@@ -25,4 +48,3 @@
     <button mat-raised-button type="submit" [disabled]="!updateForm.valid">Run Update</button>
 
 </form>
-

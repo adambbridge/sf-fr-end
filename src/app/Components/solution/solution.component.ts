@@ -57,7 +57,6 @@ export class SolutionComponent implements OnInit {
                 this.solution = sol;
             }
         });
-        console.log("solution", this.solution);
     }
 
     toggleVersion() {

@@ -21,6 +21,7 @@ import { PodioService } from "../../services/podio.service";
 export class PodioSpacesComponent implements OnInit {
     @Input() org?: IPodioOrganizationViewModel;
     @Input() workspaces?;
+    @Input() preselectedSpaces?;
     @Input() disableSelection?: boolean = false;
     allSpaces: Array<IPodioSpaceViewModel> = [];
     private _selectedSpaces;
@@ -31,11 +32,11 @@ export class PodioSpacesComponent implements OnInit {
 
     ngOnInit() {
         if (this.workspaces) {
-            this.showPreselectedSpaces();
+            this.showPredeterminedSpaces();
         } else {
             this.showSelectableSpaces();
         }
-        console.log(this.allSpaces);
+        console.log(this.allSpacesSelectionList);
     }
 
     onSpaceSelection() {
@@ -45,11 +46,20 @@ export class PodioSpacesComponent implements OnInit {
         this.selectedSpaces.emit(this._selectedSpaces);
     }
 
-    showPreselectedSpaces() {
+    showPredeterminedSpaces() {
         this.allSpaces = this.workspaces;
     }
 
     showSelectableSpaces() {
         this.allSpaces = this.org.spaces;
+
+        if(this.preselectedSpaces) {
+
+            // check these boxes and set selected spaces
+            // for each options._results[0].value > _results[0].selected = true 
+            // if it is in preselected then make it selected
+            
+
+        }
     }
 }

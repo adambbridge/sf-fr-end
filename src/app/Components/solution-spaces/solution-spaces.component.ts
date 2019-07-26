@@ -15,6 +15,5 @@ export class SolutionSpacesComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
-        console.log(this.solution);
     }
 }
