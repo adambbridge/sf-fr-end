@@ -7,7 +7,6 @@ import {
     MatBottomSheetModule,
     MatButtonModule,
     MatCardModule,
-    MatDatepickerModule,
     MatCheckboxModule,
     MatButtonToggleModule,
     MatChipsModule,
@@ -33,6 +32,7 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 
 
 
@@ -47,9 +47,9 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
         MatBottomSheetModule,
         MatButtonModule,
         MatCardModule,
-        MatDatepickerModule,
         MatCheckboxModule,
         MatButtonToggleModule,
+        MatDatepickerModule,
         MatChipsModule,
         MatDialogModule,
         MatDividerModule,
@@ -78,8 +78,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
         MatAutocompleteModule,
         MatBottomSheetModule,
         MatButtonModule,
-        MatCardModule,
         MatDatepickerModule,
+        MatCardModule,
         MatCheckboxModule,
         MatButtonToggleModule,
         MatChipsModule,
@@ -103,6 +103,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
         MatToolbarModule,
         MatTooltipModule,
         MatSnackBarModule
-    ]
+    ],
+    providers: [MatDatepickerModule]
 })
 export class CustomMaterialModule {}

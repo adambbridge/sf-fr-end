@@ -69,9 +69,7 @@ app-new-patch td.mat-cell:first-of-type{
 .sf-font-weight-light {
     color: rgba(0, 0, 0, 0.54);
 }
-.text-warn {
-    color: #f44336;
-}
+
 .example-container {
     position: absolute;
     top: 0;
@@ -80,7 +78,9 @@ app-new-patch td.mat-cell:first-of-type{
     right: 0;
     background: #eee;
 }
-
+.text-warn {
+    color: #f44336;
+}
 .mat-expansion-panel-header.mat-expanded {
     border-bottom: 1px solid lightgrey;
     font-weight: bold;
@@ -92,6 +92,9 @@ app-new-patch td.mat-cell:first-of-type{
 .text-hint {
     font-size: 0.9rem;
     color: #999; /* same as bootstrap "text-muted" */
+}
+.text-light {
+    color: #999;
 }
 .text-small {
     font-size: 0.9rem;

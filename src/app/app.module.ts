@@ -8,6 +8,7 @@ import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { LayoutModule } from "@angular/cdk/layout";
+
 import {
     MatToolbarModule,
     MatButtonModule,
@@ -15,6 +16,9 @@ import {
     MatIconModule,
     MatListModule
 } from "@angular/material";
+import { MatNativeDateModule } from "@angular/material/";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+
 
 /** Components */
 import { AppComponent } from './app.component';
@@ -139,9 +143,11 @@ import { PodioOrgDetailComponent } from './Components/podio-org-detail/podio-org
         MatButtonModule,
         MatSidenavModule,
         MatIconModule,
-        MatListModule
+        MatListModule,
+        MatNativeDateModule,
+        MatDatepickerModule
     ],
-    providers: [AuthGuard],
+    providers: [AuthGuard, MatDatepickerModule],
     bootstrap: [AppComponent],
     entryComponents: [
         NewUpdateComponent,
