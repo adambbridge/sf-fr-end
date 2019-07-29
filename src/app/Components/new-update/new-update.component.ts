@@ -14,19 +14,22 @@ export class NewUpdateComponent implements OnInit {
     solution;
     sourceOrgId;
     sourceOrg;
-    selectedVersionSpaces;
     updateForm;
+    spacesForUpdate;
+    spacesCurrent;
 
     /** FAKE DATA */
     // spaces have workspaceName, apps
     allSourceOrgSpaces;
     versions = [
         {
-            versionNumber: 0.0,
+            versionNumber: '0.0',
+            versionName: 'Yosemite',
             spaces: [{ workspaceId: 123 }]
         },
         {
-            versionNumber: 1.0,
+            versionNumber: '1.0',
+            versionName: 'El Capitan',
             spaces: [{ workspaceId: 123 }]
         }
     ];
@@ -60,22 +63,18 @@ export class NewUpdateComponent implements OnInit {
     onVersionSelection() {
         let version = this.updateForm.value.version;
         /**
-         * TODO
-         * set selected spaces which will be used by update task
-         * and will show up as checked
-         * spaces selection list hidden until this.selectedSpaces
+         * TODO: show currently used spaces as checked
          */
-        this.selectedVersionSpaces = version.spaces;
-        /** set checkboxes */
+        this.spacesCurrent = version.spaces;
         this.allSourceOrgSpaces.forEach(space => {
             
         })
     }
 
     /** this captures updated selected spaces */
-    onSpaceSelection($event) {
-        console.log($event);
-        
+    onSpaceSelection(selected) {
+        this.spacesForUpdate = selected;
+        console.log('selected spaces:', this.spacesForUpdate);
     }
 
     onSubmit() {
