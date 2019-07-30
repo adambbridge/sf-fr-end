@@ -1,3 +1,5 @@
+import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmation-dialog.component";
+import { AddEnvironmentComponent } from "./../add-environment/add-environment.component";
 import { UtilsService } from "./../../services/utils.service";
 import { Component, OnInit, Inject, ViewChild } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material";
@@ -7,7 +9,8 @@ import { Validators } from "@angular/forms";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { setDefaultService } from "selenium-webdriver/chrome";
-import { SaasafrasService } from 'src/app/services/saasafras.service';
+import { SaasafrasService } from "src/app/services/saasafras.service";
+import { MatDialog } from "@angular/material";
 
 @Component({
     selector: "app-new-patch",
@@ -21,19 +24,19 @@ export class NewPatchComponent implements OnInit {
     selectedInstances;
     instancePreselection: boolean = false;
     form: FormGroup;
-    submitted: boolean = false;
     //TODO these would be solution properties?
     versions = [1, 2, "KYdev1", "KYdev2", "KYqa1"];
     patchImpactOnSpaces = null;
     minDate = new Date();
     maxDate = this._getMaxDate();
-    date; 
+    date;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
         private _fb: FormBuilder,
         private _fakeDataService: FakeDataService,
-        private _utilsService: UtilsService
+        private _utilsService: UtilsService,
+        private dialog: MatDialog
     ) {}
 
     ngOnInit() {
@@ -81,7 +84,7 @@ export class NewPatchComponent implements OnInit {
      * has an output?
      */
     onDateChange($event) {
-        this.date = $event.value; 
+        this.date = $event.value;
     }
 
     onSubmit() {
@@ -90,12 +93,20 @@ export class NewPatchComponent implements OnInit {
         this.form.value.date = this.date;
         console.warn(this.form.value);
         console.warn(this.form.valid);
-        this.submitted = true;
-        this._utilsService.openSnackBar(
-            "message triggered inside onSubmit",
-            "some action",
-            4000
-        );
+
+        var dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            data: {
+                title: "Confirm Patch Details",
+                btn1Text: "Cancel",
+                btn2Text: "Schedule Patch",
+                messages: [
+                    `${this.selectedInstances.length} instance(s) will be patched with ${this.solution.name} (add vNum and vName to this...)`,
+                    "Patch will be scheduled and will take a while to complete. You will receive an email when the patch task starts and a status report email when it is complete.",
+                    "You can also view status info for scheduled, in progress and recent patches on the manage tab of this Solution."
+                ],
+                snackBarMessage: 'Patch has been scheduled'
+            }
+        });
     }
 
     /************************
@@ -124,7 +135,7 @@ export class NewPatchComponent implements OnInit {
         var d = new Date();
         var n = d.getFullYear() + 1;
         d.setFullYear(n);
-        console.log(this.minDate, d); 
+        console.log(this.minDate, d);
         return d;
     }
 }

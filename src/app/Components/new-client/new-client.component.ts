@@ -1,4 +1,5 @@
 import { MatDialog } from "@angular/material";
+import { MatDialogRef } from "@angular/material/dialog";
 import { AddEnvironmentComponent } from "./../add-environment/add-environment.component";
 import {
     Component,
@@ -34,7 +35,7 @@ export class NewClientComponent implements OnInit {
         private fakeDataService: FakeDataService,
         private _utilsService: UtilsService,
         private router: Router,
-        private dialog: MatDialog
+        private dialog: MatDialog,
     ) {}
 
     ngOnInit() {

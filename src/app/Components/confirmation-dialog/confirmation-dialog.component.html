@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{title}}</h1>
+
+<p *ngFor="let message of messages" class="mt-4 mb-4">{{message}}</p>
+
+<div>
+    <button mat-raised-button class='mr-2' (click)="onBtn1Click()">{{btn1Text}}</button>
+    <button mat-raised-button type="submit" (click)="onBtn2Click()">{{btn2Text}}</button>
+</div>
