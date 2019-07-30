@@ -39,20 +39,7 @@
 
 <mat-tab-group >
 
-    <mat-tab label="Summary">
-        <ng-template matTabContent>
-            <app-solution-about></app-solution-about>
-
-            <mat-card class='card-table-container mat-elevation-z3'>
-                <mat-card-title class="pl-4">
-                    Deployed Instances
-                </mat-card-title>
-                <app-instances [instances]="instances"></app-instances>
-            </mat-card>
-
-            <app-solution-spaces *ngIf="showTemplate" [solution]='solution'></app-solution-spaces>
-        </ng-template>
-    </mat-tab>
+   
 
     <mat-tab label="Manage">
         <ng-template matTabContent>
@@ -116,6 +103,21 @@
             <!--====== TASK HISTORY NOT IN EXP PANEL ========= -->
             <app-solution-history *ngIf="v1"  [solution]='solution'></app-solution-history>
 
+        </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Summary">
+        <ng-template matTabContent>
+            <app-solution-about></app-solution-about>
+    
+            <mat-card class='card-table-container mat-elevation-z3'>
+                <mat-card-title class="pl-4">
+                    Deployed Instances
+                </mat-card-title>
+                <app-instances [instances]="instances"></app-instances>
+            </mat-card>
+    
+            <app-solution-spaces *ngIf="showTemplate" [solution]='solution'></app-solution-spaces>
         </ng-template>
     </mat-tab>
 

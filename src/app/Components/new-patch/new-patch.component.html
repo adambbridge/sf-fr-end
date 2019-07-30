@@ -38,12 +38,14 @@
     </mat-form-field>
 
     <mat-form-field class="w-75">
-        <input matInput (focus)="picker.open()" (click)="picker.open()" [matDatepicker]="picker"
-            placeholder="Schedule patch">
+        <input matInput [min]="minDate" [max]="maxDate" (focus)="picker.open()" (click)="picker.open()"
+            [matDatepicker]="picker" placeholder="Schedule patch" (dateChange)="onDateChange($event)">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker disabled="false"></mat-datepicker>
     </mat-form-field>
-    <mat-icon class="text-light" matTooltip="Choosing today will add patch to cue immediately.  Choosing a future date schedules patch for 12:01am on that date. You will receive an email at 'usersemailaddr@email.com' when patch has begun and a status report email when it has completed." >help</mat-icon>
+    <mat-icon class="text-light"
+        matTooltip="Choosing today will add patch to cue immediately.  Choosing a future date schedules patch for 12:01am on that date. You will receive an email at 'usersemailaddr@email.com' when patch has begun and a status report email when it has completed.">
+        help</mat-icon>
 
     <div>
         <button mat-raised-button class='mr-2'>Cancel</button>

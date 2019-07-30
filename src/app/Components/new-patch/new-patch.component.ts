@@ -25,6 +25,9 @@ export class NewPatchComponent implements OnInit {
     //TODO these would be solution properties?
     versions = [1, 2, "KYdev1", "KYdev2", "KYqa1"];
     patchImpactOnSpaces = null;
+    minDate = new Date();
+    maxDate = this._getMaxDate();
+    date; 
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
@@ -73,18 +76,26 @@ export class NewPatchComponent implements OnInit {
         this.selectedInstances = selected;
     }
 
+    /**
+     * capture picker data and add to form data
+     * has an output?
+     */
+    onDateChange($event) {
+        this.date = $event.value; 
+    }
+
     onSubmit() {
         delete this.form.value.environments; // true/false values
         this.form.value.selectedInstances = this.selectedInstances;
-        // console.warn(this.form.value);
-        // console.warn(this.form.valid);
+        this.form.value.date = this.date;
+        console.warn(this.form.value);
+        console.warn(this.form.valid);
         this.submitted = true;
         this._utilsService.openSnackBar(
             "message triggered inside onSubmit",
             "some action",
             4000
         );
-
     }
 
     /************************
@@ -107,5 +118,13 @@ export class NewPatchComponent implements OnInit {
 
     get notes() {
         return this.form.get("notes");
+    }
+
+    private _getMaxDate() {
+        var d = new Date();
+        var n = d.getFullYear() + 1;
+        d.setFullYear(n);
+        console.log(this.minDate, d); 
+        return d;
     }
 }
