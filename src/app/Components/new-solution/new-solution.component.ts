@@ -17,7 +17,6 @@ import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
-import { MAT_DIALOG_DATA } from "@angular/material";
 import {
     SolutionCreationRequest,
     SolutionCreationResponse
@@ -33,6 +32,11 @@ import {
     IPodioSpaceViewModel
 } from "src/app/services/fake-data.service";
 import { PodioService } from "src/app/services/podio.service";
+import { MatDialog } from "@angular/material";
+import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmation-dialog.component";
+import { MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef } from "@angular/material/dialog";
+
 
 @Component({
     selector: "app-new-solution",
@@ -49,6 +53,7 @@ export class NewSolutionComponent implements OnInit {
     @ViewChild("spaces") spaces;
     preselectedSpaces: boolean = false;
     showInDialog: boolean = false;
+    newSolutionDialog? = null;
 
     constructor(
         private _fb: FormBuilder,
@@ -56,6 +61,9 @@ export class NewSolutionComponent implements OnInit {
         private _podioService: PodioService,
         private fakeDataService: FakeDataService,
         private _utilsService: UtilsService,
+        private dialog: MatDialog,
+        // if being used inside a dialog
+        @Optional() newSolutionDialog: MatDialogRef<NewSolutionComponent>,
         @Optional() @Inject(MAT_DIALOG_DATA) private _passedData?: any
     ) {}
 
@@ -110,12 +118,31 @@ export class NewSolutionComponent implements OnInit {
         this.newSolutionForm.value.workspaces = this.selectedWorkspaces;
         console.log("form value:", this.newSolutionForm.value);
         console.log("form value:", this.newSolutionForm.valid);
-        this._utilsService.openSnackBar("triggered this from onSubmit");
+
+        if (this.newSolutionDialog) {
+            this.newSolutionDialog.close();
+        }
+        const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
+            data: this.getConfirmationDialogData()
+        });
     }
 
     /*=========================
             HELPERS
      =========================*/
+
+    private getConfirmationDialogData() {
+        return {
+            title: "Create Solution?",
+            btn1Text: "Cancel",
+            btn2Text: "Create",
+            snackBarCancelMessage: "Task cancelled",
+            snackBarConfirmMessage: "Task scheduled",
+            messages: [
+                "This may take a minute. We'll send an email to _____ when it's done."
+            ]
+        };
+    }
 
     private _dialogSetup(data) {
         /**

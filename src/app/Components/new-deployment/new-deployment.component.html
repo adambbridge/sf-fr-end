@@ -20,7 +20,7 @@
     </mat-form-field>
 
     <mat-form-field class="w-100">
-        <mat-label>Which version?</mat-label>
+        <mat-label>Which version do you want to deploy?</mat-label>
         <mat-select formControlName="version">
             <mat-option *ngFor="let version of versions" [value]="version">{{version}}</mat-option>
         </mat-select>
@@ -40,7 +40,7 @@
     </mat-form-field>
 
     <mat-form-field class="w-100" *ngIf='environments && !preselectedOrg'>
-        <mat-label>Which organization?</mat-label>
+        <mat-label>Create in what organization?</mat-label>
         <mat-select formControlName="environment">
             <mat-option *ngFor="let env of environments" [value]="env">{{env.name}}</mat-option>
         </mat-select>
@@ -60,9 +60,5 @@
 
     <button mat-raised-button class='mr-2'>Cancel</button>
     <button mat-raised-button type="submit" [disabled]="false">Deploy</button>
-
-    <div class="mt-4 mb-4" *ngIf="submitted">
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </div>
 
 </form>

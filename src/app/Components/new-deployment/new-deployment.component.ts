@@ -1,12 +1,15 @@
+import { environment } from 'src/environments/environment.prod';
 import { Solution } from "./../../../model/saasafras/solution";
-import { environment } from "./../../../environments/environment.prod";
 import { FakeDataService } from "src/app/services/fake-data.service";
-import { Component, OnInit, Inject } from "@angular/core";
-import { MAT_DIALOG_DATA } from "@angular/material";
+import { Component, OnInit, Inject, Version } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
+import { MatDialog } from "@angular/material";
+import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmation-dialog.component";
+import { MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
     selector: "app-new-deployment",
@@ -30,7 +33,6 @@ export class NewDeploymentComponent implements OnInit {
     clients;
     environments;
     instance;
-    //TODO these would be solution properties?
     versions = [1, 2, "KYdev1", "KYdev2", "KYqa1"];
 
     deploymentForm = this.fb.group({
@@ -43,6 +45,7 @@ export class NewDeploymentComponent implements OnInit {
     });
     submitted: boolean = false;
 
+
     get c() {
         return this.deploymentForm.get("client");
     }
@@ -51,9 +54,11 @@ export class NewDeploymentComponent implements OnInit {
     }
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) private _passedData: any,
         private fb: FormBuilder,
-        private fakeDataService: FakeDataService
+        private fakeDataService: FakeDataService,
+        @Inject(MAT_DIALOG_DATA) private _passedData: any,
+        public deployDialog: MatDialogRef<NewDeploymentComponent>,
+        private dialog: MatDialog
     ) {}
 
     ngOnInit() {
@@ -73,11 +78,34 @@ export class NewDeploymentComponent implements OnInit {
         this.submitted = true;
         console.warn(this.deploymentForm.value);
         console.warn(this.deploymentForm.valid);
+        this.deployDialog.close();
+        const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
+            data: this.getConfirmationDialogData()
+        });
     }
 
     /** ==================
      * HELPER METHODS 
      ===================== */
+
+    private getConfirmationDialogData() {
+        let form = this.deploymentForm.value;
+        let sol = form.solution;
+        let ver = form.version;
+        let org = form.environment.name;
+
+        let data = {
+            title: "Create Solution?",
+            btn1Text: "Cancel",
+            btn2Text: "Create",
+            snackBarCancelMessage: "Task cancelled",
+            snackBarConfirmMessage: "Task scheduled",
+            messages: [
+                `A new instance of solution ${sol} version ${ver} will be created in org ${org}`
+            ]
+        };
+        return data;
+    }
 
     private _configurePreselections(data) {
         console.log("preselected data", data);
@@ -93,9 +121,7 @@ export class NewDeploymentComponent implements OnInit {
             console.log(this.preselectedOrg);
             this.deploymentForm.controls.environment.setValue(data.org.name);
             this.deploymentForm.controls.instance.setValue(
-                this._generateInstanceNameFromClientName(
-                    data.org.owner
-                )
+                this._generateInstanceNameFromClientName(data.org.owner)
             );
         }
     }

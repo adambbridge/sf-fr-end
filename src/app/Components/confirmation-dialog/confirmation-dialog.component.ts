@@ -3,6 +3,7 @@ import { InstancesComponent } from "./../instances/instances.component";
 import { Component, OnInit, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material";
 import { MatDialogRef } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "app-confirmation-dialog",
@@ -15,12 +16,15 @@ export class ConfirmationDialogComponent implements OnInit {
     messages: string[];
     btn1Text: string;
     btn2Text: string;
-    snackBarMessage: string;
+    snackBarCancelMessage: string;
+    snackBarConfirmMessage: string;
+    destinationOnClose?: string;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
         private utilsService: UtilsService,
-        public dialogRef: MatDialogRef<ConfirmationDialogComponent>
+        public confirmDialogRef: MatDialogRef<ConfirmationDialogComponent>,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -39,18 +43,24 @@ export class ConfirmationDialogComponent implements OnInit {
         if (d.btn2Text) {
             this.btn2Text = d.btn2Text;
         }
-        if (d.snackBarMessage) {
-            this.snackBarMessage = d.snackBarMessage;
+        if (d.snackBarConfirmMessage) {
+            this.snackBarConfirmMessage = d.snackBarConfirmMessage;
+        }
+        if (d.snackBarCancelMessage) {
+            this.snackBarCancelMessage = d.snackBarCancelMessage;
         }
     }
 
     onBtn1Click(): void {
         console.log("clicked cancel");
-        this.dialogRef.close();
+        this.utilsService.openSnackBar(this.snackBarCancelMessage, null, 4000);
+        this.confirmDialogRef.close();
+        this.router.navigate(["solutions"]);
     }
 
     onBtn2Click() {
-        this.utilsService.openSnackBar(this.snackBarMessage, null, 4000);
-        this.dialogRef.close();
+        this.utilsService.openSnackBar(this.snackBarConfirmMessage, null, 4000);
+        this.confirmDialogRef.close();
+        this.router.navigate(["solutions"]);
     }
 }

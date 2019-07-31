@@ -1,8 +1,6 @@
-import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmation-dialog.component";
 import { AddEnvironmentComponent } from "./../add-environment/add-environment.component";
 import { UtilsService } from "./../../services/utils.service";
 import { Component, OnInit, Inject, ViewChild } from "@angular/core";
-import { MAT_DIALOG_DATA } from "@angular/material";
 import { FakeDataService } from "src/app/services/fake-data.service";
 import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
@@ -11,6 +9,9 @@ import { MatInputModule } from "@angular/material/input";
 import { setDefaultService } from "selenium-webdriver/chrome";
 import { SaasafrasService } from "src/app/services/saasafras.service";
 import { MatDialog } from "@angular/material";
+import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmation-dialog.component";
+import { MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
     selector: "app-new-patch",
@@ -30,12 +31,14 @@ export class NewPatchComponent implements OnInit {
     minDate = new Date();
     maxDate = this._getMaxDate();
     patchDate;
+    confirmationDialog;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) private _passedData: any,
         private _fb: FormBuilder,
         private _fakeDataService: FakeDataService,
         private _utilsService: UtilsService,
+        @Inject(MAT_DIALOG_DATA) private _passedData: any,
+        public patchDialog: MatDialogRef<NewPatchComponent>,
         private dialog: MatDialog
     ) {}
 
@@ -93,37 +96,42 @@ export class NewPatchComponent implements OnInit {
         this.form.value.date = this.patchDate;
         console.warn(this.form.value);
         console.warn(this.form.valid);
-
-        var dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        this.patchDialog.close();
+        const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
             data: this.getConfirmationDialogData()
         });
     }
 
-    /************************
+    /* ======================
      *  HELPER METHODS
-     ************************/
+     ======================= */
+
     private getConfirmationDialogData() {
         let whenMessage;
         let today = new Date().toDateString();
-        if(this.patchDate.toDateString() === today) {
-            whenMessage = 'This could take a while.'
+        if (this.patchDate.toDateString() === today) {
+            whenMessage = "This could take a while.";
         } else {
             whenMessage = `Patching set for ${this.patchDate.toDateString()}`;
         }
-
         let data = {
             title: "Confirm Patch",
             btn1Text: "Cancel",
             btn2Text: "Patch",
-            snackBarMessage: "Patch has been scheduled",
+            snackBarCancelMessage: "Patch cancelled",
+            snackBarConfirmMessage: "Patch has been scheduled",
             messages: [
-                `${this.selectedInstances.length} instance(s) will be patched with ${this.solution.name} (add vNum and vNam)`,
+                `${
+                    this.selectedInstances.length
+                } instance(s) will be patched with ${
+                    this.solution.name
+                } (add vNum and vNam)`,
                 whenMessage,
                 "We'll send status emails to _____ when it starts and when it finishes."
             ]
         };
         return data;
-    };
+    }
 
     get versionInput() {
         return this.form.get("version");
