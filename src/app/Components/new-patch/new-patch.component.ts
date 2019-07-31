@@ -29,7 +29,7 @@ export class NewPatchComponent implements OnInit {
     patchImpactOnSpaces = null;
     minDate = new Date();
     maxDate = this._getMaxDate();
-    date;
+    patchDate;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
@@ -84,34 +84,46 @@ export class NewPatchComponent implements OnInit {
      * has an output?
      */
     onDateChange($event) {
-        this.date = $event.value;
+        this.patchDate = $event.value;
     }
 
     onSubmit() {
         delete this.form.value.environments; // true/false values
         this.form.value.selectedInstances = this.selectedInstances;
-        this.form.value.date = this.date;
+        this.form.value.date = this.patchDate;
         console.warn(this.form.value);
         console.warn(this.form.valid);
 
         var dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-            data: {
-                title: "Confirm Patch Details",
-                btn1Text: "Cancel",
-                btn2Text: "Schedule Patch",
-                messages: [
-                    `${this.selectedInstances.length} instance(s) will be patched with ${this.solution.name} (add vNum and vName to this...)`,
-                    "Patch will be scheduled and will take a while to complete. You will receive an email when the patch task starts and a status report email when it is complete.",
-                    "You can also view status info for scheduled, in progress and recent patches on the manage tab of this Solution."
-                ],
-                snackBarMessage: 'Patch has been scheduled'
-            }
+            data: this.getConfirmationDialogData()
         });
     }
 
     /************************
      *  HELPER METHODS
      ************************/
+    private getConfirmationDialogData() {
+        let whenMessage;
+        let today = new Date().toDateString();
+        if(this.patchDate.toDateString() === today) {
+            whenMessage = 'This could take a while.'
+        } else {
+            whenMessage = `Patching set for ${this.patchDate.toDateString()}`;
+        }
+
+        let data = {
+            title: "Confirm Patch",
+            btn1Text: "Cancel",
+            btn2Text: "Patch",
+            snackBarMessage: "Patch has been scheduled",
+            messages: [
+                `${this.selectedInstances.length} instance(s) will be patched with ${this.solution.name} (add vNum and vNam)`,
+                whenMessage,
+                "We'll send status emails to _____ when it starts and when it finishes."
+            ]
+        };
+        return data;
+    };
 
     get versionInput() {
         return this.form.get("version");

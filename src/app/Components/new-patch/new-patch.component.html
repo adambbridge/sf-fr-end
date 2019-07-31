@@ -50,7 +50,7 @@
     <div>
         <button mat-raised-button class='mr-2'>Cancel</button>
         <button mat-raised-button type="submit"
-            [disabled]="!form.valid || (selectedInstances && selectedInstances.length === 0)">Schedule Patch</button>
+            [disabled]="!form.valid || (selectedInstances && selectedInstances.length === 0) || !patchDate">Schedule Patch</button>
     </div>
 
 </form>
