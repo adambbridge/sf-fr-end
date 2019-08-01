@@ -1,107 +1,79 @@
 <h3 class="text-h1 d-flex justify-content-between">
     <span>{{ solution.name }}</span>
-
-    <!-- A/B TESTING CODE
-    TO DO: REMOVE LATER -->
-    <span>
-        <span (click)='v1 = !v1' class='text-hint'>
-            &nbsp; toggle single page
-        </span>
-        <span (click)='showTemplate = !showTemplate' class='text-hint'>
-            &nbsp; toggle old spaces widget
-        </span>
-    </span>
-
 </h3>
 
-<!-- <mat-tab-group *ngIf="v1">
-
-    <mat-tab label="About">
-        <ng-template matTabContent>
-            <app-solution-about></app-solution-about>
-        </ng-template>
-    </mat-tab>
-
-    <mat-tab label="Workspaces">
-        <ng-template matTabContent>
-            <app-solution-spaces [solution]='solution'></app-solution-spaces>
-        </ng-template>
-    </mat-tab>
-
-    <mat-tab label="Tasks">
-        <ng-template matTabContent>
-            <app-solution-tasks [solution]='solution'></app-solution-tasks>
-            <app-solution-history [solution]='solution'></app-solution-history>
-        </ng-template>
-    </mat-tab>
-
-</mat-tab-group> -->
-
-<mat-tab-group >
-
-   
+<mat-tab-group>
 
     <mat-tab label="Manage">
         <ng-template matTabContent>
 
             <!--====== TASK BTNS ========= -->
             <app-solution-tasks [solution]='solution'></app-solution-tasks>
-            <!-- <app-solution-spaces [solution]='solution'></app-solution-spaces> -->
 
-            <!--====== PODIO SPACES ========= -->
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Workspaces
+            <mat-accordion>
 
-                    </mat-panel-title>
+                <!--======  SPACES ========= -->
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon class="pr-2 text-light">ballot</mat-icon>
+                            Workspaces
+                        </mat-panel-title>
+                        <mat-panel-description class="d-flex justify-content-end pr-2">
+                            <span>{{solution.workspaces.length}}</span>
+                        </mat-panel-description>
 
-                </mat-expansion-panel-header>
-                <ng-template matExpansionPanelContent>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
 
-                    <!-- SELECT VERSION
-                        TODO: GET DEFAULT OPTION TO SHOW UP SELECTED -->
-                    <mat-form-field class='ml-3 mt-3'>
-                        <mat-label>Solution version</mat-label>
-                        <mat-select [(ngModel)]="selectedVersion">
-                            <mat-option value="fakeVersions[0]">{{fakeVersions[0]}}</mat-option>
-                            <mat-option value="fakeVersions[1]">{{fakeVersions[1]}}</mat-option>
-                            <mat-option value="fakeVersions[2]">{{fakeVersions[2]}}</mat-option>
-                            <mat-option value="fakeVersions[3]">{{fakeVersions[3]}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                        <!-- TODO: GET DEFAULT OPTION TO SHOW UP SELECTED -->
+                        <mat-form-field class='ml-3 mt-3'>
+                            <mat-label>Solution version</mat-label>
+                            <mat-select [(ngModel)]="selectedVersion">
+                                <mat-option value="fakeVersions[0]">{{fakeVersions[0]}}</mat-option>
+                                <mat-option value="fakeVersions[1]">{{fakeVersions[1]}}</mat-option>
+                                <mat-option value="fakeVersions[2]">{{fakeVersions[2]}}</mat-option>
+                                <mat-option value="fakeVersions[3]">{{fakeVersions[3]}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
 
-                    <app-podio-spaces [workspaces]='solution.workspaces' [disableSelection]='true'>
-                    </app-podio-spaces>
-                </ng-template>
-            </mat-expansion-panel>
+                        <app-podio-spaces [workspaces]='solution.workspaces' [disableSelection]='true'>
+                        </app-podio-spaces>
+                    </ng-template>
+                </mat-expansion-panel>
 
-            <!--====== DEPLOYED INSTANCES EXP PANEL ========= -->
-            <mat-expansion-panel *ngIf="!v1" class='mt-3'>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Deployed Instances
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <ng-template matExpansionPanelContent>
-                    <app-instances [instances]="instances" [showSearchBox]="false"></app-instances>
-                </ng-template>
-            </mat-expansion-panel>
+                <!--====== INSTANCES  ========= -->
+                <mat-expansion-panel class='mt-3'>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon class="pr-2 text-light">launch</mat-icon>
+                            Deployed Instances
+                        </mat-panel-title>
+                        <mat-panel-description class="d-flex justify-content-end pr-2">
+                            <span>{{instances.length}}</span>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                        <app-instances [instances]="instances" [showSearchBox]="false"></app-instances>
+                    </ng-template>
+                </mat-expansion-panel>
 
-            <!--====== TASK HISTORY IN EXP PANEL ========= -->
-            <mat-expansion-panel *ngIf="!v1"  class='mt-3'>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Actions History
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <ng-template matExpansionPanelContent>
-                    <app-solution-history [solution]='solution'></app-solution-history>
-                </ng-template>
-            </mat-expansion-panel>
-
-            <!--====== TASK HISTORY NOT IN EXP PANEL ========= -->
-            <app-solution-history *ngIf="v1"  [solution]='solution'></app-solution-history>
+                <!--====== HISTORY  ========= -->
+                <mat-expansion-panel class='mt-3'>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon class="pr-2 text-light">history</mat-icon>
+                            Actions History
+                        </mat-panel-title>
+                        <mat-panel-description class="d-flex justify-content-end pr-2">
+                            <span>7/20/2019</span>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                        <app-solution-history [solution]='solution'></app-solution-history>
+                    </ng-template>
+                </mat-expansion-panel>
+            </mat-accordion>
 
         </ng-template>
     </mat-tab>
@@ -109,15 +81,13 @@
     <mat-tab label="Summary">
         <ng-template matTabContent>
             <app-solution-about></app-solution-about>
-    
+
             <mat-card class='card-table-container mat-elevation-z3'>
                 <mat-card-title class="pl-4">
                     Deployed Instances
                 </mat-card-title>
                 <app-instances [instances]="instances"></app-instances>
             </mat-card>
-    
-            <app-solution-spaces *ngIf="showTemplate" [solution]='solution'></app-solution-spaces>
         </ng-template>
     </mat-tab>
 

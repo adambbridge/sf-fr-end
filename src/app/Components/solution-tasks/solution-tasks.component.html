@@ -2,7 +2,10 @@
 
     <div class="col-12 col-sm-6 col-md-4">
         <mat-card class='mr-1 mb-4 cursor-pointer' (click)='onUpdateClick()'>
-            <mat-card-title>Update Solution</mat-card-title>
+            <mat-card-title>
+                Update Solution
+                <mat-icon class="pl-1 text-light">refresh</mat-icon>
+            </mat-card-title>
             <mat-card-content>
                 <p class='text-hint'>
                     When you have made updates to the Podio workspaces which this solution is based on, an
@@ -20,7 +23,10 @@
 
     <div class="col-12 col-sm-6 col-md-4">
         <mat-card class='mr-1 cursor-pointer' (click)='onDeploymentClick()'>
-            <mat-card-title>Create New Instance</mat-card-title>
+            <mat-card-title>
+                Create New Instance
+                <mat-icon class="pl-1 text-light">launch</mat-icon>
+            </mat-card-title>
             <mat-card-content>
                 <p class='text-hint'>
                     Create new instances of this solution inside client Podio Organizations.
@@ -35,7 +41,10 @@
 
     <div class="col-12 col-sm-6 col-md-4">
         <mat-card class='mr-1 cursor-pointer' (click)='onPatchClick()'>
-            <mat-card-title>Patch Instances</mat-card-title>
+            <mat-card-title>
+                Patch Instances
+                <mat-icon class="pl-1 text-light">send</mat-icon>
+            </mat-card-title>
             <mat-card-content>
                 <p class='text-hint'>
                     When you have run Updates on your Saasafras solution you can Update deployments of the
