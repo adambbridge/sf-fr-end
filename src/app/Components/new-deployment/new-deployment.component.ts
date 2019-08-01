@@ -95,7 +95,7 @@ export class NewDeploymentComponent implements OnInit {
         let org = form.environment.name;
 
         let data = {
-            title: "Create Solution?",
+            title: "Create Instance?",
             btn1Text: "Cancel",
             btn2Text: "Create",
             snackBarCancelMessage: "Task cancelled",

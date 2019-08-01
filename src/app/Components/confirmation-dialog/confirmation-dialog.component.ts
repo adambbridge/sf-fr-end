@@ -11,13 +11,12 @@ import { Router } from "@angular/router";
     styleUrls: ["./confirmation-dialog.component.css"]
 })
 export class ConfirmationDialogComponent implements OnInit {
-    prop = "foobar";
     title: string;
     messages: string[];
-    btn1Text: string;
+    btn1Text?: string;
     btn2Text: string;
-    snackBarCancelMessage: string;
-    snackBarConfirmMessage: string;
+    snackBarCancelMessage?: string;
+    snackBarConfirmMessage?: string;
     destinationOnClose?: string;
 
     constructor(
@@ -49,18 +48,37 @@ export class ConfirmationDialogComponent implements OnInit {
         if (d.snackBarCancelMessage) {
             this.snackBarCancelMessage = d.snackBarCancelMessage;
         }
+        if (d.destinationOnClose) {
+            this.destinationOnClose = d.destinationOnClose;
+        }
     }
 
     onBtn1Click(): void {
         console.log("clicked cancel");
-        this.utilsService.openSnackBar(this.snackBarCancelMessage, null, 4000);
+        if (this.snackBarCancelMessage) {
+            this.utilsService.openSnackBar(
+                this.snackBarCancelMessage,
+                null,
+                4000
+            );
+        }
         this.confirmDialogRef.close();
-        this.router.navigate(["solutions"]);
+        if (this.destinationOnClose) {
+            this.router.navigate([this.destinationOnClose]);
+        }
     }
 
     onBtn2Click() {
-        this.utilsService.openSnackBar(this.snackBarConfirmMessage, null, 4000);
+        if (this.snackBarConfirmMessage) {
+            this.utilsService.openSnackBar(
+                this.snackBarConfirmMessage,
+                null,
+                4000
+            );
+        }
         this.confirmDialogRef.close();
-        this.router.navigate(["solutions"]);
+        if (this.destinationOnClose) {
+            this.router.navigate([this.destinationOnClose]);
+        }
     }
 }

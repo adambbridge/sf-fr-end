@@ -1,10 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { FakeDataService, IPodioOrganizationViewModel } from "src/app/services/fake-data.service";
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from "@angular/material";
+import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmation-dialog.component";
+import { MAT_DIALOG_DATA } from "@angular/material";
+import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
     selector: "app-add-environment",
@@ -21,7 +24,9 @@ export class AddEnvironmentComponent implements OnInit {
     constructor(
         private _fakeDataService: FakeDataService,
         private _fb: FormBuilder,
-        public dialogRef: MatDialogRef<AddEnvironmentComponent>
+        public addOrgDialog: MatDialogRef<AddEnvironmentComponent>,
+        @Inject(MAT_DIALOG_DATA) private _passedData: any,
+        private dialog: MatDialog
     ) {}
 
     ngOnInit() {
@@ -37,24 +42,38 @@ export class AddEnvironmentComponent implements OnInit {
     }
 
     onCancelClick(): void {
-        console.log('clicked cancel')
-        this.dialogRef.close();
+        console.log("clicked cancel");
+        this.addOrgDialog.close();
     }
 
     onSubmit() {
         // delete this.form.value.environments; // true/false values
         // this.form.value.selectedEnvs = this.selectedEnvs;
         // console.warn(this.form.value);
-        // console.warn(this.form.valid);
-        // this._utilsService.openSnackBar(
-        //     "message triggered inside onSubmit",
-        //     "some action",
-        //     4000
-        // );
+
+        this.addOrgDialog.close();
+        const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
+            data: this.getConfirmationDialogData()
+        });
     }
 
     onHeaderClick() {
         this.showContent = true;
+    }
+
+    /** ==================
+     * HELPER METHODS 
+     ===================== */
+
+    private getConfirmationDialogData() {
+        return {
+            title: "Adding Organization...",
+            btn2Text: "OK",
+            messages: [
+                "This may take a minute.",
+                "We'll email _____ when it's done."
+            ]
+        };
     }
 
     private _createForm() {
