@@ -20,7 +20,13 @@
                             Queued Tasks
                         </mat-panel-title>
                         <mat-panel-description class="d-flex justify-content-end pr-2">
-                            <span># of tasks</span>
+                            <!-- TODO MAKE DYNAMIC -->
+                            <span class='mr-3'>
+                                <mat-icon class='icon-smaller'>schedule</mat-icon> 1
+                            </span>
+                            <span class="mr-3">
+                                <mat-icon class='icon-smaller spin'>sync</mat-icon> 1
+                            </span>
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <ng-template matExpansionPanelContent>
@@ -36,7 +42,10 @@
                              Task History
                         </mat-panel-title>
                         <mat-panel-description class="d-flex justify-content-end pr-2">
-                            <span>7/20/2019</span>
+                            <!-- TODO MAKE DYNAMIC -->
+                            <span class='mr-3'><mat-icon class='warning icon-smaller'>warning</mat-icon> 1</span>
+                            <span class="mr-3"><mat-icon class='success icon-smaller'>check_circle</mat-icon> 3</span>
+                            <span>last task: 7/20/2019</span>
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <ng-template matExpansionPanelContent>

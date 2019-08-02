@@ -11,44 +11,46 @@ export class SolutionHistoryComponent implements OnInit {
     @Input() solution;
     @Input() queueTable?: boolean = false;
     temp = this.solution;
-
-    // configure table
     filteredActions = [];
     dataSource;
     searchColumn: string[] = [""];
     @ViewChild(MatSortModule) sort: MatSortModule;
     displayedColumns: string[] = [
-        "datetime",
         "action",
+        "status",
         "instance",
         "version",
-        "status",
-        "notes"
+        "notes",
+        "datetime"
     ];
 
     constructor() {}
 
-    // d.toUTCString();
-
     ngOnInit() {
+        this.filteredActions = this.getFilteredActions();
+        this.dataSource = new MatTableDataSource(this.filteredActions);
+        console.log(this.dataSource);
+    }
+
+    getFilteredActions() {
         const now = new Date();
+        let filtered = [];
         if (this.queueTable) {
             this.solution.history.forEach((action) => {
-                if(action.datetime >= now) {
+                if (action.datetime >= now) {
                     action.datetime = action.datetime.toUTCString();
-                    this.filteredActions.push(action);
+                    filtered.push(action);
                 }
             });
         } else {
-             this.solution.history.forEach((action) => {
-                 if (action.datetime < now) {
-                     action.datetime = action.datetime.toUTCString();
-                     this.filteredActions.push(action);
-                 }
-             });
+            this.solution.history.forEach((action) => {
+                if (action.datetime < now) {
+                    action.datetime = action.datetime.toUTCString();
+                    filtered.push(action);
+                }
+            });
         }
-        this.dataSource = new MatTableDataSource(this.filteredActions);
-        console.log(this.dataSource)
+        return filtered;
     }
 
     applyFilter(filterValue: string) {

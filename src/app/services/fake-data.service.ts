@@ -143,14 +143,13 @@ export class FakeDataService {
     createDateFromOffset(offset) {
         var d = new Date();
         d.setDate(d.getDate() + offset);
-        // d.toUTCString();
         return d;
     }
 
     fakeSolutionActions: ISolutionActionViewModel[] = [
-        // FUTURE
+
         {
-            datetime: this.createDateFromOffset(1),
+            datetime: this.createDateFromOffset(4),
             action: "Patch",
             instance: "XYZC",
             versionNumFrom: "0.0",
@@ -160,7 +159,17 @@ export class FakeDataService {
             notes: "Bring Brick Bridge and XYZ up to 1.0",
             status: "scheduled"
         },
-        // NEAR PAST
+        {
+            datetime: this.createDateFromOffset(2),
+            action: "Update",
+            instance: null,
+            versionNumFrom: "0.0",
+            versionNumTo: "1.0",
+            versionNameFrom: null,
+            versionNameTo: "Some Name",
+            notes: "Lorem ipsum and some more notes ...",
+            status: "in progress"
+        },
         {
             datetime: this.createDateFromOffset(-1),
             action: "Update",
@@ -172,18 +181,6 @@ export class FakeDataService {
             notes: "Lorem ipsum and some more notes ...",
             status: "error"
         },
-        {
-            datetime: this.createDateFromOffset(0),
-            action: "Update",
-            instance: null,
-            versionNumFrom: "0.0",
-            versionNumTo: "1.0",
-            versionNameFrom: null,
-            versionNameTo: "Some Name",
-            notes: "Lorem ipsum and some more notes ...",
-            status: "in progress"
-        },
-        // HISTORY
         {
             datetime: this.createDateFromOffset(-200),
             action: "Patch",
