@@ -1,8 +1,22 @@
-<h3 class="text-h1">
-    My Saasafras Solutions
-    <span class='text-hint' [hidden]="showCards">v.1 table</span>
-    <span class='text-hint' [hidden]="!showCards">v.2 cards</span>
-    <span (click)="showCards = !showCards" class='cursor-pointer text-hint'> show other version</span>
+<h3 class="text-h1 d-flex justify-content-between">
+    <span>
+        My Solutions
+        <span class="text-hint pl-2">Please choose a solution</span>
+    </span>
+    <span>
+        
+        <!-- TOGGLE BETWEEN TABLE AND CARD LAYOUT -->
+        <span (click)="showCards = !showCards" class='text-hint' [hidden]="showCards">
+            <button class="mat-button">
+                <mat-icon>view_module</mat-icon>
+            </button>
+        </span>
+        <span (click)="showCards = !showCards" class='text-hint' [hidden]="!showCards">
+            <button class="mat-button">
+                <mat-icon>view_headline</mat-icon>
+            </button>
+        </span>
+    </span>
 </h3>
 
 <div>

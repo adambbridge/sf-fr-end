@@ -66,6 +66,9 @@ app-new-patch td.mat-cell:first-of-type{
     display: inline-block;
     height: 24px;
 }
+.mat-icon {
+    vertical-align: middle;
+}
 .sf-font-weight-light {
     color: rgba(0, 0, 0, 0.54);
 }
@@ -168,7 +171,7 @@ mat-card.card-table-container {
     padding-left: 25px;
 }
 .mat-form-field-prefix {
-    top: 4px; /* * in search input in table container */
+   /* *  top: 4px;  in search input in table container . instead of this i am now using vertical-align: middle on mat-icon */
     color: #777;
 }
 .mat-form-field-infix {

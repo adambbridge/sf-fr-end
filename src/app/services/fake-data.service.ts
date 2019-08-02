@@ -63,7 +63,7 @@ export interface IClientViewModel {
 }
 
   export interface ISolutionActionViewModel {
-      datetime: string;
+      datetime: any;
       action: string;
       instance: string;
       versionNumFrom?: any;
@@ -71,6 +71,7 @@ export interface IClientViewModel {
       versionNameFrom?: any;
       versionNameTo: string;
       notes?: string;
+      status: string;
   }
   
 
@@ -138,56 +139,94 @@ export class FakeDataService {
         }
     };
 
+    /** helper to get fake dates in the near past or future */
+    createDateFromOffset(offset) {
+        var d = new Date();
+        d.setDate(d.getDate() + offset);
+        // d.toUTCString();
+        return d;
+    }
+
     fakeSolutionActions: ISolutionActionViewModel[] = [
+        // FUTURE
         {
-            datetime: "03/01/2018 2:32 PM",
+            datetime: this.createDateFromOffset(1),
             action: "Patch",
             instance: "XYZC",
             versionNumFrom: "0.0",
             versionNumTo: "1.0",
             versionNameFrom: null,
             versionNameTo: "Some Name",
-            notes: "Bring Brick Bridge and XYZ up to 1.0"
+            notes: "Bring Brick Bridge and XYZ up to 1.0",
+            status: "scheduled"
         },
+        // NEAR PAST
         {
-            datetime: "03/01/2018 2:22 PM",
-            action: "Patch",
-            instance: "BBCO",
-            versionNumFrom: "0.0",
-            versionNumTo: "1.0",
-            versionNameFrom: null,
-            versionNameTo: "Some Name",
-            notes: "Bring Brick Bridge and XYZ up to 1.0"
-        },
-        {
-            datetime: "04/01/2018 2:22 PM",
+            datetime: this.createDateFromOffset(-1),
             action: "Update",
             instance: null,
             versionNumFrom: "0.0",
             versionNumTo: "1.0",
             versionNameFrom: null,
             versionNameTo: "Some Name",
-            notes: "Lorem ipsum and some more notes ..."
+            notes: "Lorem ipsum and some more notes ...",
+            status: "error"
         },
         {
-            datetime: "02/01/2018 2:22 PM",
+            datetime: this.createDateFromOffset(0),
+            action: "Update",
+            instance: null,
+            versionNumFrom: "0.0",
+            versionNumTo: "1.0",
+            versionNameFrom: null,
+            versionNameTo: "Some Name",
+            notes: "Lorem ipsum and some more notes ...",
+            status: "in progress"
+        },
+        // HISTORY
+        {
+            datetime: this.createDateFromOffset(-200),
+            action: "Patch",
+            instance: "BBCO",
+            versionNumFrom: "0.0",
+            versionNumTo: "1.0",
+            versionNameFrom: null,
+            versionNameTo: "Some Name",
+            notes: "Bring Brick Bridge and XYZ up to 1.0",
+            status: "success"
+        },
+        {
+            datetime: this.createDateFromOffset(-300),
+            action: "Update",
+            instance: null,
+            versionNumFrom: "0.0",
+            versionNumTo: "1.0",
+            versionNameFrom: null,
+            versionNameTo: "Some Name",
+            notes: "Lorem ipsum and some more notes ...",
+            status: "success"
+        },
+        {
+            datetime: this.createDateFromOffset(-350),
             action: "Deploy",
             instance: "INST",
             versionNumFrom: null,
             versionNumTo: "0.0",
             versionNameFrom: null,
             versionNameTo: null,
-            notes: "Lorem ipsum and some more notes ..."
+            notes: "Lorem ipsum and some more notes ...",
+            status: "success"
         },
         {
-            datetime: "05/01/2018 2:22 PM",
+            datetime: this.createDateFromOffset(-400),
             action: "Create",
             instance: null,
             versionNumFrom: null,
             versionNumTo: "0.0",
             versionNameFrom: null,
             versionNameTo: null,
-            notes: "Lorem ipsum and some more notes ..."
+            notes: "Lorem ipsum and some more notes ...",
+            status: "success"
         }
     ];
 

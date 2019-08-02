@@ -1,41 +1,41 @@
 <div class="row mt-4">
 
     <div class="col-12 col-sm-6 col-md-4">
-        <mat-card class='mr-1 mb-4 cursor-pointer' (click)='onUpdateClick()'>
-            <mat-card-title>
-                Update Solution
-                <mat-icon class="pl-1 text-light">refresh</mat-icon>
-            </mat-card-title>
-            <mat-card-content>
-                <p class='text-hint'>
-                    When you have made updates to the Podio workspaces which this solution is based on, an
-                    Update can capture those
-                    changes and update your Saasafras solution.
-                    <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
-                </p>
-            </mat-card-content>
-            <!-- <mat-card-actions>
-                <button mat-button>Preview Changes</button>
-                <button mat-button>Create Update...</button>
-            </mat-card-actions> -->
-        </mat-card>
-    </div>
-
-    <div class="col-12 col-sm-6 col-md-4">
         <mat-card class='mr-1 cursor-pointer' (click)='onDeploymentClick()'>
             <mat-card-title>
                 Create New Instance
                 <mat-icon class="pl-1 text-light">launch</mat-icon>
             </mat-card-title>
-            <mat-card-content>
-                <p class='text-hint'>
+            <mat-card-content class='text-hint'>
+                <p>
                     Create new instances of this solution inside client Podio Organizations.
-                    <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
+                    <a href="">Learn more</a>
                 </p>
             </mat-card-content>
-            <!-- <mat-card-actions>
-                <button mat-button>Create Instance...</button>
-            </mat-card-actions> -->
+            <mat-card-footer class="text-hint mr-0 ml-0">
+                last Deployment 01/01/2011
+            </mat-card-footer>
+        </mat-card>
+    </div>
+
+    <div class="col-12 col-sm-6 col-md-4">
+        <mat-card class='mr-1 mb-4 cursor-pointer' (click)='onUpdateClick()'>
+            <mat-card-title>
+                Update Solution
+                <mat-icon class="pl-1 text-light">refresh</mat-icon>
+            </mat-card-title>
+            <mat-card-content class='text-hint'>
+                <p>
+                    When you have made updates to the Podio workspaces which this solution is based on, an
+                    Update can capture those
+                    changes and update your Saasafras solution.
+                    <a href="">Learn more</a>
+                </p>
+
+            </mat-card-content>
+            <mat-card-footer class="text-hint mr-0 ml-0">
+                last Update 01/01/2011
+            </mat-card-footer>
         </mat-card>
     </div>
 
@@ -45,17 +45,17 @@
                 Patch Instances
                 <mat-icon class="pl-1 text-light">send</mat-icon>
             </mat-card-title>
-            <mat-card-content>
-                <p class='text-hint'>
+            <mat-card-content class='text-hint'>
+                <p>
                     When you have run Updates on your Saasafras solution you can Update deployments of the
                     solution with all of the changes
                     by creating a Patch.
-                    <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
+                    <a href="">Learn more</a>
                 </p>
             </mat-card-content>
-            <!-- <mat-card-actions>
-                <button mat-button>Create Patch...</button>
-            </mat-card-actions> -->
+            <mat-card-footer class="text-hint mr-0 ml-0">
+                last Patch 01/01/2011
+            </mat-card-footer>
         </mat-card>
     </div>
 

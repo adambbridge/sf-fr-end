@@ -39,7 +39,12 @@ export class SolutionComponent implements OnInit {
     solutions: ISolutionViewModel[];
     solution: ISolutionViewModel;
     instances: ISolutionInstanceViewModel[];
-    fakeVersions = ["2.1 Sierra (latest)", "2.0 Sierra", "1.0 Nevada", "0.0 InHouseVersion"];
+    fakeVersions = [
+        "2.1 Sierra (latest)",
+        "2.0 Sierra",
+        "1.0 Nevada",
+        "0.0 InHouseVersion"
+    ];
     selectedVersion = this.fakeVersions[0];
 
     constructor(
@@ -66,4 +71,5 @@ export class SolutionComponent implements OnInit {
             this.v1 = true;
         }
     }
-}
+
+} 
