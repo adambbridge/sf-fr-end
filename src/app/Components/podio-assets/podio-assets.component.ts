@@ -23,6 +23,7 @@ export class PodioAssetsComponent implements OnInit {
     @Input() accordionOnly = false;
     @Input() organizations?; // optional
     envUI: string = "oneTable";
+    addOrgInProgress: boolean = false;
 
     // MATERIAL TABLE SETUP
     displayedColumns: string[] = ["org", "owner", "solution", "isTemplate"];
@@ -56,13 +57,19 @@ export class PodioAssetsComponent implements OnInit {
         // });
     }
 
-    onAddEnvClick() {
-        this.dialog.open(AddEnvironmentComponent, {});
+    onAddOrgClick() {
+        const dialogRef = this.dialog.open(AddEnvironmentComponent, {});
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log("result: ", result);
+            if ((result = "add")) {
+                this.addOrgInProgress = true;
+            }
+        });
     }
 
-    /**
+    /** =========================
      * OLD ACCORDION FUNCTIONS
-     */
+    ============================= */
     onSelectionChange(e, panelIndex) {
         this.selectedSpaces = this.spacesLists._results[
             panelIndex

@@ -48,7 +48,7 @@
                 Explanatory text could go here if needed...
             </p>
 
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mb-3 mt-3">
+            <form [formGroup]="loginForm" class="mb-3 mt-3">
 
                 <mat-form-field class='w-100'>
                     <mat-label>Email</mat-label>
@@ -60,8 +60,8 @@
                     <input type="text" matInput formControlName="password">
                 </mat-form-field>
 
-                <button mat-raised-button class='mr-2'>Cancel</button>
-                <button mat-raised-button type="submit" [disabled]="false">Add Environment</button>
+                <button mat-raised-button class='mr-2' (click)="onCancelClick()">Cancel</button>
+                <button mat-raised-button type="button" [disabled]="false" (click)='onSubmitCredentials()'>Add Environment</button>
 
             </form>
 

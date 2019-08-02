@@ -46,12 +46,12 @@ export class AddEnvironmentComponent implements OnInit {
         this.addOrgDialog.close();
     }
 
-    onSubmit() {
+    onSubmitCredentials() {
         // delete this.form.value.environments; // true/false values
         // this.form.value.selectedEnvs = this.selectedEnvs;
         // console.warn(this.form.value);
 
-        this.addOrgDialog.close();
+        this.addOrgDialog.close('add');
         const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
             data: this.getConfirmationDialogData()
         });
