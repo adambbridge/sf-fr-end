@@ -1,15 +1,11 @@
 <!--============================
-ORG NAME AND ACTIONS
-=========================================== -->
+    ORG NAME AND ACTIONS
+================================ -->
 <div class="d-flex justify-content-center">
     <mat-card class='w-100 mt-3'>
         <mat-card-content>
-
             <div class="d-flex justify-content-between align-items-center">
-                <!-- NAME -->
                 <h3 class="text-h1">{{org.name}}</h3>
-
-                <!-- MENU -->
                 <span>
                     <mat-menu #orgActionsMenu="matMenu">
                         <button mat-menu-item>
@@ -20,10 +16,6 @@ ORG NAME AND ACTIONS
                             <mat-icon>delete</mat-icon>
                             <span>Add New Solution Instance</span>
                         </button>
-                        <!-- <button mat-menu-item>
-                            <mat-icon>delete</mat-icon>
-                            <span>View Org Workspaces</span>
-                        </button> -->
                     </mat-menu>
                     <button mat-raised-button [matMenuTriggerFor]="orgActionsMenu">
                         Org Actions &nbsp;
@@ -35,122 +27,64 @@ ORG NAME AND ACTIONS
             <mat-divider></mat-divider>
 
             <!--============================
-            ORG INFO 
-            =========================================== -->
-            <div class="row">
-                <div class="col-xs-12 col-sm-6">
-                    <mat-list>
-                        <h3>Information</h3>
-                        <mat-list-item>
-                            <mat-icon mat-list-icon>credit_card</mat-icon>
-                            <p mat-line>Org. ID: {{org.id}} </p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon mat-list-icon>store_mall_directory</mat-icon>
-                            <p mat-line>Owner: {{org.owner}} </p>
-                        </mat-list-item>
-                        <mat-list-item>
-                            <mat-icon mat-list-icon>view_quilt</mat-icon>
-                            <p mat-line>Is Template for Solution: Add this field to fake data...</p>
-                        </mat-list-item>
+                    ORG INFO 
+            ================================ -->
+            <mat-list>
+                <h3>Information</h3>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>credit_card</mat-icon>
+                    <p mat-line>Org. ID: {{org.id}} </p>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>store_mall_directory</mat-icon>
+                    <p mat-line>Owner: {{org.owner}} </p>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon mat-list-icon>view_quilt</mat-icon>
+                    <p mat-line>Is Template for Solution: Add this field to fake data...</p>
+                </mat-list-item>
+            </mat-list>
 
-                        <mat-expansion-panel>
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    Workspaces </mat-panel-title>
-                            </mat-expansion-panel-header>
 
-                            <!--============================
-                            PODIO SPACES 
-                            ==================================== -->
-                            <ng-template matExpansionPanelContent>
-                                <app-podio-spaces [org]='org' (selectedSpaces)="onSpaceSelection($event)"
-                                    [disableSelection]='false'></app-podio-spaces>
+            <!--============================
+                        SPACES 
+                ================================ -->
+            <mat-expansion-panel class="mb-3 mt-2">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <mat-icon class="pr-2 text-light">ballot</mat-icon>
+                        Workspaces
+                    </mat-panel-title>
+                    <mat-panel-description class="d-flex justify-content-end pr-2">
+                        <span>{{org.spaces.length}}</span>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                    <app-podio-spaces [org]='org' (selectedSpaces)="onSpaceSelection($event)"
+                        [disableSelection]='false'></app-podio-spaces>
+                    <button mat-raised-button (click)="onCreateSolClick()"
+                        [disabled]="!selectedWorkspaces.length">Create Solution from Selected</button>
+                </ng-template>
+            </mat-expansion-panel>
 
-                                <button mat-raised-button (click)="onCreateSolClick()"
-                                    [disabled]="!selectedWorkspaces.length">Create Solution from Selected</button>
+            <!--===========================
+                    INSTANCE(S) 
+            ================================ -->
 
-                            </ng-template>
-
-                        </mat-expansion-panel>
-
-                    </mat-list>
-
-                </div>
-
-                <div class="col-xs-12 col-sm-6 mt-2">
-
-                    <h3>Deployed Solution Instances</h3>
-
-                    <!--============================
-                    INSTANCE(S)CARDS
-                    =========================================== -->
-
-                    <div *ngFor="let instance of org.instances" class='mt-4'>
-                        <mat-card>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h4>mPactPro-XYZ Real Estate</h4>
-
-                                <!-- INSTANCE ACTIONS -->
-                                <span>
-                                    <mat-menu #instanceActionsMenu="matMenu">
-                                        <button mat-menu-item>
-                                            <mat-icon>edit</mat-icon>
-                                            <span>Instance History</span>
-                                        </button>
-                                        <button mat-menu-item>
-                                            <mat-icon>delete</mat-icon>
-                                            <span>Patch Instance</span>
-                                        </button>
-                                        <button mat-menu-item>
-                                            <mat-icon>delete</mat-icon>
-                                            <span>Delete Instance</span>
-                                        </button>
-                                        <button mat-menu-item>
-                                            <mat-icon>delete</mat-icon>
-                                            <span>Revoke Client Access</span>
-                                        </button>
-                                    </mat-menu>
-                                    <!-- <button mat-raised-button [matMenuTriggerFor]="instanceActionsMenu">
-                                            Instance Actions &nbsp;
-                                            <mat-icon>keyboard_arrow_down</mat-icon>
-                                        </button> -->
-
-                                    <!-- MORE SUBTLE BUTTON OPTION -->
-                                    <button mat-button [matMenuTriggerFor]="instanceActionsMenu">
-                                        <mat-icon>more_vert</mat-icon>
-                                    </button>
-                                </span>
-                            </div>
-                            <!-- INSTANCE INFO -->
-                            <mat-card-content>
-                                <mat-list>
-                                    <mat-list-item>
-                                        <h4 mat-line>Org ID: {{instance.id}}</h4>
-                                    </mat-list-item>
-                                    <mat-list-item>
-                                        <p mat-line>Uses Solution: {{instance.solution}}</p>
-                                    </mat-list-item>
-                                    <mat-list-item *ngIf="instance.description">
-                                        <p mat-line>Description: {{instance.description}} </p>
-                                    </mat-list-item>
-                                </mat-list>
-                            </mat-card-content>
-
-                        </mat-card>
-
-                    </div>
-
-                    <!--============================
-                    INSTANCE(S) COMPONENT
-                    =========================================== -->
-                    <h3>Deployed Solution Instances</h3>
-                    <mat-card>
-                        <app-instances [instances]="org.instances"></app-instances>
-                    </mat-card>
-
-                </div>
-            </div>
+            <mat-expansion-panel class="mb-3">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <mat-icon class="pr-2 text-light">launch</mat-icon>
+                        Deployed Solution Instances
+                    </mat-panel-title>
+                    <mat-panel-description class="d-flex justify-content-end pr-2">
+                        <span>{{org.instances.length}}</span>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                    <app-instances [instances]="org.instances" [showSearchBox]="false"></app-instances>
+                </ng-template>
+            </mat-expansion-panel>
 
         </mat-card-content>
     </mat-card>

@@ -1,7 +1,7 @@
 import { environment } from "src/environments/environment.prod";
-import { ISolutionViewModel } from "./fake-data.service";
 import { Injectable } from "@angular/core";
 
+/** we aren't currently showing the fields in the UI. mabye in the future we will be though... */
 export interface IPodioApplicationViewModel {
     appName: string;
     appId: number;
@@ -9,6 +9,9 @@ export interface IPodioApplicationViewModel {
     fields: Array<string>;
 }
 
+/** currently the UI just shows names of spaces and their apps 
+ * within the context of an organization ie at /podio/id, in the update task form etc. 
+ * */
 export interface IPodioSpaceViewModel {
     workspaceName: string;
     workspaceId: number;
@@ -19,31 +22,26 @@ export interface IPodioSpaceViewModel {
 }
 
 export interface ISolutionViewModel {
-    // always
-    appId?: string; // is this the unique ID for solution?
+    appId?: string; // is this the unique ID for a solution?
     name: string;
-    imageUrl?: string; // optional. uses icon or nothing if no img
-    description?: string;
-    lastTaskDate?: Date;
-    // needs vary
-    workspaces: Array<IPodioSpaceViewModel>; // only need names (strings) until detail screen
-    history: ISolutionTaskViewModel[]; // preview only needs date of last Task
-    // not needed for preview
-    version: string | number;
-    creationDate?: Date;
+    imageUrl?: string; // users will in the future be able to optionally upload an image to use for their solution icon
+    description?: string; // users can enter one if they want 
+    lastTaskDate?: Date; // if no other tasks this is simple the creation date
+    workspaces: Array<IPodioSpaceViewModel>; // only need names of spaces at /solutions/ (strings). Whne you get to /solution/id (detail) we display the space name and names of it's apps
+    history: ISolutionTaskViewModel[]; // /solutions/ only needs date of last task performed. /solution/id (detail) needs all tasks including their details in order to show task queue and history 
+    version: string | number; // /solutions/ shows info for latest version. /solution/id shows info for allversions of the solution. when you view the workspaces you can select which version you want to view spaces for. deployed instances, history etc show tasks and instances for all versions. each vesion is, i think, a separate solution behind the scenes so maybe we need to fetch all of them...?
+    creationDate?: Date; 
 }
 
-// export interface ISolutionPreviewViewModel {
-//     appId?: string;
-//     name: string;
-//     imageUrl?: string;
-//     lastTask: Date;
-//     description?: string;
-//     workspaces: string[];
-//     instanceCount: number;
-// }
-
-// GET solution/id/instances? or instances/where sol = currentSolution
+/**
+* WHERE: currently show instances list in new-patch, podio-org-detail and solution 
+* WHAT: currently show columns name, v num, v name, client, last action (date and type), 
+* (i want to show also the solution name and have the solution id available 
+* so you can click thru to the solution detail at solutions/id) 
+* NOTE: patch diff is not prop of instance. 
+* it is calculated by comparing spaces details of instance sol. v 
+* with spaces details of patch sol. v
+ */
 export interface ISolutionInstanceViewModel {
     name: string;
     id: string;
@@ -52,18 +50,17 @@ export interface ISolutionInstanceViewModel {
     solutionVersionNumber: string;
     solutionVersionName: string;
     client: any;
-    lastTask: ISolutionTaskViewModel; // we want to show date and task (deploy, update or patch)
-    // patch diff is not prop of instance. it is calculated
-    // by comparing spaces details of instance sol. v with spaces details of patch sol. v
+    lastTask: ISolutionTaskViewModel; 
+    
 }
 
 export interface IPodioOrganizationViewModel {
     name: string;
     owner: string;
-    isTemplate?: boolean;
+    isTemplate?: boolean; // is used as source of spaces for a solution
     orgId?: number;
     spaces: Array<IPodioSpaceViewModel>;
-    instances?: Array<ISolutionInstanceViewModel>;
+    instances?: Array<ISolutionInstanceViewModel>; // instances deployed to this org
 }
 
 export interface IClientViewModel {

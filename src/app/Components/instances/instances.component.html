@@ -76,6 +76,33 @@
                         </span>
                     </span>
 
+                    <!-- ========================
+                        INSTANCE ACTIONS 
+                    ============================= -->
+                    <!-- <span>
+                        <mat-menu #instanceActionsMenu="matMenu">
+                            <button mat-menu-item>
+                                <mat-icon>edit</mat-icon>
+                                <span>Instance History</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>delete</mat-icon>
+                                <span>Patch Instance</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>delete</mat-icon>
+                                <span>Delete Instance</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon>delete</mat-icon>
+                                <span>Revoke Client Access</span>
+                            </button>
+                        </mat-menu>
+                        <button mat-button [matMenuTriggerFor]="instanceActionsMenu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                    </span> -->
+
                 </td>
             </ng-container>
 
@@ -86,7 +113,7 @@
 
     </div>
 
-    <button *ngIf="showButton" mat-raised-button (click)="onPatchSelectedClick()"
+    <button *ngIf="showButton" mat-raised-button (click)="onPatchSelectedClick()" class="mt-3"
         [disabled]="!selection.selected.length">
         Patch Selected Instances...
     </button>
