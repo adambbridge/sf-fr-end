@@ -8,15 +8,12 @@ import { MatSortModule } from "@angular/material/sort";
     styleUrls: ["./solution-history.component.css"]
 })
 export class SolutionHistoryComponent implements OnInit {
-    @Input() solution;
-    @Input() queueTable?: boolean = false;
-    temp = this.solution;
-    filteredActions = [];
+    @Input() tasks;
     dataSource;
     searchColumn: string[] = [""];
     @ViewChild(MatSortModule) sort: MatSortModule;
     displayedColumns: string[] = [
-        "action",
+        "task",
         "status",
         "instance",
         "version",
@@ -27,30 +24,8 @@ export class SolutionHistoryComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
-        this.filteredActions = this.getFilteredActions();
-        this.dataSource = new MatTableDataSource(this.filteredActions);
+        this.dataSource = new MatTableDataSource(this.tasks);
         console.log(this.dataSource);
-    }
-
-    getFilteredActions() {
-        const now = new Date();
-        let filtered = [];
-        if (this.queueTable) {
-            this.solution.history.forEach((action) => {
-                if (action.datetime >= now) {
-                    action.datetime = action.datetime.toUTCString();
-                    filtered.push(action);
-                }
-            });
-        } else {
-            this.solution.history.forEach((action) => {
-                if (action.datetime < now) {
-                    action.datetime = action.datetime.toUTCString();
-                    filtered.push(action);
-                }
-            });
-        }
-        return filtered;
     }
 
     applyFilter(filterValue: string) {

@@ -1,49 +1,196 @@
-<div class="row mt-4">
+<div class="row mt-4 dashboard">
     <div class="col col-md-8">
         <mat-card>
-            <h1 class="text-h1" >
+            <!-- <h1 class="text-h1" >
                 Welcome!</h1>
-            <h3>Sassafras lets you create, deploy & patch versioned Podio solutions </h3>
-            <!-- <app-card-collection [showCards]="true" [items]="onboardingOptions" [chiplist]=false></app-card-collection> -->
+            <h3>Sassafras lets you create, deploy & patch versioned Podio solutions </h3> -->
 
-            <div class="row mt-4">
-                <div class="col-12 col-sm-6 col-md-4" *ngFor="let item of onboardingOptions">
+            <div class="row">
+                <!-- OLD WELCOME ONBOARDING CARDS -->
+                <!-- <div class="col-12 col-sm-6 col-md-4" *ngFor="let item of onboardingOptions">
                     <app-card [item]='item' [chiplist]='false' routerLink=""></app-card>
+                </div> -->
+
+                <!-- ACTION 1 -->
+                <div class="col-12 col-sm-6 col-md-4">
+                    <a routerLink="/solutions" class="text-no-deco">
+                        <mat-card class='mr-1 mb-4 cursor-pointer min-h-200'>
+                            <mat-card-title>
+                                Manage Solutions
+                                <!-- <mat-icon class="pl-1 text-light">refresh</mat-icon> -->
+                            </mat-card-title>
+                            <mat-card-content class='text-hint text-no-deco'>
+                                <p>
+                                    Onbaoarding help text about this action
+                                </p>
+
+                            </mat-card-content>
+                            <mat-card-actions class="text-hint">
+                                <span *ngIf="false">2 Solutions</span>
+                                <a routerLink="/solutions/new">
+                                    <button mat-flat-button class="mb-1 bg-lightgrey">Create your first
+                                        solution</button>
+                                </a>
+                            </mat-card-actions>
+                        </mat-card>
+                    </a>
+
                 </div>
+
+                <!-- ACTION 2 -->
+                <div class="col-12 col-sm-6 col-md-4">
+                    <a routerLink="/solutions" class="text-no-deco">
+                        <mat-card class='mr-1 mb-4 cursor-pointer min-h-200'>
+                            <mat-card-title>
+                                Administer Clients
+                                <!-- <mat-icon class="pl-1 text-light">refresh</mat-icon> -->
+                            </mat-card-title>
+                            <mat-card-content class='text-hint'>
+                                <p>
+                                    Onbaoarding help text about this action
+                                </p>
+
+                            </mat-card-content>
+                            <mat-card-actions class="text-hint">
+                                <span *ngIf="false">7 Clients</span>
+                                <a routerLink="/clients/new">
+                                    <!-- <button mat-flat-button class="mb-1 bg-lightgrey">Add your first client</button> -->
+                                    <p mat-line><a routerLink="/solutions/new">Create Your First Solution</a></p>
+                                </a>
+                            </mat-card-actions>
+                        </mat-card>
+                    </a>
+
+                </div>
+
+                <!-- ACTION 3 -->
+                <div class="col-12 col-sm-6 col-md-4">
+                    <a routerLink="/solutions" class="text-no-deco">
+                        <mat-card class='mr-1 mb-4 cursor-pointer min-h-200'>
+                            <mat-card-title>
+                                View Podio Orgs
+                                <!-- <mat-icon class="pl-1 text-light">refresh</mat-icon> -->
+                            </mat-card-title>
+                            <mat-card-content class='text-hint text-no-deco'>
+                                <p>Onbaoarding help text about this action</p>
+
+                            </mat-card-content>
+                            <mat-card-actions class="text-hint">
+                                <span *ngIf="false">2 Organizations</span>
+                                <!-- <a routerLink="/solutions/new">
+                                            <button mat-flat-button class="mb-1"></button>
+                                        </a> -->
+                            </mat-card-actions>
+                        </mat-card>
+                    </a>
+
+                </div>
+
             </div>
 
         </mat-card>
 
+        <!-- =================
+            RECENT TASKS 
+        ====================== -->
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon class="pr-2 text-light">history</mat-icon>
+                    Recent Tasks
+                </mat-panel-title>
+                <mat-panel-description class="d-flex justify-content-end pr-2">
+                    <!-- TODO DISPLAY ICONS DYNAMICALLY  -->
+                    <span class='mr-3'>
+                        <mat-icon class='icon-smaller'>schedule</mat-icon> 1
+                    </span>
+                    <span class="mr-3">
+                        <mat-icon class='icon-smaller spin'>sync</mat-icon> 4
+                    </span>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <app-solution-history [tasks]='recentTasks'></app-solution-history>
+            </ng-template>
+        </mat-expansion-panel>
+
+
+
     </div>
     <div class="col col-md-4">
-        <mat-card #tooltip="matTooltip" matTooltip="We can show styled tooltips when we want and make them go away when clicked." [matTooltipPosition]="'below'"
-                (mouseenter)="$event.stopImmediatePropagation()" (mouseleave)="$event.stopImmediatePropagation()" (click)="tooltip.toggle()">
-            <mat-card-header>
-                <!-- <div mat-card-avatar></div> -->
-                <mat-card-title>
-                    Level up with Sassafras!
-                    <mat-icon>help</mat-icon>
-                </mat-card-title>
-            </mat-card-header>
+        <mat-card #tooltip="matTooltip"
+            matTooltip="We can show styled tooltips when we want and make them go away when clicked."
+            [matTooltipPosition]="'below'" (mouseenter)="$event.stopImmediatePropagation()"
+            (mouseleave)="$event.stopImmediatePropagation()" (click)="tooltip.toggle()">
+            <mat-card-title class='d-flex align-content-center justify-content-start'>
+                <!-- <mat-progress-spinner [value]="25" [diameter]="50" class='mr-3'></mat-progress-spinner> -->
+                <span class='w-100'>
+                    <span class='d-flex justify-content-between mb-3'>
+                        <span>Level up with Saassafras</span>
+                        <span>25%</span>
+                    </span>
+
+                    <!-- <mat-icon class="text-lighter mat-icon-smaller pl-1">help</mat-icon> -->
+                    <mat-progress-bar mode="determinate" value="25"></mat-progress-bar>
+
+                </span>
+
+            </mat-card-title>
             <mat-card-content>
-                <mat-selection-list #shoes>
-                    <mat-list-option selected='true'>
-                        <span class="text-hint">Login with Podio</span>
 
-                    </mat-list-option>
-                    <mat-list-option>
-                        <span class="text-hint">Load my Podio workspaces</span>
+                <mat-list class="mb-3">
+                    <mat-list-item>
+                        <mat-icon mat-list-icon class="success">check_circle_o</mat-icon>
+                        <p mat-line>Login with Podio</p>
+                        <!-- <p mat-line class="text-light text-small">Loads associated <a routerLink="/podio">orgs</a></p> -->
+                    </mat-list-item>
 
-                    </mat-list-option>
-                    <mat-list-option>
-                        <span class="text-hint">Build a solution!</span>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon class="text-lighter">check_circle_o</mat-icon>
+                        <p mat-line><a routerLink="/solutions/new">Create Your First Solution</a></p>
+                        <!-- <p mat-line class="text-lighter text-small">Loads associated <a routerLink="/podio">orgs</a></p> -->
+                    </mat-list-item>
 
-                    </mat-list-option>
-                    <mat-list-option>
-                        <span class="text-hint">Deploy and maintain my Solutions</span>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon class="text-lighter">check_circle_o</mat-icon>
+                        <p mat-line><a routerLink="/clients/new">Add client to deploy to</a></p>
+                        <!-- <p mat-line class="text-lighter text-small">Loads associated <a routerLink="/podio">orgs</a></p> -->
+                    </mat-list-item>
 
-                    </mat-list-option>
-                </mat-selection-list>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon class="text-lighter">check_circle_o</mat-icon>
+                        <p mat-line><a routerLink="/solutions/123456">Deploy your Solution!</a></p>
+                        <!-- <p mat-line class="text-light text-small">Loads associated <a routerLink="/podio">orgs</a></p> -->
+                    </mat-list-item>
+                </mat-list>
+
+                <!-- ==================
+                VIDEO 
+                width="560" height="315" 
+                ======================= -->
+
+                <mat-divider></mat-divider>
+
+                <iframe [src]="videoUrlSafe" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                    class='mt-3 mb-3'></iframe>
+
+                <mat-divider></mat-divider>
+
+                <!-- ==================
+                SUPPORT 
+                ======================= -->
+
+                <mat-card-title class="mt-3">Support</mat-card-title>
+                <mat-list>
+                    <mat-list-item><a routerLink="">Some Item Here</a></mat-list-item>
+                    <mat-list-item><a routerLink="">Some Item Here</a></mat-list-item>
+                    <mat-list-item><a routerLink="">Some Item Here</a></mat-list-item>
+                    <mat-list-item><a routerLink="">Some Item Here</a></mat-list-item>
+                    <mat-list-item><a routerLink="">Some Item Here</a></mat-list-item>
+                </mat-list>
+
             </mat-card-content>
         </mat-card>
 

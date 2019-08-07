@@ -1,4 +1,4 @@
-import { environment } from 'src/environments/environment.prod';
+import { environment } from "src/environments/environment.prod";
 import { ISolutionViewModel } from "./fake-data.service";
 import { Injectable } from "@angular/core";
 
@@ -19,17 +19,31 @@ export interface IPodioSpaceViewModel {
 }
 
 export interface ISolutionViewModel {
-    appId?: string;
+    // always
+    appId?: string; // is this the unique ID for solution?
     name: string;
-    imageUrl?: string;
+    imageUrl?: string; // optional. uses icon or nothing if no img
+    description?: string;
+    lastTaskDate?: Date;
+    // needs vary
+    workspaces: Array<IPodioSpaceViewModel>; // only need names (strings) until detail screen
+    history: ISolutionTaskViewModel[]; // preview only needs date of last Task
+    // not needed for preview
     version: string | number;
     creationDate?: Date;
-    lastUpdateDate?: Date;
-    description?: string;
-    workspaces: Array<IPodioSpaceViewModel>;
-    history?: any;
 }
 
+// export interface ISolutionPreviewViewModel {
+//     appId?: string;
+//     name: string;
+//     imageUrl?: string;
+//     lastTask: Date;
+//     description?: string;
+//     workspaces: string[];
+//     instanceCount: number;
+// }
+
+// GET solution/id/instances? or instances/where sol = currentSolution
 export interface ISolutionInstanceViewModel {
     name: string;
     id: string;
@@ -38,9 +52,9 @@ export interface ISolutionInstanceViewModel {
     solutionVersionNumber: string;
     solutionVersionName: string;
     client: any;
-    lastAction: string;
-    // patch diff not prop of instance. it is calculated
-    // from instance info and patch version info
+    lastTask: ISolutionTaskViewModel; // we want to show date and task (deploy, update or patch)
+    // patch diff is not prop of instance. it is calculated
+    // by comparing spaces details of instance sol. v with spaces details of patch sol. v
 }
 
 export interface IPodioOrganizationViewModel {
@@ -62,20 +76,22 @@ export interface IClientViewModel {
     notes?: string;
 }
 
-  export interface ISolutionActionViewModel {
-      datetime: any;
-      action: string;
-      instance: string;
-      versionNumFrom?: any;
-      versionNumTo: string;
-      versionNameFrom?: any;
-      versionNameTo: string;
-      notes?: string;
-      status: string;
-  }
-  
+export interface ISolutionTaskViewModel {
+    // NEW date properties instaead of just "datetime":
+    scheduledFor: Date;
+    startedAt: Date;
+    completedAt: Date;
+    faultedAt: Date;
 
-
+    task: string;
+    instance: string;
+    versionNumFrom?: any;
+    versionNumTo: string;
+    versionNameFrom?: any;
+    versionNameTo: string;
+    notes?: string;
+    status: string;
+}
 
 // so we can inject this service
 @Injectable({
@@ -146,11 +162,14 @@ export class FakeDataService {
         return d;
     }
 
-    fakeSolutionActions: ISolutionActionViewModel[] = [
-
+    fakeSolutionTasks: ISolutionTaskViewModel[] = [
         {
-            datetime: this.createDateFromOffset(4),
-            action: "Patch",
+            scheduledFor: this.createDateFromOffset(4),
+            startedAt: null,
+            completedAt: null,
+            faultedAt: null,
+
+            task: "Patch",
             instance: "XYZC",
             versionNumFrom: "0.0",
             versionNumTo: "1.0",
@@ -160,8 +179,12 @@ export class FakeDataService {
             status: "scheduled"
         },
         {
-            datetime: this.createDateFromOffset(2),
-            action: "Update",
+            scheduledFor: this.createDateFromOffset(2),
+            startedAt: null,
+            completedAt: null,
+            faultedAt: null,
+
+            task: "Update",
             instance: null,
             versionNumFrom: "0.0",
             versionNumTo: "1.0",
@@ -171,8 +194,12 @@ export class FakeDataService {
             status: "in progress"
         },
         {
-            datetime: this.createDateFromOffset(-1),
-            action: "Update",
+            scheduledFor: this.createDateFromOffset(-1),
+            startedAt: this.createDateFromOffset(-1),
+            completedAt: null,
+            faultedAt: this.createDateFromOffset(-1),
+
+            task: "Update",
             instance: null,
             versionNumFrom: "0.0",
             versionNumTo: "1.0",
@@ -182,8 +209,12 @@ export class FakeDataService {
             status: "error"
         },
         {
-            datetime: this.createDateFromOffset(-200),
-            action: "Patch",
+            scheduledFor: this.createDateFromOffset(-200),
+            startedAt: this.createDateFromOffset(-200),
+            completedAt: this.createDateFromOffset(-200),
+            faultedAt: null,
+
+            task: "Patch",
             instance: "BBCO",
             versionNumFrom: "0.0",
             versionNumTo: "1.0",
@@ -193,8 +224,12 @@ export class FakeDataService {
             status: "success"
         },
         {
-            datetime: this.createDateFromOffset(-300),
-            action: "Update",
+            scheduledFor: this.createDateFromOffset(-300),
+            startedAt: this.createDateFromOffset(-300),
+            completedAt: this.createDateFromOffset(-300),
+            faultedAt: null,
+
+            task: "Update",
             instance: null,
             versionNumFrom: "0.0",
             versionNumTo: "1.0",
@@ -204,8 +239,12 @@ export class FakeDataService {
             status: "success"
         },
         {
-            datetime: this.createDateFromOffset(-350),
-            action: "Deploy",
+            scheduledFor: this.createDateFromOffset(-350),
+            startedAt: this.createDateFromOffset(-350),
+            completedAt: this.createDateFromOffset(-350),
+            faultedAt: null,
+
+            task: "Deploy",
             instance: "INST",
             versionNumFrom: null,
             versionNumTo: "0.0",
@@ -215,8 +254,12 @@ export class FakeDataService {
             status: "success"
         },
         {
-            datetime: this.createDateFromOffset(-400),
-            action: "Create",
+            scheduledFor: this.createDateFromOffset(-400),
+            startedAt: this.createDateFromOffset(-400),
+            completedAt: this.createDateFromOffset(-400),
+            faultedAt: null,
+
+            task: "Create",
             instance: null,
             versionNumFrom: null,
             versionNumTo: "0.0",
@@ -241,7 +284,7 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace
         ],
-        history: this.fakeSolutionActions
+        history: this.fakeSolutionTasks
     };
 
     fakeSolutions: Array<ISolutionViewModel> = [
@@ -252,7 +295,7 @@ export class FakeDataService {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 1,
             creationDate: new Date("2013-03-01T01:10:00"),
-            lastUpdateDate: new Date(),
+            lastTaskDate: new Date(),
             description:
                 "my lollipop. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
@@ -260,7 +303,7 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
-            history: this.fakeSolutionActions
+            history: this.fakeSolutionTasks
         },
         {
             appId: "123456",
@@ -269,7 +312,7 @@ export class FakeDataService {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 2,
             creationDate: new Date("2013-03-01T01:10:00"),
-            lastUpdateDate: new Date(),
+            lastTaskDate: new Date(),
             description:
                 "my ice cream. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
@@ -277,7 +320,7 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
-            history: this.fakeSolutionActions
+            history: this.fakeSolutionTasks
         },
         {
             appId: "123456",
@@ -286,7 +329,7 @@ export class FakeDataService {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 1,
             creationDate: new Date("2013-03-01T01:10:00"),
-            lastUpdateDate: new Date(),
+            lastTaskDate: new Date(),
             description:
                 "my burger. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
@@ -294,14 +337,14 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
-            history: this.fakeSolutionActions
+            history: this.fakeSolutionTasks
         },
         {
             appId: "123456",
             name: "Custom Solution D",
             version: 4,
             creationDate: new Date("2013-03-01T01:10:00"),
-            lastUpdateDate: new Date(),
+            lastTaskDate: new Date(),
             description:
                 "my pizza. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
@@ -309,14 +352,14 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
-            history: this.fakeSolutionActions
+            history: this.fakeSolutionTasks
         },
         {
             appId: "123456",
             name: "Custom Solution E",
             version: 4,
             creationDate: new Date("2013-03-01T01:10:00"),
-            lastUpdateDate: new Date(),
+            lastTaskDate: new Date(),
             description:
                 "my roasted pig. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
@@ -324,7 +367,7 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
-            history: this.fakeSolutionActions
+            history: this.fakeSolutionTasks
         },
         {
             appId: "123456",
@@ -333,7 +376,7 @@ export class FakeDataService {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             version: 4,
             creationDate: new Date("2013-03-01T01:10:00"),
-            lastUpdateDate: new Date(),
+            lastTaskDate: new Date(),
             description:
                 "my description. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
@@ -341,7 +384,7 @@ export class FakeDataService {
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
-            history: this.fakeSolutionActions
+            history: this.fakeSolutionTasks
         }
     ];
 
@@ -353,7 +396,7 @@ export class FakeDataService {
         solutionVersionNumber: "1.0",
         solutionVersionName: "Sierra",
         client: "XYZ Real Estate",
-        lastAction: "04/01/19 (Deploy)"
+        lastTask: this.fakeSolutionTasks[0]
     };
 
     fakeInstance2: ISolutionInstanceViewModel = {
@@ -364,7 +407,7 @@ export class FakeDataService {
         solutionVersionNumber: "1.1",
         solutionVersionName: "Sierra",
         client: "ABC Construction",
-        lastAction: "04/01/19 (Patch)"
+        lastTask: this.fakeSolutionTasks[1]
     };
     fakeInstance3: ISolutionInstanceViewModel = {
         name: "SFC1",
@@ -374,7 +417,7 @@ export class FakeDataService {
         solutionVersionNumber: "0.0",
         solutionVersionName: "Nevada",
         client: "DEFG Coffee",
-        lastAction: "04/01/19 (Deploy)"
+        lastTask: this.fakeSolutionTasks[2]
     };
     fakeInstance4: ISolutionInstanceViewModel = {
         name: "SFC1",
@@ -384,7 +427,7 @@ export class FakeDataService {
         solutionVersionNumber: "3.0",
         solutionVersionName: "California",
         client: "HIJK Catering",
-        lastAction: "04/01/19 (Patch)"
+        lastTask: this.fakeSolutionTasks[3]
     };
 
     fakeInstances: ISolutionInstanceViewModel[] = [

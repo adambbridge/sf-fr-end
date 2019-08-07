@@ -14,7 +14,8 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import {
     FakeDataService,
     ISolutionViewModel,
-    ISolutionInstanceViewModel
+    ISolutionInstanceViewModel,
+    ISolutionTaskViewModel
 } from "./../../services/fake-data.service";
 import { Solution } from "src/model/saasafras/solution";
 import { $Space } from "src/model/saasafras/saas.space";
@@ -31,13 +32,13 @@ import { SolutionAboutComponent } from "src/app/Components/solution-about/soluti
     styleUrls: ["./solution.component.css"]
 })
 export class SolutionComponent implements OnInit {
-    // @Input() solution: Solution;
-    // TODO initialize this in ngOnInit
     appId;
     v1 = false;
     showTemplate = true;
     solutions: ISolutionViewModel[];
     solution: ISolutionViewModel;
+    queuedTasks: ISolutionTaskViewModel[] = [];
+    taskHistory: ISolutionTaskViewModel[] = [];
     instances: ISolutionInstanceViewModel[];
     fakeVersions = [
         "2.1 Sierra (latest)",
@@ -57,11 +58,8 @@ export class SolutionComponent implements OnInit {
         this.appId = this.route.snapshot.paramMap.get("id");
         this.solutions = this.fakeDataService.fakeSolutions;
         this.instances = this.fakeDataService.fakeInstances;
-        this.solutions.forEach((sol) => {
-            if (sol.appId === this.appId) {
-                this.solution = sol;
-            }
-        });
+        this._setCurrentSolution();
+        this._buildTaskArrays();
     }
 
     toggleVersion() {
@@ -72,4 +70,25 @@ export class SolutionComponent implements OnInit {
         }
     }
 
-} 
+    /** ==========================
+     *  HELPERS
+     * =========================== */
+
+    private _buildTaskArrays() {
+        this.solution.history.forEach((task) => {
+            if(task.status === 'scheduled' || task.status === 'in progress') {
+                this.queuedTasks.push(task);
+            } else {
+                this.taskHistory.push(task);
+            }
+        });
+    }
+
+    private _setCurrentSolution() {
+        this.solutions.forEach((sol) => {
+            if (sol.appId === this.appId) {
+                this.solution = sol;
+            }
+        });
+    }
+}

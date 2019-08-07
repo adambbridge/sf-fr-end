@@ -22,6 +22,7 @@ import {
     MatMenuModule,
     MatTabsModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
@@ -33,6 +34,7 @@ import { MatTableModule } from "@angular/material/table";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+
 
 
 
@@ -63,6 +65,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
         MatMenuModule,
         MatTabsModule,
         MatProgressBarModule,
+        MatProgressSpinnerModule,
         MatRadioModule,
         MatTableModule,
         MatSortModule,
@@ -95,6 +98,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
         MatMenuModule,
         MatTabsModule,
         MatProgressBarModule,
+        MatProgressSpinnerModule,
         MatRadioModule,
         MatTableModule,
         MatSortModule,

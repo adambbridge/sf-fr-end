@@ -123,9 +123,17 @@ app-new-patch td.mat-cell:first-of-type{
 .text-light {
     color: #999;
 }
+.text-lighter {
+    color: #e0e0e0;
+}
 .text-small {
     font-size: 0.9rem;
 }
+.text-no-deco,
+a.text-no-deco {
+    text-decoration: none;
+}
+
 .text-inherit-styles {
     font-size: inherit;
     color: inherit;
@@ -147,10 +155,14 @@ app-new-patch td.mat-cell:first-of-type{
     width: unset;
     height: 30px;
 }
+/* FOR WELCOME LEVEL UP CARD */
+app-welcome .mat-list-base .mat-list-item .mat-list-item-content {
+  padding-left: 0;
+}
+
 .bg-lightgrey {
     background: #EEEEEE;
 }
-
 .mat-selection-list .mat-list-option.mat-list-option-multi-line {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -205,8 +217,12 @@ mat-card.card-table-container {
     font-size: 18px;
     font-weight: normal;
 }
-app-solution-tasks .mat-card {
+app-solution-tasks .mat-card,
+app-solution-about .mat-card {
     min-height: 210px;
+}
+.min-h-200 {
+    min-height: 200px;
 }
 input[type="file"] {
     font-family: Roboto, "Helvetica Neue", sans-serif;
