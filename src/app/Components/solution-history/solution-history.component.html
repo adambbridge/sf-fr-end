@@ -16,17 +16,17 @@
             </th>
             <td mat-cell *matCellDef="let element">
                 <span *ngIf="element.faultedAt">
-                    failed {{element.faultedAt}}
+                    failed {{element.faultedAt | date:'short'}}
                 </span>
                 <span *ngIf="!element.faultedAt && element.completedAt">
-                    Completed {{element.completedAt}}
+                    Completed {{element.completedAt | date:'short'}}
                 </span>
                 <span *ngIf="!element.completedAt && !element.faultedAt && element.startedAt">
                     started
-                    {{element.startedAt}}
+                    {{element.startedAt | date:'short'}}
                 </span>
                 <span *ngIf="!element.startedAt && element.scheduledFor">
-                    scheduled for {{element.scheduledFor}}
+                    scheduled for {{element.scheduledFor | date:'short'}}
                 </span>
             </td>
             <td mat-footer-cell *matFooterCellDef></td>
@@ -91,7 +91,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 Notes
             </th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" class="max-w-100 pr-2 overflow-ellipsis">
                 <span class='hidden-sm-down'>
                     {{ element.notes }}
                 </span>
