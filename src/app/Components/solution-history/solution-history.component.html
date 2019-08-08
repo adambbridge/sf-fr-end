@@ -16,17 +16,20 @@
             </th>
             <td mat-cell *matCellDef="let element">
                 <span *ngIf="element.faultedAt">
-                    failed {{element.faultedAt | date:'short'}}
+                    <span class="w-125px d-inline-block">{{element.faultedAt | date:'short'}}</span>
+                    <span class='text-light'> (failed)</span>
                 </span>
                 <span *ngIf="!element.faultedAt && element.completedAt">
-                    Completed {{element.completedAt | date:'short'}}
+                    <span class="w-125px d-inline-block">{{element.completedAt | date:'short'}}</span>
+                    <span class='text-light'> (completed)</span>
                 </span>
                 <span *ngIf="!element.completedAt && !element.faultedAt && element.startedAt">
-                    started
-                    {{element.startedAt | date:'short'}}
+                    <span class="w-125px d-inline-block">{{element.startedAt | date:'short'}}</span>
+                    <span class='text-light'> (started)</span>
                 </span>
                 <span *ngIf="!element.startedAt && element.scheduledFor">
-                    scheduled for {{element.scheduledFor | date:'short'}}
+                    <span class="w-125px d-inline-block">{{element.scheduledFor | date:'short'}}</span>
+                    <span class='text-light'> (scheduled for) </span>
                 </span>
             </td>
             <td mat-footer-cell *matFooterCellDef></td>
@@ -58,12 +61,14 @@
             </th>
             <td mat-cell *matCellDef="let element">
                 <span *ngIf="element.versionNumFrom">
-                    {{element.versionNumFrom}} {{element.versionNameFrom}} to&nbsp;
+                    <span class='text-light'></span>
+                    {{element.versionNumFrom}}
+                    <span class='text-light'> {{element.versionNameFrom}} to&nbsp;</span>
                 </span>
                 <span>
-                    {{ element.versionNumTo }} {{element.versionNameTo}}
+                    {{ element.versionNumTo }}
+                    <span class="text-light"> {{element.versionNameTo}}</span>
                 </span>
-
             </td>
             <td mat-footer-cell *matFooterCellDef></td>
         </ng-container>
@@ -91,7 +96,8 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
                 Notes
             </th>
-            <td mat-cell *matCellDef="let element" class="max-w-100 pr-2 overflow-ellipsis">
+            <td mat-cell *matCellDef="let element" class="max-w-100 pr-2 overflow-ellipsis"
+                matTooltip="{{element.notes}}">
                 <span class='hidden-sm-down'>
                     {{ element.notes }}
                 </span>
@@ -106,4 +112,7 @@
         </tbody>
 
     </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 20, 100]" showFirstLastButtons></mat-paginator>
+
 </div>

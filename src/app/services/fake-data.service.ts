@@ -1,7 +1,8 @@
 import { environment } from "src/environments/environment.prod";
 import { Injectable } from "@angular/core";
 
-/** we aren't currently showing the fields in the UI. mabye in the future we will be though... */
+/** IPodioApplicationViewModel
+ * we aren't currently showing the fields in the UI. mabye in the future we will be though... */
 export interface IPodioApplicationViewModel {
     appName: string;
     appId: number;
@@ -9,7 +10,8 @@ export interface IPodioApplicationViewModel {
     fields: Array<string>;
 }
 
-/** currently the UI just shows names of spaces and their apps 
+/** IPodioSpaceViewModel
+ * currently the UI just shows names of spaces and their apps 
  * within the context of an organization ie at /podio/id, in the update task form etc. 
  * */
 export interface IPodioSpaceViewModel {
@@ -34,6 +36,7 @@ export interface ISolutionViewModel {
 }
 
 /**
+* ISolutionInstanceViewModel 
 * WHERE: currently show instances list in new-patch, podio-org-detail and solution 
 * WHAT: currently show columns name, v num, v name, client, last action (date and type), 
 * (i want to show also the solution name and have the solution id available 
@@ -63,13 +66,19 @@ export interface IPodioOrganizationViewModel {
     instances?: Array<ISolutionInstanceViewModel>; // instances deployed to this org
 }
 
+/**
+ * IClientViewModel
+ * I'm not sure about the fields for client
+ * TODO Adam will solicit input on these ... 
+ */
 export interface IClientViewModel {
     id: string;
-    identifier: string;
+    identifier: string; // is this name?
     contact: string;
     company?: string;
     email?: string;
-    environments;
+    orgs: IPodioOrganizationViewModel[];
+    instances?: ISolutionInstanceViewModel[]; // prop of client or just org? we do currently show number of deployed instances in client table but in client detail we just show orgs table and orgs have instances 
     notes?: string;
 }
 
@@ -497,7 +506,7 @@ export class FakeDataService {
             email: "pam@gmail.com",
             notes:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            environments: [this.fakeOrganization1, this.fakeOrganization2]
+            orgs: [this.fakeOrganization1, this.fakeOrganization2]
         },
         {
             company: "Random Consulting",
@@ -507,7 +516,7 @@ export class FakeDataService {
             email: "dan@gmail.com",
             notes:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            environments: [this.fakeOrganization1, this.fakeOrganization2]
+            orgs: [this.fakeOrganization1, this.fakeOrganization2]
         },
         {
             company: "ABC Real Estate",
@@ -517,7 +526,7 @@ export class FakeDataService {
             email: "jan@gmail.com",
             notes:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            environments: [this.fakeOrganization1, this.fakeOrganization2]
+            orgs: [this.fakeOrganization1, this.fakeOrganization2]
         }
     ];
 } // end class fakeDataService

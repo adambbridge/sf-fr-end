@@ -133,7 +133,7 @@
 
         <mat-card #tooltip="matTooltip"
             matTooltip="We can show styled tooltips when we want and make them go away when clicked."
-            [matTooltipPosition]="'below'" (mouseenter)="$event.stopImmediatePropagation()"
+            [matTooltipPosition]="'right'" (mouseenter)="$event.stopImmediatePropagation()"
             (mouseleave)="$event.stopImmediatePropagation()" (click)="tooltip.toggle()">
             <mat-card-title class='d-flex align-content-center justify-content-start'>
                 <!-- <mat-progress-spinner [value]="25" [diameter]="50" class='mr-3'></mat-progress-spinner> -->

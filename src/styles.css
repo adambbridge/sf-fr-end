@@ -153,6 +153,9 @@ a.text-no-deco {
 .max-w-100 {
     max-width: 100px;
 }
+.w-125px {
+    width: 125px;
+}
 .mat-list-base .mat-list-option.mat-list-option-inline {
     display: inline-block;
     width: unset;
@@ -208,6 +211,9 @@ mat-card.card-table-container {
 .card-table-container .mat-form-field-wrapper {
     padding-bottom: 1.25em;
     padding-left: 25px;
+}
+mat-paginator .mat-paginator-container {
+    justify-content: center; 
 }
 .mat-form-field-prefix {
    /* *  top: 4px;  in search input in table container . instead of this i am now using vertical-align: middle on mat-icon */
@@ -282,6 +288,14 @@ app-welcome app-card-collection .mat-card:hover {
     object-fit: cover;
     overflow: hidden;
 }
+
+.mat-progress-bar .mat-progress-bar-fill::after {
+    background: #00c853;
+}
+.mat-progress-bar .mat-progress-bar-buffer {
+    background: lightgrey;
+}
+
 
 .spin {
   -webkit-animation: spin 3s infinite linear;

@@ -31,6 +31,7 @@ import {
 
 import { MatSortModule } from "@angular/material/sort";
 import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDatepickerModule } from "@angular/material/datepicker";
@@ -68,6 +69,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
         MatProgressSpinnerModule,
         MatRadioModule,
         MatTableModule,
+        MatPaginatorModule,
         MatSortModule,
         MatSelectModule,
         MatSidenavModule,
@@ -101,6 +103,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
         MatProgressSpinnerModule,
         MatRadioModule,
         MatTableModule,
+        MatPaginatorModule,
         MatSortModule,
         MatSelectModule,
         MatSidenavModule,
