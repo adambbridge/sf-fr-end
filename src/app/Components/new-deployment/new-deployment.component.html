@@ -1,13 +1,55 @@
-<h1 *ngIf="preselectedSolution" mat-dialog-title>Create New Solution Instance of {{solutionTitle}}</h1>
-<h1 *ngIf="preselectedOrg" mat-dialog-title>Create New Solution Instance in Org "{{orgTitle}}"</h1>
-
-<p class="text-hint">
-    When you have created a Saasafras Solution, you can deploy the Solution to one or more of your clients. This will
-    ... add further explanation...
-    <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
-</p>
+<h1 *ngIf="preselectedSolution" mat-dialog-title>
+    Create New Instance of {{solutionTitle}}
+    <!-- TODO JUST FOR DEV AND TESTING -->
+    <span class="text-hint" (click)="toggleNoClientsView()">no clients</span>
+</h1>
+<h1 *ngIf="preselectedOrg" mat-dialog-title>
+    Create New Instance in Org "{{orgTitle}}"
+    <!-- TODO JUST FOR DEV AND TESTING -->
+    <span class="text-hint" (click)="toggleNoClientsView()">no clients</span>
+</h1>
 
 <form [formGroup]="deploymentForm" (ngSubmit)="onSubmit()">
+
+    
+    <div *ngIf="!preselectedOrg">
+
+        <!-- if no clients -->
+        <div *ngIf="!clients.length">
+            Looks like you don't have any clients
+            <mat-form-field class="w-100">
+                <mat-label>Add client or deploy to one or your own orgs?</mat-label>
+                <mat-select formControlName="client" readonly (selectionChange)='onClientSelection()'>
+                    <mat-option value="addClient">Add client</mat-option>
+                    <mat-option value="self">Deploy to one of my orgs</mat-option>
+                </mat-select>
+                <div *ngIf="c.invalid && (c.dirty || c.touched)">
+                    <mat-error>Please make a selection</mat-error>
+                </div>
+            </mat-form-field>
+        </div>
+
+        <!-- if clients -->
+        <mat-form-field class="w-100" *ngIf="clients.length">
+            <mat-label>Who is the target client?</mat-label>
+            <mat-select formControlName="client" readonly (selectionChange)='onClientSelection($event.value)'>
+                <mat-option *ngFor="let client of clients" [value]="client">{{client.contact}}</mat-option>
+            </mat-select>
+            <div *ngIf="c.invalid && (c.dirty || c.touched)">
+                <mat-error>Please select a client</mat-error>
+            </div>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class="w-100" *ngIf='orgs && !preselectedOrg'>
+        <mat-label>Which organization do you want to deploy into?</mat-label>
+        <mat-select formControlName="org">
+            <mat-option *ngFor="let org of orgs" [value]="org">{{org.name}}</mat-option>
+        </mat-select>
+        <div *ngIf="org.invalid && (org.dirty || org.touched)">
+            <mat-error>Please select an organization</mat-error>
+        </div>
+    </mat-form-field>
 
     <mat-form-field class="w-100" *ngIf='!preselectedSolution'>
         <mat-label>What Solution do you want to deploy?</mat-label>
@@ -20,7 +62,7 @@
     </mat-form-field>
 
     <mat-form-field class="w-100">
-        <mat-label>Which version do you want to deploy?</mat-label>
+        <mat-label>Which solution version?</mat-label>
         <mat-select formControlName="version">
             <mat-option *ngFor="let version of versions" [value]="version">{{version}}</mat-option>
         </mat-select>
@@ -29,25 +71,7 @@
         </div>
     </mat-form-field>
 
-    <mat-form-field class="w-100" *ngIf="!preselectedOrg">
-        <mat-label>Who is the target client?</mat-label>
-        <mat-select formControlName="client" readonly (selectionChange)='onClientSelection($event.value)'>
-            <mat-option *ngFor="let client of clients" [value]="client.id">{{client.contact}}</mat-option>
-        </mat-select>
-        <div *ngIf="c.invalid && (c.dirty || c.touched)">
-            <mat-error>Please select a client</mat-error>
-        </div>
-    </mat-form-field>
-
-    <mat-form-field class="w-100" *ngIf='orgs && !preselectedOrg'>
-        <mat-label>Create in what organization?</mat-label>
-        <mat-select formControlName="org">
-            <mat-option *ngFor="let org of orgs" [value]="org">{{org.name}}</mat-option>
-        </mat-select>
-        <div *ngIf="org.invalid && (org.dirty || org.touched)">
-            <mat-error>Please select an organization</mat-error>
-        </div>
-    </mat-form-field>
+  
 
     <mat-form-field class="w-100" *ngIf="deploymentForm.controls.instance">
         <mat-label>Instance Name (generated automatically based on client)</mat-label>

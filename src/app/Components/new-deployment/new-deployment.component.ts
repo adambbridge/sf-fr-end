@@ -1,4 +1,4 @@
-import { environment } from 'src/environments/environment.prod';
+import { environment } from "src/environments/environment.prod";
 import { Solution } from "./../../../model/saasafras/solution";
 import { FakeDataService } from "src/app/services/fake-data.service";
 import { Component, OnInit, Inject, Version } from "@angular/core";
@@ -10,6 +10,7 @@ import { MatDialog } from "@angular/material";
 import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmation-dialog.component";
 import { MAT_DIALOG_DATA } from "@angular/material";
 import { MatDialogRef } from "@angular/material/dialog";
+import { routerNgProbeToken } from "@angular/router/src/router_module";
 
 @Component({
     selector: "app-new-deployment",
@@ -45,7 +46,6 @@ export class NewDeploymentComponent implements OnInit {
     });
     submitted: boolean = false;
 
-
     get c() {
         return this.deploymentForm.get("client");
     }
@@ -67,11 +67,21 @@ export class NewDeploymentComponent implements OnInit {
         this.solutions = this.fakeDataService.fakeSolutions;
     }
 
-    onClientSelection(selectedClientID): void {
-        let client = this.clients.find((c) => c.id === selectedClientID);
-        this.orgs = client.orgs;
-        this.deploymentForm.controls.instance.setValue(client.identifier);
-        this.instance = client.identifier;
+    onClientSelection(): void {
+        console.log(this.c.value);
+        let userSelection = this.c.value;
+
+        if (userSelection === "self") {
+            /** show orgs of authenticated user */
+        } else if (userSelection === "add") {
+            /** navigate to new client form */
+        } else {
+            /** show orgs of selected client */
+            let selectedClient = userSelection;
+            this.orgs = selectedClient.orgs;
+            this.deploymentForm.controls.instance.setValue(selectedClient.identifier);
+            this.instance = selectedClient.identifier;
+        }
     }
 
     onSubmit() {
@@ -82,6 +92,14 @@ export class NewDeploymentComponent implements OnInit {
         const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
             data: this.getConfirmationDialogData()
         });
+    }
+
+    toggleNoClientsView() {
+        if (this.clients.length) {
+            this.clients = [];
+        } else {
+            this.clients = this.fakeDataService.fakeClients;
+        }
     }
 
     /** ==================
