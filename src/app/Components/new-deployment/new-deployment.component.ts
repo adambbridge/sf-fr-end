@@ -31,7 +31,7 @@ export class NewDeploymentComponent implements OnInit {
     preselectedOrg;
     orgTitle;
     clients;
-    environments;
+    orgs;
     instance;
     versions = [1, 2, "KYdev1", "KYdev2", "KYqa1"];
 
@@ -39,7 +39,7 @@ export class NewDeploymentComponent implements OnInit {
         solution: ["", Validators.required],
         version: ["", Validators.required],
         client: [""],
-        environment: ["", Validators.required],
+        org: ["", Validators.required],
         instance: ["", Validators.required],
         description: [""]
     });
@@ -49,8 +49,8 @@ export class NewDeploymentComponent implements OnInit {
     get c() {
         return this.deploymentForm.get("client");
     }
-    get env() {
-        return this.deploymentForm.get("environment");
+    get org() {
+        return this.deploymentForm.get("org");
     }
 
     constructor(
@@ -69,7 +69,7 @@ export class NewDeploymentComponent implements OnInit {
 
     onClientSelection(selectedClientID): void {
         let client = this.clients.find((c) => c.id === selectedClientID);
-        this.environments = client.environments;
+        this.orgs = client.orgs;
         this.deploymentForm.controls.instance.setValue(client.identifier);
         this.instance = client.identifier;
     }
@@ -92,7 +92,7 @@ export class NewDeploymentComponent implements OnInit {
         let form = this.deploymentForm.value;
         let sol = form.solution;
         let ver = form.version;
-        let org = form.environment.name;
+        let org = form.org.name;
 
         let data = {
             title: "Create Instance?",
@@ -119,7 +119,7 @@ export class NewDeploymentComponent implements OnInit {
             this.preselectedOrg = data.org.name;
             this.orgTitle = data.org.name;
             console.log(this.preselectedOrg);
-            this.deploymentForm.controls.environment.setValue(data.org.name);
+            this.deploymentForm.controls.org.setValue(data.org.name);
             this.deploymentForm.controls.instance.setValue(
                 this._generateInstanceNameFromClientName(data.org.owner)
             );

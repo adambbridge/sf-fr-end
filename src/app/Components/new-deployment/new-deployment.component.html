@@ -39,13 +39,13 @@
         </div>
     </mat-form-field>
 
-    <mat-form-field class="w-100" *ngIf='environments && !preselectedOrg'>
+    <mat-form-field class="w-100" *ngIf='orgs && !preselectedOrg'>
         <mat-label>Create in what organization?</mat-label>
-        <mat-select formControlName="environment">
-            <mat-option *ngFor="let env of environments" [value]="env">{{env.name}}</mat-option>
+        <mat-select formControlName="org">
+            <mat-option *ngFor="let org of orgs" [value]="org">{{org.name}}</mat-option>
         </mat-select>
-        <div *ngIf="env.invalid && (env.dirty || env.touched)">
-            <mat-error>Please select an environment</mat-error>
+        <div *ngIf="org.invalid && (org.dirty || org.touched)">
+            <mat-error>Please select an organization</mat-error>
         </div>
     </mat-form-field>
 

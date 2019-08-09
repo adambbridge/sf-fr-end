@@ -186,7 +186,7 @@ export class FakeDataService {
         },
         {
             scheduledFor: this.createDateFromOffset(2),
-            startedAt: null,
+            startedAt: this.createDateFromOffset(2),
             completedAt: null,
             faultedAt: null,
 

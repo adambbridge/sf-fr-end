@@ -125,17 +125,26 @@
         COLUMN 2 
     ====================== -->
 
-    <div class="col col-md-4">
+    <div class="col col-md-4 ">
 
         <!-- =================
             LEVEL UP
         ====================== -->
 
-        <mat-card #tooltip="matTooltip"
+       
+
+        <mat-card class="relative" #tooltip="matTooltip"
             matTooltip="We can show styled tooltips when we want and make them go away when clicked."
             [matTooltipPosition]="'right'" (mouseenter)="$event.stopImmediatePropagation()"
             (mouseleave)="$event.stopImmediatePropagation()" (click)="tooltip.toggle()">
             <mat-card-title class='d-flex align-content-center justify-content-start'>
+
+                <!-- <mat-card class="hint hint-level-up" *ngIf="onboardMssgs.levelUp">
+                    <mat-card-title>some onboarding message</mat-card-title>
+                    <button mat-flat-button (click)='onboardMssgs.levelUp = false'>OK, thanks</button>
+                </mat-card> -->
+
+
                 <!-- <mat-progress-spinner [value]="25" [diameter]="50" class='mr-3'></mat-progress-spinner> -->
                 <span class='w-100'>
                     <span class='d-flex justify-content-between mb-3'>
@@ -178,6 +187,8 @@
                 </mat-list>
             </mat-card-content>
         </mat-card>
+
+        
 
         <mat-card class='mt-3'>
             <mat-card-content>

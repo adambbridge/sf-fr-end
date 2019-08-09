@@ -17,11 +17,12 @@ export class SolutionHistoryComponent implements OnInit {
     @ViewChild(MatSortModule) sort: MatSortModule;
     displayedColumns: string[] = [
         "task",
-        "status",
         "instance",
-        "datetime",
         "version",
+        "status",
         "notes"
+
+        // "datetime",
     ];
     @ViewChild(MatPaginator) taskPaginator: MatPaginator;
 
@@ -31,7 +32,7 @@ export class SolutionHistoryComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.tasks);
         this.dataSource.paginator = this.taskPaginator;
         console.log(this.dataSource);
-        console.log(this.taskPaginator)
+        console.log(this.taskPaginator);
     }
 
     applyFilter(filterValue: string) {

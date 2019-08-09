@@ -64,21 +64,21 @@ tr:active {
 .scheduled {
     /* color: blue; */
 }
-/* */ 
-.instances-component .mat-cell, 
+/* */
+.instances-component .mat-cell,
 .instances-component .mat-header-cell,
 .instances-component .mat-footer-cell {
     font-size: 16px;
 }
 /* left align table when inside new patch form */
 app-new-patch th.mat-header-cell:first-of-type,
-app-new-patch td.mat-cell:first-of-type{
+app-new-patch td.mat-cell:first-of-type {
     padding-left: unset;
 }
 
 /* so ripple can expand beyond checkbox in selection table */
 .mat-column-select {
-  overflow: initial;
+    overflow: initial;
 }
 /* TODO register a podio icon with material or use mat-icon class?*/
 .sf-mat-icon {
@@ -163,11 +163,11 @@ a.text-no-deco {
 }
 /* FOR WELCOME LEVEL UP CARD */
 app-welcome .mat-list-base .mat-list-item .mat-list-item-content {
-  padding-left: 0;
+    padding-left: 0;
 }
 
 .bg-lightgrey {
-    background: #EEEEEE;
+    background: #eeeeee;
 }
 .mat-selection-list .mat-list-option.mat-list-option-multi-line {
     padding-top: 15px;
@@ -213,10 +213,10 @@ mat-card.card-table-container {
     padding-left: 25px;
 }
 mat-paginator .mat-paginator-container {
-    justify-content: center; 
+    justify-content: center;
 }
 .mat-form-field-prefix {
-   /* *  top: 4px;  in search input in table container . instead of this i am now using vertical-align: middle on mat-icon */
+    /* *  top: 4px;  in search input in table container . instead of this i am now using vertical-align: middle on mat-icon */
     color: #777;
 }
 .mat-form-field-infix {
@@ -296,23 +296,51 @@ app-welcome app-card-collection .mat-card:hover {
     background: lightgrey;
 }
 
+/* to left align with mat-selection list checkboxes */
+table td.mat-cell:first-of-type,
+table td.mat-footer-cell:first-of-type,
+table th.mat-header-cell:first-of-type {
+    padding-left: 16px;
+}
+
+/* so content doesn't go right to bottom of screen */
+.mat-drawer-content {
+    padding-bottom: 50px;
+}
+
+.hint-level-up {
+    right: 315px;
+    top: 20px;
+    width: 300px;
+    height: 200px;
+}
+.hint {
+    position: absolute;
+    z-index: 1000;
+    background: #00c853;
+    color: white;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+        0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 14px 0 rgba(0, 0, 0, 0.12);
+}
+.relative {
+    position: relative;
+}
 
 .spin {
-  -webkit-animation: spin 3s infinite linear;
-  animation: spin 3s infinite linear;
+    -webkit-animation: spin 3s infinite linear;
+    animation: spin 3s infinite linear;
 }
 
 @keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
-  }
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
 }
-
 
 @media only screen and (max-width: 767px) {
     .hidden-sm-down {

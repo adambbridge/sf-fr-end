@@ -43,6 +43,7 @@ export class InstancesComponent implements OnInit {
         const allColumns: string[] = [
             "select",
             "name",
+            "solution",
             "version",
             "client",
             "lastAction",
