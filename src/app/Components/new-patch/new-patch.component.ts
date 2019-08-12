@@ -12,6 +12,7 @@ import { MatDialog } from "@angular/material";
 import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmation-dialog.component";
 import { MAT_DIALOG_DATA } from "@angular/material";
 import { MatDialogRef } from "@angular/material/dialog";
+import { NewDeploymentComponent } from "src/app/Components/new-deployment/new-deployment.component";
 
 @Component({
     selector: "app-new-patch",
@@ -88,6 +89,28 @@ export class NewPatchComponent implements OnInit {
      */
     onDateChange($event) {
         this.patchDate = $event.value;
+    }
+
+    /** TODO ONLY FOR DEVELOPMENT */
+    toggleNoInstancesView() {
+        console.log("testing");
+        if (this.instances.length) {
+            this.instances = [];
+            console.log(this.instances);
+        } else {
+            this.instances = this._fakeDataService.fakeInstances;
+        }
+    }
+
+    /** onCreateNewInstanceClick()
+     * close newPatchDialog
+     * openNewDeployment dialog
+     */
+    onCreateNewInstanceClick() {
+        this.dialog.open(NewDeploymentComponent, {
+            data: { solution: this.solution }
+        });
+        this.patchDialog.close();
     }
 
     onSubmit() {

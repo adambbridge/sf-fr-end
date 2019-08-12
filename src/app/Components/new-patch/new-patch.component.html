@@ -1,56 +1,63 @@
-<h1 mat-dialog-title>Patch Solution Instances</h1>
+<h1 mat-dialog-title>
+    Patch Solution Instances
+    <span class="text-hint pl-2" (click)="toggleNoInstancesView()"> instances</span>
+</h1>
 
-<p class="text-hint">
-    When you have run Updates on your Saasafras solution you can Update deployments of the solution with all of the
-    changes by creating a Patch.
-    <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a>
-</p>
+<div *ngIf="!instances.length">
+    <p>Looks like you don't have any instances to Patch yet.</p>
+    <p (click)="onCreateNewInstanceClick()" class='text-clickable'>Create new instance</p>
+    <p class='text-clickable'>Learn more<mat-icon class="text-small">open_in_new</mat-icon></p>
+</div>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div *ngIf="instances.length">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-    <mat-form-field class='w-100 d-none'>
-        <mat-label>Solution</mat-label>
-        <input type="text" matInput readonly formControlName="solution">
-    </mat-form-field>
+        <mat-form-field class='w-100 d-none'>
+            <mat-label>Solution</mat-label>
+            <input type="text" matInput readonly formControlName="solution">
+        </mat-form-field>
 
-    <mat-form-field class="w-100">
-        <mat-label>Version to use for Patch</mat-label>
-        <mat-select formControlName="version" (selectionChange)="onVersionSelection()">
-            <mat-option *ngFor="let version of versions" [value]="version">{{version}}</mat-option>
-        </mat-select>
-        <div *ngIf="versionInput.touched && versionInput.invalid">
-            <mat-error>Please select a version</mat-error>
+        <mat-form-field class="w-100">
+            <mat-label>Version to use for Patch</mat-label>
+            <mat-select formControlName="version" (selectionChange)="onVersionSelection()">
+                <mat-option *ngFor="let version of versions" [value]="version">{{version}}</mat-option>
+            </mat-select>
+            <div *ngIf="versionInput.touched && versionInput.invalid">
+                <mat-error>Please select a version</mat-error>
+            </div>
+        </mat-form-field>
+
+        <div>
+            <mat-label class='mt-2'>
+                <span *ngIf="!instancePreselection">Which Instances do you want to Patch?</span>
+                <span *ngIf="instancePreselection">Instances</span>
+            </mat-label>
+            <app-instances [instances]="instances" [instancePreselection]="instancePreselection"
+                [patchImpactOnSpaces]='patchImpactOnSpaces' [showButton]="false"
+                (selectedInstances)="onInstanceSelection($event)" [showSearchBox]="instances.length > 5">
+            </app-instances>
         </div>
-    </mat-form-field>
 
-    <div>
-        <mat-label class='mt-2'>
-            <span *ngIf="!instancePreselection">Which Instances do you want to Patch?</span>
-            <span *ngIf="instancePreselection">Instances</span>
-        </mat-label>
-        <app-instances [instances]="instances" [instancePreselection]="instancePreselection"
-            [patchImpactOnSpaces]='patchImpactOnSpaces' [showButton]="false"
-            (selectedInstances)="onInstanceSelection($event)" [showSearchBox]="instances.length > 5"></app-instances>
-    </div>
+        <mat-form-field class="w-100">
+            <textarea matInput minRows='3' formControlName="notes" placeholder="Notes (optional)"></textarea>
+        </mat-form-field>
 
-    <mat-form-field class="w-100">
-        <textarea matInput minRows='3' formControlName="notes" placeholder="Notes (optional)"></textarea>
-    </mat-form-field>
+        <mat-form-field class="w-75">
+            <input matInput [min]="minDate" [max]="maxDate" (focus)="picker.open()" (click)="picker.open()"
+                [matDatepicker]="picker" placeholder="Schedule patch" (dateChange)="onDateChange($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+        </mat-form-field>
+        <mat-icon class="text-light"
+            matTooltip="Choosing today will add patch to cue immediately.  Choosing a future date schedules patch for 12:01am on that date. You will receive an email at 'usersemailaddr@email.com' when patch has begun and a status report email when it has completed.">
+            help</mat-icon>
 
-    <mat-form-field class="w-75">
-        <input matInput [min]="minDate" [max]="maxDate" (focus)="picker.open()" (click)="picker.open()"
-            [matDatepicker]="picker" placeholder="Schedule patch" (dateChange)="onDateChange($event)">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker disabled="false"></mat-datepicker>
-    </mat-form-field>
-    <mat-icon class="text-light"
-        matTooltip="Choosing today will add patch to cue immediately.  Choosing a future date schedules patch for 12:01am on that date. You will receive an email at 'usersemailaddr@email.com' when patch has begun and a status report email when it has completed.">
-        help</mat-icon>
+        <div>
+            <button mat-raised-button class='mr-2'>Cancel</button>
+            <button mat-raised-button type="submit"
+                [disabled]="!form.valid || (selectedInstances && selectedInstances.length === 0) || !patchDate">Schedule
+                Patch</button>
+        </div>
 
-    <div>
-        <button mat-raised-button class='mr-2'>Cancel</button>
-        <button mat-raised-button type="submit"
-            [disabled]="!form.valid || (selectedInstances && selectedInstances.length === 0) || !patchDate">Schedule Patch</button>
-    </div>
-
-</form>
+    </form>
+</div>

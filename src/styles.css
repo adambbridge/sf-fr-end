@@ -105,6 +105,16 @@ app-new-patch td.mat-cell:first-of-type {
     right: 0;
     background: #eee;
 }
+.text-clickable {
+    color: #07C;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.text-clickable:hover {
+    color: #3af;
+}
+
+
 .text-warn {
     color: #f44336;
 }
