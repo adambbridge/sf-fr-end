@@ -73,7 +73,7 @@ import { AuthGuard } from "./guards/auth-guard.service";
 import { ClientsComponent } from './Components/clients/clients.component';
 import { NewClientComponent } from './Components/new-client/new-client.component';
 import { ClientComponent } from './Components/client/client.component';
-import { AddEnvironmentComponent } from './Components/add-environment/add-environment.component';
+import { AddKnownOrgComponent } from "./Components/add-known-org/add-known-org.component";
 import { PodioOrgDetailComponent } from './Components/podio-org-detail/podio-org-detail.component';
 import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
 @NgModule({
@@ -126,7 +126,7 @@ import { ConfirmationDialogComponent } from './Components/confirmation-dialog/co
         ClientsComponent,
         NewClientComponent,
         ClientComponent,
-        AddEnvironmentComponent,
+        AddKnownOrgComponent,
         PodioOrgDetailComponent,
         InstancesComponent,
         ConfirmationDialogComponent
@@ -155,7 +155,7 @@ import { ConfirmationDialogComponent } from './Components/confirmation-dialog/co
         NewUpdateComponent,
         NewDeploymentComponent,
         NewPatchComponent,
-        AddEnvironmentComponent,
+        AddKnownOrgComponent,
         ConfirmationDialogComponent
     ]
 })

@@ -1,4 +1,4 @@
-import { AddEnvironmentComponent } from "./../add-environment/add-environment.component";
+import { AddKnownOrgComponent } from "../add-known-org/add-known-org.component";
 import { UtilsService } from "./../../services/utils.service";
 import { Component, OnInit, Inject, ViewChild } from "@angular/core";
 import { FakeDataService } from "src/app/services/fake-data.service";

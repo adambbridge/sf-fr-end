@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddEnvironmentComponent } from './add-environment.component';
+import { AddKnownOrgComponent } from './add-known-org.component';
 
-describe('AddEnvironmentComponent', () => {
-  let component: AddEnvironmentComponent;
-  let fixture: ComponentFixture<AddEnvironmentComponent>;
+describe('AddKnownOrgComponent', () => {
+  let component: AddKnownOrgComponent;
+  let fixture: ComponentFixture<AddKnownOrgComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddEnvironmentComponent ]
+      declarations: [ AddKnownOrgComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddEnvironmentComponent);
+    fixture = TestBed.createComponent(AddKnownOrgComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

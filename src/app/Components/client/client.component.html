@@ -81,7 +81,7 @@
                     ORGS AND INSTANCES TABLE
                 =========================================== -->
 
-                <app-podio-assets *ngIf="envUI === 'oneTable'" [organizations]='client.environments'></app-podio-assets>
+                <app-podio-assets *ngIf="envUI === 'oneTable'" [organizations]='client.environments' [client]='client'></app-podio-assets>
 
             </mat-list>
 

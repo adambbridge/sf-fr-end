@@ -1,5 +1,5 @@
-import { AddEnvironmentComponent } from './../add-environment/add-environment.component';
-import { FakeDataService } from "./../../services/fake-data.service";
+import { AddKnownOrgComponent } from '../add-known-org/add-known-org.component';
+import { FakeDataService, IClientViewModel } from "./../../services/fake-data.service";
 import {
     Component,
     OnInit,
@@ -22,6 +22,7 @@ export class PodioAssetsComponent implements OnInit {
     selectedSpaces = [];
     @Input() accordionOnly = false;
     @Input() organizations?; // optional
+    @Input() client?: IClientViewModel;
     envUI: string = "oneTable";
     addOrgInProgress: boolean = false;
 
@@ -57,14 +58,28 @@ export class PodioAssetsComponent implements OnInit {
         // });
     }
 
-    onAddOrgClick() {
-        const dialogRef = this.dialog.open(AddEnvironmentComponent, {});
+    onAddKnownOrgClick() {
+        const dialogRef = this.dialog.open(AddKnownOrgComponent, {
+            data: { client: this.client ? this.client : null }
+        });
         dialogRef.afterClosed().subscribe((result) => {
             console.log("result: ", result);
             if ((result = "add")) {
                 this.addOrgInProgress = true;
             }
         });
+    }
+    onAddNewOrgClick() {
+        console.log('add new org')
+        //    const dialogRef = this.dialog.open(AddNewOrgComponent, {
+        //        data: { client: this.client ? this.client : null }
+        //    });
+        //    dialogRef.afterClosed().subscribe((result) => {
+        //        console.log("result: ", result);
+        //        if ((result = "add")) {
+        //            this.addOrgInProgress = true;
+        //        }
+        //    });
     }
 
     /** =========================

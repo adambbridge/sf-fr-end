@@ -262,6 +262,9 @@ mat-tab-body .row {
     object-fit: contain;
     padding-right: 11px;
 }
+.cdk-overlay-container .mat-menu-panel {
+    max-width: 500px;
+}
 
 app-welcome app-card-collection .mat-card {
     background: #eeeeee;

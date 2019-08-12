@@ -1,9 +1,50 @@
 <h1 mat-dialog-title>Add Podio Organization</h1>
+<!-- 
+<mat-form-field *ngIf="offerSelect" class="w-100">
+    <mat-label>Choose an option</mat-label>
+    <mat-select #offerSelect (selectionChange)="onOfferSelectChange()">
+        <mat-option value="false">Select from orgs already added to Saasafrass</mat-option>
+        <mat-option value="true">Add new org using email and password</mat-option>
+    </mat-select>
+</mat-form-field> -->
 
-<mat-accordion class="example-headers-align mt-4">
+<form [formGroup]="loginForm" class="mb-3 mt-3">
+    <!-- 
+    <mat-form-field class="w-100">
+        <mat-label>Select org</mat-label>
+        <mat-select formControlName="org">
+            <mat-option *ngFor="let org of orgs" [value]="org">{{org.name}}</mat-option>
+        </mat-select>
+     
+    </mat-form-field> -->
+
+    <label class='pb-3'>Select org</label>
+    <mat-radio-group formControlName="org">
+        <mat-radio-button *ngFor="let org of orgs" [value]="org" class='d-block pt-2'>
+            {{org.name}}
+        </mat-radio-button>
+    </mat-radio-group>
+
+    <div [hidden]='true'>
+        <mat-form-field class='w-100' hidden>
+            <mat-label>org Username/Email</mat-label>
+            <input type="text" matInput formControlName="email">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class='w-100 pt-2'>
+        <mat-label>Re-enter org Password</mat-label>
+        <input type="text" matInput formControlName="password">
+    </mat-form-field>
+
+    <button mat-raised-button class='mr-2' (click)="onCancelClick()">Cancel</button>
+    <button mat-raised-button type="button" [disabled]="false" (click)='onSubmitCredentials()'>Add Organization</button>
+
+</form>
+
+<!-- <mat-accordion class="example-headers-align mt-4">
     <mat-expansion-panel hideToggle [expanded]="false">
 
-        <!-- PANEL HEADER -->
         <mat-expansion-panel-header (click)="onHeaderClick()">
             <mat-panel-title>
                 Add from Available Podio Orgs
@@ -11,7 +52,6 @@
             <mat-icon>add_box</mat-icon>
         </mat-expansion-panel-header>
 
-        <!-- PANEL BODY -->
         <div *ngIf="showContent">
             <div class="mb-3 mt-3">
                 <mat-selection-list #envs (selectionChange)="onOrgSelection()">
@@ -34,7 +74,6 @@
 
     <mat-expansion-panel hideToggle [expanded]="false">
 
-        <!-- PANEL HEADER -->
         <mat-expansion-panel-header (click)="onHeaderClick()">
             <mat-panel-title>
                 Add A Podio Org Not Yet Known Using Credentials
@@ -42,7 +81,6 @@
             <mat-icon>library_add</mat-icon>
         </mat-expansion-panel-header>
 
-        <!-- PANEL BODY -->
         <div *ngIf="showContent">
             <p class="text-hint">
                 Explanatory text could go here if needed...
@@ -69,4 +107,4 @@
 
     </mat-expansion-panel>
 
-</mat-accordion>
+</mat-accordion> -->

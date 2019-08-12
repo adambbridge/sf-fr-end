@@ -1,6 +1,6 @@
 import { MatDialog } from "@angular/material";
 import { MatDialogRef } from "@angular/material/dialog";
-import { AddEnvironmentComponent } from "./../add-environment/add-environment.component";
+import { AddKnownOrgComponent } from "../add-known-org/add-known-org.component";
 import {
     Component,
     OnInit,
@@ -44,7 +44,9 @@ export class NewClientComponent implements OnInit {
 
     /** open dialog and setup a subscription to it's afterClosed lifecycle event */
     onAddOrgClick() {
-        const dialogRef = this.dialog.open(AddEnvironmentComponent, {});
+        const dialogRef = this.dialog.open(AddKnownOrgComponent, {
+            data: { addToClient: true }
+        });
         dialogRef.afterClosed().subscribe((result) => {
             console.log("d closed, received: ", result);
             this.orgs = result;

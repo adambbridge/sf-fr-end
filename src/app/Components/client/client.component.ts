@@ -1,5 +1,5 @@
 import { PodioAssetsComponent } from './../podio-assets/podio-assets.component';
-import { AddEnvironmentComponent } from './../add-environment/add-environment.component';
+import { AddKnownOrgComponent } from "../add-known-org/add-known-org.component";
 import {
     FakeDataService,
     IClientViewModel

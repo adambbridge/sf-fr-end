@@ -33,9 +33,11 @@
                         <mat-icon class='spin icon-smaller'>sync</mat-icon>
                         Adding Podio Org...
                     </span>
-                    <button mat-raised-button (click)="onAddOrgClick()">
-                        Add Organization
-                    </button>
+                    <button mat-raised-button [matMenuTriggerFor]="addOrgMenu">Add Organization</button>
+                    <mat-menu #addOrgMenu="matMenu">
+                        <button mat-menu-item (click)="onAddKnownOrgClick()">From orgs already added to Saasafrass</button>
+                        <button mat-menu-item (click)="onAddNewOrgClick()">Add new org with it's username and password</button>
+                    </mat-menu>
                 </span>
 
             </div>

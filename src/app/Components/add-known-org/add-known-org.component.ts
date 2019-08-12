@@ -1,64 +1,69 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, Input } from '@angular/core';
 import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
 import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
-import { FakeDataService, IPodioOrganizationViewModel } from "src/app/services/fake-data.service";
+import { FakeDataService, IPodioOrganizationViewModel, IClientViewModel } from "src/app/services/fake-data.service";
 import { MatDialog } from "@angular/material";
-import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmation-dialog.component";
+import { ConfirmationDialogComponent } from "../confirmation-dialog/confirmation-dialog.component";
 import { MAT_DIALOG_DATA } from "@angular/material";
 import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
-    selector: "app-add-environment",
-    templateUrl: "./add-environment.component.html",
-    styleUrls: ["./add-environment.component.css"]
+    selector: "app-add-known-org",
+    templateUrl: "./add-known-org.component.html",
+    styleUrls: ["./add-known-org.component.css"]
 })
-export class AddEnvironmentComponent implements OnInit {
+export class AddKnownOrgComponent implements OnInit {
     loginForm: FormGroup;
-    availableEnvs;
-    showContent = false;
-    @ViewChild("envs") envs;
-    selectedOrgs: IPodioOrganizationViewModel[] = [];
+    orgs: IPodioOrganizationViewModel[];
+    client?: IClientViewModel;
+    // @ViewChild("offerSelect") offerSelect;
+    // selectedOrgs: IPodioOrganizationViewModel[] = [];
+    // addToClient: boolean = false;
+    // showAvailOrgs: boolean = false;
 
     constructor(
         private _fakeDataService: FakeDataService,
         private _fb: FormBuilder,
-        public addOrgDialog: MatDialogRef<AddEnvironmentComponent>,
+        public addKnownOrgDialog: MatDialogRef<AddKnownOrgComponent>,
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
         private dialog: MatDialog
     ) {}
 
     ngOnInit() {
+        this.orgs = this._fakeDataService.fakeOrganizations;
         this.loginForm = this._createForm();
-        this.availableEnvs = this._fakeDataService.fakeOrganizations;
+        if (this._passedData.client) {
+            this.client = this._passedData.client;
+        }
     }
 
-    onOrgSelection() {
-        this.selectedOrgs = this.envs.selectedOptions.selected.map(
-            (option) => option.value
-        );
-        console.log(this.selectedOrgs);
-    }
+    // onOfferSelectChange() {
+    //     console.log(this.offerSelect.value);
+    //     this.availableOrgs = this._fakeDataService.fakeOrganizations;
+    // }
+
+    // onOrgSelection() {
+    //     this.selectedOrgs = this.envs.selectedOptions.selected.map(
+    //         (option) => option.value
+    //     );
+    //     console.log(this.selectedOrgs);
+    // }
 
     onCancelClick(): void {
         console.log("clicked cancel");
-        this.addOrgDialog.close();
+        this.addKnownOrgDialog.close();
     }
 
     onSubmitCredentials() {
         // delete this.form.value.environments; // true/false values
         // this.form.value.selectedEnvs = this.selectedEnvs;
         // console.warn(this.form.value);
-
-        this.addOrgDialog.close('add');
+        this.addKnownOrgDialog.close("add");
         const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
             data: this.getConfirmationDialogData()
         });
-    }
-
-    onHeaderClick() {
-        this.showContent = true;
     }
 
     /** ==================
@@ -78,6 +83,7 @@ export class AddEnvironmentComponent implements OnInit {
 
     private _createForm() {
         let form = this._fb.group({
+            org: ["", Validators.required],
             email: ["", Validators.required],
             password: ["", Validators.required]
         });
