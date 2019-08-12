@@ -1,22 +1,6 @@
 <h1 mat-dialog-title>Add Podio Organization</h1>
-<!-- 
-<mat-form-field *ngIf="offerSelect" class="w-100">
-    <mat-label>Choose an option</mat-label>
-    <mat-select #offerSelect (selectionChange)="onOfferSelectChange()">
-        <mat-option value="false">Select from orgs already added to Saasafrass</mat-option>
-        <mat-option value="true">Add new org using email and password</mat-option>
-    </mat-select>
-</mat-form-field> -->
 
-<form [formGroup]="loginForm" class="mb-3 mt-3">
-    <!-- 
-    <mat-form-field class="w-100">
-        <mat-label>Select org</mat-label>
-        <mat-select formControlName="org">
-            <mat-option *ngFor="let org of orgs" [value]="org">{{org.name}}</mat-option>
-        </mat-select>
-     
-    </mat-form-field> -->
+<form [formGroup]="form" class="mb-3 mt-3">
 
     <label class='pb-3'>Select org</label>
     <mat-radio-group formControlName="org">
@@ -34,77 +18,10 @@
 
     <mat-form-field class='w-100 pt-2'>
         <mat-label>Re-enter org Password</mat-label>
-        <input type="text" matInput formControlName="password">
+        <input type="password" matInput formControlName="password">
     </mat-form-field>
 
     <button mat-raised-button class='mr-2' (click)="onCancelClick()">Cancel</button>
     <button mat-raised-button type="button" [disabled]="false" (click)='onSubmitCredentials()'>Add Organization</button>
 
 </form>
-
-<!-- <mat-accordion class="example-headers-align mt-4">
-    <mat-expansion-panel hideToggle [expanded]="false">
-
-        <mat-expansion-panel-header (click)="onHeaderClick()">
-            <mat-panel-title>
-                Add from Available Podio Orgs
-            </mat-panel-title>
-            <mat-icon>add_box</mat-icon>
-        </mat-expansion-panel-header>
-
-        <div *ngIf="showContent">
-            <div class="mb-3 mt-3">
-                <mat-selection-list #envs (selectionChange)="onOrgSelection()">
-                    <mat-list-option *ngFor="let env of availableEnvs" [value]="env" [checkboxPosition]="before" class='mat-list-option-multi-line'>
-                        <div class='mb-1'>{{env.name}}</div>
-                        <div class='text-hint text-small'>
-                            <span class="mr-1">Owner: {{env.owner}}.</span>
-                            <span>Deployed Instances: </span>
-                            <span *ngFor="let instance of env.instances" class='comma-separated-list'>{{instance.name}}</span>
-                        </div>
-                    </mat-list-option>
-                </mat-selection-list>
-
-                <button mat-raised-button class='mr-2 mt-3' (click)="onCancelClick()">Cancel</button>
-                <button mat-raised-button type="submit" [disabled]="selectedOrgs.length === 0" [mat-dialog-close]='this.selectedOrgs'>Add Organization(s)</button>
-            </div>
-        </div>
-
-    </mat-expansion-panel>
-
-    <mat-expansion-panel hideToggle [expanded]="false">
-
-        <mat-expansion-panel-header (click)="onHeaderClick()">
-            <mat-panel-title>
-                Add A Podio Org Not Yet Known Using Credentials
-            </mat-panel-title>
-            <mat-icon>library_add</mat-icon>
-        </mat-expansion-panel-header>
-
-        <div *ngIf="showContent">
-            <p class="text-hint">
-                Explanatory text could go here if needed...
-            </p>
-
-            <form [formGroup]="loginForm" class="mb-3 mt-3">
-
-                <mat-form-field class='w-100'>
-                    <mat-label>Email</mat-label>
-                    <input type="text" matInput formControlName="email">
-                </mat-form-field>
-
-                <mat-form-field class='w-100'>
-                    <mat-label>Password</mat-label>
-                    <input type="text" matInput formControlName="password">
-                </mat-form-field>
-
-                <button mat-raised-button class='mr-2' (click)="onCancelClick()">Cancel</button>
-                <button mat-raised-button type="button" [disabled]="false" (click)='onSubmitCredentials()'>Add Organization</button>
-
-            </form>
-
-        </div>
-
-    </mat-expansion-panel>
-
-</mat-accordion> -->

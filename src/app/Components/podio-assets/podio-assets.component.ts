@@ -1,3 +1,4 @@
+import { AddNewOrgComponent } from './../add-new-org/add-new-org.component';
 import { AddKnownOrgComponent } from '../add-known-org/add-known-org.component';
 import { FakeDataService, IClientViewModel } from "./../../services/fake-data.service";
 import {
@@ -71,15 +72,15 @@ export class PodioAssetsComponent implements OnInit {
     }
     onAddNewOrgClick() {
         console.log('add new org')
-        //    const dialogRef = this.dialog.open(AddNewOrgComponent, {
-        //        data: { client: this.client ? this.client : null }
-        //    });
-        //    dialogRef.afterClosed().subscribe((result) => {
-        //        console.log("result: ", result);
-        //        if ((result = "add")) {
-        //            this.addOrgInProgress = true;
-        //        }
-        //    });
+           const dialogRef = this.dialog.open(AddNewOrgComponent, {
+               data: { client: this.client ? this.client : null }
+           });
+           dialogRef.afterClosed().subscribe((result) => {
+               console.log("result: ", result);
+               if ((result = "add")) {
+                   this.addOrgInProgress = true;
+               }
+           });
     }
 
     /** =========================

@@ -76,6 +76,7 @@ import { ClientComponent } from './Components/client/client.component';
 import { AddKnownOrgComponent } from "./Components/add-known-org/add-known-org.component";
 import { PodioOrgDetailComponent } from './Components/podio-org-detail/podio-org-detail.component';
 import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
+import { AddNewOrgComponent } from './Components/add-new-org/add-new-org.component';
 @NgModule({
     declarations: [
         /** Components */
@@ -129,7 +130,8 @@ import { ConfirmationDialogComponent } from './Components/confirmation-dialog/co
         AddKnownOrgComponent,
         PodioOrgDetailComponent,
         InstancesComponent,
-        ConfirmationDialogComponent
+        ConfirmationDialogComponent,
+        AddNewOrgComponent
     ],
     imports: [
         /** Modules */
@@ -156,6 +158,7 @@ import { ConfirmationDialogComponent } from './Components/confirmation-dialog/co
         NewDeploymentComponent,
         NewPatchComponent,
         AddKnownOrgComponent,
+        AddNewOrgComponent,
         ConfirmationDialogComponent
     ]
 })
