@@ -11,6 +11,7 @@ import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmati
 import { MAT_DIALOG_DATA } from "@angular/material";
 import { MatDialogRef } from "@angular/material/dialog";
 import { routerNgProbeToken } from "@angular/router/src/router_module";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "app-new-deployment",
@@ -58,7 +59,8 @@ export class NewDeploymentComponent implements OnInit {
         private fakeDataService: FakeDataService,
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
         public deployDialog: MatDialogRef<NewDeploymentComponent>,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -71,17 +73,26 @@ export class NewDeploymentComponent implements OnInit {
         console.log(this.c.value);
         let userSelection = this.c.value;
 
-        if (userSelection === "self") {
-            /** show orgs of authenticated user */
-        } else if (userSelection === "add") {
-            /** navigate to new client form */
+        if (userSelection === "deployToSelf") {
+            /** TODO
+             * get orgs of authenticated user
+             * how to set instance name in this case?
+             * */
+            this.orgs = this.fakeDataService.fakeOrganizations;
+            this._setInstance("SELF");
+        } else if (userSelection === "addClient") {
+            this.deployDialog.close();
+            this.router.navigate(["clients/new"]);
         } else {
-            /** show orgs of selected client */
             let selectedClient = userSelection;
             this.orgs = selectedClient.orgs;
-            this.deploymentForm.controls.instance.setValue(selectedClient.identifier);
-            this.instance = selectedClient.identifier;
+            this._setInstance(selectedClient.identifier);
         }
+    }
+
+    private _setInstance(instanceName) {
+        this.deploymentForm.controls.instance.setValue(instanceName);
+        this.instance = instanceName;
     }
 
     onSubmit() {

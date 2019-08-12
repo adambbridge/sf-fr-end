@@ -21,7 +21,7 @@
                 <mat-label>Add client or deploy to one or your own orgs?</mat-label>
                 <mat-select formControlName="client" readonly (selectionChange)='onClientSelection()'>
                     <mat-option value="addClient">Add client</mat-option>
-                    <mat-option value="self">Deploy to one of my orgs</mat-option>
+                    <mat-option value="deployToSelf">Deploy to one of my orgs</mat-option>
                 </mat-select>
                 <div *ngIf="c.invalid && (c.dirty || c.touched)">
                     <mat-error>Please make a selection</mat-error>
@@ -71,7 +71,6 @@
         </div>
     </mat-form-field>
 
-  
 
     <mat-form-field class="w-100" *ngIf="deploymentForm.controls.instance">
         <mat-label>Instance Name (generated automatically based on client)</mat-label>
