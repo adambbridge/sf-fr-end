@@ -1,3 +1,5 @@
 <mat-chip>
-    <mat-icon>{{icon}}</mat-icon> {{text}}
+    <mat-icon *ngIf="icon" class='text-light'>{{icon}}</mat-icon> 
+    <span *ngIf="!icon" class="pl-1"></span>
+    {{text}}
 </mat-chip>

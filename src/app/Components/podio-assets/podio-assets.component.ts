@@ -1,6 +1,9 @@
-import { AddNewOrgComponent } from './../add-new-org/add-new-org.component';
-import { AddKnownOrgComponent } from '../add-known-org/add-known-org.component';
-import { FakeDataService, IClientViewModel } from "./../../services/fake-data.service";
+import { AddNewOrgComponent } from "./../add-new-org/add-new-org.component";
+import { AddKnownOrgComponent } from "../add-known-org/add-known-org.component";
+import {
+    FakeDataService,
+    IClientViewModel
+} from "./../../services/fake-data.service";
 import {
     Component,
     OnInit,
@@ -28,7 +31,7 @@ export class PodioAssetsComponent implements OnInit {
     addOrgInProgress: boolean = false;
 
     // MATERIAL TABLE SETUP
-    displayedColumns: string[] = ["org", "owner", "solution", "isTemplate"];
+    displayedColumns: string[] = ["org", "owner", "isTemplate", "solution"];
     @ViewChild(MatSortModule) sort: MatSortModule;
     dataSource;
 
@@ -71,16 +74,16 @@ export class PodioAssetsComponent implements OnInit {
         });
     }
     onAddNewOrgClick() {
-        console.log('add new org')
-           const dialogRef = this.dialog.open(AddNewOrgComponent, {
-               data: { client: this.client ? this.client : null }
-           });
-           dialogRef.afterClosed().subscribe((result) => {
-               console.log("result: ", result);
-               if ((result = "add")) {
-                   this.addOrgInProgress = true;
-               }
-           });
+        console.log("add new org");
+        const dialogRef = this.dialog.open(AddNewOrgComponent, {
+            data: { client: this.client ? this.client : null }
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log("result: ", result);
+            if ((result = "add")) {
+                this.addOrgInProgress = true;
+            }
+        });
     }
 
     /** =========================

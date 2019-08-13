@@ -11,8 +11,8 @@ export interface IPodioApplicationViewModel {
 }
 
 /** IPodioSpaceViewModel
- * currently the UI just shows names of spaces and their apps 
- * within the context of an organization ie at /podio/id, in the update task form etc. 
+ * currently the UI just shows names of spaces and their apps
+ * within the context of an organization ie at /podio/id, in the update task form etc.
  * */
 export interface IPodioSpaceViewModel {
     workspaceName: string;
@@ -27,23 +27,25 @@ export interface ISolutionViewModel {
     appId?: string; // is this the unique ID for a solution?
     name: string;
     imageUrl?: string; // users will in the future be able to optionally upload an image to use for their solution icon
-    description?: string; // users can enter one if they want 
+    description?: string; // users can enter one if they want
     lastTaskDate?: Date; // if no other tasks this is simple the creation date
     workspaces: Array<IPodioSpaceViewModel>; // only need names of spaces at /solutions/ (strings). Whne you get to /solution/id (detail) we display the space name and names of it's apps
-    history: ISolutionTaskViewModel[]; // /solutions/ only needs date of last task performed. /solution/id (detail) needs all tasks including their details in order to show task queue and history 
-    version: string | number; // /solutions/ shows info for latest version. /solution/id shows info for allversions of the solution. when you view the workspaces you can select which version you want to view spaces for. deployed instances, history etc show tasks and instances for all versions. each vesion is, i think, a separate solution behind the scenes so maybe we need to fetch all of them...?
-    creationDate?: Date; 
+    history: ISolutionTaskViewModel[]; // /solutions/ only needs date of last task performed. /solution/id (detail) needs all tasks including their details in order to show task queue and history
+    versionNumber: string | number;
+    versionName: string;
+    // /solutions/ shows info for latest version. /solution/id shows info for allversions of the solution. when you view the workspaces you can select which version you want to view spaces for. deployed instances, history etc show tasks and instances for all versions. each vesion is, i think, a separate solution behind the scenes so maybe we need to fetch all of them...?
+    creationDate?: Date;
 }
 
 /**
-* ISolutionInstanceViewModel 
-* WHERE: currently show instances list in new-patch, podio-org-detail and solution 
-* WHAT: currently show columns name, v num, v name, client, last action (date and type), 
-* (i want to show also the solution name and have the solution id available 
-* so you can click thru to the solution detail at solutions/id) 
-* NOTE: patch diff is not prop of instance. 
-* it is calculated by comparing spaces details of instance sol. v 
-* with spaces details of patch sol. v
+ * ISolutionInstanceViewModel
+ * WHERE: currently show instances list in new-patch, podio-org-detail and solution
+ * WHAT: currently show columns name, v num, v name, client, last action (date and type),
+ * (i want to show also the solution name and have the solution id available
+ * so you can click thru to the solution detail at solutions/id)
+ * NOTE: patch diff is not prop of instance.
+ * it is calculated by comparing spaces details of instance sol. v
+ * with spaces details of patch sol. v
  */
 export interface ISolutionInstanceViewModel {
     name: string;
@@ -53,8 +55,7 @@ export interface ISolutionInstanceViewModel {
     solutionVersionNumber: string;
     solutionVersionName: string;
     client: any;
-    lastTask: ISolutionTaskViewModel; 
-    
+    lastTask: ISolutionTaskViewModel;
 }
 
 export interface IPodioOrganizationViewModel {
@@ -69,7 +70,7 @@ export interface IPodioOrganizationViewModel {
 /**
  * IClientViewModel
  * I'm not sure about the fields for client
- * TODO Adam will solicit input on these ... 
+ * TODO Adam will solicit input on these ...
  */
 export interface IClientViewModel {
     id: string;
@@ -78,7 +79,7 @@ export interface IClientViewModel {
     company?: string;
     email?: string;
     orgs: IPodioOrganizationViewModel[];
-    instances?: ISolutionInstanceViewModel[]; // prop of client or just org? we do currently show number of deployed instances in client table but in client detail we just show orgs table and orgs have instances 
+    instances?: ISolutionInstanceViewModel[]; // prop of client or just org? we do currently show number of deployed instances in client table but in client detail we just show orgs table and orgs have instances
     notes?: string;
 }
 
@@ -279,7 +280,8 @@ export class FakeDataService {
     fakeSolution: ISolutionViewModel = {
         appId: "123456",
         name: "Fake Solution",
-        version: 1,
+        versionNumber: "1.0",
+        versionName: "Sierra",
         workspaces: [
             this.fakeWorkspace,
             this.fakeWorkspace,
@@ -299,7 +301,8 @@ export class FakeDataService {
             name: "Custom Solution A",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
-            version: 1,
+            versionNumber: "1.0",
+            versionName: "Sierra",
             creationDate: new Date("2013-03-01T01:10:00"),
             lastTaskDate: new Date(),
             description:
@@ -316,7 +319,8 @@ export class FakeDataService {
             name: "Custom Solution B",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
-            version: 2,
+            versionNumber: "2.0",
+            versionName: "Whitney",
             creationDate: new Date("2013-03-01T01:10:00"),
             lastTaskDate: new Date(),
             description:
@@ -333,7 +337,8 @@ export class FakeDataService {
             name: "Custom Solution C",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
-            version: 1,
+            versionNumber: "1.0",
+            versionName: "Nissan",
             creationDate: new Date("2013-03-01T01:10:00"),
             lastTaskDate: new Date(),
             description:
@@ -348,7 +353,8 @@ export class FakeDataService {
         {
             appId: "123456",
             name: "Custom Solution D",
-            version: 4,
+            versionNumber: "4.0",
+            versionName: "Yellowstone",
             creationDate: new Date("2013-03-01T01:10:00"),
             lastTaskDate: new Date(),
             description:
@@ -363,7 +369,8 @@ export class FakeDataService {
         {
             appId: "123456",
             name: "Custom Solution E",
-            version: 4,
+            versionNumber: "4.0",
+            versionName: "Cherokee",
             creationDate: new Date("2013-03-01T01:10:00"),
             lastTaskDate: new Date(),
             description:
@@ -380,7 +387,8 @@ export class FakeDataService {
             name: "Custom Solution F",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
-            version: 4,
+            versionNumber: "4.0",
+            versionName: "Cherokee",
             creationDate: new Date("2013-03-01T01:10:00"),
             lastTaskDate: new Date(),
             description:

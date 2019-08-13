@@ -27,7 +27,7 @@ export class NewPatchComponent implements OnInit {
     instancePreselection: boolean = false;
     form: FormGroup;
     //TODO these would be solution properties?
-    versions = [1, 2, "KYdev1", "KYdev2", "KYqa1"];
+    versions = ["0.0", "1.0 Mongoose", "1.1 Bobcat", "2.0 Wildebeest"];
     patchImpactOnSpaces = null;
     minDate = new Date();
     maxDate = this._getMaxDate();

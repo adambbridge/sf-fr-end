@@ -64,12 +64,14 @@ tr:active {
 .scheduled {
     /* color: blue; */
 }
-/* */
+
 .instances-component .mat-cell,
 .instances-component .mat-header-cell,
 .instances-component .mat-footer-cell {
     font-size: 16px;
+    padding-right: 10px;
 }
+
 /* left align table when inside new patch form */
 app-new-patch th.mat-header-cell:first-of-type,
 app-new-patch td.mat-cell:first-of-type {
@@ -164,6 +166,12 @@ a.text-no-deco {
     max-width: 100px;
 }
 .w-125px {
+    width: 125px;
+}
+.w-100px {
+    width: 125px;
+}
+.w-150px {
     width: 125px;
 }
 .mat-list-base .mat-list-option.mat-list-option-inline {
@@ -314,6 +322,9 @@ table td.mat-cell:first-of-type,
 table td.mat-footer-cell:first-of-type,
 table th.mat-header-cell:first-of-type {
     padding-left: 16px;
+}
+.table-layout-fixed {
+    table-layout: fixed;
 }
 
 /* so content doesn't go right to bottom of screen */

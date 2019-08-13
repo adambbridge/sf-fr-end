@@ -35,7 +35,7 @@ export class NewDeploymentComponent implements OnInit {
     clients;
     orgs;
     instance;
-    versions = [1, 2, "KYdev1", "KYdev2", "KYqa1"];
+    versions = [];
 
     deploymentForm = this.fb.group({
         solution: ["", Validators.required],
@@ -67,6 +67,10 @@ export class NewDeploymentComponent implements OnInit {
         this._configurePreselections(this._passedData);
         this.clients = this.fakeDataService.fakeClients;
         this.solutions = this.fakeDataService.fakeSolutions;
+        this.solutions.forEach(sol => {
+            this.versions.push(sol.versionNumber + " " + sol.versionName);
+        } )
+        console.log(this.versions);
     }
 
     onClientSelection(): void {

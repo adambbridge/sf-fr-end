@@ -26,10 +26,12 @@
     <mat-card-actions>
 
         <mat-chip-list class='text-hint' *ngIf="chiplist">
+            <app-mat-chip-custom [text]="'v.' + item.versionNumber" matTooltip="Latest version">
+            </app-mat-chip-custom>
             <app-mat-chip-custom [icon]="'ballot'" [text]="item.workspaces.length" matTooltip="workspaces">
             </app-mat-chip-custom>
             <app-mat-chip-custom [icon]="'launch'" [text]="'5'" matTooltip="Deployed Instances"></app-mat-chip-custom>
-            <app-mat-chip-custom [icon]="'autorenew'" [text]="'07/20/2019'" matTooltip="Last action">
+            <app-mat-chip-custom [icon]="'build'" [text]="'07/20/2019'" matTooltip="Last action">
             </app-mat-chip-custom>
         </mat-chip-list>
     </mat-card-actions>
