@@ -14,25 +14,11 @@
     
     <div *ngIf="!preselectedOrg">
 
-        <!-- if no clients -->
-        <div *ngIf="!clients.length">
-            Looks like you don't have any clients
-            <mat-form-field class="w-100">
-                <mat-label>Add client or deploy to one or your own orgs?</mat-label>
-                <mat-select formControlName="client" readonly (selectionChange)='onClientSelection()'>
-                    <mat-option value="addClient">Add client</mat-option>
-                    <mat-option value="deployToSelf">Deploy to one of my orgs</mat-option>
-                </mat-select>
-                <div *ngIf="c.invalid && (c.dirty || c.touched)">
-                    <mat-error>Please make a selection</mat-error>
-                </div>
-            </mat-form-field>
-        </div>
-
-        <!-- if clients -->
-        <mat-form-field class="w-100" *ngIf="clients.length">
+        <mat-form-field class="w-100">
             <mat-label>Who is the target client?</mat-label>
             <mat-select formControlName="client" readonly (selectionChange)='onClientSelection($event.value)'>
+                <mat-option value="addClient">Add new client<mat-icon class="text-light pl-2">add_box</mat-icon></mat-option>
+                <mat-option value="deployToSelf">Provider name (me)</mat-option>
                 <mat-option *ngFor="let client of clients" [value]="client">{{client.contact}}</mat-option>
             </mat-select>
             <div *ngIf="c.invalid && (c.dirty || c.touched)">

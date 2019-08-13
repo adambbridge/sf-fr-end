@@ -130,14 +130,14 @@ export class NewPatchComponent implements OnInit {
      ======================= */
 
     private getConfirmationDialogData() {
-        let whenMessage;
-        let today = new Date().toDateString();
-        if (this.patchDate.toDateString() === today) {
-            whenMessage = "This could take a while.";
-        } else {
-            whenMessage = `Patching set for ${this.patchDate.toDateString()}`;
+        var today = new Date();
+        var futureDate = this._addDays(today, 3);
+        var reminder;
+        if (this.patchDate >= futureDate) {
+            reminder = `We'll also send a reminder 3 days before start time.`;
+            console.log("set reminder", reminder);
         }
-        let data = {
+        var data = {
             title: "Confirm Patch",
             btn1Text: "Cancel",
             btn2Text: "Patch",
@@ -149,11 +149,19 @@ export class NewPatchComponent implements OnInit {
                 } instance(s) will be patched with ${
                     this.solution.name
                 } (add vNum and vNam)`,
-                whenMessage,
-                "We'll send status emails to _____ when it starts and when it finishes."
+                `Patching set for ${this.patchDate.toDateString()}. We'll send status emails to _____ when it starts and finishes. ${
+                    reminder ? reminder : ""
+                }`
             ]
         };
+        console.log("before return", reminder);
         return data;
+    }
+
+    private _addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
     }
 
     get versionInput() {

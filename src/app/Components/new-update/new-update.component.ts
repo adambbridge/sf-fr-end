@@ -101,7 +101,8 @@ export class NewUpdateComponent implements OnInit {
             snackBarCancelMessage: "Update cancelled",
             snackBarConfirmMessage: "Update scheduled",
             messages: [
-                "This will create a new solution version. Old versions will remain available."
+                "This will create a new solution version. Old versions will remain available.",
+                "This may take a minute. We'll email ___ when it's done."
             ]
         };
         return data;

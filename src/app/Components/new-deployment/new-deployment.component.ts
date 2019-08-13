@@ -119,10 +119,6 @@ export class NewDeploymentComponent implements OnInit {
 
     private getConfirmationDialogData() {
         let form = this.deploymentForm.value;
-        let sol = form.solution;
-        let ver = form.version;
-        let org = form.org.name;
-
         let data = {
             title: "Create Instance?",
             btn1Text: "Cancel",
@@ -130,7 +126,8 @@ export class NewDeploymentComponent implements OnInit {
             snackBarCancelMessage: "Task cancelled",
             snackBarConfirmMessage: "Task scheduled",
             messages: [
-                `A new instance of solution ${sol} version ${ver} will be created in org ${org}`
+                `A new instance of solution ${form.solution} version ${form.version} will be created in org ${form.org.name}`,
+                `This may take a few minutes. We'll email you when task completes.`
             ]
         };
         return data;
