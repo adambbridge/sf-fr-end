@@ -31,15 +31,9 @@
                 <span>
                     <span *ngIf="addOrgInProgress" class="mr-3 text-hint">
                         <mat-icon class='spin icon-smaller'>sync</mat-icon>
-                        Adding Podio Org...
+                        Adding Account...
                     </span>
-                    <button mat-raised-button [matMenuTriggerFor]="addOrgMenu">Add Organization</button>
-                    <mat-menu #addOrgMenu="matMenu">
-                        <button mat-menu-item (click)="onAddKnownOrgClick()">From orgs already added to
-                            Saasafrass</button>
-                        <button mat-menu-item (click)="onAddNewOrgClick()">Add new org with it's username and
-                            password</button>
-                    </mat-menu>
+                    <button mat-raised-button (click)="onAddAccountClick()">Add Account</button>
                 </span>
 
             </div>

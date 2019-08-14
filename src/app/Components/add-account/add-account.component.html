@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Name the account</h1>
+
+<form [formGroup]="form" class="mb-3 mt-3">
+
+    <div [hidden]='true'>
+        <mat-form-field class='w-100' hidden>
+            <mat-label>Client ID</mat-label>
+            <input type="text" [value]="client.id" matInput formControlName="clientId">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class='w-100'>
+        <mat-label></mat-label>
+        <input type="text" matInput formControlName="accountName">
+    </mat-form-field>
+
+    <p>You will be redirected to Podio to enter account credentials.</p>
+
+    <button mat-raised-button class='mr-2' (click)="onCancelClick()">Cancel</button>
+    <button mat-raised-button type="submit" (click)="onSubmit()" [disabled]="false">Proceed</button>
+
+</form>
+
+<iframe width="1" height="1" [src]="logOutUrl"></iframe>

@@ -1,5 +1,4 @@
-import { AddNewOrgComponent } from "./../add-new-org/add-new-org.component";
-import { AddKnownOrgComponent } from "../add-known-org/add-known-org.component";
+import { AddAccountComponent } from './../add-account/add-account.component';
 import {
     FakeDataService,
     IClientViewModel
@@ -53,38 +52,41 @@ export class PodioAssetsComponent implements OnInit {
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
-    onOrgRowClick(test) {
-        console.log(test);
-        // this.dialog.open(PodioOrgDetailComponent, {
-        //     data: {
-        //         organization: this.solution
-        //     }
-        // });
+    onAddAccountClick() {
+        const dialogRef = this.dialog.open(AddAccountComponent, {
+            data: { client: this.client ? this.client : null }
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log("result: ", result);
+            if ((result = "add")) {
+                this.addOrgInProgress = true;
+            }
+        });
     }
 
-    onAddKnownOrgClick() {
-        const dialogRef = this.dialog.open(AddKnownOrgComponent, {
-            data: { client: this.client ? this.client : null }
-        });
-        dialogRef.afterClosed().subscribe((result) => {
-            console.log("result: ", result);
-            if ((result = "add")) {
-                this.addOrgInProgress = true;
-            }
-        });
-    }
-    onAddNewOrgClick() {
-        console.log("add new org");
-        const dialogRef = this.dialog.open(AddNewOrgComponent, {
-            data: { client: this.client ? this.client : null }
-        });
-        dialogRef.afterClosed().subscribe((result) => {
-            console.log("result: ", result);
-            if ((result = "add")) {
-                this.addOrgInProgress = true;
-            }
-        });
-    }
+    // onAddKnownOrgClick() {
+    //     const dialogRef = this.dialog.open(AddKnownOrgComponent, {
+    //         data: { client: this.client ? this.client : null }
+    //     });
+    //     dialogRef.afterClosed().subscribe((result) => {
+    //         console.log("result: ", result);
+    //         if ((result = "add")) {
+    //             this.addOrgInProgress = true;
+    //         }
+    //     });
+    // }
+    // onAddNewOrgClick() {
+    //     console.log("add new org");
+    //     const dialogRef = this.dialog.open(AddNewOrgComponent, {
+    //         data: { client: this.client ? this.client : null }
+    //     });
+    //     dialogRef.afterClosed().subscribe((result) => {
+    //         console.log("result: ", result);
+    //         if ((result = "add")) {
+    //             this.addOrgInProgress = true;
+    //         }
+    //     });
+    // }
 
     /** =========================
      * OLD ACCORDION FUNCTIONS
