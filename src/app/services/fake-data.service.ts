@@ -77,9 +77,17 @@ export interface IClientViewModel {
     identifier: string; // is this name?
     contact: string;
     company?: string;
-    email?: string;
-    orgs: IPodioOrganizationViewModel[];
+    email: string;
+    orgs?: IPodioOrganizationViewModel[];
     instances?: ISolutionInstanceViewModel[]; // prop of client or just org? we do currently show number of deployed instances in client table but in client detail we just show orgs table and orgs have instances
+    notes?: string;
+}
+
+export interface INewClientFormSubmission {
+    contact: string;
+    company?: string;
+    email: string;
+    orgs?: IPodioOrganizationViewModel[];
     notes?: string;
 }
 
@@ -537,4 +545,32 @@ export class FakeDataService {
             orgs: [this.fakeOrganization1, this.fakeOrganization2]
         }
     ];
+
+    newClient(clientInfo) {
+        // pretend to get new item back from api with props added
+        let savedClient = clientInfo;
+        savedClient.id = "foo";
+        savedClient.identifier = "bar";
+
+        this.fakeClients.unshift(savedClient);
+        return this.fakeClients;
+    }
+
+    newSolution(solutionInfo) {
+        // pretend to get new item back from api with props added
+        let savedSol = solutionInfo;
+        savedSol.appId = "foo";
+        savedSol.identifier = "bar";
+        savedSol.workspaces = [
+            this.fakeWorkspace,
+            this.fakeWorkspace,
+            this.fakeWorkspace
+        ];
+        savedSol.versionNumber = '0.0';
+        savedSol.creationDate = new Date();
+
+        this.fakeSolutions.unshift(savedSol);
+        return this.fakeSolutions;
+    }
+    
 } // end class fakeDataService

@@ -1,3 +1,4 @@
+import { INewClientFormSubmission } from './../../services/fake-data.service';
 import { MatDialog } from "@angular/material";
 import { MatDialogRef } from "@angular/material/dialog";
 import { AddKnownOrgComponent } from "../add-known-org/add-known-org.component";
@@ -55,11 +56,16 @@ export class NewClientComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-        this.newClientForm.value.envs = this.orgs;
+        this.newClientForm.value.orgs = this.orgs;
         console.log("form value:", this.newClientForm.value);
         console.log("form value:", this.newClientForm.valid);
+
+        // call service
+        // TODO add async code...
+        let newClientsArray = this.fakeDataService.newClient(this.newClientForm.value);
+
         // if success
-        this._utilsService.openSnackBar("triggered this from onSubmit");
+        this._utilsService.openSnackBar("New client added");
         this.router.navigate(["/clients"]);
     }
 
@@ -73,7 +79,7 @@ export class NewClientComponent implements OnInit {
             company: [""],
             email: ["", Validators.required],
             notes: [""],
-            envs: [""]
+            orgs: [""]
         });
     }
 }

@@ -10,6 +10,7 @@ import {
     Inject,
     Optional
 } from "@angular/core";
+import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import { of } from "rxjs";
 import { NgForm } from "@angular/forms";
@@ -37,7 +38,6 @@ import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmati
 import { MAT_DIALOG_DATA } from "@angular/material";
 import { MatDialogRef } from "@angular/material/dialog";
 
-
 @Component({
     selector: "app-new-solution",
     templateUrl: "./new-solution.component.html",
@@ -56,6 +56,7 @@ export class NewSolutionComponent implements OnInit {
     newSolutionDialog? = null;
 
     constructor(
+        private router: Router,
         private _fb: FormBuilder,
         private _saasafrasService: SaasafrasService,
         private _podioService: PodioService,
@@ -124,6 +125,19 @@ export class NewSolutionComponent implements OnInit {
         }
         const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
             data: this.getConfirmationDialogData()
+        });
+        confirmDialog.afterClosed().subscribe((result) => {
+            console.log("d closed, received: ", result);
+            
+            // when user confirms, create the solution 
+            let newSolutionsArray = this.fakeDataService.newSolution(
+                this.newSolutionForm.value
+            );
+            console.log(newSolutionsArray);
+            if (newSolutionsArray) {
+                this._utilsService.openSnackBar("New solution added");
+                this.router.navigate(["/solutions"]);
+            }
         });
     }
 
