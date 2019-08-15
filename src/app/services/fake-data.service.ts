@@ -58,6 +58,12 @@ export interface ISolutionInstanceViewModel {
     lastTask: ISolutionTaskViewModel;
 }
 
+export interface IPodioAccountViewModel {
+    orgs?: IPodioOrganizationViewModel[];
+    name: string;
+    email: string;
+}
+
 export interface IPodioOrganizationViewModel {
     name: string;
     owner: string;
@@ -287,7 +293,7 @@ export class FakeDataService {
 
     fakeSolution: ISolutionViewModel = {
         appId: "123456",
-        name: "Fake Solution",
+        name: "FastBooks",
         versionNumber: "1.0",
         versionName: "Sierra",
         workspaces: [
@@ -306,7 +312,7 @@ export class FakeDataService {
     fakeSolutions: Array<ISolutionViewModel> = [
         {
             appId: "123456",
-            name: "Custom Solution A",
+            name: "Jira Dreams of Sushi",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             versionNumber: "1.0",
@@ -324,7 +330,7 @@ export class FakeDataService {
         },
         {
             appId: "123456",
-            name: "Custom Solution B",
+            name: "Salesfork",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             versionNumber: "2.0",
@@ -341,8 +347,8 @@ export class FakeDataService {
             history: this.fakeSolutionTasks
         },
         {
-            appId: "123456",
-            name: "Custom Solution C",
+            appId: "Jello",
+            name: "",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             versionNumber: "1.0",
@@ -360,7 +366,7 @@ export class FakeDataService {
         },
         {
             appId: "123456",
-            name: "Custom Solution D",
+            name: "Legal Broom",
             versionNumber: "4.0",
             versionName: "Yellowstone",
             creationDate: new Date("2013-03-01T01:10:00"),
@@ -370,44 +376,48 @@ export class FakeDataService {
             workspaces: [
                 this.fakeWorkspace,
                 this.fakeWorkspace,
-                this.fakeWorkspace
-            ],
-            history: this.fakeSolutionTasks
-        },
-        {
-            appId: "123456",
-            name: "Custom Solution E",
-            versionNumber: "4.0",
-            versionName: "Cherokee",
-            creationDate: new Date("2013-03-01T01:10:00"),
-            lastTaskDate: new Date(),
-            description:
-                "my roasted pig. item description could be here and truncate after 2 lines or so with ...",
-            workspaces: [
                 this.fakeWorkspace,
-                this.fakeWorkspace,
-                this.fakeWorkspace
-            ],
-            history: this.fakeSolutionTasks
-        },
-        {
-            appId: "123456",
-            name: "Custom Solution F",
-            imageUrl:
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
-            versionNumber: "4.0",
-            versionName: "Cherokee",
-            creationDate: new Date("2013-03-01T01:10:00"),
-            lastTaskDate: new Date(),
-            description:
-                "my description. item description could be here and truncate after 2 lines or so with ...",
-            workspaces: [
                 this.fakeWorkspace,
                 this.fakeWorkspace,
                 this.fakeWorkspace
             ],
             history: this.fakeSolutionTasks
         }
+
+        // {
+        //     appId: "123456",
+        //     name: "Custom Solution E",
+        //     versionNumber: "4.0",
+        //     versionName: "Cherokee",
+        //     creationDate: new Date("2013-03-01T01:10:00"),
+        //     lastTaskDate: new Date(),
+        //     description:
+        //         "my roasted pig. item description could be here and truncate after 2 lines or so with ...",
+        //     workspaces: [
+        //         this.fakeWorkspace,
+        //         this.fakeWorkspace,
+        //         this.fakeWorkspace
+        //     ],
+        //     history: this.fakeSolutionTasks
+        // },
+        // {
+        //     appId: "123456",
+        //     name: "Custom Solution F",
+        //     imageUrl:
+        //         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
+        //     versionNumber: "4.0",
+        //     versionName: "Cherokee",
+        //     creationDate: new Date("2013-03-01T01:10:00"),
+        //     lastTaskDate: new Date(),
+        //     description:
+        //         "my description. item description could be here and truncate after 2 lines or so with ...",
+        //     workspaces: [
+        //         this.fakeWorkspace,
+        //         this.fakeWorkspace,
+        //         this.fakeWorkspace
+        //     ],
+        //     history: this.fakeSolutionTasks
+        // }
     ];
 
     fakeInstance1: ISolutionInstanceViewModel = {
@@ -460,9 +470,9 @@ export class FakeDataService {
     ];
 
     fakeOrganization1: IPodioOrganizationViewModel = {
-        name: "Fake Org1",
+        name: "Brick Bridge Consulting",
         orgId: 1,
-        owner: "Client Company XYZ",
+        owner: "Brick Bridge Consulting",
         isTemplate: true,
         spaces: [
             this.fakeWorkspace,
@@ -476,13 +486,11 @@ export class FakeDataService {
         instances: [this.fakeInstance1, this.fakeInstance2]
     };
     fakeOrganization2: IPodioOrganizationViewModel = {
-        name: "Fake Org2",
+        name: "Zoller Swanson Accounting",
         orgId: 2,
-        owner: "Brick Bridge Consulting",
+        owner: "Zoller Swanson",
         isTemplate: false,
         spaces: [
-            this.fakeWorkspace,
-            this.fakeWorkspace,
             this.fakeWorkspace,
             this.fakeWorkspace,
             this.fakeWorkspace,
@@ -492,18 +500,10 @@ export class FakeDataService {
         instances: [this.fakeInstance1, this.fakeInstance2]
     };
     fakeOrganization3: IPodioOrganizationViewModel = {
-        name: "Fake Org3",
+        name: "First United Church",
         orgId: 3,
-        owner: "Client Company ABC",
-        spaces: [
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace
-        ],
+        owner: "First United Church",
+        spaces: [this.fakeWorkspace, this.fakeWorkspace, this.fakeWorkspace],
         instances: [this.fakeInstance1, this.fakeInstance2]
     };
 
@@ -513,36 +513,70 @@ export class FakeDataService {
         this.fakeOrganization3
     ];
 
+    fakeOrganizationsLong: Array<IPodioOrganizationViewModel> = [
+        this.fakeOrganization1,
+        this.fakeOrganization2,
+        this.fakeOrganization3,
+        this.fakeOrganization1,
+        this.fakeOrganization2,
+        this.fakeOrganization3,
+        this.fakeOrganization1,
+        this.fakeOrganization2,
+        this.fakeOrganization3,
+        this.fakeOrganization1,
+        this.fakeOrganization2,
+        this.fakeOrganization3,
+        this.fakeOrganization1,
+        this.fakeOrganization2,
+        this.fakeOrganization3,
+        this.fakeOrganization1,
+        this.fakeOrganization2,
+        this.fakeOrganization3
+    ];
+
     fakeClients: Array<IClientViewModel> = [
         {
-            company: "XYZ Real Estate",
-            contact: "Pam Smith",
+            company: "Brick Bridge Consulting",
+            contact: "Gil Roberts",
             identifier: "XYZR",
             id: "1",
-            email: "pam@gmail.com",
+            email: "gil@bbc.com",
             notes:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
             orgs: [this.fakeOrganization1, this.fakeOrganization2]
         },
         {
-            company: "Random Consulting",
-            contact: "Dan Jones",
+            company: "Code Louisville",
+            contact: "Brian Louerman",
             identifier: "RAND",
             id: "2",
-            email: "dan@gmail.com",
+            email: "brian@gmail.com",
             notes:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
             orgs: [this.fakeOrganization1, this.fakeOrganization2]
         },
         {
-            company: "ABC Real Estate",
-            contact: "Jan Weller",
+            company: "Jefferson Co. Public Schools",
+            contact: "The Superintendent",
             identifier: "ABCR",
             id: "3",
-            email: "jan@gmail.com",
+            email: "super@jcps.com",
             notes:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            orgs: [this.fakeOrganization1, this.fakeOrganization2]
+            orgs: [
+                this.fakeOrganization1,
+                this.fakeOrganization2,
+                this.fakeOrganization1,
+                this.fakeOrganization2,
+                this.fakeOrganization1,
+                this.fakeOrganization2,
+                this.fakeOrganization1,
+                this.fakeOrganization2,
+                this.fakeOrganization1,
+                this.fakeOrganization2,
+                this.fakeOrganization1,
+                this.fakeOrganization2
+            ]
         }
     ];
 
@@ -566,11 +600,10 @@ export class FakeDataService {
             this.fakeWorkspace,
             this.fakeWorkspace
         ];
-        savedSol.versionNumber = '0.0';
+        savedSol.versionNumber = "0.0";
         savedSol.creationDate = new Date();
 
         this.fakeSolutions.unshift(savedSol);
         return this.fakeSolutions;
     }
-    
 } // end class fakeDataService
