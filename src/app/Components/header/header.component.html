@@ -10,13 +10,13 @@
 
     <div>
         <ul class="d-none d-lg-flex flex-row">
-            <li><a routerLink="" class="pr-2 mat-h4 mb-0">Dashboard</a></li>
-            <li><a routerLink="/podio" class="pr-2 mat-h4 mb-0">Podio Orgs</a></li>
-            <li><a routerLink="/clients" class="pr-2 mat-h4 mb-0">Clients</a></li>
-            <li><a routerLink="/solutions" class="pr-2 mat-h4 mb-0">Solutions</a></li>
+            <li><a routerLink="" routerLinkActive="active-nav-item" [routerLinkActiveOptions]="{ exact: true }" class="pr-2 mat-h4 mb-0">Dashboard</a></li>
+            <li><a routerLink="/podio" routerLinkActive="active-nav-item" class="pr-2 mat-h4 mb-0">Podio Orgs</a></li>
+            <li><a routerLink="/clients" routerLinkActive="active-nav-item" class="pr-2 mat-h4 mb-0">Clients</a></li>
+            <li><a routerLink="/solutions" routerLinkActive="active-nav-item" class="pr-2 mat-h4 mb-0">Solutions</a></li>
             <li>
-                <a *ngIf='loggedIn' routerLink="/login" (click)="logout()" id="signup" class="pr-2 mat-h4 mb-0">Logout</a>
-                <a *ngIf='!loggedIn' routerLink="/login" id="signup" class="pr-2 mat-h4 mb-0">Login</a>
+                <a *ngIf='loggedIn' routerLink="/login" routerLinkActive="active-nav-item"  (click)="logout()" id="signup" class="pr-2 mat-h4 mb-0">Logout</a>
+                <a *ngIf='!loggedIn' routerLink="/login" routerLinkActive="active-nav-item"  id="signup" class="pr-2 mat-h4 mb-0">Login</a>
             </li>
         </ul>
     </div>

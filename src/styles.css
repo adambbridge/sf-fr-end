@@ -286,13 +286,31 @@ app-welcome app-card-collection .mat-card:hover {
     width: 100%;
     margin-top: unset;
 }
-
+.mat-toolbar {
+    background-color: #333;
+    color: #f2f2f2;
+}
+mat-toolbar li {
+    list-style: none;
+    font-size: initial;
+    font-weight: initial;
+}
+mat-toolbar a {
+    text-decoration: none;
+    color: white;
+}
+mat-toolbar a:hover,
+mat-toolbar a:active {
+    color: lightgray;
+}
 /* .highlight {
     border: 2px solid #ff4081;
 } */
-.active-nav-item {
+.active-nav-item,
+.active-nav-item:hover {
     font-weight: bold;
-    color: white;
+    /* color: white; */
+    color: #4cd886;;
 }
 /* TODO ENABLE SPECIAL STYLING ONLY IN CERTAIN PLACES */
 .mat-tooltip {
