@@ -18,24 +18,10 @@ export class NewUpdateComponent implements OnInit {
     sourceOrgId;
     sourceOrg;
     updateForm;
-    spacesForUpdate;
-    spacesCurrent;
-
-    /** FAKE DATA */
-    // spaces have workspaceName, apps
-    allSourceOrgSpaces;
-    versions = [
-        {
-            versionNumber: "0.0",
-            versionName: "Yosemite",
-            spaces: [{ workspaceId: 123 }]
-        },
-        {
-            versionNumber: "1.0",
-            versionName: "El Capitan",
-            spaces: [{ workspaceId: 123 }]
-        }
-    ];
+    spacesAllInOrg;
+    spacesCurrentlyUsed;
+    spacesToUseForNewVersion;
+    versions;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
@@ -47,42 +33,50 @@ export class NewUpdateComponent implements OnInit {
 
     ngOnInit() {
         this.solution = this._passedData.solution;
-        /** TODO USE THIS WHEN WE USE REAL DATA  */
-        this.sourceOrgId = this.solution.workspaces[0].podioSpace.org_id;
         this.sourceOrg = this.fakeDataService.fakeOrganization1;
-        this.allSourceOrgSpaces = this.sourceOrg.spaces;
-        // todo: set selected spaces from most recent version of solution?
+        this.spacesAllInOrg = this.sourceOrg.spaces;
 
         this.updateForm = this.fb.group({
             solution: ["", Validators.required],
             version: ["", Validators.required],
-            source: [""],
+            workspaces: [""], // what is source ??
             name: [""],
             notes: [""]
         });
         this.updateForm.controls.solution.setValue(
             this._passedData.solution.name
         );
+
+        this.versions = [
+            {
+                versionNumber: "0.0",
+                versionName: "Yosemite",
+                spaces: [this.fakeDataService.fakeWorkspace1]
+            },
+            {
+                versionNumber: "1.0",
+                versionName: "El Capitan",
+                spaces: [this.fakeDataService.fakeWorkspace2]
+            }
+        ];
     }
 
     onVersionSelection() {
-        let version = this.updateForm.value.version;
-        /**
-         * TODO: show currently used spaces as checked
-         */
-        this.spacesCurrent = version.spaces;
-        this.allSourceOrgSpaces.forEach((space) => {});
+        this.spacesCurrentlyUsed = this.updateForm.value.version.spaces;
     }
 
-    /** this captures updated selected spaces */
     onSpaceSelection(selected) {
-        this.spacesForUpdate = selected;
-        console.log("selected spaces:", this.spacesForUpdate);
+        this.spacesToUseForNewVersion = selected;
+        console.log("selected spaces:", this.spacesToUseForNewVersion);
     }
 
     onSubmit() {
+        this.updateForm.controls.workspaces.setValue(
+            this.spacesToUseForNewVersion
+        );
         console.warn(this.updateForm.value);
         console.warn(this.updateForm.valid);
+        // TODO call service to run task... then update versions with new one etc.
         this.updateDialog.close();
         const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
             data: this.getConfirmationDialogData()

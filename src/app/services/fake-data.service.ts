@@ -21,6 +21,7 @@ export interface IPodioSpaceViewModel {
     checked: boolean;
     podioSpace: any;
     apps: Array<IPodioApplicationViewModel>;
+    selected?: boolean; // add in UI for checkbox selection
 }
 
 export interface ISolutionViewModel {
@@ -59,7 +60,7 @@ export interface ISolutionInstanceViewModel {
 }
 
 export interface IPodioAccountViewModel {
-    orgs?: IPodioOrganizationViewModel[]; 
+    orgs?: IPodioOrganizationViewModel[];
     name: string;
     email: string;
 }
@@ -69,7 +70,7 @@ export interface IPodioOrganizationViewModel {
     owner: string;
     orgId?: number;
     spaces: Array<IPodioSpaceViewModel>;
-    instances?: Array<ISolutionInstanceViewModel>; 
+    instances?: Array<ISolutionInstanceViewModel>;
 }
 
 export interface IClientViewModel {
@@ -79,7 +80,7 @@ export interface IClientViewModel {
     company?: string;
     email: string;
     orgs?: IPodioOrganizationViewModel[];
-    instances?: ISolutionInstanceViewModel[]; 
+    instances?: ISolutionInstanceViewModel[];
     notes?: string;
 }
 
@@ -125,9 +126,39 @@ export class FakeDataService {
         fields: ["foo", "bar"]
     };
 
-    fakeWorkspace: IPodioSpaceViewModel = {
-        workspaceName: "Workspace 1",
-        workspaceId: 123,
+    fakeWorkspace1: IPodioSpaceViewModel = {
+        workspaceName: "Human Resources",
+        workspaceId: 1,
+        apps: [
+            this.fakeApplication,
+            this.fakeApplication,
+            this.fakeApplication,
+            this.fakeApplication
+        ],
+        description:
+            "This is a workspace description. Not sure how long these might be. May need to truncate",
+        checked: false, // solely for purpose of user selection when creating a solution
+        podioSpace: "foo"
+    };
+
+    fakeWorkspace2: IPodioSpaceViewModel = {
+        workspaceName: "Ticketing",
+        workspaceId: 2,
+        apps: [
+            this.fakeApplication,
+            this.fakeApplication,
+            this.fakeApplication,
+            this.fakeApplication
+        ],
+        description:
+            "This is a workspace description. Not sure how long these might be. May need to truncate",
+        checked: false, // solely for purpose of user selection when creating a solution
+        podioSpace: "foo"
+    };
+
+    fakeWorkspace3: IPodioSpaceViewModel = {
+        workspaceName: "Calendar",
+        workspaceId: 3,
         apps: [
             this.fakeApplication,
             this.fakeApplication,
@@ -169,6 +200,12 @@ export class FakeDataService {
             ]
         }
     };
+
+    fakeWorkspaces: IPodioSpaceViewModel[] = [
+        this.fakeWorkspace1,
+        this.fakeWorkspace2,
+        this.fakeWorkspace3
+    ];
 
     /** helper to get fake dates in the near past or future */
     createDateFromOffset(offset) {
@@ -291,14 +328,15 @@ export class FakeDataService {
         versionNumber: "1.0",
         versionName: "Sierra",
         workspaces: [
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace
+            this.fakeWorkspace1,
+            this.fakeWorkspace2,
+            this.fakeWorkspace3,
+            this.fakeWorkspace1,
+            this.fakeWorkspace2,
+            this.fakeWorkspace3,
+            this.fakeWorkspace1,
+            this.fakeWorkspace2,
+            this.fakeWorkspace3
         ],
         history: this.fakeSolutionTasks
     };
@@ -316,9 +354,9 @@ export class FakeDataService {
             description:
                 "my lollipop. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
-                this.fakeWorkspace,
-                this.fakeWorkspace,
-                this.fakeWorkspace
+                this.fakeWorkspace1,
+                this.fakeWorkspace2,
+                this.fakeWorkspace3
             ],
             history: this.fakeSolutionTasks
         },
@@ -334,9 +372,9 @@ export class FakeDataService {
             description:
                 "my ice cream. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
-                this.fakeWorkspace,
-                this.fakeWorkspace,
-                this.fakeWorkspace
+                this.fakeWorkspace1,
+                this.fakeWorkspace2,
+                this.fakeWorkspace3
             ],
             history: this.fakeSolutionTasks
         },
@@ -352,9 +390,9 @@ export class FakeDataService {
             description:
                 "my burger. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
-                this.fakeWorkspace,
-                this.fakeWorkspace,
-                this.fakeWorkspace
+                this.fakeWorkspace1,
+                this.fakeWorkspace2,
+                this.fakeWorkspace3
             ],
             history: this.fakeSolutionTasks
         },
@@ -368,12 +406,12 @@ export class FakeDataService {
             description:
                 "my pizza. item description could be here and truncate after 2 lines or so with ...",
             workspaces: [
-                this.fakeWorkspace,
-                this.fakeWorkspace,
-                this.fakeWorkspace,
-                this.fakeWorkspace,
-                this.fakeWorkspace,
-                this.fakeWorkspace
+                this.fakeWorkspace1,
+                this.fakeWorkspace2,
+                this.fakeWorkspace3,
+                this.fakeWorkspace1,
+                this.fakeWorkspace2,
+                this.fakeWorkspace3
             ],
             history: this.fakeSolutionTasks
         }
@@ -468,13 +506,12 @@ export class FakeDataService {
         orgId: 1,
         owner: "Brick Bridge Consulting",
         spaces: [
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace
+            this.fakeWorkspace1,
+            this.fakeWorkspace2,
+            this.fakeWorkspace3,
+            this.fakeWorkspace1,
+            this.fakeWorkspace2,
+            this.fakeWorkspace3
         ],
         instances: [this.fakeInstance1, this.fakeInstance2]
     };
@@ -483,11 +520,12 @@ export class FakeDataService {
         orgId: 2,
         owner: "Zoller Swanson",
         spaces: [
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace
+            ,
+            this.fakeWorkspace1,
+            this.fakeWorkspace2,
+            this.fakeWorkspace3,
+            this.fakeWorkspace2,
+            this.fakeWorkspace3
         ],
         instances: [this.fakeInstance1, this.fakeInstance2]
     };
@@ -495,7 +533,7 @@ export class FakeDataService {
         name: "First United Church",
         orgId: 3,
         owner: "First United Church",
-        spaces: [this.fakeWorkspace, this.fakeWorkspace, this.fakeWorkspace],
+        spaces: [this.fakeWorkspace2, this.fakeWorkspace3],
         instances: [this.fakeInstance1, this.fakeInstance2]
     };
 
@@ -588,9 +626,9 @@ export class FakeDataService {
         savedSol.appId = "foo";
         savedSol.identifier = "bar";
         savedSol.workspaces = [
-            this.fakeWorkspace,
-            this.fakeWorkspace,
-            this.fakeWorkspace
+            this.fakeWorkspace2,
+            this.fakeWorkspace3,
+            this.fakeWorkspace1
         ];
         savedSol.versionNumber = "0.0";
         savedSol.creationDate = new Date();

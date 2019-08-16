@@ -31,7 +31,7 @@
                                 <span>{{space.workspaceName}}</span>
                             </mat-list-option>
                         </mat-selection-list> -->
-                        <app-podio-spaces [org]='org' [workspaces]="workspaces" (selectedSpaces)="onSpaceSelection($event)" [disableSelection]='preselectedSpaces'></app-podio-spaces>
+                        <app-podio-spaces [workspaces]="workspaces" (selectedSpaces)="onSpaceSelection($event)" [disableSelection]='preselectedSpaces'></app-podio-spaces>
                     </div>
 
                     <small *ngIf="selectedWorkspacesError && description.touched">Please select at least one workspace</small>

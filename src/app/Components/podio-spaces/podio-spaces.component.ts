@@ -12,6 +12,7 @@ import {
     ViewChild
 } from "@angular/core";
 import { PodioService } from "../../services/podio.service";
+import { MatListOption } from '@angular/material';
 
 @Component({
     selector: "app-podio-spaces",
@@ -19,11 +20,9 @@ import { PodioService } from "../../services/podio.service";
     styleUrls: ["./podio-spaces.component.css"]
 })
 export class PodioSpacesComponent implements OnInit {
-    @Input() org?: IPodioOrganizationViewModel;
-    @Input() workspaces?;
-    @Input() preselectedSpaces?;
-    @Input() disableSelection?: boolean = false;
-    allSpaces: Array<IPodioSpaceViewModel> = [];
+    @Input() workspaces: IPodioSpaceViewModel[];
+    @Input() preselectedSpaces?: IPodioSpaceViewModel[];
+    @Input() disableSelection?: boolean = false; // hides checkboxes
     private _selectedSpaces;
     @Output() selectedSpaces = new EventEmitter<IPodioSpaceViewModel>();
     @ViewChild("allSpacesSelectionList") allSpacesSelectionList;
@@ -31,12 +30,17 @@ export class PodioSpacesComponent implements OnInit {
     constructor(private _podioService: PodioService) {}
 
     ngOnInit() {
-        if (this.workspaces) {
-            this.showPredeterminedSpaces();
-        } else {
-            this.showSelectableSpaces();
-        }
         console.log(this.allSpacesSelectionList);
+
+        if (this.preselectedSpaces) {
+          this.preselectedSpaces.forEach(s => {
+              this.workspaces.forEach(w => {
+                  if (w.workspaceId === s.workspaceId) {
+                    w.checked = true;
+                  }
+              })
+          })
+        }
     }
 
     onSpaceSelection() {
@@ -44,22 +48,10 @@ export class PodioSpacesComponent implements OnInit {
             (option) => option.value
         );
         this.selectedSpaces.emit(this._selectedSpaces);
+        console.log(this._selectedSpaces)
     }
 
-    showPredeterminedSpaces() {
-        this.allSpaces = this.workspaces;
-    }
-
-    showSelectableSpaces() {
-        this.allSpaces = this.org.spaces;
-
-        if(this.preselectedSpaces) {
-
-            // check these boxes and set selected spaces
-            // for each options._results[0].value > _results[0].selected = true 
-            // if it is in preselected then make it selected
-            
-
-        }
+    compareFn(user1: IPodioSpaceViewModel, user2: IPodioSpaceViewModel) {
+        return user1 && user2 ? user1.workspaceId === user2.workspaceId : user1 === user2;
     }
 }

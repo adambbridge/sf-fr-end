@@ -31,17 +31,8 @@ export class PodioOrgDetailComponent implements OnInit {
 
     ngOnInit() {
         this.orgId = this.route.snapshot.paramMap.get("id");
-
         this.orgs = this.fakeDataService.fakeOrganizations;
-        // this.orgs.forEach((org) => {
-        //     if (org.orgId === this.orgId) {
-        //         this.org = org;
-        //         console.log('org in foreach', org);
-        //         console.log('this.org', this.org)
-        //     }
-        // });
         this.org = this.orgs[0];
-
         console.log("org", this.org);
         console.log("orgs", this.orgs);
     }

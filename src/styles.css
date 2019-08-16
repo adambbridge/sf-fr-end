@@ -307,7 +307,10 @@ mat-toolbar a:active {
     border: 2px solid #ff4081;
 } */
 .active-nav-item,
-.active-nav-item:hover {
+.active-nav-item:hover,
+.mat-nav-list .mat-list-item.active-nav-item,
+.mat-nav-list .mat-list-item.active-nav-item:hover
+ {
     font-weight: bold;
     /* color: white; */
     color: #4cd886;;

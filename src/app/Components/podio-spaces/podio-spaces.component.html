@@ -1,5 +1,5 @@
-<mat-selection-list #allSpacesSelectionList [disabled]='disableSelection' (selectionChange)="onSpaceSelection()" class='mt-2 mb-2'>
-    <mat-list-option *ngFor="let space of allSpaces" [value]="space" class='mat-list-option-multi-line'
+<mat-selection-list #allSpacesSelectionList [disabled]='disableSelection' (selectionChange)="onSpaceSelection()" class='mt-2 mb-2' [compareWith]="compareFn">
+    <mat-list-option *ngFor="let space of workspaces" [value]="space" class='mat-list-option-multi-line' [selected]='space.checked'
         [ngClass]="{'checkbox-hidden': disableSelection}" [checkboxPosition]="before">
         <div class='mb-1'>{{space.workspaceName}}</div>
         <div class='text-hint text-small'>

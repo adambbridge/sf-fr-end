@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Update "{{solution.name}}"</h1>
+<h1 mat-dialog-title>Update "{{solution.name}}" (Create new version)</h1>
 
 <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
 
@@ -14,7 +14,7 @@
         </mat-select>
     </mat-form-field>
 
-    <mat-expansion-panel *ngIf="spacesCurrent" >
+    <mat-expansion-panel *ngIf="spacesCurrentlyUsed" >
         <mat-expansion-panel-header>
             <mat-panel-title>Edit included workspaces (optional)</mat-panel-title>
         </mat-expansion-panel-header>
@@ -23,8 +23,8 @@
                 <mat-label>
                     <span>Select to add spaces. Deselect spaces you do not want included in the new version. If you Patch a solution with a version that does not include a space in the current version, it will not delete that space, it will leave it unchanged. <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a></span>
                 </mat-label>
-                <app-podio-spaces [org]="sourceOrg" [workspaces]="allSourceOrgSpaces"
-                    [preselectedSpaces]="spacesCurrent" (selectedSpaces)="onSpaceSelection($event)">
+                <app-podio-spaces [workspaces]="spacesAllInOrg"
+                    [preselectedSpaces]="spacesCurrentlyUsed" (selectedSpaces)="onSpaceSelection($event)">
                 </app-podio-spaces>
             </div>
         </ng-template>
