@@ -59,7 +59,7 @@ export interface ISolutionInstanceViewModel {
 }
 
 export interface IPodioAccountViewModel {
-    orgs?: IPodioOrganizationViewModel[];
+    orgs?: IPodioOrganizationViewModel[]; 
     name: string;
     email: string;
 }
@@ -67,17 +67,11 @@ export interface IPodioAccountViewModel {
 export interface IPodioOrganizationViewModel {
     name: string;
     owner: string;
-    isTemplate?: boolean; // is used as source of spaces for a solution
     orgId?: number;
     spaces: Array<IPodioSpaceViewModel>;
-    instances?: Array<ISolutionInstanceViewModel>; // instances deployed to this org
+    instances?: Array<ISolutionInstanceViewModel>; 
 }
 
-/**
- * IClientViewModel
- * I'm not sure about the fields for client
- * TODO Adam will solicit input on these ...
- */
 export interface IClientViewModel {
     id: string;
     identifier: string; // is this name?
@@ -85,7 +79,7 @@ export interface IClientViewModel {
     company?: string;
     email: string;
     orgs?: IPodioOrganizationViewModel[];
-    instances?: ISolutionInstanceViewModel[]; // prop of client or just org? we do currently show number of deployed instances in client table but in client detail we just show orgs table and orgs have instances
+    instances?: ISolutionInstanceViewModel[]; 
     notes?: string;
 }
 
@@ -473,7 +467,6 @@ export class FakeDataService {
         name: "Brick Bridge Consulting",
         orgId: 1,
         owner: "Brick Bridge Consulting",
-        isTemplate: true,
         spaces: [
             this.fakeWorkspace,
             this.fakeWorkspace,
@@ -489,7 +482,6 @@ export class FakeDataService {
         name: "Zoller Swanson Accounting",
         orgId: 2,
         owner: "Zoller Swanson",
-        isTemplate: false,
         spaces: [
             this.fakeWorkspace,
             this.fakeWorkspace,

@@ -30,7 +30,7 @@ export class PodioAssetsComponent implements OnInit {
     addOrgInProgress: boolean = false;
 
     // MATERIAL TABLE SETUP
-    displayedColumns: string[] = ["org", "owner", "isTemplate", "solution"];
+    displayedColumns: string[] = ["org", "owner", "solution"];
     @ViewChild(MatSortModule) sort: MatSortModule;
     dataSource;
 

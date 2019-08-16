@@ -67,16 +67,6 @@
                         <td mat-footer-cell *matFooterCellDef></td>
                     </ng-container>
 
-                    <ng-container matColumnDef="isTemplate">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-100px">
-                            Is Template
-                        </th>
-                        <td mat-cell *matCellDef="let element" class='overflow-ellipsis'>
-                            <span *ngIf="element.isTemplate">true</span>
-                        </td>
-                        <td mat-footer-cell *matFooterCellDef></td>
-                    </ng-container>
-
                     <ng-container matColumnDef="solution">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>
                             Deployed Solution Instances
@@ -89,51 +79,6 @@
                         </td>
                         <td mat-footer-cell *matFooterCellDef></td>
                     </ng-container>
-
-                    <!-- <ng-container matColumnDef="actions">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Actions
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-
-                            <mat-menu #envActions="matMenu">
-                                <button mat-menu-item *ngIf="!element.isTemplate">
-                                    <mat-icon>history</mat-icon>
-                                    <span>Instance history</span>
-                                </button>
-                                <button mat-menu-item *ngIf="!element.isTemplate">
-                                    <mat-icon>edit</mat-icon>
-                                    <span>Edit Instance</span>
-                                </button>
-                                <button mat-menu-item *ngIf="!element.isTemplate">
-                                    <mat-icon>settings</mat-icon>
-                                    <span>Patch Instance</span>
-                                </button>
-                                <button mat-menu-item>
-                                    <mat-icon>vpn_key</mat-icon>
-                                    <span>Pause client access</span>
-                                </button>
-                                <button mat-menu-item *ngIf="!element.isTemplate">
-                                    <mat-icon>settings</mat-icon>
-                                    <span>Above in Manage Instance dialog?</span>
-                                </button>
-                                <button mat-menu-item>
-                                    <mat-icon>settings</mat-icon>
-                                    <span>Manage Organization</span>
-                                </button>
-
-                                <button mat-menu-item>
-                                    <mat-icon>delete</mat-icon>
-                                    <span>Delete Organization</span>
-                                </button>
-                            </mat-menu>
-                            <button mat-button [matMenuTriggerFor]="envActions">
-                                <mat-icon>more_vert</mat-icon>
-                            </button>
-
-                        </td>
-                        <td mat-footer-cell *matFooterCellDef></td>
-                    </ng-container> -->
 
                     <!-- ROWS -->
                     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="md-elevation-z5"></tr>
