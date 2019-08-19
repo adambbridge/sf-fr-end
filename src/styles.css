@@ -109,14 +109,13 @@ app-new-patch td.mat-cell:first-of-type {
     /* background: #FAFAFA; slightly lighter grey */
 }
 .text-clickable {
-    color: #07C;
+    color: #07c;
     cursor: pointer;
     text-decoration: underline;
 }
 .text-clickable:hover {
     color: #3af;
 }
-
 
 .text-warn {
     color: #f44336;
@@ -310,11 +309,10 @@ mat-toolbar a:active {
 .active-nav-item,
 .active-nav-item:hover,
 .mat-nav-list .mat-list-item.active-nav-item,
-.mat-nav-list .mat-list-item.active-nav-item:hover
- {
+.mat-nav-list .mat-list-item.active-nav-item:hover {
     font-weight: bold;
     /* color: white; */
-    color: #4cd886;;
+    color: #4cd886;
 }
 /* TODO ENABLE SPECIAL STYLING ONLY IN CERTAIN PLACES */
 .mat-tooltip {
@@ -372,6 +370,31 @@ table th.mat-header-cell:first-of-type {
     position: relative;
 }
 
+/* =====================
+    TIME PICKER 
+    TRYING TO MAKE IT LOOK 
+    MORE LIKE THE 
+    MAT DATE PICKER
+======================== */
+.ngx-timepicker-field-example {
+    display: inline-block;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.87);
+    display: inline-block;
+    border-bottom: 1px solid #999;
+    position: relative;
+    bottom: 2px;
+    margin-left: 20px;
+}
+
+.ngx-timepicker__time-colon {
+    margin-left: 5px;
+}
+
+/* =====================
+        SPIN
+======================== */
+
 .spin {
     -webkit-animation: spin 3s infinite linear;
     animation: spin 3s infinite linear;
@@ -388,6 +411,9 @@ table th.mat-header-cell:first-of-type {
     }
 }
 
+/* =====================
+    MEDIA QUERIES  
+======================== */
 @media only screen and (max-width: 767px) {
     .hidden-sm-down {
         display: none;

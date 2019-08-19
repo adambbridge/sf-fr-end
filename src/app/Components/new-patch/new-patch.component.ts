@@ -26,13 +26,13 @@ export class NewPatchComponent implements OnInit {
     selectedInstances;
     instancePreselection: boolean = false;
     form: FormGroup;
-    //TODO these would be solution properties?
     versions = ["0.0", "1.0 Mongoose", "1.1 Bobcat", "2.0 Wildebeest"];
     patchImpactOnSpaces = null;
     minDate = new Date();
     maxDate = this._getMaxDate();
-    patchDate;
+    patchDatetime;
     confirmationDialog;
+    minTime: string;
 
     constructor(
         private _fb: FormBuilder,
@@ -62,6 +62,9 @@ export class NewPatchComponent implements OnInit {
         }
         this.clients = this._fakeDataService.fakeClients;
         this.form = this._createForm();
+
+        this._setMinTime();
+        console.log(this.form.value)
     }
 
     onVersionSelection() {
@@ -83,12 +86,17 @@ export class NewPatchComponent implements OnInit {
         this.selectedInstances = selected;
     }
 
-    /**
-     * capture picker data and add to form data
-     * has an output?
-     */
     onDateChange($event) {
-        this.patchDate = $event.value;
+        this.form.value.date = $event.value;
+        console.log(this.form.value);
+    }
+
+    /**
+     * TODO
+     * combine time and date into one date object
+     */
+    onTimeChange() {     
+        console.log(this.form.value.time);
     }
 
     /** TODO ONLY FOR DEVELOPMENT */
@@ -102,10 +110,6 @@ export class NewPatchComponent implements OnInit {
         }
     }
 
-    /** onCreateNewInstanceClick()
-     * close newPatchDialog
-     * openNewDeployment dialog
-     */
     onCreateNewInstanceClick() {
         this.dialog.open(NewDeploymentComponent, {
             data: { solution: this.solution }
@@ -116,7 +120,6 @@ export class NewPatchComponent implements OnInit {
     onSubmit() {
         delete this.form.value.environments; // true/false values
         this.form.value.selectedInstances = this.selectedInstances;
-        this.form.value.date = this.patchDate;
         console.warn(this.form.value);
         console.warn(this.form.valid);
         this.patchDialog.close();
@@ -130,10 +133,11 @@ export class NewPatchComponent implements OnInit {
      ======================= */
 
     private getConfirmationDialogData() {
+        var patchDatetime = this.form.value.date;
         var today = new Date();
         var futureDate = this._addDays(today, 3);
         var reminder;
-        if (this.patchDate >= futureDate) {
+        if (patchDatetime >= futureDate) {
             reminder = `We'll also send a reminder 3 days before start time.`;
             console.log("set reminder", reminder);
         }
@@ -149,7 +153,7 @@ export class NewPatchComponent implements OnInit {
                 } instance(s) will be patched with ${
                     this.solution.name
                 } (add vNum and vNam)`,
-                `Patching set for ${this.patchDate.toDateString()}. We'll send status emails to _____ when it starts and finishes. ${
+                `Patching set for ${patchDatetime.toDateString()}. We'll send status emails to _____ when it starts and finishes. ${
                     reminder ? reminder : ""
                 }`
             ]
@@ -173,7 +177,9 @@ export class NewPatchComponent implements OnInit {
             solution: [this.solution.name, Validators.required],
             version: ["", Validators.required],
             instances: this._fb.array([]),
-            notes: [""]
+            notes: [""],
+            date: [new Date(), Validators.required],
+            time: [""]
         });
         return form;
     }
@@ -186,7 +192,21 @@ export class NewPatchComponent implements OnInit {
         var d = new Date();
         var n = d.getFullYear() + 1;
         d.setFullYear(n);
-        console.log(this.minDate, d);
         return d;
+    }
+
+    /** create time string to set default and minimum time
+     * for time picker. required format 'hr:min am/pm'
+     * https://agranom.github.io/ngx-material-timepicker/
+     */
+    private _setMinTime() {
+        let now = new Date();
+        let rawHr = now.getHours();
+        let rawMin = now.getMinutes();
+        let min = (rawMin.toString().length === 1)? '0' + rawMin : rawMin; 
+        let hr = (rawHr > 12)? (rawHr - 12) : rawHr;
+        let suffix = (rawHr >= 12)? 'pm' : 'am';
+        let minTime = hr + ':' + min + " " + suffix;
+        this.minTime = minTime;
     }
 }

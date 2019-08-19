@@ -8,6 +8,8 @@ import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { LayoutModule } from "@angular/cdk/layout";
+import { NgxMaterialTimepickerModule } from "ngx-material-timepicker";
+
 
 import {
     MatToolbarModule,
@@ -151,7 +153,8 @@ import { AddAccountComponent } from './Components/add-account/add-account.compon
         MatIconModule,
         MatListModule,
         MatNativeDateModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        NgxMaterialTimepickerModule
     ],
     providers: [AuthGuard, MatDatepickerModule],
     bootstrap: [AppComponent],
