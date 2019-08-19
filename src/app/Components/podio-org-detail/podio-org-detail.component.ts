@@ -51,11 +51,5 @@ export class PodioOrgDetailComponent implements OnInit {
         });
     }
 
-    onAddInstanceClick() {
-        this.dialog.open(NewDeploymentComponent, {
-            data: {
-                org: this.org            
-            }
-        });
-    }
+ 
 }

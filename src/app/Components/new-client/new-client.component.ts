@@ -43,16 +43,16 @@ export class NewClientComponent implements OnInit {
         this._createNewClientForm();
     }
 
-    /** open dialog and setup a subscription to it's afterClosed lifecycle event */
-    onAddOrgClick() {
-        const dialogRef = this.dialog.open(AddKnownOrgComponent, {
-            data: { addToClient: true }
-        });
-        dialogRef.afterClosed().subscribe((result) => {
-            console.log("d closed, received: ", result);
-            this.orgs = result;
-        });
-    }
+    /** NOT ADDING ORGS HERE FOR NOW  */
+    // onAddOrgClick() {
+    //     const dialogRef = this.dialog.open(AddKnownOrgComponent, {
+    //         data: { addToClient: true }
+    //     });
+    //     dialogRef.afterClosed().subscribe((result) => {
+    //         console.log("d closed, received: ", result);
+    //         this.orgs = result;
+    //     });
+    // }
 
     onSubmit() {
         this.submitted = true;

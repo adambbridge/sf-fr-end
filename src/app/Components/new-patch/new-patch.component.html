@@ -42,7 +42,7 @@
             <textarea matInput minRows='3' formControlName="notes" placeholder="Notes (optional)"></textarea>
         </mat-form-field>
 
-        <mat-form-field class="w-75">
+        <mat-form-field class="w-25">
             <input matInput [min]="minDate" [max]="maxDate" (focus)="picker.open()" (click)="picker.open()"
                 [matDatepicker]="picker" placeholder="Schedule patch" (dateChange)="onDateChange($event)">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

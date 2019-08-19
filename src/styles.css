@@ -106,6 +106,7 @@ app-new-patch td.mat-cell:first-of-type {
     left: 0;
     right: 0;
     background: #eee;
+    /* background: #FAFAFA; slightly lighter grey */
 }
 .text-clickable {
     color: #07C;
