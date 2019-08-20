@@ -371,24 +371,22 @@ table th.mat-header-cell:first-of-type {
 }
 
 /* =====================
-    TIME PICKER 
-    TRYING TO MAKE IT LOOK 
-    MORE LIKE THE 
-    MAT DATE PICKER
+ngx-timepicker dialog
 ======================== */
-.ngx-timepicker-field-example {
-    display: inline-block;
-    font-size: 16px;
-    color: rgba(0, 0, 0, 0.87);
-    display: inline-block;
-    border-bottom: 1px solid #999;
-    position: relative;
-    bottom: 2px;
-    margin-left: 20px;
-}
 
-.ngx-timepicker__time-colon {
-    margin-left: 5px;
+.timepicker .timepicker__header {
+    background-color: #999;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.timepicker .clock-face .clock-face__number > span.active {
+    background-color: #999;
+    color: white;
+}
+.timepicker .clock-face__clock-hand {
+    background-color: #999;
+}
+.timepicker .timepicker-button {
+  color: grey;
 }
 
 /* =====================
