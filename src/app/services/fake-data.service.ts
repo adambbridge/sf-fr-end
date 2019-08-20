@@ -1,3 +1,4 @@
+import { IAuthenticatedSfUser } from './fake-data.service';
 import { environment } from "src/environments/environment.prod";
 import { Injectable } from "@angular/core";
 
@@ -48,6 +49,15 @@ export interface ISolutionViewModel {
  * it is calculated by comparing spaces details of instance sol. v
  * with spaces details of patch sol. v
  */
+
+ export interface IAuthenticatedSfUser {
+    id: string;
+    name: string;
+    email: string;
+ }
+
+
+
 export interface ISolutionInstanceViewModel {
     name: string;
     id: string;
@@ -114,6 +124,12 @@ export interface ISolutionTaskViewModel {
     providedIn: "root"
 })
 export class FakeDataService {
+    fakeAuthenticatedSfUser: IAuthenticatedSfUser = {
+        id: '1234',
+        name: "Adam Wilson",
+        email: "adam@brickbridgeconsulting.com"
+    };
+
     fakeApplication: IPodioApplicationViewModel = {
         appId: 123,
         appName: "Time Center",

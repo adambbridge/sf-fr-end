@@ -1,4 +1,9 @@
-import { IClientViewModel } from 'src/app/services/fake-data.service';
+import { UtilsService } from './../../services/utils.service';
+import {
+    FakeDataService,
+    IAuthenticatedSfUser
+} from "src/app/services/fake-data.service";
+import { IClientViewModel } from "src/app/services/fake-data.service";
 import { Component, OnInit, Inject } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
@@ -8,7 +13,6 @@ import { FormGroup, FormControl, FormArray } from "@angular/forms";
 import { MatDialogRef } from "@angular/material/dialog";
 import { MAT_DIALOG_DATA } from "@angular/material";
 
-
 @Component({
     selector: "app-add-account",
     templateUrl: "./add-account.component.html",
@@ -16,44 +20,89 @@ import { MAT_DIALOG_DATA } from "@angular/material";
 })
 export class AddAccountComponent implements OnInit {
     logOutUrl: SafeUrl;
-    client?: IClientViewModel;
-
-    form = this.fb.group({
-        clientId: ["", Validators.required],
-        accountName: ["", Validators.required]
-    });
+    passedClient?: IClientViewModel;
+    clients: IClientViewModel[];
+    fakeSfUser: IAuthenticatedSfUser;
+    alternativeEmail: string;
+    form: FormGroup;
 
     constructor(
         private _authService: AuthService,
         private dom: DomSanitizer,
         private fb: FormBuilder,
         public addAccountDialog: MatDialogRef<AddAccountComponent>,
-        @Inject(MAT_DIALOG_DATA) private _passedData: any
+        @Inject(MAT_DIALOG_DATA) private _passedData: any,
+        private _fakeDataService: FakeDataService,
+        private _utilsService: UtilsService
     ) {}
 
     ngOnInit() {
-        this.client = this._passedData.client
+        this._createForm();
+        this._configureClientOptions();
+        this.fakeSfUser = this._fakeDataService.fakeAuthenticatedSfUser;
+        console.log(this.form.value);
+    }
+
+    onClientSelection(selectedClient) {
+        this.form.controls.email.setValue(selectedClient.email);
+    }
+
+    get client() {
+        return this.form.get("client").value;
+    }
+
+    get accountName() {
+        return this.form.get("accountName").value;
     }
 
     onCancelClick(): void {
-        console.log("clicked cancel");
         this.addAccountDialog.close("cancel");
     }
 
     onSubmit() {
         // logout current sf user from podio. doesnt log them out of sf
-        this.logOutUrl = this.dom.bypassSecurityTrustResourceUrl(
-            "https://podio.com/logout"
-        );
+        // this.logOutUrl = this.dom.bypassSecurityTrustResourceUrl(
+        //     "https://podio.com/logout"
+        // );
 
-        setTimeout(() => {
-            this._authService.loginEnvironmentServiceAccount(
-                this.form.value.clientId,
-                this.form.value.accountName
-            );
-        }, 1000);
+        // setTimeout(() => {
+        //     this._authService.loginEnvironmentServiceAccount(
+        //         this.form.value.clientId,
+        //         this.form.value.accountName
+        //     );
+        // }, 1000);
 
+        /**
+         * TODO: SEND REQUEST EMAIL .... from a service?
+         * open snackbar once sent "Request sent"
+         */
+         this._utilsService.openSnackBar("Request sent");
+        console.log(this.form.value);
+        console.log(this.form.valid);
+
+    
         this.addAccountDialog.close("add");
     }
+
+    /** ======================
+     * PRIVATE METHODS
+     * ======================= */
+
+    private _createForm() {
+        this.form = this.fb.group({
+            client: ["", Validators.required],
+            accountName: ["", Validators.required],
+            email: ["", Validators.required]
+        });
+    }
+
+    private _configureClientOptions() {
+        if (this._passedData.client) {
+            this.passedClient = this._passedData.client;
+            this.form.controls.client.setValue(this.passedClient);
+            this.form.controls.email.setValue(this.passedClient.email);
+        } else {
+            this.clients = this._fakeDataService.fakeClients;
+        }
+    }
 }
-    
