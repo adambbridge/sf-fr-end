@@ -1,5 +1,3 @@
-import { InstancesComponent } from './../instances/instances.component';
-import { NewDeploymentComponent } from './../new-deployment/new-deployment.component';
 import { NewSolutionComponent } from './../new-solution/new-solution.component';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -17,9 +15,9 @@ import { MatDialog } from "@angular/material";
     styleUrls: ["./podio-org-detail.component.css"]
 })
 export class PodioOrgDetailComponent implements OnInit {
-    orgs;
-    org;
     orgId;
+    orgs: IPodioOrganizationViewModel[];
+    org: IPodioOrganizationViewModel;
     selectedWorkspaces = [];
 
     constructor(
@@ -32,7 +30,7 @@ export class PodioOrgDetailComponent implements OnInit {
     ngOnInit() {
         this.orgId = this.route.snapshot.paramMap.get("id");
         this.orgs = this.fakeDataService.fakeOrganizations;
-        this.org = this.orgs[0];
+        this.org = this.orgs.find((o) => o.orgId === this.orgId);
         console.log("org", this.org);
         console.log("orgs", this.orgs);
     }
@@ -50,6 +48,4 @@ export class PodioOrgDetailComponent implements OnInit {
             }
         });
     }
-
- 
 }

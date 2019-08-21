@@ -169,10 +169,13 @@ a.text-no-deco {
     width: 125px;
 }
 .w-100px {
-    width: 125px;
+    width: 100px;
 }
 .w-150px {
-    width: 125px;
+    width: 150px;
+}
+.w-250px {
+    width: 250px;
 }
 .mat-list-base .mat-list-option.mat-list-option-inline {
     display: inline-block;

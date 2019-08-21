@@ -1,4 +1,4 @@
-import { IAuthenticatedSfUser } from './fake-data.service';
+import { IAuthenticatedSfUser } from "./fake-data.service";
 import { environment } from "src/environments/environment.prod";
 import { Injectable } from "@angular/core";
 
@@ -50,13 +50,11 @@ export interface ISolutionViewModel {
  * with spaces details of patch sol. v
  */
 
- export interface IAuthenticatedSfUser {
+export interface IAuthenticatedSfUser {
     id: string;
     name: string;
     email: string;
- }
-
-
+}
 
 export interface ISolutionInstanceViewModel {
     name: string;
@@ -70,10 +68,13 @@ export interface ISolutionInstanceViewModel {
 }
 
 export interface IPodioAccountViewModel {
-    orgs?: IPodioOrganizationViewModel[];
+    id: string;
     name: string;
+    owner: string;
     email: string;
+    orgs?: IPodioOrganizationViewModel[];
 }
+
 
 export interface IPodioOrganizationViewModel {
     name: string;
@@ -89,7 +90,7 @@ export interface IClientViewModel {
     contact: string;
     company?: string;
     email: string;
-    orgs?: IPodioOrganizationViewModel[];
+    accounts?: IPodioAccountViewModel[];
     instances?: ISolutionInstanceViewModel[];
     notes?: string;
 }
@@ -125,7 +126,7 @@ export interface ISolutionTaskViewModel {
 })
 export class FakeDataService {
     fakeAuthenticatedSfUser: IAuthenticatedSfUser = {
-        id: '1234',
+        id: "1234",
         name: "Adam Wilson",
         email: "adam@brickbridgeconsulting.com"
     };
@@ -580,6 +581,23 @@ export class FakeDataService {
         this.fakeOrganization3
     ];
 
+    fakeAccounts: Array<IPodioAccountViewModel> = [
+        {
+            id: '123',
+            name: "Gil Roberts",
+            owner: "Gil Roberts",
+            email: "gil@brickbridgeconsulting.com",
+            orgs: this.fakeOrganizations
+        },
+        {
+            id: '456',
+            name: "Jordan",
+            owner: "Jordan",
+            email: "jordan@someCompany.com",
+            orgs: this.fakeOrganizationsLong
+        }
+    ];
+
     fakeClients: Array<IClientViewModel> = [
         {
             company: "Brick Bridge Consulting",
@@ -589,17 +607,17 @@ export class FakeDataService {
             email: "gil@bbc.com",
             notes:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            orgs: [this.fakeOrganization1, this.fakeOrganization2]
+            accounts: [this.fakeAccounts[0]]
         },
         {
-            company: "Code Louisville",
-            contact: "Brian Louerman",
+            company: "Jordan's Company",
+            contact: "Jordan",
             identifier: "RAND",
             id: "2",
-            email: "brian@gmail.com",
+            email: "jordan@gmail.com",
             notes:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            orgs: [this.fakeOrganization1, this.fakeOrganization2]
+            accounts: [this.fakeAccounts[1]]
         },
         {
             company: "Jefferson Co. Public Schools",
@@ -609,20 +627,7 @@ export class FakeDataService {
             email: "super@jcps.com",
             notes:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            orgs: [
-                this.fakeOrganization1,
-                this.fakeOrganization2,
-                this.fakeOrganization1,
-                this.fakeOrganization2,
-                this.fakeOrganization1,
-                this.fakeOrganization2,
-                this.fakeOrganization1,
-                this.fakeOrganization2,
-                this.fakeOrganization1,
-                this.fakeOrganization2,
-                this.fakeOrganization1,
-                this.fakeOrganization2
-            ]
+            accounts: this.fakeAccounts
         }
     ];
 

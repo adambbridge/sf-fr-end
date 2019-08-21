@@ -1,3 +1,5 @@
+import { PodioAccountDetailComponent } from './Components/podio-account-detail/podio-account-detail.component';
+import { PodioAccountsComponent } from './Components/podio-accounts/podio-accounts.component';
 import { PodioOrgDetailComponent } from './Components/podio-org-detail/podio-org-detail.component';
 import { ClientComponent } from './Components/client/client.component';
 import { NewClientComponent } from './Components/new-client/new-client.component';
@@ -18,6 +20,7 @@ import { ServiceAuthenticatingComponent } from "./Components/service-authenticat
 import { PodioSpacesComponent } from "./Components/podio-spaces/podio-spaces.component";
 import { PodioOrgsComponent } from "./Components/podio-orgs/podio-orgs.component";
 import { NewSolutionComponent } from "./Components/new-solution/new-solution.component";
+
 
 // removed auth for development convenience
 // TODO re-add property canActivate: [AuthGuard] to relevant routes
@@ -69,11 +72,16 @@ export const APP_ROUTES: Routes = [
            },
            {
                path: "podio",
-               component: PodioAssetsComponent,
+               component: PodioAccountsComponent,
                canActivate: []
            },
            {
                path: "podio/:id",
+               component: PodioAccountDetailComponent,
+               canActivate: []
+           },
+           {
+               path: "podio/:id/org/:id",
                component: PodioOrgDetailComponent,
                canActivate: []
            },

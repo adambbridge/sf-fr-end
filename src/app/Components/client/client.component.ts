@@ -31,11 +31,7 @@ export class ClientComponent implements OnInit {
     ngOnInit() {
         this.id = this.route.snapshot.paramMap.get("id");
         this.clients = this.fakeDataService.fakeClients;
-        this.clients.forEach((client) => {
-            if (client.id === this.id) {
-                this.client = client;
-            }
-        });
+        this.client = this.clients.find(c => c.id === this.id);
 
         console.log("client", this.client);
         console.log("clients", this.clients);

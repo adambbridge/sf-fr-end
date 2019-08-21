@@ -8,22 +8,6 @@
                 <h3 class="text-h1">{{client.contact}}</h3>
 
                 <span>
-                    <!-- ========================
-                    A/B TESTING MENU 
-                    removed since single table 
-                    preferred by adam, caleb
-                    ===================================-->
-                    <!-- <mat-menu #envUIOptions="matMenu">
-                        <button mat-menu-item (click)="envUI = 'oneTable'">
-                            <span>orgs in one table</span>
-                        </button>
-                        <button mat-menu-item (click)="envUI = 'twoAccordions'">
-                            <span>orgs, instances in two accordions</span>
-                        </button>
-                    </mat-menu>
-                    <button mat-raised-button [matMenuTriggerFor]="envUIOptions" class="mr-2">
-                        <span>env UI options</span>
-                    </button> -->
 
                     <!--  MENU -->
                     <mat-menu #clientActionsMenu="matMenu">
@@ -81,7 +65,7 @@
                     ORGS AND INSTANCES TABLE
                 =========================================== -->
 
-                <app-podio-assets [organizations]='client.orgs' [client]='client'></app-podio-assets>
+                <app-podio-accounts [accounts]='client.accounts'></app-podio-accounts>
 
             </mat-list>
 

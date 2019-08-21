@@ -80,6 +80,8 @@ import { PodioOrgDetailComponent } from './Components/podio-org-detail/podio-org
 import { ConfirmationDialogComponent } from './Components/confirmation-dialog/confirmation-dialog.component';
 import { AddNewOrgComponent } from './Components/add-new-org/add-new-org.component';
 import { AddAccountComponent } from './Components/add-account/add-account.component';
+import { PodioAccountsComponent } from './Components/podio-accounts/podio-accounts.component';
+import { PodioAccountDetailComponent } from './Components/podio-account-detail/podio-account-detail.component';
 @NgModule({
     declarations: [
         /** Components */
@@ -135,7 +137,9 @@ import { AddAccountComponent } from './Components/add-account/add-account.compon
         InstancesComponent,
         ConfirmationDialogComponent,
         AddNewOrgComponent,
-        AddAccountComponent
+        AddAccountComponent,
+        PodioAccountsComponent,
+        PodioAccountDetailComponent
     ],
     imports: [
         /** Modules */
