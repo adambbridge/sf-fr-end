@@ -13,6 +13,7 @@ import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmati
 import { MAT_DIALOG_DATA } from "@angular/material";
 import { MatDialogRef } from "@angular/material/dialog";
 import { NewDeploymentComponent } from "src/app/Components/new-deployment/new-deployment.component";
+import moment from "moment";
 
 @Component({
     selector: "app-new-patch",
@@ -33,6 +34,7 @@ export class NewPatchComponent implements OnInit {
     patchDatetime;
     confirmationDialog;
     minTime: string;
+    timeError: boolean = false;
 
     constructor(
         private _fb: FormBuilder,
@@ -64,7 +66,7 @@ export class NewPatchComponent implements OnInit {
         this.form = this._createForm();
 
         this._setMinTime();
-        console.log(this.form.value)
+        console.log(this.form.value);
     }
 
     onVersionSelection() {
@@ -91,12 +93,40 @@ export class NewPatchComponent implements OnInit {
         console.log(this.form.value);
     }
 
-    /**
-     * TODO
-     * combine time and date into one date object
-     */
-    onTimeChange() {     
-        console.log(this.form.value.time);
+    /** combine date and time chosen into single datetime moment */
+    /** TODO use better/integrate datetime picker to avoid all this code
+     *  */
+    onTimeChange() {
+        // values from both date and time pickers 
+        var d = this.form.value.date;
+        var t = this.form.value.time; // "HH:mm pm"
+        var dateMoment = moment(d);
+
+        // get hr, min, suffix (am or pm) 
+        var HHmm = t.split(" ")[0]; // "HH:mm"
+        var hr = HHmm.split(":")[0]; // "HH"
+        var min = HHmm.split(":")[1]; // "mm"
+        var suffix = t.split(" ")[1]; // am or pm
+
+        // convert hr from 12 hr to 24 hr format 
+        if (suffix.includes("pm")) {
+            hr = parseInt(hr) + 12;
+        }
+
+        // use hr and min to set time on the date 
+        var dateTimeCombinedNativeDateObject = dateMoment.set("hour", hr).set("minute", min).toDate();
+        this.form.controls.date.setValue(
+            dateTimeCombinedNativeDateObject
+        ); 
+
+        // if time in past show error message and disable submit btn
+        if(dateTimeCombinedNativeDateObject < new Date()) {
+            this.timeError = true;
+        } else {
+            this.timeError = false;
+        }
+
+        // console.log(this.form.value);
     }
 
     /** TODO ONLY FOR DEVELOPMENT */
@@ -122,6 +152,8 @@ export class NewPatchComponent implements OnInit {
         this.form.value.selectedInstances = this.selectedInstances;
         console.warn(this.form.value);
         console.warn(this.form.valid);
+        // TODO call service to schedule patch
+        // NOTE use form date value NOT time value
         this.patchDialog.close();
         const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
             data: this.getConfirmationDialogData()
@@ -134,6 +166,7 @@ export class NewPatchComponent implements OnInit {
 
     private getConfirmationDialogData() {
         var patchDatetime = this.form.value.date;
+        var userFriendlyDateTime = moment(patchDatetime).format("lll");
         var today = new Date();
         var futureDate = this._addDays(today, 3);
         var reminder;
@@ -153,7 +186,7 @@ export class NewPatchComponent implements OnInit {
                 } instance(s) will be patched with ${
                     this.solution.name
                 } (add vNum and vNam)`,
-                `Patching set for ${patchDatetime.toDateString()}. We'll send status emails to _____ when it starts and finishes. ${
+                `Patching set for ${userFriendlyDateTime}. We'll send status emails to _____ when it starts and finishes. ${
                     reminder ? reminder : ""
                 }`
             ]
@@ -203,10 +236,10 @@ export class NewPatchComponent implements OnInit {
         let now = new Date();
         let rawHr = now.getHours();
         let rawMin = now.getMinutes();
-        let min = (rawMin.toString().length === 1)? '0' + rawMin : rawMin; 
-        let hr = (rawHr > 12)? (rawHr - 12) : rawHr;
-        let suffix = (rawHr >= 12)? 'pm' : 'am';
-        let minTime = hr + ':' + min + " " + suffix;
+        let min = rawMin.toString().length === 1 ? "0" + rawMin : rawMin;
+        let hr = rawHr > 12 ? rawHr - 12 : rawHr;
+        let suffix = rawHr >= 12 ? "pm" : "am";
+        let minTime = hr + ":" + min + " " + suffix;
         this.minTime = minTime;
     }
 }

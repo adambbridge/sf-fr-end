@@ -54,9 +54,13 @@
         <!-- uses: https://agranom.github.io/ngx-material-timepicker/ -->
         <mat-form-field class='d-inline-block w-50'>
             <mat-label>Pick a time</mat-label>
-            <input type="text" matInput readonly formControlName='time' [ngxTimepicker]="timePicker" [min]="minTime" (ngModelChange)='onTimeChange()'>
+            <input type="text" matInput readonly formControlName='time' [ngxTimepicker]="timePicker" (ngModelChange)='onTimeChange()'>
             <ngx-material-timepicker #timePicker [defaultTime]="minTime"></ngx-material-timepicker>
+            <div *ngIf="timeError">
+                <mat-error>Time is in the past</mat-error>
+            </div>
         </mat-form-field>
+        
 
         <mat-icon class="text-light"
             matTooltip="Choosing today will add patch to cue immediately.  Choosing a future date schedules patch for 12:01am on that date. You will receive an email at 'usersemailaddr@email.com' when patch has begun and a status report email when it has completed.">
