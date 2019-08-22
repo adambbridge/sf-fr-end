@@ -51,9 +51,14 @@ export class PodioAccountsComponent implements OnInit {
         private dialog: MatDialog
     ) {}
 
+    /** if in client we pass in accts = client.accts
+     * if in all accts we fetch all accts. 
+     */
     ngOnInit() {
-        if (!this.accounts) {
-            this.accounts = this._fakeDataService.fakeAccounts;
+        if (this.client) {
+            this.accounts = this.client.accounts; // just accounts for this client 
+        } else {
+            this.accounts = this._fakeDataService.fakeAccounts; // all acccounts
         }
         this.dataSource = new MatTableDataSource(this.accounts);
     }

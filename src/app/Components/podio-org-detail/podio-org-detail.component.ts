@@ -1,13 +1,11 @@
-import { NewSolutionComponent } from './../new-solution/new-solution.component';
-import { Component, OnInit } from '@angular/core';
+import { NewSolutionComponent } from "./../new-solution/new-solution.component";
+import { Component, OnInit } from "@angular/core";
 import {
     FakeDataService,
     IPodioOrganizationViewModel
-
 } from "./../../services/fake-data.service";
 import { Router, ActivatedRoute, Params } from "@angular/router";
 import { MatDialog } from "@angular/material";
-
 
 @Component({
     selector: "app-podio-org-detail",
@@ -30,7 +28,9 @@ export class PodioOrgDetailComponent implements OnInit {
     ngOnInit() {
         this.orgId = this.route.snapshot.paramMap.get("id");
         this.orgs = this.fakeDataService.fakeOrganizations;
-        this.org = this.orgs.find((o) => o.orgId === this.orgId);
+        this.org = this.orgs.find((o) => {
+            return o.orgId == this.orgId;
+        });
         console.log("org", this.org);
         console.log("orgs", this.orgs);
     }

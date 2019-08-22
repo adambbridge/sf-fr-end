@@ -128,6 +128,9 @@ app-new-patch td.mat-cell:first-of-type {
     font-size: 32px;
     margin: 20px 20px 20px 0;
 }
+.font-size-16px {
+    font-size: 16px;
+}
 .text-hint {
     font-size: 0.9rem;
     color: #999; /* same as bootstrap "text-muted" */
@@ -208,6 +211,13 @@ app-welcome .mat-list-base .mat-list-item .mat-list-item-content {
 .checkbox-hidden,
 .mat-list-item-disabled {
     background: unset;
+}
+
+.client-notes {
+    overflow-y: scroll;
+    font-size: 16px;
+    max-height: 200px;
+    margin-top: 0;
 }
 
 .cursor-pointer {

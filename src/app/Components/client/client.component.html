@@ -31,43 +31,45 @@
             </div>
 
             <!-- INFO  -->
+            <div class="row">
+                <div class="col-sm-6">
+                    <mat-list>
 
-            <mat-list>
-                <h3>Information</h3>
-                <mat-list-item>
-                    <mat-icon mat-list-icon>person_outline</mat-icon>
-                    <p mat-line> {{client.contact}} </p>
-                </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon mat-list-icon>person_outline</mat-icon>
+                            <p mat-line> {{client.contact}} </p>
+                        </mat-list-item>
 
-                <mat-list-item>
-                    <mat-icon mat-list-icon>store_mall_directory</mat-icon>
-                    <p mat-line> {{client.company}} </p>
-                </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon mat-list-icon>store_mall_directory</mat-icon>
+                            <p mat-line> {{client.company}} </p>
+                        </mat-list-item>
 
-                <mat-list-item>
-                    <mat-icon mat-list-icon>credit_card</mat-icon>
-                    <p mat-line> {{client.id}} </p>
-                </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon mat-list-icon>credit_card</mat-icon>
+                            <p mat-line> {{client.id}} </p>
+                        </mat-list-item>
 
-                <mat-list-item>
-                    <mat-icon mat-list-icon>email</mat-icon>
-                    <p mat-line> {{client.email}} </p>
-                </mat-list-item>
+                        <mat-list-item>
+                            <mat-icon mat-list-icon>email</mat-icon>
+                            <p mat-line> {{client.email}} </p>
+                        </mat-list-item>
 
-                <mat-list-item>
-                    <mat-icon mat-list-icon>note</mat-icon>
-                    <p mat-line> {{client.notes}} </p>
-                </mat-list-item>
+                    </mat-list>
+                </div>
+                <div class="col-sm-6">
+                    <p class='font-size-16px'>Notes</p>
+                    <p class='client-notes'>{{client.notes}}</p>
+                </div>
+            </div>
 
-                <mat-divider></mat-divider>
+            <mat-divider class='pt-2'></mat-divider>
 
-                <!--============================
-                    ORGS AND INSTANCES TABLE
-                =========================================== -->
+            <!--============================
+                ORGS AND INSTANCES TABLE
+            =========================================== -->
 
-                <app-podio-accounts [accounts]='client.accounts'></app-podio-accounts>
-
-            </mat-list>
+            <app-podio-accounts [client]="client"></app-podio-accounts>
 
         </mat-card-content>
     </mat-card>
