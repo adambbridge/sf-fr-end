@@ -1,25 +1,10 @@
-import { INewClientFormSubmission } from './../../services/fake-data.service';
-import { MatDialog } from "@angular/material";
-import { MatDialogRef } from "@angular/material/dialog";
-import { AddKnownOrgComponent } from "../add-known-org/add-known-org.component";
-import {
-    Component,
-    OnInit,
-    Input,
-    ViewChild,
-    Output,
-    EventEmitter
-} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
-import { FormGroup, FormControl, FormArray } from "@angular/forms";
-import { MatInputModule } from "@angular/material/input";
+import { FormGroup } from "@angular/forms";
 import { UtilsService } from "./../../services/utils.service";
-import {
-    FakeDataService,
-    IClientViewModel
-} from "src/app/services/fake-data.service";
+import { FakeDataService } from "src/app/services/fake-data.service";
 
 @Component({
     selector: "app-new-client",
@@ -27,44 +12,36 @@ import {
     styleUrls: ["./new-client.component.css"]
 })
 export class NewClientComponent implements OnInit {
+    /**
+     * IF CLIENT, 
+     * CREATE FORM WITH VALUES ELSE WITH ""
+     * SUBMIT > NEWCLIENT ELSE , SNACKBAR "ADDED"
+     * ELSE SUBMIT > UPDATECLIENT SNACKBAR "UPDATED"
+     * 
+     * 
+     */
     newClientForm: FormGroup;
-    submitted = false;
-    orgs;
 
     constructor(
         private _fb: FormBuilder,
         private fakeDataService: FakeDataService,
         private _utilsService: UtilsService,
-        private router: Router,
-        private dialog: MatDialog,
+        private router: Router
     ) {}
 
     ngOnInit() {
-        this._createNewClientForm();
+        this._createForm();
     }
 
-    /** NOT ADDING ORGS HERE FOR NOW  */
-    // onAddOrgClick() {
-    //     const dialogRef = this.dialog.open(AddKnownOrgComponent, {
-    //         data: { addToClient: true }
-    //     });
-    //     dialogRef.afterClosed().subscribe((result) => {
-    //         console.log("d closed, received: ", result);
-    //         this.orgs = result;
-    //     });
-    // }
-
     onSubmit() {
-        this.submitted = true;
-        this.newClientForm.value.orgs = this.orgs;
         console.log("form value:", this.newClientForm.value);
         console.log("form value:", this.newClientForm.valid);
 
-        // call service
-        // TODO add async code...
-        let newClientsArray = this.fakeDataService.newClient(this.newClientForm.value);
+        let newClientsArray = this.fakeDataService.newClient(
+            this.newClientForm.value
+        );
 
-        // if success
+        // on success
         this._utilsService.openSnackBar("New client added");
         this.router.navigate(["/clients"]);
     }
@@ -73,13 +50,12 @@ export class NewClientComponent implements OnInit {
             HELPERS
      =========================*/
 
-    private _createNewClientForm() {
+    private _createForm() {
         this.newClientForm = this._fb.group({
             contact: ["", Validators.required],
             company: [""],
             email: ["", Validators.required],
-            notes: [""],
-            orgs: [""]
+            notes: [""]
         });
     }
 }

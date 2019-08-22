@@ -19,7 +19,6 @@ export class ClientComponent implements OnInit {
     id;
     client: IClientViewModel;
     clients: IClientViewModel[];
-    envUI: string = "oneTable";
 
     constructor(
         private router: Router,
@@ -36,10 +35,5 @@ export class ClientComponent implements OnInit {
         console.log("client", this.client);
         console.log("clients", this.clients);
     }
-
-    // applyFilter(filterValue: string) {
-    //     this.dataSource.filter = filterValue.trim().toLowerCase();
-    // }
-
    
 }

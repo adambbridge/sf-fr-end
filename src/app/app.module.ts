@@ -82,6 +82,7 @@ import { AddNewOrgComponent } from './Components/add-new-org/add-new-org.compone
 import { AddAccountComponent } from './Components/add-account/add-account.component';
 import { PodioAccountsComponent } from './Components/podio-accounts/podio-accounts.component';
 import { PodioAccountDetailComponent } from './Components/podio-account-detail/podio-account-detail.component';
+import { EditClientComponent } from './Components/edit-client/edit-client.component';
 @NgModule({
     declarations: [
         /** Components */
@@ -139,7 +140,8 @@ import { PodioAccountDetailComponent } from './Components/podio-account-detail/p
         AddNewOrgComponent,
         AddAccountComponent,
         PodioAccountsComponent,
-        PodioAccountDetailComponent
+        PodioAccountDetailComponent,
+        EditClientComponent
     ],
     imports: [
         /** Modules */

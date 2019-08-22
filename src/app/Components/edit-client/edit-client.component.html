@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+    <mat-card class='w-75 mt-3'>
+        <mat-card-content>
+            <h3>Update Client: {{client.contact}}</h3>
+
+            <form [formGroup]="updateForm" (ngSubmit)="onSubmit()" novalidate>
+
+                <div [hidden]='true'>
+                    <mat-form-field hidden>
+                        <input type='text' formControlName="id" matInput required />
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field class="w-100">
+                    <input type='text' formControlName="contact" matInput required placeholder="Contact person" />
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <input type='text' formControlName="company" matInput placeholder="Company (optional)" />
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <input type='email' formControlName="email" matInput placeholder="email" required />
+                </mat-form-field>
+
+                <mat-form-field class="w-100">
+                    <textarea formControlName="notes" matInput placeholder="Notes"></textarea>
+                </mat-form-field>
+
+                <div class='mt-4'>
+                    <button routerLink="/clients/{{client.id}}" mat-raised-button class="mr-2">Cancel</button>
+                    <button type="submit" mat-raised-button [disabled]="!updateForm.valid">Save Changes</button>
+                </div>
+
+            </form>
+
+        </mat-card-content>
+    </mat-card>
+
+</div>

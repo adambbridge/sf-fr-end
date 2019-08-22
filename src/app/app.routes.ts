@@ -1,3 +1,4 @@
+import { EditClientComponent } from './Components/edit-client/edit-client.component';
 import { PodioAccountDetailComponent } from './Components/podio-account-detail/podio-account-detail.component';
 import { PodioAccountsComponent } from './Components/podio-accounts/podio-accounts.component';
 import { PodioOrgDetailComponent } from './Components/podio-org-detail/podio-org-detail.component';
@@ -88,6 +89,11 @@ export const APP_ROUTES: Routes = [
            {
                path: "clients/new",
                component: NewClientComponent,
+               canActivate: []
+           },
+           {
+               path: "clients/:id/edit",
+               component: EditClientComponent,
                canActivate: []
            },
            {

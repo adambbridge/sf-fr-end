@@ -75,7 +75,6 @@ export interface IPodioAccountViewModel {
     orgs?: IPodioOrganizationViewModel[];
 }
 
-
 export interface IPodioOrganizationViewModel {
     name: string;
     owner: string;
@@ -639,6 +638,15 @@ export class FakeDataService {
 
         this.fakeClients.unshift(savedClient);
         return this.fakeClients;
+    }
+
+    /** finds client by id and updates any props that changed */
+    updateClient(newInfo) {
+        var index = this.fakeClients.findIndex(
+            (client) => client.id == newInfo.id
+        );
+        Object.assign(this.fakeClients[index], newInfo);
+        console.log(this.fakeClients);
     }
 
     newSolution(solutionInfo) {
