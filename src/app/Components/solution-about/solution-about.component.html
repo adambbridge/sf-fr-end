@@ -1,6 +1,6 @@
 <div class="row mt-4">
 
-    <div class="col-12 col-sm-6 col-md-4">
+    <div class="col-4">
         <mat-card class='mr-1 mb-4'>
             <mat-card-content>
                 <mat-card-title>Description</mat-card-title>
@@ -14,8 +14,41 @@
         </mat-card>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4">
-        <mat-card class='mr-1 mb-4'>
+    <div class="col-8">
+
+        <!--======  SPACES ========= -->
+        <mat-expansion-panel [expanded]='true'>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon class="pr-2 text-light">ballot</mat-icon>
+                    Workspaces
+                </mat-panel-title>
+                <mat-panel-description class="d-flex justify-content-end pr-2">
+                    <span>{{solution.workspaces.length}}</span>
+                </mat-panel-description>
+        
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+        
+                <!-- TODO: GET DEFAULT OPTION TO SHOW UP SELECTED -->
+                <mat-form-field class='ml-3 mt-3'>
+                    <mat-label>Solution version</mat-label>
+                    <mat-select [(ngModel)]="selectedVersion">
+                        <mat-option value="fakeVersions[0]">{{fakeVersions[0]}}</mat-option>
+                        <mat-option value="fakeVersions[1]">{{fakeVersions[1]}}</mat-option>
+                        <mat-option value="fakeVersions[2]">{{fakeVersions[2]}}</mat-option>
+                        <mat-option value="fakeVersions[3]">{{fakeVersions[3]}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+        
+                <app-podio-spaces [workspaces]='solution.workspaces' [disableSelection]='true'>
+                </app-podio-spaces>
+            </ng-template>
+        </mat-expansion-panel>
+
+
+        <!-- TODO ADD ICON 
+            <mat-card class='mr-1 mb-4'>
             <mat-card-content>
                 <mat-card-title>Icon</mat-card-title>
                 <p class="text-hint">
@@ -24,18 +57,8 @@
                 <input type="file">
 
             </mat-card-content>
-        </mat-card>
+        </mat-card> -->
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4">
-        <mat-card class='mr-1 mb-4'>
-            <mat-card-content>
-                <mat-card-title>Stats card</mat-card-title>
-                <img src="assets/generic-chart-line-small.png" alt="deployments line chart" class='object-fit'>
-                
-    
-            </mat-card-content>
-        </mat-card>
-    </div>
 
 </div>
