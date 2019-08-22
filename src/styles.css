@@ -1,11 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+/* ====================
+    IMPORTS 
+=======================*/
+
 /* Bootstrap-4-grid */
 @import "~bootstrap-4-grid/css/grid.css";
 
 /* Angular Material theme */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-/* Other */
+/* ====================
+    VARIABLES 
+=======================*/
+:root {
+    --green: #4cd886;
+    --mat-border-radius: 4px;
+    --bg-black: #333333;
+}
+/* ====================
+    OTHER 
+=======================*/
+
+.bg-black {
+    background: var(--bg-black);
+}
+.color-green {
+    color: var(--green);
+}
+
 html,
 body {
     height: 100%;
@@ -335,6 +357,12 @@ mat-toolbar a:active {
     padding-right: 20px;
     padding-left: 20px; */
 }
+.bg-green {
+    background: var(--green);
+}
+.b-radius-std {
+    border-radius: var(--mat-border-radius);
+}
 
 .object-fit {
     width: 100%;
@@ -420,6 +448,10 @@ ngx-timepicker dialog
         -webkit-transform: rotate(359deg);
         transform: rotate(359deg);
     }
+}
+
+.bg-img-speed {
+    background-image: url('https://www.gstatic.com/mobilesdk/180326_mobilesdk/discoverycards/performance.png');
 }
 
 /* =====================

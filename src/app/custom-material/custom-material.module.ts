@@ -35,6 +35,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatStepperModule } from "@angular/material/stepper";
+
 
 
 
@@ -75,7 +77,8 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
         MatSidenavModule,
         MatToolbarModule,
         MatTooltipModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatStepperModule
     ],
     exports: [
         MatBadgeModule,
@@ -109,7 +112,8 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
         MatSidenavModule,
         MatToolbarModule,
         MatTooltipModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatStepperModule
     ],
     providers: [MatDatepickerModule]
 })
