@@ -12,15 +12,8 @@ import { FakeDataService } from "src/app/services/fake-data.service";
     styleUrls: ["./new-client.component.css"]
 })
 export class NewClientComponent implements OnInit {
-    /**
-     * IF CLIENT, 
-     * CREATE FORM WITH VALUES ELSE WITH ""
-     * SUBMIT > NEWCLIENT ELSE , SNACKBAR "ADDED"
-     * ELSE SUBMIT > UPDATECLIENT SNACKBAR "UPDATED"
-     * 
-     * 
-     */
     newClientForm: FormGroup;
+    submitted: boolean = false;
 
     constructor(
         private _fb: FormBuilder,
@@ -34,6 +27,7 @@ export class NewClientComponent implements OnInit {
     }
 
     onSubmit() {
+        this.submitted = true;
         console.log("form value:", this.newClientForm.value);
         console.log("form value:", this.newClientForm.valid);
 

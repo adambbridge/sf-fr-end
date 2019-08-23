@@ -20,6 +20,7 @@ export class WelcomeComponent implements OnInit {
     onboardMssgs = {
         levelUp: true
     }
+    before: string = 'before';
 
     constructor(
         private dom: DomSanitizer,
