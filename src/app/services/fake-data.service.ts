@@ -2,6 +2,7 @@ import { IAuthenticatedSfUser } from "./fake-data.service";
 import { environment } from "src/environments/environment.prod";
 import { Injectable } from "@angular/core";
 
+
 /** IPodioApplicationViewModel
  * we aren't currently showing the fields in the UI. mabye in the future we will be though... */
 export interface IPodioApplicationViewModel {
@@ -57,7 +58,6 @@ export interface IAuthenticatedSfUser {
 }
 
 export interface ISolutionInstanceViewModel {
-    name: string;
     id: string;
     description?: string;
     solution: ISolutionViewModel;
@@ -396,7 +396,7 @@ export class FakeDataService {
         },
         {
             appId: "Jello",
-            name: "",
+            name: "Fastbooks",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             versionNumber: "1.0",
@@ -469,7 +469,6 @@ export class FakeDataService {
     ];
 
     fakeInstance1: ISolutionInstanceViewModel = {
-        name: "HCCL",
         id: "123",
         description: "This is an optional description of the instance.",
         solution: this.fakeSolutions[0],
@@ -480,7 +479,6 @@ export class FakeDataService {
     };
 
     fakeInstance2: ISolutionInstanceViewModel = {
-        name: "SFC1",
         id: "234",
         description: "This is an optional description of the instance.",
         solution: this.fakeSolutions[0],
@@ -490,7 +488,6 @@ export class FakeDataService {
         lastTask: this.fakeSolutionTasks[1]
     };
     fakeInstance3: ISolutionInstanceViewModel = {
-        name: "SFC1",
         id: "567",
         description: "This is an optional description of the instance.",
         solution: this.fakeSolutions[0],
@@ -500,7 +497,6 @@ export class FakeDataService {
         lastTask: this.fakeSolutionTasks[2]
     };
     fakeInstance4: ISolutionInstanceViewModel = {
-        name: "SFC1",
         id: "891",
         description: "This is an optional description of the instance.",
         solution: this.fakeSolutions[0],

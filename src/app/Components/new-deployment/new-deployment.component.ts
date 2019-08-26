@@ -1,6 +1,6 @@
 import { environment } from "src/environments/environment.prod";
 import { Solution } from "./../../../model/saasafras/solution";
-import { FakeDataService } from "src/app/services/fake-data.service";
+import { FakeDataService, IPodioOrganizationViewModel } from "src/app/services/fake-data.service";
 import { Component, OnInit, Inject, Version } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
@@ -33,7 +33,7 @@ export class NewDeploymentComponent implements OnInit {
     preselectedOrg;
     orgTitle;
     clients;
-    orgs;
+    orgs: IPodioOrganizationViewModel[];
     instance;
     versions = [];
 
@@ -42,7 +42,6 @@ export class NewDeploymentComponent implements OnInit {
         version: ["", Validators.required],
         client: [""],
         org: ["", Validators.required],
-        instance: ["", Validators.required],
         description: [""]
     });
     submitted: boolean = false;
@@ -67,9 +66,9 @@ export class NewDeploymentComponent implements OnInit {
         this._configurePreselections(this._passedData);
         this.clients = this.fakeDataService.fakeClients;
         this.solutions = this.fakeDataService.fakeSolutions;
-        this.solutions.forEach(sol => {
+        this.solutions.forEach((sol) => {
             this.versions.push(sol.versionNumber + " " + sol.versionName);
-        } )
+        });
         console.log(this.versions);
     }
 
@@ -78,25 +77,15 @@ export class NewDeploymentComponent implements OnInit {
         let userSelection = this.c.value;
 
         if (userSelection === "deployToSelf") {
-            /** TODO
-             * get orgs of authenticated user
-             * how to set instance name in this case?
-             * */
+            /** TODO get orgs of authenticated user */
             this.orgs = this.fakeDataService.fakeOrganizations;
-            this._setInstance("SELF");
         } else if (userSelection === "addClient") {
             this.deployDialog.close();
             this.router.navigate(["clients/new"]);
         } else {
-            let selectedClient = userSelection;
-            this.orgs = selectedClient.orgs;
-            this._setInstance(selectedClient.identifier);
+            var selectedClient = userSelection;
+            this.orgs = this._getClientOrgs(selectedClient);
         }
-    }
-
-    private _setInstance(instanceName) {
-        this.deploymentForm.controls.instance.setValue(instanceName);
-        this.instance = instanceName;
     }
 
     onSubmit() {
@@ -121,6 +110,16 @@ export class NewDeploymentComponent implements OnInit {
      * HELPER METHODS 
      ===================== */
 
+    private _getClientOrgs(client) {
+        var orgs = [];
+        client.accounts.forEach((a) => {
+            a.orgs.forEach((org) => {
+                orgs.push(org);
+            });
+        });
+        return orgs;
+    }
+
     private getConfirmationDialogData() {
         let form = this.deploymentForm.value;
         let data = {
@@ -130,7 +129,9 @@ export class NewDeploymentComponent implements OnInit {
             snackBarCancelMessage: "Task cancelled",
             snackBarConfirmMessage: "Task scheduled",
             messages: [
-                `A new instance of solution ${form.solution} version ${form.version} will be created in org ${form.org.name}`,
+                `A new instance of solution ${form.solution} version ${
+                    form.version
+                } will be created in org ${form.org.name}`,
                 `This may take a few minutes. We'll email you when task completes.`
             ]
         };

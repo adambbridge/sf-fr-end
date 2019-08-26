@@ -349,13 +349,8 @@ mat-toolbar a:active {
     /* color: white; */
     color: #4cd886;
 }
-/* TODO ENABLE SPECIAL STYLING ONLY IN CERTAIN PLACES */
 .mat-tooltip {
-    /* background: #62BC5B;
-    color: white;
-    font-size: 20px;
-    padding-right: 20px;
-    padding-left: 20px; */
+    font-size: 15px;
 }
 .bg-green {
     background: var(--green);

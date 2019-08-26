@@ -1,30 +1,27 @@
 <mat-card class='mr-1 mb-4 cursor-pointer' [class.highlight]="item.featured"
     [routerLink]="item.linkUrl ? [item.linkUrl] : []">
 
-    <!-- IF IMAGE -->
-    <mat-card-header *ngIf="item.imageUrl || item.iconName">
-        <div mat-card-avatar>
-
-            <!-- show icon or image. if both present will show image -->
+    <!-- IF IMAGE or ICON -->
+    <!-- <mat-card-header *ngIf="item.imageUrl || item.iconName">
+      <div mat-card-avatar>
             <mat-icon *ngIf='item.iconName'>{{item.iconName}}</mat-icon>
             <img *ngIf='item.imageUrl' [src]='item.imageUrl' alt="">
-
-        </div>
+        </div> 
         <mat-card-title>{{item.name}}</mat-card-title>
-    </mat-card-header>
+    </mat-card-header> -->
 
-    <!-- IF NO IMAGE -->
-    <mat-card-title *ngIf="!item.imageUrl && !item.iconName">{{item.name}}</mat-card-title>
+    <!-- <mat-card-title *ngIf="!item.imageUrl && !item.iconName">{{item.name}}</mat-card-title> -->
+
+    <mat-card-title>{{item.name}}</mat-card-title>
 
     <mat-card-content>
         <p class='text-hint'>
             <span *ngIf="item.description">{{item.description}}</span>
             <!-- <span *ngIf="!item.description">item description could be here and truncate after 2 lines or so with ...</span> -->
-
         </p>
     </mat-card-content>
+    
     <mat-card-actions>
-
         <mat-chip-list class='text-hint' *ngIf="chiplist">
             <app-mat-chip-custom [text]="'v.' + item.versionNumber" matTooltip="Latest version">
             </app-mat-chip-custom>

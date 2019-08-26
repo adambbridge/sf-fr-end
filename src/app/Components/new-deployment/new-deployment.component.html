@@ -57,12 +57,6 @@
         </div>
     </mat-form-field>
 
-
-    <mat-form-field class="w-100" *ngIf="deploymentForm.controls.instance">
-        <mat-label>Instance Name (generated automatically based on client)</mat-label>
-        <input type="text" matInput readonly formControlName="instance">
-    </mat-form-field>
-
     <mat-form-field class="w-100">
         <textarea matInput formControlName="description" placeholder="Instance description (optional)"></textarea>
     </mat-form-field>
