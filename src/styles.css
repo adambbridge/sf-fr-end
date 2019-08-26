@@ -21,6 +21,16 @@
     OTHER 
 =======================*/
 
+[class^="flaticon-"]:before,
+[class*=" flaticon-"]:before,
+[class^="flaticon-"]:after,
+[class*=" flaticon-"]:after {
+    font-size: 1em;
+}
+.flaticon-lg {
+    font-size: 45px;
+}
+
 .bg-black {
     background: var(--bg-black);
 }
@@ -422,7 +432,7 @@ ngx-timepicker dialog
     background-color: #999;
 }
 .timepicker .timepicker-button {
-  color: grey;
+    color: grey;
 }
 
 /* =====================
@@ -446,7 +456,7 @@ ngx-timepicker dialog
 }
 
 .bg-img-speed {
-    background-image: url('https://www.gstatic.com/mobilesdk/180326_mobilesdk/discoverycards/performance.png');
+    background-image: url("https://www.gstatic.com/mobilesdk/180326_mobilesdk/discoverycards/performance.png");
 }
 
 /* =====================

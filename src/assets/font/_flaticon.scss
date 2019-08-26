@@ -1,0 +1,100 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 26/08/2019 21:52
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-authorization:before { content: "\f100"; }
+.flaticon-account:before { content: "\f101"; }
+.flaticon-clone:before { content: "\f102"; }
+.flaticon-clone-stamper:before { content: "\f103"; }
+.flaticon-copy-machine-1:before { content: "\f104"; }
+.flaticon-content:before { content: "\f105"; }
+.flaticon-magic:before { content: "\f106"; }
+.flaticon-band-aid-1:before { content: "\f107"; }
+.flaticon-patch:before { content: "\f108"; }
+.flaticon-patch-1:before { content: "\f109"; }
+.flaticon-cloth:before { content: "\f10a"; }
+.flaticon-rocket-1:before { content: "\f10b"; }
+.flaticon-update:before { content: "\f10c"; }
+.flaticon-update-1:before { content: "\f10d"; }
+.flaticon-refresh-1:before { content: "\f10e"; }
+.flaticon-refresh-2:before { content: "\f10f"; }
+.flaticon-calendar:before { content: "\f110"; }
+.flaticon-scroll:before { content: "\f111"; }
+.flaticon-scroll-1:before { content: "\f112"; }
+.flaticon-ancient-scroll:before { content: "\f113"; }
+.flaticon-blocks:before { content: "\f114"; }
+.flaticon-blocks-1:before { content: "\f115"; }
+.flaticon-lego:before { content: "\f116"; }
+.flaticon-engine:before { content: "\f117"; }
+.flaticon-muscle:before { content: "\f118"; }
+.flaticon-vertex:before { content: "\f119"; }
+.flaticon-profits:before { content: "\f11a"; }
+.flaticon-statistics:before { content: "\f11b"; }
+.flaticon-trophy:before { content: "\f11c"; }
+.flaticon-medal:before { content: "\f11d"; }
+    
+    $font-Flaticon-authorization: "\f100";
+    $font-Flaticon-account: "\f101";
+    $font-Flaticon-clone: "\f102";
+    $font-Flaticon-clone-stamper: "\f103";
+    $font-Flaticon-copy-machine-1: "\f104";
+    $font-Flaticon-content: "\f105";
+    $font-Flaticon-magic: "\f106";
+    $font-Flaticon-band-aid-1: "\f107";
+    $font-Flaticon-patch: "\f108";
+    $font-Flaticon-patch-1: "\f109";
+    $font-Flaticon-cloth: "\f10a";
+    $font-Flaticon-rocket-1: "\f10b";
+    $font-Flaticon-update: "\f10c";
+    $font-Flaticon-update-1: "\f10d";
+    $font-Flaticon-refresh-1: "\f10e";
+    $font-Flaticon-refresh-2: "\f10f";
+    $font-Flaticon-calendar: "\f110";
+    $font-Flaticon-scroll: "\f111";
+    $font-Flaticon-scroll-1: "\f112";
+    $font-Flaticon-ancient-scroll: "\f113";
+    $font-Flaticon-blocks: "\f114";
+    $font-Flaticon-blocks-1: "\f115";
+    $font-Flaticon-lego: "\f116";
+    $font-Flaticon-engine: "\f117";
+    $font-Flaticon-muscle: "\f118";
+    $font-Flaticon-vertex: "\f119";
+    $font-Flaticon-profits: "\f11a";
+    $font-Flaticon-statistics: "\f11b";
+    $font-Flaticon-trophy: "\f11c";
+    $font-Flaticon-medal: "\f11d";
