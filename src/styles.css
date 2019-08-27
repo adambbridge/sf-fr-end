@@ -30,12 +30,23 @@
 .flaticon-lg {
     font-size: 45px;
 }
+.stepper-margin-hack {
+    margin: -16px;
+    margin-top: 0;
+}
 
 .bg-black {
     background: var(--bg-black);
 }
 .color-green {
     color: var(--green);
+}
+
+.mat-step-header .mat-step-icon-selected, 
+.mat-step-header .mat-step-icon-state-done, 
+.mat-step-header .mat-step-icon-state-edit {
+    background-color: var(--green);
+    color: #fff;
 }
 
 html,
@@ -140,14 +151,20 @@ app-new-patch td.mat-cell:first-of-type {
     background: #eee;
     /* background: #FAFAFA; slightly lighter grey */
 }
-.text-clickable {
-    color: #07c;
+a,
+a:hover,
+a:active,
+a:visited,
+.text-clickable,
+.text-clickable:hover,
+.text-clickable:visited,
+.text-clickable:active
+ {
+    color: #136BF5;
+    text-decoration: none;
     cursor: pointer;
-    text-decoration: underline;
 }
-.text-clickable:hover {
-    color: #3af;
-}
+
 
 .text-warn {
     color: #f44336;
@@ -217,6 +234,15 @@ a.text-no-deco {
     width: unset;
     height: 30px;
 }
+
+.mat-list-compact.mat-list-base .mat-list-item.mat-list-item-with-avatar, 
+.mat-list-compact.mat-list-base .mat-list-option.mat-list-item-with-avatar,
+.mat-list-compact.mat-list-base .mat-list-item, 
+.mat-list-compact.mat-list-base .mat-list-option {
+    height: 40px;
+}
+
+
 /* FOR WELCOME LEVEL UP CARD */
 app-welcome .mat-list-base .mat-list-item .mat-list-item-content {
     padding-left: 0;
@@ -296,6 +322,9 @@ app-solution-about .mat-card {
 .min-h-200 {
     min-height: 200px;
 }
+.min-h-155 {
+    min-height: 155px;
+}
 input[type="file"] {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 14px;
@@ -340,7 +369,9 @@ mat-toolbar li {
     font-size: initial;
     font-weight: initial;
 }
-mat-toolbar a {
+mat-toolbar a,
+mat-toolbar a:visited
+ {
     text-decoration: none;
     color: white;
 }
@@ -348,15 +379,12 @@ mat-toolbar a:hover,
 mat-toolbar a:active {
     color: lightgray;
 }
-/* .highlight {
-    border: 2px solid #ff4081;
-} */
-.active-nav-item,
-.active-nav-item:hover,
+
+mat-toolbar a.active-nav-item,
+mat-toolbar a.active-nav-item:hover,
 .mat-nav-list .mat-list-item.active-nav-item,
 .mat-nav-list .mat-list-item.active-nav-item:hover {
     font-weight: bold;
-    /* color: white; */
     color: #4cd886;
 }
 .mat-tooltip {
@@ -364,6 +392,7 @@ mat-toolbar a:active {
 }
 .bg-green {
     background: var(--green);
+    color: white;
 }
 .b-radius-std {
     border-radius: var(--mat-border-radius);
