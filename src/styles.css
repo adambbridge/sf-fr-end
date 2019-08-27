@@ -218,6 +218,10 @@ a.text-no-deco {
 .w-125px {
     width: 125px;
 }
+.mat-column-notes {
+    max-width: 100px;
+}
+
 .w-100px {
     width: 100px;
 }

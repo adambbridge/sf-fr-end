@@ -109,6 +109,7 @@ export interface ISolutionTaskViewModel {
     completedAt: Date;
     faultedAt: Date;
 
+    solution: string;
     task: string;
     instance: string;
     versionNumFrom?: any;
@@ -236,7 +237,7 @@ export class FakeDataService {
             startedAt: null,
             completedAt: null,
             faultedAt: null,
-
+            solution: "Fastbooks",
             task: "Patch",
             instance: "XYZC",
             versionNumFrom: "0.0",
@@ -251,7 +252,7 @@ export class FakeDataService {
             startedAt: this.createDateFromOffset(2),
             completedAt: null,
             faultedAt: null,
-
+            solution: "Fastbooks",
             task: "Update",
             instance: null,
             versionNumFrom: "0.0",
@@ -266,6 +267,7 @@ export class FakeDataService {
             startedAt: this.createDateFromOffset(-1),
             completedAt: null,
             faultedAt: this.createDateFromOffset(-1),
+            solution: "Fastbooks",
 
             task: "Update",
             instance: null,
@@ -281,6 +283,7 @@ export class FakeDataService {
             startedAt: this.createDateFromOffset(-200),
             completedAt: this.createDateFromOffset(-200),
             faultedAt: null,
+            solution: "Fastbooks",
 
             task: "Patch",
             instance: "BBCO",
@@ -296,6 +299,7 @@ export class FakeDataService {
             startedAt: this.createDateFromOffset(-300),
             completedAt: this.createDateFromOffset(-300),
             faultedAt: null,
+            solution: "Fastbooks",
 
             task: "Update",
             instance: null,
@@ -311,6 +315,7 @@ export class FakeDataService {
             startedAt: this.createDateFromOffset(-350),
             completedAt: this.createDateFromOffset(-350),
             faultedAt: null,
+            solution: "Fastbooks",
 
             task: "Deploy",
             instance: "INST",
@@ -326,6 +331,7 @@ export class FakeDataService {
             startedAt: this.createDateFromOffset(-400),
             completedAt: this.createDateFromOffset(-400),
             faultedAt: null,
+            solution: "Fastbooks",
 
             task: "Create",
             instance: null,
