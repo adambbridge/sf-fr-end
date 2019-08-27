@@ -42,8 +42,8 @@
     color: var(--green);
 }
 
-.mat-step-header .mat-step-icon-selected, 
-.mat-step-header .mat-step-icon-state-done, 
+.mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
 .mat-step-header .mat-step-icon-state-edit {
     background-color: var(--green);
     color: #fff;
@@ -158,13 +158,11 @@ a:visited,
 .text-clickable,
 .text-clickable:hover,
 .text-clickable:visited,
-.text-clickable:active
- {
-    color: #136BF5;
+.text-clickable:active {
+    color: #136bf5;
     text-decoration: none;
     cursor: pointer;
 }
-
 
 .text-warn {
     color: #f44336;
@@ -235,13 +233,12 @@ a.text-no-deco {
     height: 30px;
 }
 
-.mat-list-compact.mat-list-base .mat-list-item.mat-list-item-with-avatar, 
+.mat-list-compact.mat-list-base .mat-list-item.mat-list-item-with-avatar,
 .mat-list-compact.mat-list-base .mat-list-option.mat-list-item-with-avatar,
-.mat-list-compact.mat-list-base .mat-list-item, 
+.mat-list-compact.mat-list-base .mat-list-item,
 .mat-list-compact.mat-list-base .mat-list-option {
     height: 40px;
 }
-
 
 /* FOR WELCOME LEVEL UP CARD */
 app-welcome .mat-list-base .mat-list-item .mat-list-item-content {
@@ -312,12 +309,28 @@ mat-paginator .mat-paginator-container {
     padding-left: 11px;
 }
 .mat-card-title {
-    font-size: 18px;
-    font-weight: normal;
+    /* font-size: 18px; */
+    /* font-weight: normal; */
+}
+.stat-cards .mat-card-title {
+    font-size: 16px;
 }
 app-solution-tasks .mat-card,
 app-solution-about .mat-card {
     min-height: 210px;
+}
+.iframe-container-resp {
+    padding-bottom: 56.25%;
+    position: relative;
+    display: block;
+    width: 100%;
+    border-radius: var(--mat-border-radius);
+}
+.iframe-resp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: var(--mat-border-radius);
 }
 .min-h-200 {
     min-height: 200px;
@@ -370,8 +383,7 @@ mat-toolbar li {
     font-weight: initial;
 }
 mat-toolbar a,
-mat-toolbar a:visited
- {
+mat-toolbar a:visited {
     text-decoration: none;
     color: white;
 }
