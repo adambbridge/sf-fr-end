@@ -54,6 +54,7 @@ export class NewSolutionComponent implements OnInit {
     preselectedSpaces: boolean = false;
     showInDialog: boolean = false;
     newSolutionDialog? = null;
+    @Input() dashBoardVersion: boolean = false;
 
     constructor(
         private router: Router,

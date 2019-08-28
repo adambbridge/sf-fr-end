@@ -1,12 +1,8 @@
 <h1 *ngIf="preselectedSolution" mat-dialog-title>
     Create New Instance of {{solutionTitle}}
-    <!-- TODO JUST FOR DEV AND TESTING -->
-    <span class="text-hint" (click)="toggleNoClientsView()">no clients</span>
 </h1>
 <h1 *ngIf="preselectedOrg" mat-dialog-title>
     Create New Instance in Org "{{orgTitle}}"
-    <!-- TODO JUST FOR DEV AND TESTING -->
-    <span class="text-hint" (click)="toggleNoClientsView()">no clients</span>
 </h1>
 
 <form [formGroup]="deploymentForm" (ngSubmit)="onSubmit()">
