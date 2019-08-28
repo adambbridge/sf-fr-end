@@ -13,14 +13,14 @@ import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 })
 export class WelcomeComponent implements OnInit {
     badges;
-    videoUrl: string = "https://www.youtube.com/embed/yG90m3H_kgA";
+    videoUrl: string = "https://www.youtube.com/embed/EmrTeRgpchs";
     videoUrlSafe;
     solutions: ISolutionViewModel[];
     recentTasks = [];
     onboardMssgs = {
         levelUp: true
-    }
-    before: string = 'before';
+    };
+    before: string = "before";
 
     constructor(
         private dom: DomSanitizer,
@@ -42,7 +42,7 @@ export class WelcomeComponent implements OnInit {
             sol.history.forEach((task) => {
                 if (task.scheduledFor > cutoffDate) {
                     this.recentTasks.push(task);
-                } 
+                }
             });
         });
     }

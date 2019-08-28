@@ -212,11 +212,17 @@ a.text-no-deco {
 .max-width-200 {
     max-width: 200px;
 }
+.max-w-150 {
+    max-width: 150px;
+}
 .max-w-100 {
     max-width: 100px;
 }
 .w-125px {
     width: 125px;
+}
+.w-110px {
+    width: 110px;
 }
 .mat-column-notes {
     max-width: 100px;
