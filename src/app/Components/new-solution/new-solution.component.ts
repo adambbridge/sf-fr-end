@@ -55,6 +55,7 @@ export class NewSolutionComponent implements OnInit {
     showInDialog: boolean = false;
     newSolutionDialog? = null;
     @Input() dashBoardVersion: boolean = false;
+    @Output() viewsInitialized = new EventEmitter();
 
     constructor(
         private router: Router,
@@ -78,6 +79,10 @@ export class NewSolutionComponent implements OnInit {
         }
         console.log("passed spaces", this.workspaces);
         console.log("preselectedspaces", this.preselectedSpaces);
+    }
+
+    ngAfterViewInit() {
+        this.viewsInitialized.emit();
     }
 
     onOrgSelection(userSelectedOrg) {
@@ -107,6 +112,7 @@ export class NewSolutionComponent implements OnInit {
             }
         });
         this._podioService.refresh();
+        console.log(this.workspaces)
     }
 
     onSpaceSelection(selected) {
@@ -129,8 +135,8 @@ export class NewSolutionComponent implements OnInit {
         });
         confirmDialog.afterClosed().subscribe((result) => {
             console.log("d closed, received: ", result);
-            
-            // when user confirms, create the solution 
+
+            // when user confirms, create the solution
             let newSolutionsArray = this.fakeDataService.newSolution(
                 this.newSolutionForm.value
             );
@@ -182,6 +188,13 @@ export class NewSolutionComponent implements OnInit {
                         spaces: []
                     };
                 });
+
+                console.log(this.organizations);
+                console.log(this.newSolutionForm.get("organization"));
+
+                // this.newSolutionForm
+                //     .get("organization")
+                //     .setValue(this.organizations[0].name);
             }
         });
     }
@@ -190,7 +203,7 @@ export class NewSolutionComponent implements OnInit {
         this.newSolutionForm = this._fb.group({
             name: ["", Validators.required],
             description: ["", Validators.required],
-            organization: [""],
+            organization: ["", Validators.required],
             workspaceControls: this._fb.array([])
         });
     }

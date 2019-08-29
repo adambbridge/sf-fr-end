@@ -10,16 +10,22 @@
     </div>
 
     <div>
-      
 
         <ul class="d-none d-lg-flex flex-row">
-            <li><a routerLink="" routerLinkActive="active-nav-item" [routerLinkActiveOptions]="{ exact: true }" class="pr-3 mat-h4 mb-0">Dashboard</a></li>
-            <li><a routerLink="/podio" routerLinkActive="active-nav-item" class="pr-3 mat-h4 mb-0">Podio Accounts</a></li>
-            <li><a routerLink="/solutions" routerLinkActive="active-nav-item" class="pr-3 mat-h4 mb-0">Solutions</a></li>
+            <li>
+                <a routerLink="" routerLinkActive="active-nav-item" [routerLinkActiveOptions]="{ exact: true }"
+                    class="pr-3 mat-h4 mb-0">Dashboard</a>
+            </li>
+            <li id="podio-accounts"><a routerLink="/podio" routerLinkActive="active-nav-item"
+                    class="pr-3 mat-h4 mb-0">Podio Accounts</a></li>
+            <li><a routerLink="/solutions" routerLinkActive="active-nav-item" class="pr-3 mat-h4 mb-0">Solutions</a>
+            </li>
             <li><a routerLink="/clients" routerLinkActive="active-nav-item" class="pr-3 mat-h4 mb-0">Clients</a></li>
             <li>
-                <a *ngIf='loggedIn' routerLink="/login" routerLinkActive="active-nav-item"  (click)="logout()" id="signup" class="pr-3 mat-h4 mb-0">Logout</a>
-                <a *ngIf='!loggedIn' routerLink="/login" routerLinkActive="active-nav-item"  id="signup" class="pr-3 mat-h4 mb-0">Login</a>
+                <a *ngIf='loggedIn' routerLink="/login" routerLinkActive="active-nav-item" (click)="logout()"
+                    id="signup" class="pr-3 mat-h4 mb-0">Logout</a>
+                <a *ngIf='!loggedIn' routerLink="/login" routerLinkActive="active-nav-item" id="signup"
+                    class="pr-3 mat-h4 mb-0">Login</a>
             </li>
         </ul>
     </div>

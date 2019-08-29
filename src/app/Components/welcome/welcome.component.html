@@ -9,7 +9,7 @@
 
             <div class="col-12 col-sm-6 col-md-4">
                 <a routerLink="/solutions" class="text-no-deco">
-                    <mat-card class='mr-1 cursor-pointer min-h-155'>
+                    <mat-card class='mr-1 cursor-pointer min-h-155' id="podio-accounts-card">
                         <mat-card-title class='d-flex justify-content-between w-100'>
                             <span>Podio Accounts</span>
                             <span class="text-hint">
@@ -74,71 +74,7 @@
             STEPPER MOCKUP
         ====================== -->
 
-            <app-new-solution [dashBoardVersion]="true" class='mt-4'></app-new-solution>
-
-
-            <!-- <mat-card-title class='pb-2'>Create Your First Solution in seconds</mat-card-title>
-            <mat-divider></mat-divider>
-            <mat-vertical-stepper #stepper class='b-radius-std'>
-                <mat-step>
-                    <form>
-                        <ng-template matStepLabel>Select Podio Org</ng-template>
-                        <mat-form-field class="mr-2 w-50">
-                            <mat-label>Brick Bridge Consulting</mat-label>
-                            <mat-select>
-                                <mat-option>
-                                    Brick Bridge Consulting
-                                </mat-option>
-                                <mat-option>
-                                    mPactPro
-                                </mat-option>
-                                <mat-option>
-                                    FastBooks
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        <button type="button" mat-raised-button matStepperNext class="bg-green">Next</button>
-                    </form>
-                </mat-step>
-                <mat-step>
-                    <form>
-                        <ng-template matStepLabel>Include desired workspaces</ng-template>
-                        <mat-selection-list #shoes>
-                            <mat-list-option [checkboxPosition]="before">
-                                Human Resources
-                            </mat-list-option>
-                            <mat-list-option [checkboxPosition]="before">
-                                Ticketing
-                            </mat-list-option>
-                            <mat-list-option [checkboxPosition]="before">
-                                Calendar
-                            </mat-list-option>
-                        </mat-selection-list>
-                        <div>
-                            <button type="button" mat-raised-button matStepperPrevious class="mr-2">Back</button>
-                            <button type="button" mat-raised-button matStepperNext class="bg-green">Next</button>
-                        </div>
-                    </form>
-                </mat-step>
-                <mat-step>
-                    <ng-template matStepLabel>Create your first Saassafrass Solution!</ng-template>
-                    <mat-form-field class="w-100">
-                        <input matInput placeholder="Name your solution" required>
-                    </mat-form-field>
-                    <mat-form-field class='w-100'>
-                        <input matInput placeholder="Description (optional)">
-                    </mat-form-field>
-                    <div>
-                        <button type="button" mat-raised-button matStepperPrevious class="mr-2">Back</button>
-                        <button mat-raised-button (click)="stepper.reset()" class="bg-green">Create Solution</button>
-                    </div>
-                </mat-step>
-            </mat-vertical-stepper> -->
-
-        <!-- </mat-card> -->
-
-       
+        <app-new-solution (viewsInitialized)="initIntro()" [dashBoardVersion]="true" class='mt-4'></app-new-solution>
 
     </div> <!-- end column -->
 
@@ -152,10 +88,7 @@
             LEVEL UP
         ====================== -->
 
-        <mat-card class="relative" #tooltip="matTooltip"
-            matTooltip="We can show styled tooltips when we want and make them go away when clicked."
-            [matTooltipPosition]="'right'" (mouseenter)="$event.stopImmediatePropagation()"
-            (mouseleave)="$event.stopImmediatePropagation()" (click)="tooltip.toggle()">
+        <mat-card class="relative" id="level-up">
             <mat-card-title class='d-flex align-content-center justify-content-start'>
 
                 <!-- <mat-card class="hint hint-level-up" *ngIf="onboardMssgs.levelUp">
@@ -187,13 +120,26 @@
 
                     <mat-list-item>
                         <mat-icon mat-list-icon class="text-lighter">check_circle_o</mat-icon>
-                        <p mat-line><a routerLink="/solutions/new">Create Your First Solution</a></p>
+                        <p mat-line>
+                            <a routerLink="/solutions/new">Create Your First Solution</a>
+                            
+
+                        </p>
                         <!-- <p mat-line class="text-lighter text-small">Loads associated <a routerLink="/podio">orgs</a></p> -->
                     </mat-list-item>
 
                     <mat-list-item>
                         <mat-icon mat-list-icon class="text-lighter">check_circle_o</mat-icon>
-                        <p mat-line><a routerLink="/clients/new">Add client to deploy to</a></p>
+                        <p mat-line>
+                            <a routerLink="/clients/new">Add client to deploy to</a>
+                            <button mat-icon-button matTooltip="90 second tutorial">
+                                <mat-icon class='text-light'>play_circle_filled</mat-icon>
+                            </button>
+                            <button mat-icon-button matTooltip="walk me through it">
+                                <mat-icon class='text-light'>directions</mat-icon>
+                            </button>
+
+                        </p>
                         <!-- <p mat-line class="text-lighter text-small">Loads associated <a routerLink="/podio">orgs</a></p> -->
                     </mat-list-item>
 
@@ -211,14 +157,15 @@
         ======================= -->
 
         <div class='iframe-container-resp mt-4'>
-            <iframe class="iframe-resp" width="100%" height="100%"
-                [src]="videoUrlSafe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="iframe-resp" width="100%" height="100%" [src]="videoUrlSafe" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
         </div>
 
         <!-- ==================
         SUPPORT 
         ======================= -->
-        
+
         <mat-expansion-panel class='mt-4'>
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -234,7 +181,6 @@
             </mat-list>
         </mat-expansion-panel>
 
-    
     </div> <!-- end column -->
 </div> <!-- end row -->
 

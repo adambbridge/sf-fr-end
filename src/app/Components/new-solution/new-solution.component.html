@@ -1,70 +1,77 @@
-<div class="d-flex justify-content-center">
-
+<div class="d-flex justify-content-center" >
     <mat-card [ngClass]="{'w-100 mt-1 mat-elevation-z0': showInDialog || dashBoardVersion, 'w-75 mt-3': !showInDialog}">
+        <div >
+            <mat-card-title *ngIf="!dashBoardVersion" class='pb-2'>New SaaSsafras Solution</mat-card-title>
+            <mat-card-title *ngIf="dashBoardVersion" class='pb-2'>Create Your First Solution in seconds
+            </mat-card-title>
 
-        <mat-card-title *ngIf="!dashBoardVersion" class='pb-2'>New SaaSsafras Solution</mat-card-title>
-        <mat-card-title *ngIf="dashBoardVersion" class='pb-2'>Create Your First Solution in seconds
-        </mat-card-title>
+            <mat-divider></mat-divider>
 
-        <mat-divider></mat-divider>
+            <form [formGroup]="newSolutionForm" (ngSubmit)="onSubmit()" novalidate>
+                <mat-vertical-stepper #stepper class='b-radius-std'>
 
-        <form [formGroup]="newSolutionForm" (ngSubmit)="onSubmit()" novalidate>
-            <mat-vertical-stepper #stepper class='b-radius-std'>
+                    <!-- step 1 -->
+                    <div>
+                        <mat-step>
+                            <ng-template matStepLabel>Select Podio Org</ng-template>
+                            <mat-form-field class="mr-2 w-75">
+                                <!-- <mat-label>Use workspaces from...</mat-label> -->
+                                <mat-select formControlName="organization" required
+                                    (selectionChange)='onOrgSelection($event)'>
+                                    <mat-option *ngFor="let org of organizations" [value]="org.name">
+                                        {{org.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <button type="button" mat-raised-button matStepperNext class="bg-green">Next</button>
+                        </mat-step>
+                    </div>
 
-                <!-- step 1 -->
-                <mat-step>
-                    <ng-template matStepLabel>Select Podio Org</ng-template>
-                    <mat-form-field class="mr-2 w-75">
-                        <mat-label>Use workspaces from...</mat-label>
-                        <mat-select formControlName="organization" required (selectionChange)='onOrgSelection($event)'>
-                            <mat-option *ngFor="let org of organizations" [value]="org.name">
-                                {{org.name}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <button type="button" mat-raised-button matStepperNext class="bg-green">Next</button>
-                </mat-step>
-
-                <!-- step 2 -->
-                <mat-step>
-                    <ng-template matStepLabel>Include desired workspaces</ng-template>
-                    <div *ngIf="workspaces" class="mb-3">
-                        <mat-label>Workspaces</mat-label>
-                        <div>
-                            <app-podio-spaces [workspaces]="workspaces" (selectedSpaces)="onSpaceSelection($event)" [disableSelection]='preselectedSpaces'></app-podio-spaces>
+                    <!-- step 2 -->
+                    <mat-step>
+                        <ng-template matStepLabel>Include desired workspaces</ng-template>
+                        <div *ngIf="workspaces" class="mb-3">
+                            <mat-label>Workspaces</mat-label>
+                            <div>
+                                <app-podio-spaces [workspaces]="workspaces" (selectedSpaces)="onSpaceSelection($event)"
+                                    [disableSelection]='preselectedSpaces'></app-podio-spaces>
+                            </div>
+                            <small *ngIf="selectedWorkspacesError && description.touched">Please select at least one
+                                workspace</small>
                         </div>
-                        <small *ngIf="selectedWorkspacesError && description.touched">Please select at least one workspace</small>
-                    </div>
-                    <div>
-                        <button type="button" mat-raised-button matStepperPrevious class="mr-2">Back</button>
-                        <button type="button" mat-raised-button matStepperNext class="bg-green">Next</button>
-                    </div>
-                </mat-step>
+                        <div>
+                            <button type="button" mat-raised-button matStepperPrevious class="mr-2">Back</button>
+                            <button type="button" mat-raised-button matStepperNext class="bg-green">Next</button>
+                        </div>
+                    </mat-step>
 
-                <!-- step 3 -->
-                <mat-step>
-                    <ng-template matStepLabel>
-                        <span *ngIf="!dashBoardVersion">Name the solution</span>
-                        <span *ngIf="dashBoardVersion">Create your first Saassafrass Solution!</span>
-                    </ng-template>
-                    <mat-form-field class="w-100">
-                        <input type='text' formControlName="name" matInput required placeholder="Name" />
-                    </mat-form-field>
-                    <mat-form-field class="w-100">
-                        <textarea formControlName="description" matInput placeholder="Description" required></textarea>
-                    </mat-form-field>
-                    <div>
-                        <button type="button" mat-raised-button matStepperPrevious class="mr-2">Back</button>
-                        <button type="submit" mat-raised-button *ngIf="!submitted"
-                            [disabled]="newSolutionForm.status === 'INVALID' || !selectedWorkspaces.length"
-                            (click)="stepper.reset()" class="bg-green">
-                            Create Solution
-                        </button>
-                    </div>
-                </mat-step>
+                    <!-- step 3 -->
+                    <mat-step>
+                        <ng-template matStepLabel>
+                            <span *ngIf="!dashBoardVersion">Name the solution</span>
+                            <span *ngIf="dashBoardVersion">Create your first Saassafrass Solution!</span>
+                        </ng-template>
+                        <mat-form-field class="w-100">
+                            <input type='text' formControlName="name" matInput required placeholder="Name" />
+                        </mat-form-field>
+                        <mat-form-field class="w-100">
+                            <textarea formControlName="description" matInput placeholder="Description"
+                                required></textarea>
+                        </mat-form-field>
+                        <div>
+                            <button type="button" mat-raised-button matStepperPrevious class="mr-2">Back</button>
+                            <button type="submit" mat-raised-button *ngIf="!submitted"
+                                [disabled]="newSolutionForm.status === 'INVALID' || !selectedWorkspaces.length"
+                                (click)="stepper.reset()" class="bg-green">
+                                Create Solution
+                            </button>
+                        </div>
+                    </mat-step>
 
-            </mat-vertical-stepper>
-        </form>
+                </mat-vertical-stepper>
+            </form>
+
+        </div>
 
     </mat-card>
 </div>

@@ -142,6 +142,15 @@ app-new-patch td.mat-cell:first-of-type {
     color: rgba(0, 0, 0, 0.54);
 }
 
+/* .position-relative {
+    position: relative;
+}
+.tip-pseudo-el-below {
+    position: relative:
+    bottom: 200px;
+    height:
+} */
+
 .example-container {
     position: absolute;
     top: 0;
@@ -443,13 +452,16 @@ table th.mat-header-cell:first-of-type {
 .table-layout-fixed {
     table-layout: fixed;
 }
+.height-500px {
+    height: 500px;
+}
 
 /* so content doesn't go right to bottom of screen */
 .mat-drawer-content {
     padding-bottom: 50px;
 }
 
-.hint-level-up {
+/* .hint-level-up {
     right: 315px;
     top: 20px;
     width: 300px;
@@ -462,7 +474,7 @@ table th.mat-header-cell:first-of-type {
     color: white;
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
         0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 14px 0 rgba(0, 0, 0, 0.12);
-}
+} */
 .relative {
     position: relative;
 }
