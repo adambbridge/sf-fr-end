@@ -39,32 +39,42 @@ export class WelcomeComponent implements OnInit {
     initIntro() {
         console.log("child view initialized new solution that is. ");
         this.intro.setOptions({
-            skipLabel: "Got it",
+            skipLabel: "Exit mini tour",
             overlayOpacity: 0.6,
-            disableInteractions: false,
+            disableInteraction: true,
+            showProgress: true,
             exitOnEsc: true,
             tooltipPosition: "bottom",
             tooltipClass: "", // add a css class to tooltip
             keyboardNavigation: true,
             steps: [
                 {
-                    element: document.querySelector("#podio-accounts-card"),
-                    intro:
-                        "We've loaded your Podio orgs and workspaces. You are all set to create your first solution!"
+                    element: document.querySelector(
+                        "#podio-accounts-card"
+                    ),
+                    intro: "We've loaded your Orgs and workspaces."
                 },
-                // {
-                //     element: document.querySelector("#create-first-solution"),
-                //     intro: "We've loaded your Podio orgs and workspaces. You are all set to create your first solution!"
-                // },
                 {
-                    element: document.querySelector("#level-up"),
+                    element: document.querySelector(
+                        "#create-first-solution"
+                    ),
                     intro:
-                        "Once you have a Solution, you can deploy it to any Podio org you have access to, create versions, patch updates and more."
+                        "You are all set to create your first solution!"
                 },
                 {
                     element: document.querySelector("#podio-accounts"),
                     intro:
-                        "Manage Podio Accounts. You can send access requests from within SaaSafrass"
+                        "Get access to other Podio accounts and orgs here"
+                },
+                {
+                    element: document.querySelector("#level-up"),
+                    intro:
+                        "Level Up links provide guided task completion"
+                },
+                {
+                    element: document.querySelector("#video-general-intro"),
+                    intro:
+                        "Check out our videos or help section anytime to learn more. Thanks for taking the mini-tour!"
                 }
             ]
         });

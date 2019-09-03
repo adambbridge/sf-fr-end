@@ -122,7 +122,6 @@
                         <mat-icon mat-list-icon class="text-lighter">check_circle_o</mat-icon>
                         <p mat-line>
                             <a routerLink="/solutions/new">Create Your First Solution</a>
-                            
 
                         </p>
                         <!-- <p mat-line class="text-lighter text-small">Loads associated <a routerLink="/podio">orgs</a></p> -->
@@ -156,11 +155,11 @@
             VIDEO 
         ======================= -->
 
-        <div class='iframe-container-resp mt-4'>
-            <iframe class="iframe-resp" width="100%" height="100%" [src]="videoUrlSafe" frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-        </div>
+            <div class='iframe-container-resp mt-4' id="video-general-intro">
+                <iframe class="iframe-resp" width="100%" height="100%" [src]="videoUrlSafe" frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
 
         <!-- ==================
         SUPPORT 

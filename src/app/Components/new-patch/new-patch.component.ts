@@ -24,7 +24,7 @@ export class NewPatchComponent implements OnInit {
     solution;
     clients;
     instances;
-    selectedInstances;
+    selectedInstances = [];
     instancePreselection: boolean = false;
     form: FormGroup;
     versions = ["0.0", "1.0 Mongoose", "1.1 Bobcat", "2.0 Wildebeest"];
@@ -94,39 +94,8 @@ export class NewPatchComponent implements OnInit {
     }
 
     /** combine date and time chosen into single datetime moment */
-    /** TODO use better/integrate datetime picker to avoid all this code
-     *  */
     onTimeChange() {
-        // values from both date and time pickers 
-        var d = this.form.value.date;
-        var t = this.form.value.time; // "HH:mm pm"
-        var dateMoment = moment(d);
-
-        // get hr, min, suffix (am or pm) 
-        var HHmm = t.split(" ")[0]; // "HH:mm"
-        var hr = HHmm.split(":")[0]; // "HH"
-        var min = HHmm.split(":")[1]; // "mm"
-        var suffix = t.split(" ")[1]; // am or pm
-
-        // convert hr from 12 hr to 24 hr format 
-        if (suffix.includes("pm")) {
-            hr = parseInt(hr) + 12;
-        }
-
-        // use hr and min to set time on the date 
-        var dateTimeCombinedNativeDateObject = dateMoment.set("hour", hr).set("minute", min).toDate();
-        this.form.controls.date.setValue(
-            dateTimeCombinedNativeDateObject
-        ); 
-
-        // if time in past show error message and disable submit btn
-        if(dateTimeCombinedNativeDateObject < new Date()) {
-            this.timeError = true;
-        } else {
-            this.timeError = false;
-        }
-
-        // console.log(this.form.value);
+        this._onTimeChangeHelper();
     }
 
     /** TODO ONLY FOR DEVELOPMENT */
@@ -145,6 +114,11 @@ export class NewPatchComponent implements OnInit {
             data: { solution: this.solution }
         });
         this.patchDialog.close();
+    }
+
+    onCancelClick(): void {
+        this.patchDialog.close("cancel");
+        this._utilsService.openSnackBar("Patch cancelled");
     }
 
     onSubmit() {
@@ -195,12 +169,6 @@ export class NewPatchComponent implements OnInit {
         return data;
     }
 
-    private _addDays(date, days) {
-        var result = new Date(date);
-        result.setDate(result.getDate() + days);
-        return result;
-    }
-
     get versionInput() {
         return this.form.get("version");
     }
@@ -219,6 +187,18 @@ export class NewPatchComponent implements OnInit {
 
     get notes() {
         return this.form.get("notes");
+    }
+
+    /* ======================
+      TIME AND DATE HELPER METHODS
+      TODO: refactor to use single datetime picker
+      and moment so we can get rid of all this code
+     ======================= */
+
+    private _addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
     }
 
     private _getMaxDate() {
@@ -241,5 +221,38 @@ export class NewPatchComponent implements OnInit {
         let suffix = rawHr >= 12 ? "pm" : "am";
         let minTime = hr + ":" + min + " " + suffix;
         this.minTime = minTime;
+    }
+
+    private _onTimeChangeHelper() {
+        // values from both date and time pickers
+        var d = this.form.value.date;
+        var t = this.form.value.time; // "HH:mm pm"
+        var dateMoment = moment(d);
+
+        // get hr, min, suffix (am or pm)
+        var HHmm = t.split(" ")[0]; // "HH:mm"
+        var hr = HHmm.split(":")[0]; // "HH"
+        var min = HHmm.split(":")[1]; // "mm"
+        var suffix = t.split(" ")[1]; // am or pm
+
+        // convert hr from 12 hr to 24 hr format
+        if (suffix.includes("pm")) {
+            hr = parseInt(hr) + 12;
+        }
+
+        // use hr and min to set time on the date
+        var dateTimeCombinedNativeDateObject = dateMoment
+            .set("hour", hr)
+            .set("minute", min)
+            .toDate();
+        this.form.controls.date.setValue(dateTimeCombinedNativeDateObject);
+
+        // if time in past show error message and disable submit btn
+        if (dateTimeCombinedNativeDateObject < new Date()) {
+            this.timeError = true;
+        } else {
+            this.timeError = false;
+        }
+        console.log(this.form.value);
     }
 }

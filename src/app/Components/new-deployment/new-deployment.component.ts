@@ -12,6 +12,8 @@ import { MAT_DIALOG_DATA } from "@angular/material";
 import { MatDialogRef } from "@angular/material/dialog";
 import { routerNgProbeToken } from "@angular/router/src/router_module";
 import { Router } from "@angular/router";
+import { UtilsService } from "./../../services/utils.service";
+
 
 @Component({
     selector: "app-new-deployment",
@@ -58,6 +60,7 @@ export class NewDeploymentComponent implements OnInit {
         private fakeDataService: FakeDataService,
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
         public deployDialog: MatDialogRef<NewDeploymentComponent>,
+        private _utilsService: UtilsService,
         private dialog: MatDialog,
         private router: Router
     ) {}
@@ -86,6 +89,11 @@ export class NewDeploymentComponent implements OnInit {
             var selectedClient = userSelection;
             this.orgs = this._getClientOrgs(selectedClient);
         }
+    }
+
+    onCancelClick(): void {
+        this.deployDialog.close("cancel");
+        this._utilsService.openSnackBar("Deployment cancelled");
     }
 
     onSubmit() {

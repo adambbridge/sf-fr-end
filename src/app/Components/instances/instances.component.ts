@@ -42,7 +42,6 @@ export class InstancesComponent implements OnInit {
     getDisplayedColumns() {
         const allColumns: string[] = [
             "select",
-            "name",
             "solution",
             "version",
             "client",

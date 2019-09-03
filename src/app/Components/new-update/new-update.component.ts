@@ -7,6 +7,8 @@ import { MatDialog } from "@angular/material";
 import { ConfirmationDialogComponent } from "./../confirmation-dialog/confirmation-dialog.component";
 import { MAT_DIALOG_DATA } from "@angular/material";
 import { MatDialogRef } from "@angular/material/dialog";
+import { UtilsService } from "./../../services/utils.service";
+
 
 @Component({
     selector: "app-new-update",
@@ -27,6 +29,7 @@ export class NewUpdateComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
         private dialog: MatDialog,
         public updateDialog: MatDialogRef<NewUpdateComponent>,
+        private _utilsService: UtilsService,
         private fb: FormBuilder,
         private fakeDataService: FakeDataService
     ) {}
@@ -68,6 +71,11 @@ export class NewUpdateComponent implements OnInit {
     onSpaceSelection(selected) {
         this.spacesToUseForNewVersion = selected;
         console.log("selected spaces:", this.spacesToUseForNewVersion);
+    }
+
+    onCancelClick(): void {
+        this.updateDialog.close("cancel");
+        this._utilsService.openSnackBar("Update cancelled");
     }
 
     onSubmit() {

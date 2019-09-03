@@ -57,7 +57,7 @@
         <textarea matInput formControlName="description" placeholder="Instance description (optional)"></textarea>
     </mat-form-field>
 
-    <button mat-raised-button class='mr-2'>Cancel</button>
+    <button mat-raised-button class='mr-2' type="button" (click)="onCancelClick()">Cancel</button>
     <button mat-raised-button type="submit" [disabled]="false">Deploy</button>
 
 </form>
