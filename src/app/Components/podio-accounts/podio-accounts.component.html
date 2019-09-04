@@ -16,11 +16,12 @@
 
                 <!-- IF NO ACCOUNTS -->
                 <span *ngIf="!accounts">
-                    No accounts yet added.
+                    Add an account so you can copy client workspaces or deploy a solution to client organization(s). 
+                    <mat-icon matTooltip="Send account access request emails to clients to gain access to Podio organizations in the account. This allows you to create solutions from their workspaces and/or deploy any solution(s) into any of their organizations.">help_outline</mat-icon>
                 </span>
 
                 <span>
-                    <button mat-raised-button (click)="onAddAccountClick()">Add Account</button>
+                    <button mat-raised-button class="bg-green" (click)="onAddAccountClick()">Add Podio Account</button>
                 </span>
 
             </div>

@@ -35,12 +35,6 @@
     margin-top: 0;
 }
 
-.bg-black {
-    background: var(--bg-black);
-}
-.color-green {
-    color: var(--green);
-}
 
 .mat-step-header .mat-step-icon-selected,
 .mat-step-header .mat-step-icon-state-done,
@@ -92,10 +86,10 @@ tr:active {
     border-radius: 4px;
 }
 .bg-success {
-    background-color: #00c853;
+    background-color: #DFF2BF;
 }
-.bg-warning {
-    background-color: #e53935;
+.bg-error {
+    background-color: #FFD2D2;
 }
 .success {
     color: #00c853;
@@ -103,6 +97,16 @@ tr:active {
 .warning {
     color: #e53935;
     background: unset;
+}
+
+.bg-black {
+    background: var(--bg-black);
+}
+.color-green {
+    color: var(--green);
+}
+.bg-warning {
+    background: #FEEFB3;
 }
 .scheduled {
     /* color: blue; */

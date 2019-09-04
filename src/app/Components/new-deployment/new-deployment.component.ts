@@ -1,8 +1,10 @@
+import { AddAccountComponent } from './../add-account/add-account.component';
 import { environment } from "src/environments/environment.prod";
 import { Solution } from "./../../../model/saasafras/solution";
 import {
     FakeDataService,
-    IPodioOrganizationViewModel
+    IPodioOrganizationViewModel,
+    IClientViewModel
 } from "src/app/services/fake-data.service";
 import { Component, OnInit, Inject, Version } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
@@ -39,6 +41,8 @@ export class NewDeploymentComponent implements OnInit {
     orgs: IPodioOrganizationViewModel[];
     instance;
     versions = [];
+    noClientAcctsMssg: boolean = false;
+    selectedClient: IClientViewModel;
 
     deploymentForm = this.fb.group({
         solution: ["", Validators.required],
@@ -97,8 +101,13 @@ export class NewDeploymentComponent implements OnInit {
             this.deployDialog.close();
             this.router.navigate(["clients/new"]);
         } else {
-            var selectedClient = userSelection;
-            this.orgs = this._getClientOrgs(selectedClient);
+            this.selectedClient = userSelection;
+            if (!this.selectedClient.accounts) {
+                this.orgs = this.fakeDataService.fakeOrganizations;
+                this.noClientAcctsMssg = true;
+            } else {
+                this.orgs = this._getClientOrgs(this.selectedClient);
+            }
         }
     }
 
@@ -123,6 +132,17 @@ export class NewDeploymentComponent implements OnInit {
         } else {
             this.clients = this.fakeDataService.fakeClients;
         }
+    }
+
+    onAddAccountClick() {
+        this.noClientAcctsMssg = false;
+        const dialogRef = this.dialog.open(AddAccountComponent, {
+            data: { client: this.selectedClient ? this.selectedClient : null }
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+            console.log("result: ", result);
+
+        });
     }
 
     /** ==================
