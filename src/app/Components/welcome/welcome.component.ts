@@ -33,11 +33,32 @@ export class WelcomeComponent implements OnInit {
         this._setRecentTasks(7);
     }
 
-    /**
-     * tagged intro items level-up, create-first-solution, podio-account (click it, more tooltips for adding)
-     */
+    /** called by event emission from child component */
     initIntro() {
         console.log("child view initialized new solution that is. ");
+        var tipsArray = [
+            {
+                element: document.querySelector("#podio-accounts-card"),
+                intro: "We've loaded your Orgs and workspaces."
+            },
+            {
+                element: document.querySelector("#create-first-solution"),
+                intro: "You are all set to create your first solution!"
+            },
+            {
+                element: document.querySelector("#podio-accounts"),
+                intro: "Get access to other Podio accounts and orgs here"
+            },
+            {
+                element: document.querySelector("#level-up"),
+                intro: "Level Up links provide guided task completion"
+            },
+            {
+                element: document.querySelector("#video-general-intro"),
+                intro:
+                    "Check out our videos or help section anytime to learn more. Thanks for taking the mini-tour!"
+            }
+        ];
         this.intro.setOptions({
             skipLabel: "Exit mini tour",
             overlayOpacity: 0.6,
@@ -47,47 +68,10 @@ export class WelcomeComponent implements OnInit {
             tooltipPosition: "bottom",
             tooltipClass: "", // add a css class to tooltip
             keyboardNavigation: true,
-            steps: [
-                {
-                    element: document.querySelector(
-                        "#podio-accounts-card"
-                    ),
-                    intro: "We've loaded your Orgs and workspaces."
-                },
-                {
-                    element: document.querySelector(
-                        "#create-first-solution"
-                    ),
-                    intro:
-                        "You are all set to create your first solution!"
-                },
-                {
-                    element: document.querySelector("#podio-accounts"),
-                    intro:
-                        "Get access to other Podio accounts and orgs here"
-                },
-                {
-                    element: document.querySelector("#level-up"),
-                    intro:
-                        "Level Up links provide guided task completion"
-                },
-                {
-                    element: document.querySelector("#video-general-intro"),
-                    intro:
-                        "Check out our videos or help section anytime to learn more. Thanks for taking the mini-tour!"
-                }
-            ]
+            steps: tipsArray
         });
 
         this.intro.start();
-
-        // this.intro.addHints();
-        // this.intro.onexit(function() {
-        //     alert("exit of introduction");
-        // });
-        // this.intro.oncomplete(function() {
-        //     alert("end of introduction");
-        // });
     }
 
     private _setRecentTasks(days) {

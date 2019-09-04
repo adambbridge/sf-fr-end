@@ -20,15 +20,6 @@ export class SolutionTasksComponent implements OnInit {
 
     ngOnInit() {}
 
-    /**
-     * TODO
-     * ADD ABILITY TO ADD OR REMOVE SPACES FROM SOL. WORKSPACES
-     * WHEN PERFORMING AN UPDATE
-     * pass-data: allSourceOrgSpaces = sol.workspaces[0].podioSpace.org_id 
-     * pass-data: currentlyUsedSpaces = sol.spaces 
-     * use the spaces component with selection list like org-detail uses
-     * 
-     */
     onUpdateClick() {
         this.dialog.open(NewUpdateComponent, {
             data: {
