@@ -1,4 +1,3 @@
-import { AddKnownOrgComponent } from "../add-known-org/add-known-org.component";
 import { UtilsService } from "./../../services/utils.service";
 import { Component, OnInit, Inject, ViewChild } from "@angular/core";
 import { FakeDataService } from "src/app/services/fake-data.service";
@@ -27,7 +26,7 @@ export class NewPatchComponent implements OnInit {
     selectedInstances = [];
     instancePreselection: boolean = false;
     form: FormGroup;
-    versions = ["0.0", "1.0 Mongoose", "1.1 Bobcat", "2.0 Wildebeest"];
+    versions = [];
     patchImpactOnSpaces = null;
     minDate = new Date();
     maxDate = this._getMaxDate();
@@ -62,9 +61,9 @@ export class NewPatchComponent implements OnInit {
                 this.instances = this._fakeDataService.fakeInstances;
             }
         }
+        this.versions = this._getVersionsFromSolutions();
         this.clients = this._fakeDataService.fakeClients;
         this.form = this._createForm();
-
         this._setMinTime();
         console.log(this.form.value);
     }
@@ -137,6 +136,20 @@ export class NewPatchComponent implements OnInit {
     /* ======================
      *  HELPER METHODS
      ======================= */
+
+    private _getVersionsFromSolutions() {
+        var solutions = this._fakeDataService.fakeSolutions;
+        var versions = [];
+        solutions.forEach((sol) => {
+            let v = {
+                number: sol.versionNumber,
+                name: sol.versionName
+            };
+            versions.push(v);
+        });
+        console.log(versions);
+        return versions;
+    }
 
     private getConfirmationDialogData() {
         var patchDatetime = this.form.value.date;

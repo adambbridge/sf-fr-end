@@ -10,28 +10,34 @@
     <mat-form-field class="w-100">
         <mat-label>Which version do you want to update?</mat-label>
         <mat-select formControlName="version" (selectionChange)="onVersionSelection()">
-            <mat-option *ngFor="let version of versions" [value]="version">{{version.versionNumber}} {{version.versionName}}</mat-option>
+            <mat-option *ngFor="let v of versions" [value]="v.number">
+                {{v.number}} <span *ngIf="v.name">{{v.name}}</span>
+            </mat-option>
         </mat-select>
     </mat-form-field>
 
-    <mat-expansion-panel *ngIf="spacesCurrentlyUsed" >
+    <mat-expansion-panel *ngIf="spacesCurrentlyUsed">
         <mat-expansion-panel-header>
             <mat-panel-title>Edit included workspaces (optional)</mat-panel-title>
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
             <div class="mt-2">
                 <mat-label>
-                    <span>Select to add spaces. Deselect spaces you do not want included in the new version. If you Patch a solution with a version that does not include a space in the current version, it will not delete that space, it will leave it unchanged. <a href="">Learn more <mat-icon class="text-small">open_in_new</mat-icon></a></span>
+                    <span>Select to add spaces. Deselect spaces you do not want included in the new version. If you
+                        Patch a solution with a version that does not include a space in the current version, it will
+                        not delete that space, it will leave it unchanged. <a href="">Learn more <mat-icon
+                                class="text-small">open_in_new</mat-icon></a></span>
                 </mat-label>
-                <app-podio-spaces [workspaces]="spacesAllInOrg"
-                    [preselectedSpaces]="spacesCurrentlyUsed" (selectedSpaces)="onSpaceSelection($event)">
+                <app-podio-spaces [workspaces]="spacesAllInOrg" [preselectedSpaces]="spacesCurrentlyUsed"
+                    (selectedSpaces)="onSpaceSelection($event)">
                 </app-podio-spaces>
             </div>
         </ng-template>
     </mat-expansion-panel>
 
     <mat-form-field class="w-100 mt-2">
-        <input matInput formControlName="name" placeholder="Add optional user friendly name for new solution version (ie 'Yosemite', 'El Capitan' etc.)">
+        <input matInput formControlName="name"
+            placeholder="Add optional user friendly name for new solution version (ie 'Yosemite', 'El Capitan' etc.)">
     </mat-form-field>
 
     <mat-form-field class="w-100">

@@ -1,6 +1,9 @@
 import { environment } from "src/environments/environment.prod";
 import { Solution } from "./../../../model/saasafras/solution";
-import { FakeDataService, IPodioOrganizationViewModel } from "src/app/services/fake-data.service";
+import {
+    FakeDataService,
+    IPodioOrganizationViewModel
+} from "src/app/services/fake-data.service";
 import { Component, OnInit, Inject, Version } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { Validators } from "@angular/forms";
@@ -13,7 +16,6 @@ import { MatDialogRef } from "@angular/material/dialog";
 import { routerNgProbeToken } from "@angular/router/src/router_module";
 import { Router } from "@angular/router";
 import { UtilsService } from "./../../services/utils.service";
-
 
 @Component({
     selector: "app-new-deployment",
@@ -29,7 +31,6 @@ import { UtilsService } from "./../../services/utils.service";
  * set value of solution as the id property but display the name property
  */
 export class NewDeploymentComponent implements OnInit {
-    solutions;
     preselectedSolution;
     solutionTitle;
     preselectedOrg;
@@ -68,11 +69,21 @@ export class NewDeploymentComponent implements OnInit {
     ngOnInit() {
         this._configurePreselections(this._passedData);
         this.clients = this.fakeDataService.fakeClients;
-        this.solutions = this.fakeDataService.fakeSolutions;
-        this.solutions.forEach((sol) => {
-            this.versions.push(sol.versionNumber + " " + sol.versionName);
+        this.versions = this._getVersionsFromSolutions();
+    }
+
+    private _getVersionsFromSolutions() {
+        var solutions = this.fakeDataService.fakeSolutions;
+        var versions = [];
+        solutions.forEach((sol) => {
+            let v = {
+                number: sol.versionNumber,
+                name: sol.versionName
+            };
+            versions.push(v);
         });
-        console.log(this.versions);
+        console.log(versions);
+        return versions;
     }
 
     onClientSelection(): void {

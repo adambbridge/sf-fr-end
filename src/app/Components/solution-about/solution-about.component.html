@@ -4,11 +4,7 @@
         <mat-card class='mr-1 mb-4'>
             <mat-card-content>
                 <mat-card-title>Description</mat-card-title>
-                <p class="text-hint">
-                    This can be a user created description for this solution. It can be edited at any time
-                    as
-                    the solution evolves.
-                </p>
+                <p class="text-hint">{{solution.description}}</p>
 
             </mat-card-content>
         </mat-card>
@@ -26,39 +22,26 @@
                 <mat-panel-description class="d-flex justify-content-end pr-2">
                     <span>{{solution.workspaces.length}}</span>
                 </mat-panel-description>
-        
+
             </mat-expansion-panel-header>
             <ng-template matExpansionPanelContent>
-        
+
                 <!-- TODO: GET DEFAULT OPTION TO SHOW UP SELECTED -->
                 <mat-form-field class='ml-3 mt-3'>
                     <mat-label>Solution version</mat-label>
-                    <mat-select [(ngModel)]="selectedVersion">
-                        <mat-option value="fakeVersions[0]">{{fakeVersions[0]}}</mat-option>
-                        <mat-option value="fakeVersions[1]">{{fakeVersions[1]}}</mat-option>
-                        <mat-option value="fakeVersions[2]">{{fakeVersions[2]}}</mat-option>
-                        <mat-option value="fakeVersions[3]">{{fakeVersions[3]}}</mat-option>
+                    <mat-select [(ngModel)]="selectedVersion" (selectionChange)="onVersionSelection()">
+                        <mat-option *ngFor="let v of versions" [value]="v.number">
+                            {{v.number}} <span *ngIf="v.name">{{v.name}}</span>
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
-        
+
+                <!-- TODO SHOW SPACES IN SELECTED VERSION  -->
                 <app-podio-spaces [workspaces]='solution.workspaces' [disableSelection]='true'>
                 </app-podio-spaces>
             </ng-template>
         </mat-expansion-panel>
 
-
-        <!-- TODO ADD ICON 
-            <mat-card class='mr-1 mb-4'>
-            <mat-card-content>
-                <mat-card-title>Icon</mat-card-title>
-                <p class="text-hint">
-                    Personalize your solution with an icon.
-                </p>
-                <input type="file">
-
-            </mat-card-content>
-        </mat-card> -->
     </div>
-
 
 </div>

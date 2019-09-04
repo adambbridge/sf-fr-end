@@ -46,7 +46,9 @@
     <mat-form-field class="w-100">
         <mat-label>Which solution version?</mat-label>
         <mat-select formControlName="version">
-            <mat-option *ngFor="let version of versions" [value]="version">{{version}}</mat-option>
+            <mat-option *ngFor="let v of versions" [value]="v.number">
+                {{v.number}} <span *ngIf="v.name">{{v.name}}</span>
+            </mat-option>
         </mat-select>
         <div *ngIf="c.invalid && (c.dirty || c.touched)">
             <mat-error>Please select a version</mat-error>

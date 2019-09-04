@@ -21,27 +21,10 @@ import { MatDialog } from "@angular/material";
     styleUrls: ["./podio-accounts.component.css"]
 })
 
-// fakeAccounts: Array<IPodioAccountViewModel> = [
-//         {
-//             id: '123',
-//              name: "Brick Bridge Consulting",
-//             owner: "Gil Roberts",
-//             email: "gil@brickbridgeconsulting.com",
-//             orgs: this.fakeOrganizations
-//         },
-//         {
-//             id: '456',
-//              name: "Jordan",
-//              owner: "Jordan",
-//             email: "jordan@someCompany.com",
-//             orgs: this.fakeOrganizationsLong
-//         }
-//     ];
 export class PodioAccountsComponent implements OnInit {
     @Input() accounts?: IPodioAccountViewModel[];
     @Input() client?: IClientViewModel;
 
-    // material table setup
     displayedColumns: string[] = ["name", "client", "orgs"];
     @ViewChild(MatSortModule) sort: MatSortModule;
     dataSource;
@@ -51,14 +34,11 @@ export class PodioAccountsComponent implements OnInit {
         private dialog: MatDialog
     ) {}
 
-    /** if in client we pass in accts = client.accts
-     * if in all accts we fetch all accts. 
-     */
     ngOnInit() {
         if (this.client) {
-            this.accounts = this.client.accounts; // just accounts for this client 
+            this.accounts = this.client.accounts; 
         } else {
-            this.accounts = this._fakeDataService.fakeAccounts; // all acccounts
+            this.accounts = this._fakeDataService.fakeAccounts;
         }
         this.dataSource = new MatTableDataSource(this.accounts);
     }

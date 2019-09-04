@@ -2,7 +2,6 @@ import { IAuthenticatedSfUser } from "./fake-data.service";
 import { environment } from "src/environments/environment.prod";
 import { Injectable } from "@angular/core";
 
-
 /** IPodioApplicationViewModel
  * we aren't currently showing the fields in the UI. mabye in the future we will be though... */
 export interface IPodioApplicationViewModel {
@@ -437,41 +436,6 @@ export class FakeDataService {
             ],
             history: this.fakeSolutionTasks
         }
-
-        // {
-        //     appId: "123456",
-        //     name: "Custom Solution E",
-        //     versionNumber: "4.0",
-        //     versionName: "Cherokee",
-        //     creationDate: new Date("2013-03-01T01:10:00"),
-        //     lastTaskDate: new Date(),
-        //     description:
-        //         "my roasted pig. item description could be here and truncate after 2 lines or so with ...",
-        //     workspaces: [
-        //         this.fakeWorkspace,
-        //         this.fakeWorkspace,
-        //         this.fakeWorkspace
-        //     ],
-        //     history: this.fakeSolutionTasks
-        // },
-        // {
-        //     appId: "123456",
-        //     name: "Custom Solution F",
-        //     imageUrl:
-        //         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
-        //     versionNumber: "4.0",
-        //     versionName: "Cherokee",
-        //     creationDate: new Date("2013-03-01T01:10:00"),
-        //     lastTaskDate: new Date(),
-        //     description:
-        //         "my description. item description could be here and truncate after 2 lines or so with ...",
-        //     workspaces: [
-        //         this.fakeWorkspace,
-        //         this.fakeWorkspace,
-        //         this.fakeWorkspace
-        //     ],
-        //     history: this.fakeSolutionTasks
-        // }
     ];
 
     fakeInstance1: ISolutionInstanceViewModel = {

@@ -1,5 +1,4 @@
 import { PodioAssetsComponent } from './../podio-assets/podio-assets.component';
-import { AddKnownOrgComponent } from "../add-known-org/add-known-org.component";
 import {
     FakeDataService,
     IClientViewModel

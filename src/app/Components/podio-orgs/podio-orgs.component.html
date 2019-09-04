@@ -1,8 +1,0 @@
-<mat-list>
-  <app-podio-org #childOrgs *ngFor="let org of orgs" 
-  [org]="org" [showDetail]="showDetail"
-  (selected)="onSelected(childOrgs.org,$event)"
-  (selectedSpaces)="onSpaceSelected($event)"
-  (unselectedSpaces)="onSpaceUnselected($event)">
-</app-podio-org>
-</mat-list>

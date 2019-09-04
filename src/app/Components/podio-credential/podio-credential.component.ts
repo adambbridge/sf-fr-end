@@ -23,8 +23,8 @@ export class PodioCredentialComponent implements OnInit {
   createCredential(request: CredentialRequest) {
   }
   onSubmit(f: NgForm) {
-    console.log(f.value);  // { first: '', last: '' }
-    console.log(f.valid);  // false
+    console.log(f.value);  
+    console.log(f.valid);  
   }
   setType(type: string) {
     this.credential.type = type;

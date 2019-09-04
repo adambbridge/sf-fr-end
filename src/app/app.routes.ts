@@ -19,7 +19,6 @@ import { AuthGuard } from "./guards/auth-guard.service";
 import { SolutionComponent } from "./Components/solution/solution.component";
 import { ServiceAuthenticatingComponent } from "./Components/service-authenticating/service-authenticating.component";
 import { PodioSpacesComponent } from "./Components/podio-spaces/podio-spaces.component";
-import { PodioOrgsComponent } from "./Components/podio-orgs/podio-orgs.component";
 import { NewSolutionComponent } from "./Components/new-solution/new-solution.component";
 
 
@@ -64,11 +63,6 @@ export const APP_ROUTES: Routes = [
            {
                path: "spaces",
                component: PodioSpacesComponent,
-               canActivate: []
-           },
-           {
-               path: "orgs",
-               component: PodioOrgsComponent,
                canActivate: []
            },
            {

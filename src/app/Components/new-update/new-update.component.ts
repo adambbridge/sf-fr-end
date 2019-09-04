@@ -9,7 +9,6 @@ import { MAT_DIALOG_DATA } from "@angular/material";
 import { MatDialogRef } from "@angular/material/dialog";
 import { UtilsService } from "./../../services/utils.service";
 
-
 @Component({
     selector: "app-new-update",
     templateUrl: "./new-update.component.html",
@@ -23,7 +22,7 @@ export class NewUpdateComponent implements OnInit {
     spacesAllInOrg;
     spacesCurrentlyUsed;
     spacesToUseForNewVersion;
-    versions;
+    versions = [];
 
     constructor(
         @Inject(MAT_DIALOG_DATA) private _passedData: any,
@@ -49,23 +48,12 @@ export class NewUpdateComponent implements OnInit {
         this.updateForm.controls.solution.setValue(
             this._passedData.solution.name
         );
-
-        this.versions = [
-            {
-                versionNumber: "0.0",
-                versionName: "Yosemite",
-                spaces: [this.fakeDataService.fakeWorkspace1]
-            },
-            {
-                versionNumber: "1.0",
-                versionName: "El Capitan",
-                spaces: [this.fakeDataService.fakeWorkspace2]
-            }
-        ];
+        this.versions = this._getVersionsFromSolutions();
     }
 
     onVersionSelection() {
-        this.spacesCurrentlyUsed = this.updateForm.value.version.spaces;
+        this.spacesCurrentlyUsed = this.spacesAllInOrg;
+        /** TODO only currently used instead of all */
     }
 
     onSpaceSelection(selected) {
@@ -94,6 +82,20 @@ export class NewUpdateComponent implements OnInit {
     /************************
      *  HELPER METHODS
      ************************/
+
+    private _getVersionsFromSolutions() {
+        var solutions = this.fakeDataService.fakeSolutions;
+        var versions = [];
+        solutions.forEach((sol) => {
+            let v = {
+                number: sol.versionNumber,
+                name: sol.versionName
+            };
+            versions.push(v);
+        });
+        console.log(versions);
+        return versions;
+    }
 
     private getConfirmationDialogData() {
         let data = {
