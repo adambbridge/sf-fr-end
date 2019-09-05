@@ -64,6 +64,7 @@ import { PodioAccountsComponent } from './Components/podio-accounts/podio-accoun
 import { PodioAccountDetailComponent } from './Components/podio-account-detail/podio-account-detail.component';
 import { EditClientComponent } from './Components/edit-client/edit-client.component';
 import { WorkspaceNameFilter } from './pipes/filter-pipe.pipe';
+import { NewClientConfirmationComponent } from './Components/new-client-confirmation/new-client-confirmation.component';
 @NgModule({
     declarations: [
         /** Components */
@@ -103,7 +104,8 @@ import { WorkspaceNameFilter } from './pipes/filter-pipe.pipe';
         PodioAccountsComponent,
         PodioAccountDetailComponent,
         EditClientComponent,
-        WorkspaceNameFilter
+        WorkspaceNameFilter,
+        NewClientConfirmationComponent
     ],
     imports: [
         /** Modules */
@@ -131,7 +133,8 @@ import { WorkspaceNameFilter } from './pipes/filter-pipe.pipe';
         NewDeploymentComponent,
         NewPatchComponent,
         AddAccountComponent,
-        ConfirmationDialogComponent
+        ConfirmationDialogComponent,
+        NewClientConfirmationComponent
     ]
 })
 export class AppModule {}

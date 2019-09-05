@@ -17,8 +17,8 @@
                             <mat-form-field class="mr-2 w-75">
                                 <!-- <mat-label>Use workspaces from...</mat-label> -->
                                 <mat-select formControlName="organization" required
-                                    (selectionChange)='onOrgSelection($event)'>
-                                    <mat-option *ngFor="let org of organizations" [value]="org.name">
+                                    (selectionChange)='onOrgSelection($event.value)'>
+                                    <mat-option *ngFor="let org of organizations" [value]="org">
                                         {{org.name}}
                                     </mat-option>
                                 </mat-select>

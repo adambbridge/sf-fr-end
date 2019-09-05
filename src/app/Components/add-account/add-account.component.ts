@@ -1,4 +1,4 @@
-import { UtilsService } from './../../services/utils.service';
+import { UtilsService } from "./../../services/utils.service";
 import {
     FakeDataService,
     IAuthenticatedSfUser
@@ -60,28 +60,22 @@ export class AddAccountComponent implements OnInit {
     }
 
     onSubmit() {
+        /** TODO: SEND REQUEST EMAIL & tell user request was sent */
+        this._utilsService.openSnackBar("Request sent");
+        console.log(this.form.value);
+        console.log(this.form.valid);
+        this.addAccountDialog.close("add");
+
         // logout current sf user from podio. doesnt log them out of sf
         // this.logOutUrl = this.dom.bypassSecurityTrustResourceUrl(
         //     "https://podio.com/logout"
         // );
-
         // setTimeout(() => {
         //     this._authService.loginEnvironmentServiceAccount(
         //         this.form.value.clientId,
         //         this.form.value.accountName
         //     );
         // }, 1000);
-
-        /**
-         * TODO: SEND REQUEST EMAIL .... from a service?
-         * open snackbar once sent "Request sent"
-         */
-         this._utilsService.openSnackBar("Request sent");
-        console.log(this.form.value);
-        console.log(this.form.valid);
-
-    
-        this.addAccountDialog.close("add");
     }
 
     /** ======================

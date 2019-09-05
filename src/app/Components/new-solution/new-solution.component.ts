@@ -85,15 +85,15 @@ export class NewSolutionComponent implements OnInit {
         this.viewsInitialized.emit();
     }
 
-    onOrgSelection(userSelectedOrg) {
-        let chosenOrg = this.organizations.find(
-            (org) => org.name === userSelectedOrg.value
-        );
-        this._podioService.GetWorkspacesInOrg(chosenOrg.orgId).subscribe({
+    onOrgSelection(org) {
+        // let chosenOrg = this.organizations.find(
+        //     (org) => org.name === org.value
+        // );
+        this._podioService.GetWorkspacesInOrg(org.orgId).subscribe({
             next: (sa) => {
-                chosenOrg = {
-                    orgId: chosenOrg.orgId,
-                    name: chosenOrg.name,
+                org = {
+                    orgId: org.orgId,
+                    name: org.name,
                     owner: "fake owner",
                     spaces: sa.map((s) => {
                         return {
@@ -108,11 +108,11 @@ export class NewSolutionComponent implements OnInit {
                 };
                 this._clearFormArray(this.workspaceControls);
                 this.selectedWorkspaces = [];
-                this.workspaces = chosenOrg.spaces;
+                this.workspaces = org.spaces;
             }
         });
         this._podioService.refresh();
-        console.log(this.workspaces)
+        console.log(this.workspaces);
     }
 
     onSpaceSelection(selected) {
@@ -192,11 +192,17 @@ export class NewSolutionComponent implements OnInit {
                 console.log(this.organizations);
                 console.log(this.newSolutionForm.get("organization"));
 
-                // this.newSolutionForm
-                //     .get("organization")
-                //     .setValue(this.organizations[0].name);
+                this._setOrgSelectToFirstOrg();
             }
         });
+    }
+
+    private _setOrgSelectToFirstOrg() {
+        var firstOrg = this.organizations[0];
+        this.newSolutionForm
+            .get("organization")
+            .setValue(firstOrg.name);
+        this.onOrgSelection(firstOrg);
     }
 
     private _createNewSolutionForm() {
