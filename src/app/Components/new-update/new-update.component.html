@@ -18,16 +18,15 @@
 
     <mat-expansion-panel *ngIf="spacesCurrentlyUsed">
         <mat-expansion-panel-header>
-            <mat-panel-title>Edit included workspaces (optional)</mat-panel-title>
+            <mat-panel-title>
+                Edit included workspaces (optional)
+                <mat-icon class="text-light pl-2" matTooltip="You can edit the workspaces included in a new version. If you use the edited version to run a Patch, it will add new workspaces but will not remove any existing workspaces. In other words, if you Patch a deployed solution with a version that includes additional spaces those spaces will be added to deployed solution. If you Patch with a version that does not include spaces that are in the deployed version the Patch will NOT remove those spaces.">
+                    help_outline
+                </mat-icon>
+            </mat-panel-title>
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
-            <div class="mt-2">
-                <mat-label>
-                    <span>Select to add spaces. Deselect spaces you do not want included in the new version. If you
-                        Patch a solution with a version that does not include a space in the current version, it will
-                        not delete that space, it will leave it unchanged. <a href="">Learn more <mat-icon
-                                class="text-small">open_in_new</mat-icon></a></span>
-                </mat-label>
+            <div class="mt-2"> 
                 <app-podio-spaces [workspaces]="spacesAllInOrg" [preselectedSpaces]="spacesCurrentlyUsed"
                     (selectedSpaces)="onSpaceSelection($event)">
                 </app-podio-spaces>

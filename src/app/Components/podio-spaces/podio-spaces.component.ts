@@ -13,6 +13,8 @@ import {
 } from "@angular/core";
 import { PodioService } from "../../services/podio.service";
 import { MatListOption } from '@angular/material';
+import { WorkspaceNameFilter } from "../../pipes/filter-pipe.pipe";
+
 
 @Component({
     selector: "app-podio-spaces",

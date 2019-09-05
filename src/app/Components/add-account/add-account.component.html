@@ -17,25 +17,24 @@
         </mat-form-field>
     </div>
 
+    <div>
+        <p>A request for account admin credentials will be sent to {{client.email}}.</p>
+        <p class="text-clickable" (click)="alternativeEmail = true">Send request to a different email</p>
+        <mat-form-field *ngIf='alternativeEmail' class='w-100'>
+            <mat-label>Enter alternative email</mat-label>
+            <input type="email" matInput formControlName="email">
+        </mat-form-field>
+
+        <p>When client submits credentials, Saassafras will gain access to account.</p>
+        <p>We'll email you when this occurs.</p>
+    </div>
+
     <mat-form-field class='w-100'>
         <mat-label>What do you want to call this account?</mat-label>
         <input type="text" matInput formControlName="accountName">
     </mat-form-field>
 
-    <div *ngIf="accountName">
-        <p>A request for credentials will be sent to {{client.email}}.</p>
-        <p>Once credentials have been entered, Saassafras will have access to the account. You will receive an email
-            when this
-            occurs.</p>
-        <p class="text-clickable" (click)="alternativeEmail = true">Send request to a different email</p>
-
-        <mat-form-field *ngIf='alternativeEmail' class='w-100'>
-            <mat-label>Enter alternative email</mat-label>
-            <input type="email" matInput formControlName="email">
-        </mat-form-field>
-    </div>
-
-    <button mat-raised-button class='mr-2 mt-2' (click)="onCancelClick()">Cancel</button>
+    <button mat-raised-button class='mr-2 mt-3' (click)="onCancelClick()">Cancel</button>
     <button mat-raised-button type="submit" (click)="onSubmit()" [disabled]="!form.valid">Send Request</button>
 
 </form>

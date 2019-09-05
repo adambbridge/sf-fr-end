@@ -63,6 +63,7 @@ import { AddAccountComponent } from './Components/add-account/add-account.compon
 import { PodioAccountsComponent } from './Components/podio-accounts/podio-accounts.component';
 import { PodioAccountDetailComponent } from './Components/podio-account-detail/podio-account-detail.component';
 import { EditClientComponent } from './Components/edit-client/edit-client.component';
+import { WorkspaceNameFilter } from './pipes/filter-pipe.pipe';
 @NgModule({
     declarations: [
         /** Components */
@@ -101,7 +102,8 @@ import { EditClientComponent } from './Components/edit-client/edit-client.compon
         AddAccountComponent,
         PodioAccountsComponent,
         PodioAccountDetailComponent,
-        EditClientComponent
+        EditClientComponent,
+        WorkspaceNameFilter
     ],
     imports: [
         /** Modules */
@@ -122,7 +124,7 @@ import { EditClientComponent } from './Components/edit-client/edit-client.compon
         MatDatepickerModule,
         NgxMaterialTimepickerModule
     ],
-    providers: [AuthGuard, MatDatepickerModule],
+    providers: [AuthGuard, MatDatepickerModule, WorkspaceNameFilter],
     bootstrap: [AppComponent],
     entryComponents: [
         NewUpdateComponent,

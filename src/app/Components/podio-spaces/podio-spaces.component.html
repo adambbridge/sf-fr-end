@@ -1,5 +1,11 @@
-<mat-selection-list #allSpacesSelectionList [disabled]='disableSelection' (selectionChange)="onSpaceSelection()" class='mt-2 mb-2' [compareWith]="compareFn">
-    <mat-list-option *ngFor="let space of workspaces" [value]="space" class='mat-list-option-multi-line' [selected]='space.checked'
+<!-- FILTER -->
+<mat-form-field class="w-50 mt-2 d-block" *ngIf="workspaces.length > 4">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput [(ngModel)]="searchString" placeholder="filter workspaces">
+</mat-form-field>
+
+<mat-selection-list #allSpacesSelectionList [disabled]='disableSelection' (selectionChange)="onSpaceSelection()" class='mt-2 mb-4' [compareWith]="compareFn">
+    <mat-list-option *ngFor="let space of (workspaces | workspaceNameFilter: searchString)" [value]="space" class='mat-list-option-multi-line' [selected]='space.checked'
         [ngClass]="{'checkbox-hidden': disableSelection}" [checkboxPosition]="before">
         <div class='mb-1'>{{space.workspaceName}}</div>
         <div class='text-hint text-small'>
