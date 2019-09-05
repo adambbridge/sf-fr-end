@@ -28,6 +28,7 @@ export class PodioAccountsComponent implements OnInit {
     displayedColumns: string[] = ["name", "client", "orgs"];
     @ViewChild(MatSortModule) sort: MatSortModule;
     dataSource;
+    noClientAcctsMssg: boolean = true;
 
     constructor(
         private _fakeDataService: FakeDataService,

@@ -31,13 +31,14 @@ export class NewClientComponent implements OnInit {
         console.log("form value:", this.newClientForm.value);
         console.log("form value:", this.newClientForm.valid);
 
-        let newClientsArray = this.fakeDataService.newClient(
+        var newClient = this.fakeDataService.newClient(
             this.newClientForm.value
         );
+        console.log(newClient)
 
         // on success
         this._utilsService.openSnackBar("New client added");
-        this.router.navigate(["/clients"]);
+        this.router.navigate(["/clients/", newClient.id]);
     }
 
     /*=========================

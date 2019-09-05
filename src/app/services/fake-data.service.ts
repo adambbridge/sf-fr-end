@@ -603,7 +603,7 @@ export class FakeDataService {
         savedClient.identifier = "bar";
 
         this.fakeClients.unshift(savedClient);
-        return this.fakeClients;
+        return savedClient;
     }
 
     /** finds client by id and updates any props that changed */
