@@ -28,6 +28,7 @@ export class PodioSpacesComponent implements OnInit {
     private _selectedSpaces;
     @Output() selectedSpaces = new EventEmitter<IPodioSpaceViewModel>();
     @ViewChild("allSpacesSelectionList") allSpacesSelectionList;
+    searchString: string = "";
 
     constructor(private _podioService: PodioService) {}
 

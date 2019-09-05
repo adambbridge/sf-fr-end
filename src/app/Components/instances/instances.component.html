@@ -1,5 +1,5 @@
 <div class="instances-component">
-    <div class="d-flex justify-content-between align-items-center" *ngIf="showSearchBox">
+    <div class="d-flex justify-content-between align-items-center" *ngIf="showSearchBox || instances.length >=  10">
         <!-- FILTER -->
         <mat-form-field class="w-50">
             <mat-icon matPrefix>search</mat-icon>

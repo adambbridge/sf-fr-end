@@ -317,6 +317,10 @@ mat-card.card-table-container {
     text-align: left; */
     margin-bottom: -10px;
 }
+.max-h-300-scroll {
+    max-height: 300px;
+    overflow-y: scroll;
+}
 .mat-expansion-panel-content .mat-form-field {
     padding-left: 16px;
 }
@@ -484,6 +488,10 @@ table th.mat-header-cell:first-of-type {
 } */
 .relative {
     position: relative;
+}
+
+.mat-dialog-container .mat-dialog-actions {
+    margin-bottom: -12px;
 }
 
 /* =====================

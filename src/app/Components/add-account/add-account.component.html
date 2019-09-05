@@ -19,7 +19,7 @@
 
     <div>
         <p>A request for account admin credentials will be sent to {{client.email}}.</p>
-        <p class="text-clickable" (click)="alternativeEmail = true">Send request to a different email</p>
+        <p class="text-clickable" (click)="alternativeEmail = 'true'">Send request to a different email</p>
         <mat-form-field *ngIf='alternativeEmail' class='w-100'>
             <mat-label>Enter alternative email</mat-label>
             <input type="email" matInput formControlName="email">

@@ -2,48 +2,55 @@
 
 <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
 
-    <mat-form-field class="w-100 d-none">
-        <mat-label>Solution</mat-label>
-        <input type="text" matInput readonly formControlName="solution">
-    </mat-form-field>
+    <div mat-dialog-content>
 
-    <mat-form-field class="w-100">
-        <mat-label>Which version do you want to update?</mat-label>
-        <mat-select formControlName="version" (selectionChange)="onVersionSelection()">
-            <mat-option *ngFor="let v of versions" [value]="v.number">
-                {{v.number}} <span *ngIf="v.name">{{v.name}}</span>
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+        <mat-form-field class="w-100 d-none">
+            <mat-label>Solution</mat-label>
+            <input type="text" matInput readonly formControlName="solution">
+        </mat-form-field>
 
-    <mat-expansion-panel *ngIf="spacesCurrentlyUsed">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                Edit included workspaces (optional)
-                <mat-icon class="text-light pl-2" matTooltip="You can edit the workspaces included in a new version. If you use the edited version to run a Patch, it will add new workspaces but will not remove any existing workspaces. In other words, if you Patch a deployed solution with a version that includes additional spaces those spaces will be added to deployed solution. If you Patch with a version that does not include spaces that are in the deployed version the Patch will NOT remove those spaces.">
-                    help_outline
-                </mat-icon>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <ng-template matExpansionPanelContent>
-            <div class="mt-2"> 
-                <app-podio-spaces [workspaces]="spacesAllInOrg" [preselectedSpaces]="spacesCurrentlyUsed"
-                    (selectedSpaces)="onSpaceSelection($event)">
-                </app-podio-spaces>
-            </div>
-        </ng-template>
-    </mat-expansion-panel>
+        <mat-form-field class="w-100">
+            <mat-label>Which version do you want to update?</mat-label>
+            <mat-select formControlName="version" (selectionChange)="onVersionSelection()">
+                <mat-option *ngFor="let v of versions" [value]="v.number">
+                    {{v.number}} <span *ngIf="v.name">{{v.name}}</span>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <mat-form-field class="w-100 mt-2">
-        <input matInput formControlName="name"
-            placeholder="Add optional user friendly name for new solution version (ie 'Yosemite', 'El Capitan' etc.)">
-    </mat-form-field>
+        <mat-expansion-panel *ngIf="spacesCurrentlyUsed">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Edit included workspaces (optional)
+                    <mat-icon class="text-light pl-2"
+                        matTooltip="You can edit the workspaces included in a new version. If you use the edited version to run a Patch, it will add new workspaces but will not remove any existing workspaces. In other words, if you Patch a deployed solution with a version that includes additional spaces those spaces will be added to deployed solution. If you Patch with a version that does not include spaces that are in the deployed version the Patch will NOT remove those spaces.">
+                        help_outline
+                    </mat-icon>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+                <div class="mt-2">
+                    <app-podio-spaces [workspaces]="spacesAllInOrg" [preselectedSpaces]="spacesCurrentlyUsed"
+                        (selectedSpaces)="onSpaceSelection($event)">
+                    </app-podio-spaces>
+                </div>
+            </ng-template>
+        </mat-expansion-panel>
 
-    <mat-form-field class="w-100">
-        <textarea matInput formControlName="notes" placeholder="Notes (optional)"></textarea>
-    </mat-form-field>
+        <mat-form-field class="w-100 mt-2">
+            <input matInput formControlName="name"
+                placeholder="Add optional user friendly name for new solution version (ie 'Yosemite', 'El Capitan' etc.)">
+        </mat-form-field>
 
-    <button mat-raised-button class='mr-2' type="button" (click)="onCancelClick()">Cancel</button>
-    <button mat-raised-button type="submit" [disabled]="!updateForm.valid">Run Update</button>
+        <mat-form-field class="w-100">
+            <textarea matInput formControlName="notes" placeholder="Notes (optional)"></textarea>
+        </mat-form-field>
+
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-raised-button class='mr-2' type="button" (click)="onCancelClick()">Cancel</button>
+        <button mat-raised-button type="submit" [disabled]="!updateForm.valid">Run Update</button>
+    </div>
 
 </form>
