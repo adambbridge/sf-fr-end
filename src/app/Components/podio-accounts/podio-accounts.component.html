@@ -15,10 +15,10 @@
                 </mat-form-field>
 
                 <!-- IF NO ACCOUNTS -->
-                <!-- <span *ngIf="!accounts">
-                    Add an account so you can copy client workspaces or deploy a solution to client organization(s). 
-                    <mat-icon matTooltip="Send account access request emails to clients to gain access to Podio organizations in the account. This allows you to create solutions from their workspaces and/or deploy any solution(s) into any of their organizations.">help_outline</mat-icon>
-                </span> -->
+                <span *ngIf="!accounts">
+                    Add an account so you can manage client Podio assets.
+                    <mat-icon class="text-light" matTooltip="TODO add help content here...">help_outline</mat-icon>
+                </span>
 
                 <span>
                     <button mat-raised-button class="bg-green" (click)="onAddAccountClick()">Add Podio Account</button>
@@ -26,18 +26,6 @@
 
             </div>
 
-            <!-- IF NO ACCOUNTS -->
-
-            <mat-card *ngIf="!accounts && noClientAcctsMssg" class='mt-3 mb-3 mat-elevation-z0'>
-                <mat-card-subtitle>
-                    You haven't added any accounts for this client. Add an account to gain access to client Podio
-                    organizations.
-                    This enables you to copy their workspaces and/or deploy solutions into their orgs.
-                </mat-card-subtitle>
-                <mat-card-actions>
-                    <button type="button" mat-button (click)="noClientAcctsMssg = false">DISMISS</button>
-                </mat-card-actions>
-            </mat-card>
 
             <!-- TABLE  -->
             <div *ngIf="accounts" class="table-container mat-elevation-z4">

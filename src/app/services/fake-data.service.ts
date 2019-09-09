@@ -533,6 +533,15 @@ export class FakeDataService {
         this.fakeOrganization3
     ];
 
+    fakeOrganizations2: Array<IPodioOrganizationViewModel> = [
+        this.fakeOrganization2,
+        this.fakeOrganization3
+    ];
+
+    fakeOrganizations3: Array<IPodioOrganizationViewModel> = [
+        this.fakeOrganization1
+    ];
+
     fakeOrganizationsLong: Array<IPodioOrganizationViewModel> = [
         this.fakeOrganization1,
         this.fakeOrganization2,
@@ -560,14 +569,14 @@ export class FakeDataService {
             name: "Gil Roberts",
             owner: "Gil Roberts",
             email: "gil@brickbridgeconsulting.com",
-            orgs: this.fakeOrganizations
+            orgs: this.fakeOrganizations3
         },
         {
             id: "456",
             name: "Jordan",
             owner: "Jordan",
             email: "jordan@someCompany.com",
-            orgs: this.fakeOrganizationsLong
+            orgs: this.fakeOrganizations2
         }
     ];
 

@@ -51,7 +51,7 @@ export class NewSolutionComponent implements OnInit {
     newSolutionForm: FormGroup;
     submitted = false;
     @ViewChild("spaces") spaces;
-    preselectedSpaces: boolean = false;
+preselectedSpaces: boolean = false;
     showInDialog: boolean = false;
     newSolutionDialog? = null;
     @Input() dashBoardVersion: boolean = false;
@@ -86,9 +86,8 @@ export class NewSolutionComponent implements OnInit {
     }
 
     onOrgSelection(org) {
-        // let chosenOrg = this.organizations.find(
-        //     (org) => org.name === org.value
-        // );
+        this.selectedWorkspaces = [];
+
         this._podioService.GetWorkspacesInOrg(org.orgId).subscribe({
             next: (sa) => {
                 org = {
@@ -106,13 +105,13 @@ export class NewSolutionComponent implements OnInit {
                         };
                     })
                 };
-                this._clearFormArray(this.workspaceControls);
-                this.selectedWorkspaces = [];
-                this.workspaces = org.spaces;
+                // this._clearFormArray(this.workspaceControls);
+
+                // this.workspaces = org.spaces;
+                // console.log(this.workspaces);
             }
         });
         this._podioService.refresh();
-        console.log(this.workspaces);
     }
 
     onSpaceSelection(selected) {
@@ -190,19 +189,21 @@ export class NewSolutionComponent implements OnInit {
                 });
 
                 console.log(this.organizations);
-                console.log(this.newSolutionForm.get("organization"));
+                console.log(this.newSolutionForm.get("organization").value);
 
-                this._setOrgSelectToFirstOrg();
+                if (!this.orgControl.value) {
+                    this.orgControl.setValue(this.organizations[0]);
+                    this.onOrgSelection(this.organizations[0]);
+                    console.log(this.newSolutionForm.valueChanges);
+                }
             }
         });
     }
 
-    private _setOrgSelectToFirstOrg() {
-        var firstOrg = this.organizations[0];
-        this.newSolutionForm
-            .get("organization")
-            .setValue(firstOrg.name);
-        this.onOrgSelection(firstOrg);
+    private _selectFirstOrg() {
+        this.orgControl.setValue(this.organizations[0]);
+        console.log(this.newSolutionForm.value);
+        this.onOrgSelection(this.organizations[0]);
     }
 
     private _createNewSolutionForm() {
@@ -219,6 +220,10 @@ export class NewSolutionComponent implements OnInit {
             formArray.removeAt(0);
         }
     };
+
+    get orgControl() {
+        return this.newSolutionForm.get("organization");
+    }
 
     get workspaceControls() {
         return this.newSolutionForm.get("workspaceControls") as FormArray;

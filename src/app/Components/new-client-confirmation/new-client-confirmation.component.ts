@@ -31,7 +31,9 @@ export class NewClientConfirmationComponent implements OnInit {
     onSubmit() {
         this.submitted = true;
         const addAccountDialog = this.dialog.open(AddAccountComponent, {
-            data: this.client
+            data: {
+                client: this.client
+            }
         });
 
         this.confirmDialog.close();

@@ -44,7 +44,7 @@
 
                 <div class='mt-4'>
                     <button routerlink="/clients" mat-raised-button class="mr-2">Cancel</button>
-                    <button type="submit" mat-raised-button *ngIf="!submitted"
+                    <button type="submit" class="bg-green" mat-raised-button *ngIf="!submitted"
                         [disabled]="newClientForm.status === 'INVALID'">Create</button>
                 </div>
 

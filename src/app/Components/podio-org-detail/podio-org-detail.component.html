@@ -44,7 +44,7 @@
                     <app-podio-spaces [workspaces]='org.spaces' (selectedSpaces)="onSpaceSelection($event)"
                         [disableSelection]='false'></app-podio-spaces>
                     <button mat-raised-button (click)="onCreateSolClick()"
-                        [disabled]="!selectedWorkspaces.length">Create Solution from Selected</button>
+                        [disabled]="!selectedWorkspaces.length" class='bg-green'>Create Solution from Selected</button>
                 </ng-template>
             </mat-expansion-panel>
 
