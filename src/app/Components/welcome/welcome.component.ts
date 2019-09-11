@@ -1,11 +1,14 @@
+import { OnboardingSlideshowComponent } from "./../onboarding-slideshow/onboarding-slideshow.component";
 import { SolutionHistoryComponent } from "src/app/Components/solution-history/solution-history.component";
 import {
     FakeDataService,
-    ISolutionViewModel
+    ISolutionViewModel,
+    IPodioAccountViewModel
 } from "src/app/services/fake-data.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import * as introJs from "intro.js/intro.js";
+import { MatDialog } from "@angular/material";
 
 @Component({
     selector: "app-welcome",
@@ -17,26 +20,46 @@ export class WelcomeComponent implements OnInit {
     videoUrl: string = "https://www.youtube.com/embed/EmrTeRgpchs";
     videoUrlSafe;
     solutions: ISolutionViewModel[];
+    accounts: IPodioAccountViewModel[];
     recentTasks = [];
     before: string = "before";
     private intro = introJs();
 
     constructor(
         private dom: DomSanitizer,
-        private fakeDataService: FakeDataService
+        private fakeDataService: FakeDataService,
+        private dialog: MatDialog
     ) {
         this.videoUrlSafe = dom.bypassSecurityTrustResourceUrl(this.videoUrl);
     }
 
     ngOnInit() {
         this.solutions = this.fakeDataService.fakeSolutions;
+        this.accounts = this.fakeDataService.fakeAccounts;
+        this.launchOnboardingSlideshow();
         this._setRecentTasks(7);
+    }
+
+    launchOnboardingSlideshow() {
+        const dialogRef = this.dialog.open(OnboardingSlideshowComponent, {
+            data: {
+                accounts: this.accounts
+            }
+        });
+        dialogRef.afterClosed().subscribe((event) => {
+            if (event === "tour") {
+                this.intro.start();
+            }
+        });
     }
 
     /** called by event emission from child component */
     initIntro() {
         console.log("child view initialized new solution that is. ");
         var tipsArray = [
+            {
+                intro: "Welcome to the mini tour. We'll keep this brief!"
+            },
             {
                 element: document.querySelector("#podio-accounts-card"),
                 intro: "We've loaded your Orgs and workspaces."
@@ -59,6 +82,18 @@ export class WelcomeComponent implements OnInit {
                     "Check out our videos or help section anytime to learn more. Thanks for taking the mini-tour!"
             }
         ];
+        var  hintsArray = [
+            { 
+                hint: "First hint", 
+                element: "#new-feature" 
+            },
+            {
+                hint: "Second hint",
+                element: "#new-button",
+                hintAnimation: false
+            }
+        ];
+       
         this.intro.setOptions({
             skipLabel: "Exit mini tour",
             overlayOpacity: 0.6,
@@ -68,10 +103,9 @@ export class WelcomeComponent implements OnInit {
             tooltipPosition: "bottom",
             tooltipClass: "", // add a css class to tooltip
             keyboardNavigation: true,
-            steps: tipsArray
+            steps: tipsArray,
+            hints: hintsArray
         });
-
-        this.intro.start();
     }
 
     private _setRecentTasks(days) {

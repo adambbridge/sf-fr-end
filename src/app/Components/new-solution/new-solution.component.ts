@@ -51,7 +51,7 @@ export class NewSolutionComponent implements OnInit {
     newSolutionForm: FormGroup;
     submitted = false;
     @ViewChild("spaces") spaces;
-preselectedSpaces: boolean = false;
+    preselectedSpaces: boolean = false;
     showInDialog: boolean = false;
     newSolutionDialog? = null;
     @Input() dashBoardVersion: boolean = false;
@@ -85,30 +85,26 @@ preselectedSpaces: boolean = false;
         this.viewsInitialized.emit();
     }
 
-    onOrgSelection(org) {
+    /** get workspaces of selected org */
+    onOrgSelection() {
+        console.log('on org sel, org is:', this.orgControl.value);
         this.selectedWorkspaces = [];
+        this.workspaces = [];
+        var orgId = this.orgControl.value.orgId;
 
-        this._podioService.GetWorkspacesInOrg(org.orgId).subscribe({
+        this._podioService.GetWorkspacesInOrg(orgId).subscribe({
             next: (sa) => {
-                org = {
-                    orgId: org.orgId,
-                    name: org.name,
-                    owner: "fake owner",
-                    spaces: sa.map((s) => {
-                        return {
-                            workspaceName: s.name,
-                            workspaceId: s.space_id,
-                            description: s.description,
-                            checked: false,
-                            podioSpace: null,
-                            apps: null
-                        };
-                    })
-                };
-                // this._clearFormArray(this.workspaceControls);
-
-                // this.workspaces = org.spaces;
-                // console.log(this.workspaces);
+                this.workspaces = sa.map((s) => {
+                    return {
+                        workspaceName: s.name,
+                        workspaceId: s.space_id,
+                        description: s.description,
+                        checked: false,
+                        podioSpace: null,
+                        apps: null
+                    };
+                });
+                console.log('spaces for org are', this.workspaces);
             }
         });
         this._podioService.refresh();
@@ -188,22 +184,12 @@ preselectedSpaces: boolean = false;
                     };
                 });
 
-                console.log(this.organizations);
-                console.log(this.newSolutionForm.get("organization").value);
-
                 if (!this.orgControl.value) {
                     this.orgControl.setValue(this.organizations[0]);
-                    this.onOrgSelection(this.organizations[0]);
-                    console.log(this.newSolutionForm.valueChanges);
+                    this.onOrgSelection();
                 }
             }
         });
-    }
-
-    private _selectFirstOrg() {
-        this.orgControl.setValue(this.organizations[0]);
-        console.log(this.newSolutionForm.value);
-        this.onOrgSelection(this.organizations[0]);
     }
 
     private _createNewSolutionForm() {

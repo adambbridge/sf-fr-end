@@ -510,7 +510,6 @@ export class FakeDataService {
         orgId: 2,
         owner: "Zoller Swanson",
         spaces: [
-            ,
             this.fakeWorkspace1,
             this.fakeWorkspace2,
             this.fakeWorkspace3,

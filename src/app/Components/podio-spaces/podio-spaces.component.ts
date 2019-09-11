@@ -25,6 +25,8 @@ export class PodioSpacesComponent implements OnInit {
     @Input() workspaces: IPodioSpaceViewModel[];
     @Input() preselectedSpaces?: IPodioSpaceViewModel[];
     @Input() disableSelection?: boolean = false; // hides checkboxes
+    @Input() hideApps?: boolean = false;
+    @Input() hideFilter?: boolean = false;
     private _selectedSpaces;
     @Output() selectedSpaces = new EventEmitter<IPodioSpaceViewModel>();
     @ViewChild("allSpacesSelectionList") allSpacesSelectionList;
@@ -36,13 +38,13 @@ export class PodioSpacesComponent implements OnInit {
         console.log(this.allSpacesSelectionList);
 
         if (this.preselectedSpaces) {
-          this.preselectedSpaces.forEach(s => {
-              this.workspaces.forEach(w => {
-                  if (w.workspaceId === s.workspaceId) {
-                    w.checked = true;
-                  }
-              })
-          })
+            this.preselectedSpaces.forEach((s) => {
+                this.workspaces.forEach((w) => {
+                    if (w.workspaceId === s.workspaceId) {
+                        w.checked = true;
+                    }
+                });
+            });
         }
     }
 
@@ -51,10 +53,12 @@ export class PodioSpacesComponent implements OnInit {
             (option) => option.value
         );
         this.selectedSpaces.emit(this._selectedSpaces);
-        console.log(this._selectedSpaces)
+        console.log(this._selectedSpaces);
     }
 
     compareFn(user1: IPodioSpaceViewModel, user2: IPodioSpaceViewModel) {
-        return user1 && user2 ? user1.workspaceId === user2.workspaceId : user1 === user2;
+        return user1 && user2
+            ? user1.workspaceId === user2.workspaceId
+            : user1 === user2;
     }
 }

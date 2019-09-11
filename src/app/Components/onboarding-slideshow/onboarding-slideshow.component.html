@@ -1,0 +1,117 @@
+<div class='w-100 pb-3'>
+    <h1>Welcome USER NAME!</h1>
+
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <h3>We've Loaded your Podio Organizations</h3>
+            <!-- <mat-card>
+                <mat-list>
+
+                    <mat-list-item *ngFor="let org of orgs" routerLink="podio/123/org/{{org.orgId}}"
+                        (click)="closeDialog()">
+                        <img class="sf-mat-icon mr-2" alt="podio logo" src="assets/podio-logo-png-transparent.png" />
+                        <h4 mat-line class="text-clickable">{{org.name}}</h4>
+                        <mat-divider></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card> -->
+
+            <!-- ORGANIZATIONS -->
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let org of orgs">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <img class="sf-mat-icon mr-2" alt="podio logo"
+                                src="assets/podio-logo-png-transparent.png" />
+                            {{org.name}}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                        <!-- WORKSPACES -->
+                        <app-podio-spaces [workspaces]='org.spaces' [hideApps]="true" [hideFilter]="true"  [disableSelection]='true'>
+                        </app-podio-spaces>
+                    </ng-template>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <h3>What next?</h3>
+            <mat-accordion>
+
+                <!-- CREATE SOLUTION -->
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Create my first SaaSafras Solution
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                        <p>Pick workspaces you'd like to include. Give it a name and description and press go. It's that
+                            simple. You'll be able to deploy your Solution to any Podio org you have access to.</p>
+                        <button class='bg-green' mat-raised-button>Create Solution</button>
+                    </ng-template>
+
+                </mat-expansion-panel>
+
+                <!-- ADD ACCOUNT -->
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Add another Podio Account
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                        <p>Gain access to additional Podio organizations so you can deploy Solutions to them or create a
+                            Solution from their workspaces.
+                        </p>
+                        <button class="w-75 mb-2" mat-raised-button routerLink="podio" (click)="closeDialog()">Add
+                            another one of my Accounts</button>
+                        <button class='bg-green w-75' mat-raised-button routerLink="clients/new"
+                            (click)="closeDialog()">Add Client Account</button>
+                    </ng-template>
+
+                </mat-expansion-panel>
+
+                <!-- INTERFACE TOUR -->
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            90 Second SaaSafras Tour
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                        <p>Navigate around with the help of tooltips. We'll point out key features and keep it short.
+                        </p>
+                        <button class='bg-green' mat-raised-button (click)="closeDialog('tour')">Start Tour</button>
+                    </ng-template>
+
+                </mat-expansion-panel>
+
+                <!-- VIDEO TUTORIAL -->
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Video Tutorial (10 minute)
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <ng-template matExpansionPanelContent>
+                        <p>Understand the tools at your disposal, how to use them, plus get recipes and best practices.
+                        </p>
+                        <button class='bg-green' mat-raised-button>
+                            <mat-icon>play_circle_outline</mat-icon>
+                            Play Tutorial
+                        </button>
+                    </ng-template>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+
+</div>
