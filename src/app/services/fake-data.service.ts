@@ -363,17 +363,34 @@ export class FakeDataService {
     };
 
     fakeSolutions: Array<ISolutionViewModel> = [
+        // {
+        //     appId: "123456",
+        //     name: "Jira Dreams of Sushi",
+        //     imageUrl:
+        //         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
+        //     versionNumber: "1.0",
+        //     versionName: "Sierra",
+        //     creationDate: new Date("2013-03-01T01:10:00"),
+        //     lastTaskDate: new Date(),
+        //     description:
+        //         "my lollipop. item description could be here and truncate after 2 lines or so with ...",
+        //     workspaces: [
+        //         this.fakeWorkspace1,
+        //         this.fakeWorkspace2,
+        //         this.fakeWorkspace3
+        //     ],
+        //     history: this.fakeSolutionTasks
+        // },
         {
-            appId: "123456",
-            name: "Jira Dreams of Sushi",
+            appId: "Jello",
+            name: "Fastbooks",
             imageUrl:
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
             versionNumber: "1.0",
-            versionName: "Sierra",
+            versionName: "Nissan",
             creationDate: new Date("2013-03-01T01:10:00"),
             lastTaskDate: new Date(),
-            description:
-                "my lollipop. item description could be here and truncate after 2 lines or so with ...",
+            description: "Customized accounting software",
             workspaces: [
                 this.fakeWorkspace1,
                 this.fakeWorkspace2,
@@ -390,26 +407,7 @@ export class FakeDataService {
             versionName: "Whitney",
             creationDate: new Date("2013-03-01T01:10:00"),
             lastTaskDate: new Date(),
-            description:
-                "my ice cream. item description could be here and truncate after 2 lines or so with ...",
-            workspaces: [
-                this.fakeWorkspace1,
-                this.fakeWorkspace2,
-                this.fakeWorkspace3
-            ],
-            history: this.fakeSolutionTasks
-        },
-        {
-            appId: "Jello",
-            name: "Fastbooks",
-            imageUrl:
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSCSkRHFDAxTdecz0FQa2qZWiu4PUogHowScKVMvIFmoWanolsHg",
-            versionNumber: "1.0",
-            versionName: "Nissan",
-            creationDate: new Date("2013-03-01T01:10:00"),
-            lastTaskDate: new Date(),
-            description:
-                "my burger. item description could be here and truncate after 2 lines or so with ...",
+            description: "CRM software tailored to your industry",
             workspaces: [
                 this.fakeWorkspace1,
                 this.fakeWorkspace2,
@@ -424,8 +422,7 @@ export class FakeDataService {
             versionName: "Yellowstone",
             creationDate: new Date("2013-03-01T01:10:00"),
             lastTaskDate: new Date(),
-            description:
-                "my pizza. item description could be here and truncate after 2 lines or so with ...",
+            description: "Customized legal software.",
             workspaces: [
                 this.fakeWorkspace1,
                 this.fakeWorkspace2,

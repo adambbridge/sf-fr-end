@@ -13,6 +13,7 @@ import { Solution } from 'src/model/saasafras/solution';
 })
 export class SolutionTasksComponent implements OnInit {
     @Input() solution;
+    helpMenuContent = 'helo woild';
 
     constructor(
         private dialog: MatDialog

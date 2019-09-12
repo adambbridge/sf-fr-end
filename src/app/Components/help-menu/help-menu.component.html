@@ -1,0 +1,33 @@
+<button class="text-hint hover-color" mat-icon-button [matMenuTriggerFor]="helpMenu"
+    aria-label="Example icon-button with a menu">
+    <mat-icon>help_outline</mat-icon>
+</button>
+<mat-menu #helpMenu="matMenu" (click)="$event.stopPropagation();">
+    <div class="help-menu max-h-400-scroll " (click)="$event.stopPropagation();">
+        <!-- <h3>Solution Deployment</h3> -->
+
+        <div *ngFor="let item of content.explanations">
+            <p class='text-small mb-1'>{{item.heading}}</p>
+            <p class='text-hint mt-1'>{{item.paragraph}}</p>
+        </div>
+
+        <mat-divider class='pt-1'></mat-divider>
+
+        <div *ngFor="let video of content.videos">
+            <p>
+                <a href="" class='text-small'>
+                    <mat-icon class='pr-2'>play_circle_outline</mat-icon>
+                    {{video.title}}
+                </a>
+            </p>
+        </div>
+
+        <p><a href="" class='text-small'>
+                <mat-icon class='pr-2'>help_outline</mat-icon>
+                TODO: ADD HELP DOCS LINK...
+            </a>
+        </p>
+
+    </div>
+
+</mat-menu>

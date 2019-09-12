@@ -1,7 +1,10 @@
-<h1 mat-dialog-title>
-    Add Podio Account
-    <span *ngIf="passedClient">to client: {{passedClient.contact}}</span>
-</h1>
+
+<mat-card-title class='d-flex justify-content-between w-100'>
+    <span>
+        Add Podio Account
+    </span>
+    <app-help-menu [topic]="'clientsAndAccounts'"></app-help-menu>
+</mat-card-title>
 
 <form [formGroup]="form" class="mb-3 mt-3">
 

@@ -7,7 +7,7 @@
 @import "~bootstrap-4-grid/css/grid.css";
 
 /* Angular Material theme */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
 
 /* ====================
     VARIABLES 
@@ -237,9 +237,15 @@ a:visited,
 .font-size-16px {
     font-size: 16px;
 }
+.material-icons.font-size-16px {
+    font-size: 16px;
+}
 .text-hint {
     font-size: 0.9rem;
     color: #999; /* same as bootstrap "text-muted" */
+}
+.text-small {
+    font-size: 0.9rem;
 }
 .text-light {
     color: var(--text-light);
@@ -367,6 +373,10 @@ mat-card.card-table-container {
     max-height: 300px;
     overflow-y: scroll;
 }
+.max-h-400-scroll {
+    max-height: 400px;
+    overflow-y: scroll;
+}
 .mat-expansion-panel-content .mat-form-field {
     padding-left: 16px;
 }
@@ -388,12 +398,16 @@ mat-paginator .mat-paginator-container {
     /* font-size: 18px; */
     /* font-weight: normal; */
 }
-.stat-cards .mat-card-title {
+app-help-menu {
+    margin-top: -10px;
+}
+.stat-cards .mat-card-title,
+.solution-tasks .mat-card-title {
     font-size: 16px;
 }
 app-solution-tasks .mat-card,
 app-solution-about .mat-card {
-    min-height: 210px;
+    min-height: 150px;
 }
 .iframe-container-resp {
     padding-bottom: 56.25%;
@@ -459,12 +473,15 @@ mat-toolbar li {
     font-weight: initial;
 }
 mat-toolbar a,
-mat-toolbar a:visited {
+mat-toolbar a:visited,
+mat-toolbar .mat-icon,
+mat-toolbar .mat-icon:visited {
     text-decoration: none;
     color: white;
 }
 mat-toolbar a:hover,
-mat-toolbar a:active {
+mat-toolbar a:active,
+mat-toolbar .mat-icon:hover {
     color: lightgray;
 }
 

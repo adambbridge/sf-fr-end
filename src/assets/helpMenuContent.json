@@ -1,0 +1,96 @@
+{
+    "deploy": {
+        "explanations": [
+            {
+                "heading": "Deploying to a 'Target Organization'",
+                "paragraph": "The Podio organization where you would like to create a copy (new 'instance') of your solution is called a 'target'. "
+            },
+            {
+                "heading": "Deployment strategies and considerations",
+                "paragraph": "SaaSafras users have employed various models for managing deployed solutions. Here are just a few to consider: 1. Deploy to org in my own Podio Account. Client access can be revoked if needed. 2. Deploy to org in client’s podio account. You retain the abiility to turnoff workflows but cannot revoke access to the workspaces. 3. Deploy a 'development copy' where you can make changes and 'patch' your production instance when you are done."
+            },
+            {
+                "heading": "Gaining access to Target orgs",
+                "paragraph": "Add a new client and choose to 'Add Podio Account' for the client. This sends an email requesting they securely enter their Podio admin credentials. This will grant access and the account assets will appear in SaaSsafras."
+            },
+            {
+                "heading": "Deployment is a Billable action",
+                "paragraph": "There is no cost to create solutions in SaaSsafras. Deployments, updates and patches are billable actions."
+            }
+        ],
+        "videos": [
+            {
+                "title": "About Deployment (3 minutes)",
+                "url": "https://youtu.be/yzyI2Lq28AQ"
+            }
+        ],
+        "links": []
+    },
+    "clientsAndAccounts": {
+        "explanations": [
+            {
+                "heading": "coming soon",
+                "paragraph": "coming soon"
+            }
+        ],
+        "videos": [],
+        "links": []
+    },
+    "newSolution": {
+        "explanations": [
+            {
+                "heading": "coming soon",
+                "paragraph": "coming soon"
+            }
+        ],
+        "videos": [],
+        "links": []
+    },
+    "patch": {
+        "explanations": [
+            {
+                "heading": "Versioning SaaSsafras Solutions with Updates and Patching",
+                "paragraph": "When you have made changes to the Podio workspaces which a Solution is based on, performing an Update will capture the new state of the workspaces into a new version of your Solution. Deployed instances can be brought up to new versions with a Patch. "
+            },
+            {
+                "heading": "Patch Options",
+                "paragraph": "1. Solution version to use. 2. optional release notes 3. date and time 4.  instances to Patch"
+            },
+
+            {
+                "heading": "Version conflicts and complications",
+                "paragraph": "1Provide a 'Predicted Impact on Workspaces' listing spaces that will be altered, added and unaffected. No spaces are ever deleted by a patch. Elaborate ...."
+            }
+        ],
+        "videos": [],
+        "links": []
+    },
+    "update": {
+        "explanations": [
+            {
+                "heading": "What is a SaaSsafras Solution Update",
+                "paragraph": "When you have made changes to the Podio workspaces which a Solution is based on, performing an Update will capture the new state of the workspaces into a new version of your Solution. "
+            },
+            {
+                "heading": "Update Options",
+                "paragraph": "1. Version to update. 2. Edit which workspace are included. 3. User friendly new version name (Version number will be automatically created. If you've changed what spaces are included the number will increment.....otherwise....). 5. Version 'release notes'."
+            },
+            {
+                "heading": "Bringing deployed instances up to a new version with a Patch",
+                "paragraph": "describe patching a bit since its part of the whole versioning process?"
+            }
+        ],
+        "videos": [],
+        "links": []
+    },
+    "helpMenuMain": {
+        "explanations": [
+            {
+                "heading": "coming soon",
+                "paragraph": "coming soon"
+            }
+        ],
+        "videos": [],
+        "links": []
+    }
+}

@@ -66,6 +66,7 @@ import { EditClientComponent } from './Components/edit-client/edit-client.compon
 import { WorkspaceNameFilter } from './pipes/filter-pipe.pipe';
 import { NewClientConfirmationComponent } from './Components/new-client-confirmation/new-client-confirmation.component';
 import { OnboardingSlideshowComponent } from './Components/onboarding-slideshow/onboarding-slideshow.component';
+import { HelpMenuComponent } from './Components/help-menu/help-menu.component';
 @NgModule({
     declarations: [
         /** Components */
@@ -107,7 +108,8 @@ import { OnboardingSlideshowComponent } from './Components/onboarding-slideshow/
         EditClientComponent,
         WorkspaceNameFilter,
         NewClientConfirmationComponent,
-        OnboardingSlideshowComponent
+        OnboardingSlideshowComponent,
+        HelpMenuComponent
     ],
     imports: [
         /** Modules */

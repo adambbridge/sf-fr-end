@@ -1,92 +1,48 @@
-<div class="row mt-4">
+<div class="row mt-4 mb-4 solution-tasks">
 
     <div class="col-12 col-sm-6 col-md-4">
         <mat-card class='mr-1 cursor-pointer'>
             <span class="overlay" (click)='onDeploymentClick()'></span>
             <mat-card-title class='d-flex justify-content-between w-100'>
-                <span>Create New Instance</span>
                 <span>
-
-                    <!-- MENU  -->
-                    <button class="text-hint hover-color" mat-icon-button [matMenuTriggerFor]="deployHelpMenu"
-                        aria-label="Example icon-button with a menu">
-                        <mat-icon>help_outline</mat-icon>
-                    </button>
-                    <mat-menu #deployHelpMenu="matMenu">
-
-                        <div class="help-menu">
-            
-                            <p>Deploying to a "Target Organization"</p>
-                            <p class='text-light'>The Podio organization where you would like to create a new instance of your solution.</p>
-
-                            <p>Deploy to self vs. client?</p>
-                            <p class='text-light'>Pros and cons in nutshell... </p>
-
-                            <p>Gaining access to Target orgs</p>
-                            <p class='text-light'>Add a new client and choose to "Add Podio Account" for the client. This sends an email requesting they securely enter their Podio admin credentials. Once entered you will receive an email notification and their account and its orgs will appear under the client.</p>
-
-                            <mat-divider></mat-divider>
-
-                            <p><a>
-                                    <mat-icon class='pr-2'>play_circle_outline</mat-icon>
-                                    Video title
-                                </a></p>
-
-                            <mat-divider class='pt-1'></mat-divider>
-
-                            <p><a>
-                                    <mat-icon class='pr-2'>help_outline</mat-icon>
-                                    Help docs
-                                </a></p>
-
-                        </div>
-
-                    </mat-menu>
+                    Deploy
                 </span>
+                <app-help-menu [topic]="'deploy'"></app-help-menu>
             </mat-card-title>
 
             <mat-card-content class='text-hint text-no-deco'>
                 <p>Create new instance in a Podio Organization</p>
             </mat-card-content>
             <mat-divider></mat-divider>
-            <mat-card-actions class="text-hint">
-                <span>last Deployment 01/01/2011</span>
+            <mat-card-actions class="text-hint pl-2">
+                <span>last Deployment TODO</span>
             </mat-card-actions>
-
-            <!-- <mat-card-content class='text-hint'>
-                <p>
-                    Create new instances of this solution inside client Podio Organizations.
-                  
-                </p>
-            </mat-card-content>
-            <mat-card-footer class="text-hint mr-0 ml-0">
-                last Deployment 01/01/2011
-            </mat-card-footer> -->
         </mat-card>
     </div>
 
     <div class="col-12 col-sm-6 col-md-4">
-        <mat-card class='mr-1 mb-4 cursor-pointer' (click)='onUpdateClick()'>
-            <mat-card-title>
-                Update Solution
-                <mat-icon class="pl-1 text-light">refresh</mat-icon>
+        <mat-card class='mr-1 cursor-pointer'>
+            <span class="overlay" (click)='onUpdateClick()'></span>
+            <mat-card-title class='d-flex justify-content-between w-100'>
+                <span>Update</span>
+                <app-help-menu [topic]="'update'"></app-help-menu>
             </mat-card-title>
-            <mat-card-content class='text-hint'>
-                <p>
-                    When you have made updates to the Podio workspaces which this solution is based on, an
-                    Update can capture those
-                    changes and update your Saasafras solution.
-                    <a href="">Learn more</a>
-                </p>
-
+    
+            <mat-card-content class='text-hint text-no-deco'>
+                <p>Create new Solution version</p>
             </mat-card-content>
-            <mat-card-footer class="text-hint mr-0 ml-0">
-                last Update 01/01/2011
-            </mat-card-footer>
+            <mat-divider></mat-divider>
+            <mat-card-actions class="text-hint pl-2">
+                <span>last Update TODO </span>
+            </mat-card-actions>
         </mat-card>
     </div>
 
-    <div class="col-12 col-sm-6 col-md-4">
+    
+
+   
+
+    <!-- <div class="col-12 col-sm-6 col-md-4">
         <mat-card class='mr-1 cursor-pointer' (click)='onPatchClick()'>
             <mat-card-title>
                 Patch Instances
@@ -103,6 +59,24 @@
             <mat-card-footer class="text-hint mr-0 ml-0">
                 last Patch 01/01/2011
             </mat-card-footer>
+        </mat-card>
+    </div> -->
+
+    <div class="col-12 col-sm-6 col-md-4">
+        <mat-card class='mr-1 cursor-pointer'>
+            <span class="overlay" (click)='onPatchClick()'></span>
+            <mat-card-title class='d-flex justify-content-between w-100'>
+                <span>Patch</span>
+                <app-help-menu [topic]="'patch'"></app-help-menu>
+            </mat-card-title>
+    
+            <mat-card-content class='text-hint text-no-deco'>
+                <p>Patch deployed instances with a new Solution version</p>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-actions class="text-hint pl-2">
+                <span>last Patch TODO</span>
+            </mat-card-actions>
         </mat-card>
     </div>
 

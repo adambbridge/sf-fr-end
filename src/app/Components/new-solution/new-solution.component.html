@@ -1,10 +1,15 @@
 <div class="d-flex justify-content-center" >
     <mat-card [ngClass]="{'w-100 mt-1 mat-elevation-z0': showInDialog || dashBoardVersion, 'w-75 mt-3': !showInDialog}">
         <div >
-            <mat-card-title *ngIf="!dashBoardVersion" class='pb-2'>New SaaSsafras Solution</mat-card-title>
-            <mat-card-title *ngIf="dashBoardVersion" class='pb-2'>Create Your First Solution in seconds
-            </mat-card-title>
 
+            <!-- form heading -->
+            <mat-card-title class='d-flex justify-content-between w-100 pb-2'>
+                <span *ngIf="!dashBoardVersion">New SaaSsafras Solution</span>
+                <span *ngIf="dashBoardVersion">Create Your First Solution in seconds
+                </span>
+                <app-help-menu [topic]="'newSolution'"></app-help-menu>
+            </mat-card-title>
+            
             <mat-divider></mat-divider>
 
             <form [formGroup]="newSolutionForm" (ngSubmit)="onSubmit()" novalidate>
